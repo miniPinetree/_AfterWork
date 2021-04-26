@@ -2,7 +2,17 @@ import React from "react";
 
 const MyPage=(props)=>{
     return(
-        <div>mypage</div>
+        
+        <UserBox></UserBox>
+        <MarkList></MarkList>
     );
 }
 export default MyPage;
+
+const UserBox = styled.div`
+
+`;
+
+const MarkList = styled.div`
+
+`;
