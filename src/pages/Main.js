@@ -1,15 +1,12 @@
 import React from 'react';
 import Banner from '../components/Banner';
-import Header from '../components/Header';
 import Carousel from '../components/Carousel';
 import CategoryCard from '../components/CategoryCard';
 import ItemCard from '../components/ItemCard';
-import Footer from '../components/Footer';
 
 function Main(props) {
   return (
     <>
-      <Header />
       <Banner />
       <Carousel text='카테고리' size='5'>
         <CategoryCard />
@@ -42,7 +39,6 @@ function Main(props) {
         <ItemCard />
         <ItemCard />
       </Carousel>
-      <Footer />
     </>
   );
 }
