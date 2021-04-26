@@ -9,12 +9,12 @@ import {Header, Footer} from "../components";
 function App() {
   return (
     <>
-    {/* <Header/> */}
+    <Header/>
       <ConnectedRouter history={history}>
         <Route path='/' exact component={Main} />
         <Route path='/mypage' component={MyPage} />
       </ConnectedRouter>
-      {/* <Footer/> */}
+      <Footer/>
     </>
   );
 }
