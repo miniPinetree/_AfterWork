@@ -3,7 +3,7 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configStore';
-import { MyPage, Main, Category } from '../pages';
+import { MyPage, Main, UserDetail, Category } from '../pages';
 import { Header, Footer } from '../components';
 
 function App() {
@@ -13,7 +13,8 @@ function App() {
       <ConnectedRouter history={history}>
         <Route path='/' exact component={Main} />
         <Route path='/category' exact component={Category} />
-        <Route path='/mypage' component={MyPage} />
+        <Route path='/mypage' exact component={MyPage} />
+        <Route path='/userdetail' exact component={UserDetail} />
       </ConnectedRouter>
       <Footer />
     </>
