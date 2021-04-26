@@ -1,8 +1,7 @@
 /* antd import */
 @import "~antd/dist/antd.css";
 
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap");
 * {
   font-family: "Noto Sans KR", sans-serif;
 }

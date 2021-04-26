@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 function Main(props) {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Banner />
       <Carousel text='카테고리' size='5'>
         <CategoryCard />
@@ -42,7 +42,7 @@ function Main(props) {
         <ItemCard />
         <ItemCard />
       </Carousel>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -17,11 +17,12 @@ export default Title;
 const TitleBox = styled.div`
 display:inline-block;
 height: 37px;
-margin-bottom:36px;
+margin:56px 29px 36px 0;
 box-sizing:border-box-sizing;
 
   & text {
     font-size: 23px;
+    font-weight:600;
     margin:0px;
     
   }
