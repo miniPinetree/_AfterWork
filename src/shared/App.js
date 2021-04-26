@@ -4,14 +4,16 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configStore';
 import {MyPage} from "../pages";
+import {Header, Footer} from "../components";
 
 function App() {
   return (
     <>
+    <Header/>
       <ConnectedRouter history={history}>
         <Route path='/mypage' component={MyPage}/>
       </ConnectedRouter>
-      good
+      <Footer/>
     </>
   );
 }
