@@ -4,6 +4,7 @@ import { Title, TextBtn } from "../elements";
 import { UserInfo, CheckBox } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { TimePicker, Input } from "antd";
+import Swal from "sweetalert2";
 import moment from "moment";
 import { range } from "lodash";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
@@ -14,11 +15,30 @@ const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user_prefer = useSelector((state) => state.preference.user_prefer);
   const [search, setSearch] = React.useState("");
+  const [location, setLocation] = React.useState(user_prefer.location);
   const [time, setTime] = React.useState(user_prefer.offTime);
-  
-  let searchLocation = locations.filter(location=>{
-  return location.includes(search);
-});
+
+  let searchLocation = locations.filter((location) => {
+    return location.includes(search);
+  });
+  const selectLocation = (val) => {
+    setLocation([...location, val]);
+  };
+  const enterLocation = (val) => {
+    console.log(val, search);
+    if (searchLocation.length === 1) {
+      setLocation([...location, ...searchLocation]);
+      setSearch("");
+    } else {
+      setSearch("");
+    }
+  };
+  const deleteLocation = (val) => {
+    let _location = location.filter((l) => {
+      return l !== val;
+    });
+    setLocation(_location);
+  };
   return (
     <Container>
       <TextBox>
@@ -34,7 +54,9 @@ const UserDetail = (props) => {
             <strong>퇴근시간 설정</strong>
             <TimePicker
               size="large"
-              onChange={(time, timeString)=>{setTime(timeString);}}
+              onChange={(time, timeString) => {
+                setTime(timeString);
+              }}
               defaultOpenValue={moment(time, "HH:mm:ss")}
               defaultValue={moment(time, "HH:mm:ss")}
               disabledHours={() => range(0, 15)}
@@ -46,7 +68,7 @@ const UserDetail = (props) => {
           <BorderBox flex>
             <Divide>
               <strong>관심 카테고리</strong>
-              <CheckBox interests={user_prefer.interests} isChecked={true}/>
+              <CheckBox interests={user_prefer.interests} isChecked={true} />
             </Divide>
             <Line />
             <Divide>
@@ -58,11 +80,15 @@ const UserDetail = (props) => {
           <BorderBox>
             <strong>관심지역 설정</strong>
             <AreaList>
-              {user_prefer.location?.map((l, idx) => {
+              {location?.map((l, idx) => {
                 return (
                   <Area>
                     {l}
-                    <CloseOutlined />
+                    <CloseOutlined
+                      onClick={() => {
+                        deleteLocation(l);
+                      }}
+                    />
                   </Area>
                 );
               })}
@@ -91,25 +117,32 @@ const UserDetail = (props) => {
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
-                onPressEnter={() => {
-                  setSearch("");
+                onPressEnter={(e) => {
+                  enterLocation(e.target.value);
                 }}
                 value={search}
               />
-              
-              {searchLocation.length !== locations.length?
-              <Autofill>
-                {searchLocation.map((location,idx)=>{
-                return(
-                 
-                  <div>
-                    {location}
-                  </div>
-                );
-              })}
-               </Autofill>
-               :
-              null}
+
+              {searchLocation.length !== locations.length ? (
+                <Autofill>
+                  {searchLocation.length === 0 ? (
+                    <p>서비스 지역이 아닙니다</p>
+                  ) : (
+                    <p>원하는 지역을 선택해주세요</p>
+                  )}
+                  {searchLocation.map((location, idx) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          selectLocation(location);
+                        }}
+                      >
+                        {location}
+                      </div>
+                    );
+                  })}
+                </Autofill>
+              ) : null}
             </InputBox>
           </BorderBox>
         </Col>
@@ -121,7 +154,7 @@ export default UserDetail;
 
 const Container = styled.div`
   width: 70%;
-  min-width: 695px;
+  min-width: 749px;
   margin: 0 auto;
 `;
 const TextBox = styled.div`
@@ -205,18 +238,22 @@ const Divide = styled.div`
 `;
 const AreaList = styled.div`
   display: flex;
-  margin-bottom: 17px;
+  flex-wrap: wrap;
+  margin-bottom: 0px;
 `;
 const Area = styled.div`
   display: flex;
-  width: 88px;
+  min-width: 88px;
   height: 28px;
   background-color: #eeeeee;
   font-size: 15px;
-  padding: 3.5px 11px 2.5px 11.53px;
+  padding: 3.5px 5px 2.5px 11.53px;
   align-items: center;
   justify-content: space-between;
-  margin: 0 13px 0 0;
+  margin: 0 13px 10px 0;
+  & svg {
+    margin-left: 2px;
+  }
 `;
 const Line = styled.div`
   border: 1px solid #e8e8e8;
@@ -227,7 +264,7 @@ const Line = styled.div`
   bottom: 10%;
 `;
 const InputBox = styled.div`
-position: relative;
+  position: relative;
   & span {
     background-color: #eeeeee;
   }
@@ -236,17 +273,21 @@ position: relative;
   }
 `;
 const Autofill = styled.div`
-width:80%;
-margin:0 auto;
-padding:5px 8px;
-font-size: 15px;
-position:absolute;
-left:10%;
-background-color: #eeeeee;
-& div{
-  cursor: pointer;
-  :hover{
-color:#7f58ec;
+  width: 80%;
+  margin: 0 auto;
+  padding: 5px 8px;
+  font-size: 15px;
+  position: absolute;
+  left: 10%;
+  background-color: #eeeeee;
+  & p {
+    margin-bottom: 3px;
+    font-weight: 600;
   }
-}
+  & div {
+    cursor: pointer;
+    :hover {
+      color: #7f58ec;
+    }
+  }
 `;
