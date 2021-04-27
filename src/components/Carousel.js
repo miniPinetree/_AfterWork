@@ -9,7 +9,7 @@ function Prev(props) {
   const { onClick } = props;
   return (
     <PrevBtn onClick={onClick}>
-      <LeftOutlined />
+      <LeftOutlined style={{ color: '#BDBDBD' }} />
     </PrevBtn>
   );
 }
@@ -17,7 +17,7 @@ function Next(props) {
   const { onClick } = props;
   return (
     <NextBtn onClick={onClick}>
-      <RightOutlined />
+      <RightOutlined style={{ color: '#BDBDBD' }} />
     </NextBtn>
   );
 }
@@ -72,16 +72,18 @@ const TitleContainer = styled.div`
   align-items: center;
   color: #000;
 `;
+const Title = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+`;
 const CarouselContainer = styled.div`
   max-width: 1004px;
   margin: 20px auto;
   color: #000;
   position: relative;
+  cursor: pointer;
 `;
-const Title = styled.div`
-  font-size: 20px;
-  font-weight: 700;
-`;
+
 const PrevBtn = styled.button`
   margin: 0;
   padding: 0;
@@ -89,10 +91,12 @@ const PrevBtn = styled.button`
   border: none;
   border-radius: 0;
   outline: none;
+  cursor: pointer;
   position: absolute;
   font-size: 20px;
   top: 50%;
-  margin-top: -15px;
+  transform: translate(-50%, -50%);
+  margin-top: -20px;
   left: -50px;
 `;
 const NextBtn = styled.button`
@@ -102,10 +106,12 @@ const NextBtn = styled.button`
   border: none;
   border-radius: 0;
   outline: none;
+  cursor: pointer;
   position: absolute;
   font-size: 20px;
   top: 50%;
-  margin-top: -15px;
+  transform: translate(-50%, -50%);
+  margin-top: -20px;
   right: -50px;
 `;
 

@@ -26,6 +26,7 @@ const Img = styled.img`
 `;
 const TextBox = styled.div`
   width: 100%;
+  font: normal normal medium 18px/50px Noto Sans CJK KR;
   font-size: 18px;
   color: #000;
   letter-spacing: -0.54px;

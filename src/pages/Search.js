@@ -94,7 +94,7 @@ const Main = styled.div`
   flex-wrap: wrap;
   cursor: default;
   & .wrap {
-    margin-right: 10px;
+    margin-right: 20px;
     margin-bottom: 20px;
   }
 `;
