@@ -22,13 +22,13 @@ const CardWrap = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 182px;
-  border: 1px solid;
   border-radius: 10px;
 `;
 const TextBox = styled.div`
   width: 100%;
   font-size: 18px;
   color: #000;
+  letter-spacing: -0.54px;
   padding: 8px;
   box-sizing: border-box;
 `;

@@ -21,7 +21,7 @@ function SubBanner(props) {
             placeholder='검색어를 입력하세요'
             suffix={
               <SearchOutlined
-                style={{ color: '#000', cursor: 'pointer' }}
+                style={{ color: '#7F58EC', cursor: 'pointer' }}
                 onClick={searchHandler}
               />
             }
@@ -52,7 +52,7 @@ function SubBanner(props) {
 const Wrap = styled.div`
   width: 100%;
   height: 100px;
-  background: #efefef;
+  background: #e8dffc;
   display: flex;
   align-items: center;
 `;

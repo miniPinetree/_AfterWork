@@ -24,7 +24,7 @@ function Category(props) {
             <div>
               <Select
                 defaultValue='인기순'
-                style={{ width: 120, marginRight: '15px' }}
+                style={{ width: 112, marginRight: '15px' }}
                 onChange={handleChange}
               >
                 <Option value='인기순'>인기순</Option>
@@ -33,7 +33,7 @@ function Category(props) {
               </Select>
               <Select
                 defaultValue='전체보기'
-                style={{ width: 120 }}
+                style={{ width: 94 }}
                 onChange={handleChange}
               >
                 <Option value='전체보기'>전체보기</Option>
@@ -76,10 +76,11 @@ const Container = styled.div`
 
 const MainContainer = styled.div`
   width: 60%;
+  margin-left: 31px;
 `;
 const MainHeader = styled.div`
   margin: 35px 0 20px 10px;
-  max-width: 90%;
+  max-width: 85%;
   display: flex;
   justify-content: space-between;
 `;
@@ -91,8 +92,9 @@ const Main = styled.div`
   align-items: center;
   flex-wrap: wrap;
   cursor: default;
-  & div {
-    margin: 10px;
+  & .wrap {
+    margin-right: 20px;
+    margin-bottom: 20px;
   }
 `;
 export default Category;

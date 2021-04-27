@@ -58,7 +58,7 @@ function Banner(props) {
               placeholder='검색어를 입력하세요'
               suffix={
                 <SearchOutlined
-                  style={{ color: '#000', cursor: 'pointer' }}
+                  style={{ color: '#7F58EC', cursor: 'pointer' }}
                   onClick={searchHandler}
                 />
               }
@@ -67,7 +67,7 @@ function Banner(props) {
                 borderRadius: '29px',
                 font: 'normal normal normal 20px/30px Noto Sans CJK KR',
                 letterSpacing: '-0.6px',
-                color: '#bdbdbd',
+                color: '#BDBDBD',
                 boxSizing: 'border-box',
                 padding: '9px 27px 12px 27px',
               }}
@@ -91,8 +91,15 @@ const Section = styled.div`
   width: 100%;
   height: 650px;
   background: transparent
-    linear-gradient(180deg, #efefef 0%, #efefeff6 54%, #dadada00 100%) 0% 0%
-    no-repeat padding-box;
+    linear-gradient(
+      180deg,
+      rgba(160, 122, 244, 0.24) 0%,
+      rgba(159, 122, 243, 0.21) 27%,
+      rgba(159, 122, 243, 0.14) 67%,
+      rgba(203, 185, 245, 0.08) 87%,
+      rgba(255, 255, 255, 0.24) 100%
+    )
+    0% 0% no-repeat padding-box;
   cursor: default;
 `;
 
@@ -111,6 +118,7 @@ const Timmer = styled.div`
   justify-content: center;
   position: absolute;
   right: 0px;
+  background: #fff;
 `;
 
 const InputBox = styled.div`
