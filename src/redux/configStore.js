@@ -2,13 +2,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { connectRouter } from 'connected-react-router';
-import UserPrefer from "./modules/userPrefer";
+import Preference from "./modules/preference";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
-  userPrefer:UserPrefer,
+  preference:Preference,
 });
 
 const middlewares = [thunk.withExtraArgument({ history: history })];

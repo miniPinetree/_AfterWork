@@ -18,6 +18,7 @@ const BtnBox = styled.div`
  display: inline-block;
   box-sizing: border-box-sizing;
   margin-top: 68px;
+  cursor: pointer;
   & text {
     font-size: 14px;
     margin: 0px;

@@ -1,27 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import {Title, TextBtn } from "../elements";
+import { Title, TextBtn } from "../elements";
 import { UserInfo, CheckBox } from "../components";
+import { useSelector, useDispatch } from "react-redux";
 import { TimePicker } from "antd";
 import moment from "moment";
 import { range } from "lodash";
 import { Input } from "antd";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
+import { actionCreators as preferActions } from "../redux/modules/preference";
 
 const UserDetail = (props) => {
-  function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
-  }
+  const dispatch = useDispatch();
+  const user_prefer = useSelector((state) => state.preference.user_prefer);
+  const [search, setSearch] = React.useState("");
+  const [time, setTime] = React.useState(user_prefer.offTime);
+  console.log(user_prefer.offTime, time);
 
-  function onChange(time, timeString) {
-    console.log(time, timeString);
+  function changeTime(time, timeString) {
+    
   }
 
   return (
     <Container>
       <TextBox>
-      <Title>회원정보 및 상세 설정</Title>
-      <TextBtn>변경 사항 저장</TextBtn>
+        <Title>회원정보 및 상세 설정</Title>
+        <TextBtn>변경 사항 저장</TextBtn>
       </TextBox>
       <Wrap>
         <Col>
@@ -31,8 +35,10 @@ const UserDetail = (props) => {
           <BorderBox>
             <strong>퇴근시간 설정</strong>
             <TimePicker
-              onChange={onChange}
-              defaultOpenValue={moment("16:00:00", "HH:mm:ss")}
+              size="large"
+              onChange={(time, timeString)=>{setTime(timeString);}}
+              defaultOpenValue={moment(time, "HH:mm:ss")}
+              defaultValue={moment(time, "HH:mm:ss")}
               disabledHours={() => range(0, 15)}
             />
           </BorderBox>
@@ -42,37 +48,40 @@ const UserDetail = (props) => {
           <BorderBox flex>
             <Divide>
               <strong>관심 카테고리</strong>
-              <CheckBox/>
+              <CheckBox interests={user_prefer.interests} isChecked={true}/>
             </Divide>
             <Line />
             <Divide>
               <text>추가하기</text>
-            <CheckBox/>
+              <CheckBox interests={user_prefer.interests} />
             </Divide>
           </BorderBox>
 
           <BorderBox>
             <strong>관심지역 설정</strong>
             <AreaList>
-              <Area>
-                서초구
-                <CloseOutlined />
-              </Area>
-              <Area>
-                송파구
-                <CloseOutlined />
-              </Area>
-              <Area>
-                성동구
-                <CloseOutlined />
-              </Area>
+              {user_prefer.location?.map((l, idx) => {
+                return (
+                  <Area>
+                    {l}
+                    <CloseOutlined />
+                  </Area>
+                );
+              })}
             </AreaList>
             <hr color="#E8E8E8" />
             <text>지역 추가하기</text>
             <InputBox>
               <Input
                 placeholder="지역을 입력하세요"
-                suffix={<SearchOutlined style={{ color: "#000" }} />}
+                suffix={
+                  <SearchOutlined
+                    style={{ color: "#000", cursor: "pointer" }}
+                    onClick={() => {
+                      setSearch("");
+                    }}
+                  />
+                }
                 style={{
                   borderRadius: "29px",
                   font: "normal normal normal 20px/30px Noto Sans CJK KR",
@@ -81,6 +90,10 @@ const UserDetail = (props) => {
                   boxSizing: "border-box",
                   padding: "9px 27px 12px 27px",
                 }}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                value={search}
               />
             </InputBox>
           </BorderBox>
@@ -99,10 +112,10 @@ const Container = styled.div`
 const TextBox = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items:center;
-  padding-right:16px;
-  & div:last-of-type{
-    color:#7F58EC;
+  align-items: center;
+  padding-right: 16px;
+  & div:last-of-type {
+    color: #7f58ec;
     cursor: pointer;
   }
 `;
