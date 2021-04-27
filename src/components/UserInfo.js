@@ -1,17 +1,19 @@
 import React from "react";
+import {useSelector} from "react-redux";
 import { Avatar } from "antd";
-import { UserOutlined, RightOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 const UserInfo =(props)=>{
+const user = useSelector((state)=>state.user.user);
     return(
         <>
         <Avatar size={80} icon={<UserOutlined />} />
         <InfoBox>
           <p>
-            <strong>퇴근근</strong>님
+            <strong>{user.nickname}</strong>님
           </p>
-          <p>email@email.com</p>
-          <p>서울 강남구</p>
+          <p>{user.email}</p>
+          <p>{user.address}</p>
         </InfoBox>
         </>
     );

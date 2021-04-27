@@ -1,11 +1,16 @@
 import React from "react";
+import styled from "styled-components";
 import {history} from "../redux/configStore";
 import { RightOutlined } from "@ant-design/icons";
-import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as preferActions } from "../redux/modules/preference";
 import { ItemCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
 
 const MyPage = (props) => {
+  const dispatch = useDispatch();
+  const collection = useSelector((state) => state.preference.collection);
+
   return (
     <Container>
       <Title>마이 페이지</Title>
@@ -25,11 +30,17 @@ const MyPage = (props) => {
         <TextBox>
           <Area1>
             <Title>찜 목록</Title>
-            <p>총 {10}건</p>
+            <p>총 {collection.length}건</p>
           </Area1>
-          <TextBtn>목록 전체 삭제</TextBtn>
+          <TextBtn 
+          _onClick={()=>{
+            dispatch(preferActions.deleteCollectionDB());
+          }}
+          >
+            목록 전체 삭제
+          </TextBtn>
         </TextBox>
-        <ItemList>
+        {/* <ItemList>
           <ItemCard small />
           <ItemCard small />
           <ItemCard small />
@@ -40,7 +51,7 @@ const MyPage = (props) => {
           <ItemCard small />
           <ItemCard small />
           <ItemCard small />
-        </ItemList>
+        </ItemList> */}
       </MarkList>
     </Container>
   );

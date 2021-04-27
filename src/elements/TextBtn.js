@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const TextBtn = (props) => {
-    const {children} = props;
+    const {children, _onClick} = props;
 
   return (
-    <BtnBox>
+    <BtnBox onClick={_onClick}>
       <text>{children}</text>
       <hr/>
     </BtnBox>
