@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { HeartFilled } from "@ant-design/icons";
 
 function ItemCard(props) {
-  const { small } = props;
+  const { small, isChecked } = props;
   return (
     <>
       <CardWrap small={small} className='wrap'>
@@ -12,7 +13,10 @@ function ItemCard(props) {
           alt='img'
         />
         <TextBox small={small}>
+          <TitleWrap isChecked={isChecked}>
           <strong>클래스</strong>
+          <HeartFilled />
+          </TitleWrap>
           <div>설명설명설명설명</div>
         </TextBox>
       </CardWrap>
@@ -21,6 +25,7 @@ function ItemCard(props) {
 }
 ItemCard.defaultProps = {
   small: false,
+  isChecked:false,
 };
 const CardWrap = styled.div`
   border-radius: 10px;
@@ -48,5 +53,13 @@ const TextBox = styled.div`
   }
   font-size: 13px;
   ${(props) => (props.small ? 'margin-bottom:5%' : '')}
+`;
+const TitleWrap = styled.div`
+display:flex;
+justify-content:space-between;
+& svg{
+  font-size:18.12px;
+  color:${(props)=>props.isChecked? '#7F58EC':'#E2E2E2'};
+}
 `;
 export default ItemCard;

@@ -3,7 +3,7 @@ import {history} from "../redux/configStore";
 import { RightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { ItemCard, UserInfo } from "../components";
-import Title from "../elements/Title";
+import {Title, TextBtn} from "../elements";
 
 const MyPage = (props) => {
   return (
@@ -27,11 +27,7 @@ const MyPage = (props) => {
             <Title>찜 목록</Title>
             <p>총 {10}건</p>
           </Area1>
-
-          <DeleteBox>
-            <text>목록 전체 삭제</text>
-            <hr />
-          </DeleteBox>
+          <TextBtn>목록 전체 삭제</TextBtn>
         </TextBox>
         <ItemList>
           <ItemCard small />
@@ -67,24 +63,6 @@ const TextBox = styled.div`
     font-weight: 100;
   }
 `;
-const Area1 = styled.div`
-  display: flex;
-`;
-const DeleteBox = styled.div`
-  display: inline-block;
-  box-sizing: border-box-sizing;
-  margin-top: 68px;
-  & text {
-    font-size: 14px;
-    margin: 0px;
-  }
-  & hr {
-    border: 0;
-    height: 1px;
-    background: #707070;
-    margin: 0px;
-  }
-`;
 const Profile = styled.div`
   width: 100%;
   height: 137px;
@@ -97,7 +75,6 @@ const Profile = styled.div`
   padding: 0 30px;
 `;
 const DetailBtn = styled.button`
-  background-color: #575757;
   color: white;
   border: none;
   border-radius: 15px;
@@ -106,11 +83,14 @@ const DetailBtn = styled.button`
   bottom: 23px;
   right: 30px;
   text-align: center;
+  background:linear-gradient(to right,#7F58EC,#5C5CE3);
+`;
+const Area1 = styled.div`
+  display: flex;
 `;
 const MarkList = styled.div`
   margin-bottom: 48px;
 `;
-
 const ItemList = styled.div`
   display: flex;
   justify-content: space-between;

@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import Title from "../elements/Title";
-import { UserInfo } from "../components";
+import {Title, TextBtn } from "../elements";
+import { UserInfo, CheckBox } from "../components";
 import { TimePicker } from "antd";
 import moment from "moment";
 import { range } from "lodash";
-import { Checkbox, Row, Col } from "antd";
 import { Input } from "antd";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
 
@@ -14,19 +13,18 @@ const UserDetail = (props) => {
     console.log(`checked = ${e.target.checked}`);
   }
 
-  function onChange(checkedValues) {
-    console.log("checked = ", checkedValues);
-  }
-
   function onChange(time, timeString) {
     console.log(time, timeString);
   }
 
   return (
     <Container>
+      <TextBox>
       <Title>회원정보 및 상세 설정</Title>
+      <TextBtn>변경 사항 저장</TextBtn>
+      </TextBox>
       <Wrap>
-        <BoxContainer>
+        <Col>
           <InfoBox>
             <UserInfo />
           </InfoBox>
@@ -38,48 +36,21 @@ const UserDetail = (props) => {
               disabledHours={() => range(0, 15)}
             />
           </BorderBox>
-        </BoxContainer>
+        </Col>
 
-        <BoxContainer>
+        <Col>
           <BorderBox flex>
             <Divide>
               <strong>관심 카테고리</strong>
-              <Checkbox.Group style={{ width: "100%" }} onChange={onChange}>
-                <Col>
-                  <Row span={16}>
-                    <Checkbox value="A" defaultChecked="true">
-                      운동/건강
-                    </Checkbox>
-                  </Row>
-                  <Col span={16}>
-                    <Checkbox value="B" defaultChecked="true">
-                      요리
-                    </Checkbox>
-                  </Col>
-                </Col>
-              </Checkbox.Group>
+              <CheckBox/>
             </Divide>
             <Line />
             <Divide>
               <text>추가하기</text>
-              <Checkbox.Group style={{ width: "100%" }} onChange={onChange}>
-                <Col>
-                  <Row span={16}>
-                    <Checkbox value="A">아트</Checkbox>
-                  </Row>
-                  <Row span={16}>
-                    <Checkbox value="B">교육</Checkbox>
-                  </Row>
-                  <Row span={16}>
-                    <Checkbox value="C">공예</Checkbox>
-                  </Row>
-                  <Row span={16}>
-                    <Checkbox value="D">음악</Checkbox>
-                  </Row>
-                </Col>
-              </Checkbox.Group>
+            <CheckBox/>
             </Divide>
           </BorderBox>
+
           <BorderBox>
             <strong>관심지역 설정</strong>
             <AreaList>
@@ -113,7 +84,7 @@ const UserDetail = (props) => {
               />
             </InputBox>
           </BorderBox>
-        </BoxContainer>
+        </Col>
       </Wrap>
     </Container>
   );
@@ -125,11 +96,21 @@ const Container = styled.div`
   min-width: 695px;
   margin: 0 auto;
 `;
+const TextBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  padding-right:16px;
+  & div:last-of-type{
+    color:#7F58EC;
+    cursor: pointer;
+  }
+`;
 const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const BoxContainer = styled.div`
+const Col = styled.div`
   width: 100%;
 `;
 const InfoBox = styled.div`
