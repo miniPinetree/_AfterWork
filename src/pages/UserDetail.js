@@ -3,24 +3,22 @@ import styled from "styled-components";
 import { Title, TextBtn } from "../elements";
 import { UserInfo, CheckBox } from "../components";
 import { useSelector, useDispatch } from "react-redux";
-import { TimePicker } from "antd";
+import { TimePicker, Input } from "antd";
 import moment from "moment";
 import { range } from "lodash";
-import { Input } from "antd";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
 import { actionCreators as preferActions } from "../redux/modules/preference";
+import locations from "../shared/locations";
 
 const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user_prefer = useSelector((state) => state.preference.user_prefer);
   const [search, setSearch] = React.useState("");
   const [time, setTime] = React.useState(user_prefer.offTime);
-  console.log(user_prefer.offTime, time);
-
-  function changeTime(time, timeString) {
-    
-  }
-
+  
+  let searchLocation = locations.filter(location=>{
+  return location.includes(search);
+});
   return (
     <Container>
       <TextBox>
@@ -93,8 +91,25 @@ const UserDetail = (props) => {
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
+                onPressEnter={() => {
+                  setSearch("");
+                }}
                 value={search}
               />
+              
+              {searchLocation.length !== locations.length?
+              <Autofill>
+                {searchLocation.map((location,idx)=>{
+                return(
+                 
+                  <div>
+                    {location}
+                  </div>
+                );
+              })}
+               </Autofill>
+               :
+              null}
             </InputBox>
           </BorderBox>
         </Col>
@@ -212,10 +227,26 @@ const Line = styled.div`
   bottom: 10%;
 `;
 const InputBox = styled.div`
+position: relative;
   & span {
     background-color: #eeeeee;
   }
   & input {
     background-color: #eeeeee;
   }
+`;
+const Autofill = styled.div`
+width:80%;
+margin:0 auto;
+padding:5px 8px;
+font-size: 15px;
+position:absolute;
+left:10%;
+background-color: #eeeeee;
+& div{
+  cursor: pointer;
+  :hover{
+color:#7f58ec;
+  }
+}
 `;
