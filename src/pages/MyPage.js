@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/preference";
 import { ItemCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
+import { Empty } from 'antd';
 
 const MyPage = (props) => {
   const dispatch = useDispatch();
@@ -40,18 +41,25 @@ const MyPage = (props) => {
             목록 전체 삭제
           </TextBtn>
         </TextBox>
-        {/* <ItemList>
-          <ItemCard small />
-          <ItemCard small />
-          <ItemCard small />
-          <ItemCard small />
-        </ItemList>
+        {collection.length?
+        <>
         <ItemList>
+          {/* {collection.map((prd,idx)=>{
+            return(
+<ItemCard small />
+            );
+          })} */}
           <ItemCard small />
           <ItemCard small />
           <ItemCard small />
           <ItemCard small />
-        </ItemList> */}
+          <ItemCard small />
+          <ItemCard small />
+        </ItemList> 
+        </>
+        : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
+        style={{ height:'20vh'}}/>
+      }
       </MarkList>
     </Container>
   );
@@ -104,7 +112,9 @@ const MarkList = styled.div`
 `;
 const ItemList = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-wrap:wrap;
+  justify-content: flex-start;
   margin-bottom: 18px;
   min-height: 220px;
+  gap: 20px 20px;
 `;

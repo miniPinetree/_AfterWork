@@ -40,7 +40,7 @@ const socialLoginDB = (id) => {
             uid: res.data.user.id,
             nickname: res.data.user.nickname,
             snsId: res.data.user.snsId,
-            //와이어프레임에는 주소 명시되어 있는데 주소 정보도 오는 지 확인해주세요
+            //와이어프레임에는 주소 명시되어 있는데 주소 정보도 오는 지 확인 부탁드려요
           })
         );
         history.replace("/");

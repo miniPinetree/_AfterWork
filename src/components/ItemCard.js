@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { HeartFilled } from "@ant-design/icons";
 
 function ItemCard(props) {
-  const { small, isChecked } = props;
+  const { small, like } = props;
   return (
     <>
       <CardWrap small={small} className='wrap'>
@@ -13,7 +13,7 @@ function ItemCard(props) {
           alt='img'
         />
         <TextBox small={small}>
-          <TitleWrap isChecked={isChecked}>
+          <TitleWrap like={like}>
           <strong>클래스</strong>
           <HeartFilled />
           </TitleWrap>
@@ -25,7 +25,7 @@ function ItemCard(props) {
 }
 ItemCard.defaultProps = {
   small: false,
-  isChecked:false,
+  like:false,
 };
 const CardWrap = styled.div`
   border-radius: 10px;
@@ -59,7 +59,8 @@ display:flex;
 justify-content:space-between;
 & svg{
   font-size:18.12px;
-  color:${(props)=>props.isChecked? '#7F58EC':'#E2E2E2'};
+  color:${(props)=>props.like? '#7F58EC':'#E2E2E2'};
+  margin-top:5px;
 }
 `;
 export default ItemCard;
