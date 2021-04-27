@@ -71,6 +71,7 @@ function Category(props) {
 }
 const Container = styled.div`
   display: flex;
+  color: #000;
 `;
 
 const MainContainer = styled.div`

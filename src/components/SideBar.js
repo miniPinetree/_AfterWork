@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Title from '../elements/Title';
 
 function SideBar() {
   return (
@@ -45,13 +44,27 @@ const SideBox = styled.div`
 `;
 
 const Container = styled.div`
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Title = styled.div`
+  display: inline-block;
+  margin-top: 35px;
+  font-size: 23px;
+  letter-spacing: -0.69px;
+  border-bottom: 3px solid #000;
 `;
 const List = styled.ul`
   list-style: none;
   font-size: 19px;
+  margin-top: 48px;
+  letter-spacing: -0.57px;
   padding: 0;
   & li {
+    margin-top: 20px;
     & span {
       cursor: pointer;
     }
