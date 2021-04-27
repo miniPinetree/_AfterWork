@@ -37,7 +37,7 @@ function CountDownTimer(dt, id) {
 function Banner(props) {
   const now = new Date();
   const today = now.toLocaleDateString();
-  CountDownTimer(today + '22:50:00', 'time');
+  CountDownTimer(today + '18:50:00', 'time');
 
   return (
     <>
