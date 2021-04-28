@@ -1,21 +1,25 @@
 import styled, { keyframes } from "styled-components";
+import { GOOGLE_AUTH_URL, KAKAO_AUTH_URL, NAVER_AUTH_URL } from "../shared/social";
+import naver from "../shared/images/naver.png";
+import kakao from "../shared/images/kakao.png";
+import google from "../shared/images/google.png";
 
 const LoginModal = ({ close }, props) => {
     return (
         <>
             <Modal>
                 <Logo>퇴근하고 뭐하지?</Logo>
-                <A href="/">
-                    <SocialLogo />
+                <A href={GOOGLE_AUTH_URL} google>
+                    <SocialLogo src={google} />
                     <Span>구글 계정으로 시작하기</Span>
                 </A>
-                <A href="/">
-                    <SocialLogo />
+                <A href={NAVER_AUTH_URL} naver>
+                    <SocialLogo src={naver} />
                     <Span>네이버 계정으로 시작하기</Span>
                 </A>
-                <A href="/">
-                    <SocialLogo />
-                    <Span>카카오 계정으로 시작하기</Span>
+                <A href={KAKAO_AUTH_URL}>
+                    <SocialLogo src={kakao} />
+                    <Span kakao>카카오 계정으로 시작하기</Span>
                 </A>
             </Modal>
 
@@ -42,7 +46,7 @@ const Back = styled.div`
 
 const openScale = keyframes`
     0%{
-        transform: scale(0) ;
+        transform: scale(0.8) ;
     }
     100% {
         transform: scale(1) ;
@@ -79,27 +83,23 @@ const A = styled.a`
     width: 322px;
     height: 40px;
     align-items: center;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 1px solid #707070;
+    background: ${(props) => (props.google ? "#dc4e41;" : props.naver ? "#00C63B;" : "#FCE000;")}
     border-radius: 20px;
     margin: 0 auto 16px;
     cursor: pointer;
     padding: 0 80px 0 16px;
 `;
 
-const SocialLogo = styled.div`
+const SocialLogo = styled.img`
     display: inline-block;
     width: 30px;
     height: 30px;
-    background: #fff;
-    border: 1px solid #707070;
-    border-radius: 15px;
 `;
 
 const Span = styled.span`
     font-size: 15px;
     font-weight: 400;
-    color: #000;
+    color: ${(props) => (props.kakao ? "#3C1E20" : "#fff")};
 `;
 
 export default LoginModal;

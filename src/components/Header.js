@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { history } from "../redux/configStore";
 import LoginModal from "./LoginModal";
@@ -11,20 +12,30 @@ const Header = () => {
     const modalClose = () => {
         setIsModal(false);
     };
+    const is_login = useSelector((state) => state.user.is_login);
 
     return (
         <>
             <Wrap>
                 <Body>
-                    <Logo
-                        onClick={() => {
-                            history.push("/");
-                        }}
-                    >
-                        퇴근하고 뭐하지?
-                    </Logo>
-                    <Login onClick={modalOpen}>로그인</Login>
-                    {isModal === true ? <LoginModal close={modalClose} /> : null}
+                    <div>
+                        <Logo
+                            onClick={() => {
+                                history.push("/");
+                            }}
+                        >
+                            퇴근하고 뭐하지?
+                        </Logo>
+                        <About onClick={() => history.push("/about")}>About</About>
+                    </div>
+                    <div>
+                        {is_login === true ? (
+                            <Login onClick={() => history.push("/mypage")}> 마이페이지 </Login>
+                        ) : (
+                            <Login onClick={modalOpen}>로그인</Login>
+                        )}
+                        {isModal === true ? <LoginModal close={modalClose} /> : null}
+                    </div>
                 </Body>
             </Wrap>
         </>
@@ -53,6 +64,15 @@ const Body = styled.div`
 const Logo = styled.span`
     font-size: 20px;
     font-weight: bold;
+    letter-spacing: -0.6px;
+    cursor: pointer;
+    height: 100%;
+    margin-right: 24px;
+`;
+
+const About = styled.span`
+    font-size: 16px;
+    font-weight: normal;
     letter-spacing: -0.6px;
     cursor: pointer;
     height: 100%;
