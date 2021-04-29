@@ -4,18 +4,20 @@ import styled from "styled-components";
 import { history } from "../redux/configStore";
 import LoginModal from "./LoginModal";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { deleteCookie } from "../shared/Cookie";
-
+import { getCookie } from "../shared/Cookie";
+import { useEffect } from "react";
 const Header = () => {
-    const [isModal, setIsModal] = useState(false);
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    const [isModal, setIsModal] = useState(false);
     const modalOpen = () => {
         setIsModal(true);
     };
     const modalClose = () => {
         setIsModal(false);
     };
-    const user = useSelector((state) => state.user);
+
+    const cookie = getCookie("accessToken");
 
     return (
         <>
@@ -32,7 +34,7 @@ const Header = () => {
                         <About onClick={() => history.push("/about")}>About</About>
                     </div>
                     <div>
-                        {user.is_login === true ? (
+                        {cookie ? (
                             <>
                                 <Login
                                     onClick={() => {
