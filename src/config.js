@@ -1,5 +1,5 @@
 const config = {
-  api: 'http://ec2-3-37-25-141.ap-northeast-2.compute.amazonaws.com',
+  api: 'https://afterwork-webservice.site',
 };
 
 export { config };
