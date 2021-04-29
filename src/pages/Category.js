@@ -30,16 +30,8 @@ function Category(props) {
   const direction = sortInfo[1];
 
   useEffect(() => {
-    if (sortBox === 'popularity desc') {
-      dispatch(postActions.getPostDB(id, sort, direction));
-    } else if (sortBox === 'price asc') {
-      dispatch(postActions.getPostDB(id, sort, direction));
-    } else if (sortBox === 'price desc') {
-      dispatch(postActions.getPostDB(id, sort, direction));
-    } else {
-      return;
-    }
-  }, [direction, dispatch, id, sort, sortBox]);
+    dispatch(postActions.getPostDB(id, sort, direction));
+  }, [direction, dispatch, id, sort]);
 
   const { Option } = Select;
 
@@ -72,18 +64,20 @@ function Category(props) {
 
                 <div>
                   <Select
-                    defaultValue='인기순'
+                    defaultValue='popularity desc'
                     style={{ width: 112, marginRight: '15px' }}
                     onChange={selectSort}
+                    value={sortBox}
                   >
                     <Option value='popularity desc'>인기순</Option>
                     <Option value='price asc'>가격 낮은순</Option>
                     <Option value='price desc'>가격 높은순</Option>
                   </Select>
                   <Select
-                    defaultValue='전체보기'
+                    defaultValue='total'
                     style={{ width: 94 }}
                     onChange={selectFilter}
+                    value={filterBox}
                   >
                     <Option value='total'>전체보기</Option>
                     <Option value='online'>온라인</Option>
