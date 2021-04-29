@@ -71,7 +71,6 @@ export default MyPage;
 
 const Container = styled.div`
   width: 70%;
-  min-width: 779px;
   max-width: 1004px;
   margin: 0 auto;
 `;
@@ -87,6 +86,7 @@ const TextBox = styled.div`
 `;
 const Profile = styled.div`
   width: 100%;
+  min-width: 495px;
   height: 137px;
   box-sizing: border-box;
   border: 1px solid #707070;

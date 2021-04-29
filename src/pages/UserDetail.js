@@ -16,7 +16,7 @@ const UserDetail = (props) => {
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState(user.locations);
   const [time, setTime] = useState(user.offTime);
-
+console.log(user);
   useEffect(() => {
     // effect
     return () => {
@@ -93,7 +93,7 @@ const UserDetail = (props) => {
               {locations?.map((location, idx) => {
                 return (
                   <Area>
-                    {location}
+                    {location.name}
                     <CloseOutlined
                       onClick={() => {
                         deleteLocation(location);

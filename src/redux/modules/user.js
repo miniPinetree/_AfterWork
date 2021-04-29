@@ -12,10 +12,11 @@ const logOut = createAction(LOG_OUT, (user) => ({ user }));
 
 const initialState = {
     user: {
-        //테스트용 임시 데이터
+        //테스트용 임시 데이터 삭제예정
         email: "email@email.com",
         name: "퇴그니",
         image: "https://www.1xbetkrs.com/wp-content/uploads/2020/02/%ED%8E%AD%EC%88%98%EC%A7%A46-e1582012424773.jpg",
+        offTime: "18:30:00",
         "interests":[
             {
                 "interestId": 1,
@@ -76,6 +77,7 @@ const getUserDB = (id) => {
                     getUser({
                         email: res.data.email,
                         image: res.data.imageUrl,
+                        offTime: res.data.offTime,
                         interests: res.data.interests,
                         locations: res.data.locations,
                         name: res.data.name,
