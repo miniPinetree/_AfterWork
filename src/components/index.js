@@ -6,5 +6,6 @@ import UserInfo from "./UserInfo";
 import FButton from "./FButton";
 import InterestBox from "./InterestBox";
 import PostCard from "./PostCard";
+import LocationBox from "./LocationBox"
 
-export { Footer, Header, CategoryCard, ItemCard, UserInfo, InterestBox, PostCard, FButton };
+export { LocationBox, Footer, Header, CategoryCard, ItemCard, UserInfo, InterestBox, PostCard, FButton };

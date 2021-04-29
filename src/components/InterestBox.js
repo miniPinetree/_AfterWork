@@ -1,19 +1,32 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { Checkbox, Col } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
 import { actionCreators as postActions } from "../redux/modules/post";
-const CheckBox = (props) => {
+const InterestBox = (props) => {
   const categoryList = useSelector((state) => state.post.category_list);
   const dispatch = useDispatch();
-  const { toggle, selectedCategory } = props;
+
+  const { setCategories, categories } = props;
 
   useEffect(() => {
     if (categoryList.length === 0) {
       dispatch(postActions.getCategoryDB());
     }
   }, []);
+  //관심 카테고리 변경
+  const changeInterest =(id)=>{
+    if(categories.includes(id)){
+      let _categories = categories.filter((category)=>{
+        console.log(category, id);
+        return category !== id
+      });
+      setCategories(_categories);
+    }else{
+      console.log(categories, id);
+      setCategories([...categories, id]);
+    }
+  }
 
   return (
     <>
@@ -22,19 +35,19 @@ const CheckBox = (props) => {
         <text>추가하기</text>
         {categoryList.map((category, idx) => {
           return(
-           selectedCategory.some(
+            categories.some(
                 (categoryId) => categoryId === category.categoryId
               )? (
               <Row
                 span={16}
                 isChecked
-                onClick={() => toggle(category.categoryId)}
+                onClick={() => changeInterest(category.categoryId)}
               >
                 <CheckCircleFilled />
                 {category.name}
               </Row>
             ) : (
-              <Row span={16} onClick={() => toggle(category.categoryId)}>
+              <Row span={16} onClick={() => changeInterest(category.categoryId)}>
                 <CheckCircleFilled />
                 {category.name}
               </Row>
@@ -47,11 +60,11 @@ const CheckBox = (props) => {
   );
 };
 
-CheckBox.defaultProps = {
+InterestBox.defaultProps = {
   isChecked: false,
 };
 
-export default CheckBox;
+export default React.memo(InterestBox);
 
 const Grid = styled.div`
   width: 100%;
