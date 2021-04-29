@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect } from 'react';
 import _ from 'lodash';
-import { Spin } from 'antd';
 
 function InfinityScroll(props) {
   const { children, callNext, is_next, loading } = props;
@@ -35,12 +34,7 @@ function InfinityScroll(props) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [is_next, loading]);
 
-  return (
-    <>
-      {children}
-      {is_next && <Spin size='large' tip='Loading...' />}
-    </>
-  );
+  return <>{children}</>;
 }
 
 InfinityScroll.defaultProps = {
