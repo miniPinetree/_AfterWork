@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
+import InfinityScroll from '../shared/InfinityScroll';
 import SubBanner from '../components/SubBanner';
 import PostCard from '../components/PostCard';
 import SideBar from '../components/SideBar';
@@ -12,6 +13,8 @@ function Category(props) {
   const id = props.match.params.id;
   const category_list = useSelector((state) => state.post.category_list);
   const post_list = useSelector((state) => state.post.post_list);
+  const paging = useSelector((state) => state.post.paging);
+  const is_loading = useSelector((state) => state.post.is_loading);
   const idx = category_list.findIndex((val) => {
     return val.id === parseInt(id);
   });
@@ -58,9 +61,17 @@ function Category(props) {
             </div>
           </MainHeader>
           <Main>
-            {post_list.map((val, idx) => {
-              return <PostCard post_info={val} key={idx} />;
-            })}
+            <InfinityScroll
+              callNext={() => {
+                dispatch(postActions.scrollGetPostDB(id, paging.page));
+              }}
+              is_next={paging.page ? true : false}
+              loading={is_loading}
+            >
+              {post_list.map((val, idx) => {
+                return <PostCard post_info={val} key={idx} />;
+              })}
+            </InfinityScroll>
           </Main>
         </MainContainer>
       </Container>
