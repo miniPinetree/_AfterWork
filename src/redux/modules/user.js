@@ -25,7 +25,7 @@ const getUserDB = (id) => {
         const jwtToken = getCookie("accessToken");
         axios({
             method: "get",
-            url: `${config.api}/user/me`,
+            url: `${config.api}/api/user/me`,
             headers: {
                 authorization: `Bearer ${jwtToken}`,
                 "Content-type": "application/json",
@@ -41,14 +41,24 @@ const getUserDB = (id) => {
                         email: res.data.email,
                         image: res.data.imageUrl,
                         interests: res.data.interests,
-                        location: res.data.location,
+                        locations: res.data.locations,
                         name: res.data.name,
+                        collects: res.data.collects,
                     })
                 );
             })
             .catch((err) => {
                 console.log(err, "에러에여");
             });
+    };
+};
+
+const logOutDB = () => {
+    return function (dispatch, getState, { history }) {
+        deleteCookie("accessToken");
+        dispatch(logOut());
+        window.alert("로그아웃 되었습니다.");
+        window.location.replace("/");
     };
 };
 
@@ -61,7 +71,6 @@ export default handleActions(
             }),
         [LOG_OUT]: (state, action) =>
             produce(state, (draft) => {
-                deleteCookie("is_login");
                 draft.user = null;
                 draft.is_login = false;
             }),
@@ -73,6 +82,7 @@ const actionCreators = {
     getUser,
     getUserDB,
     logOut,
+    logOutDB,
 };
 
 export { actionCreators };

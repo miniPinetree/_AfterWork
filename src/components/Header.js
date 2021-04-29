@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { history } from "../redux/configStore";
 import LoginModal from "./LoginModal";
+import { actionCreators as userActions } from "../redux/modules/user";
+import { deleteCookie } from "../shared/Cookie";
 
 const Header = () => {
     const [isModal, setIsModal] = useState(false);
+    const dispatch = useDispatch();
     const modalOpen = () => {
         setIsModal(true);
     };
     const modalClose = () => {
         setIsModal(false);
     };
-    const is_login = useSelector((state) => state.user.is_login);
+    const user = useSelector((state) => state.user);
 
     return (
         <>
@@ -29,8 +32,19 @@ const Header = () => {
                         <About onClick={() => history.push("/about")}>About</About>
                     </div>
                     <div>
-                        {is_login === true ? (
-                            <Login onClick={() => history.push("/mypage")}> 마이페이지 </Login>
+                        {user.is_login === true ? (
+                            <>
+                                <Login
+                                    onClick={() => {
+                                        dispatch(userActions.logOutDB());
+                                    }}
+                                >
+                                    로그아웃
+                                </Login>
+                                <Login onClick={() => history.push("/mypage")}>
+                                    {user.user.name}님
+                                </Login>
+                            </>
                         ) : (
                             <Login onClick={modalOpen}>로그인</Login>
                         )}
