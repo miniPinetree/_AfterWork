@@ -33,12 +33,12 @@ const initialState = {
         collects: [
             {
                 collectId: 1,
-                productId: 1,
+                productId: 433,
                 userId: 1, //불필요 하다 생각
             },
             {
                 collectId: 2,
-                productId: 1,
+                productId: 5,
                 userId: 1, //불필요 하다 생각
             },
         ],

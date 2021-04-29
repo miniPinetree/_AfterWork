@@ -16,33 +16,40 @@ const LocationBox=(props)=>{
         padding: "9px 27px 12px 27px",
       }
 
-      //검색 키워드가 포함된 선택가능지역 리스트
+//검색 키워드가 포함된 선택가능지역 리스트
   let searchedLocation = locationOpts.filter((option) => {
     return option.includes(search);
   });
 //선택가능지역 클릭하여 추가
   const selectLocation = (val) => {
+    if(locations.length>=5){
+        Swal.fire({
+          text: "관심지역은 5개까지 설정 가능합니다.",
+          confirmButtonColor: "#7F58EC",
+          confirmButtonText: "확인",
+        });
+      }else{
     setLocations([...locations, val]);
+      }
   };
 //선택가능지역이 하나이면 엔터로도 추가 가능
-  const enterLocation = () => {
-    if(locations.length>5){
-      Swal.fire({
-        title: "관심지역은 5개까지 설정하실 수 있어요. 😧",
-        confirmButtonColor: "#7F58EC",
-        confirmButtonText: "확인",
-      }).then((result) => {
-        if (result.isConfirmed){
-            return;
-        }
+  const enterLocation = (e) => {
+      if(e.keyCode !== 13){
+          return;
+      }else{
+        if(locations.length>=5){
+            Swal.fire({
+              text: "관심지역은 5개까지 설정하실 수 있어요. 😧",
+              confirmButtonColor: "#7F58EC",
+              confirmButtonText: "확인",
             });
-        
-    }else{
-      if (searchedLocation.length === 1) {
-        setLocations([...locations, ...searchedLocation]);
-        setSearch("");
+              }else{
+                if (searchedLocation.length === 1) {
+                  setLocations([...locations, ...searchedLocation]);
+                  setSearch("");
+                }
+              }
       }
-    }
   };
   const deleteLocation = (val) => {
     let _location = locations.filter((l) => {
@@ -82,7 +89,7 @@ const LocationBox=(props)=>{
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
-                onPressEnter={enterLocation}
+                onKeyUp={(e)=>{enterLocation(e)}}
                 value={search}
               />
 

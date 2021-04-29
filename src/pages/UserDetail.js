@@ -5,10 +5,8 @@ import { UserInfo, InterestBox, LocationBox } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { TimePicker, Input } from "antd";
 import moment from "moment";
-import Swal from "sweetalert2";
 import { range } from "lodash";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
-import locationOpts from "../shared/locationOpts";
 
 const UserDetail = (props) => {
   const dispatch = useDispatch();
@@ -19,17 +17,15 @@ const UserDetail = (props) => {
   const [locations, setLocations] = useState(locationNames);
   const [categories, setCategories] = useState(categoryIds);
   const [time, setTime] = useState(user.offTime);
- 
-console.log(locations, locations.length, time, search,categoryIds);
-console.log(categoryIds, categories);
-  const setValue = (time, location)=>{
 
+  const setValue = ()=>{
+dispatch(preferActions.updateUserInfoDB(locations,categories,time));
   };
   return (
     <Container>
       <TextBox>
         <Title>회원정보 및 상세 설정</Title>
-        <TextBtn>변경 사항 저장</TextBtn>
+        <TextBtn _onClick={setValue}>변경 사항 저장</TextBtn>
       </TextBox>
       <Wrap>
         <Col>
@@ -55,15 +51,17 @@ console.log(categoryIds, categories);
         <Col>
         {/* 관심 카테고리 */}
           <BorderBox>
-         <InterestBox setCategories={setCategories} categories={categories}/>
+         <InterestBox 
+         setCategories={setCategories} 
+         categories={categories}/>
           </BorderBox>
           {/* 관심지역 설정 */}
           <BorderBox>
             <LocationBox 
             setLocations={setLocations}
-            search={search}
-            setSearch={setSearch}
             locations={locations}
+            setSearch={setSearch}
+            search={search}
             />
           </BorderBox>
         </Col>

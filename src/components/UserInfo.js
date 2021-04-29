@@ -16,7 +16,7 @@ const user = useSelector((state)=>state.user.user);
         </>
     );
 };
-export default UserInfo;
+export default React.memo(UserInfo);
 
 const InfoBox = styled.div`
   font-size: 17px;
