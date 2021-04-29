@@ -1,10 +1,9 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
 import { Title, TextBtn } from "../elements";
 import { UserInfo, CheckBox } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { TimePicker, Input } from "antd";
-import Swal from "sweetalert2";
 import moment from "moment";
 import { range } from "lodash";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
@@ -14,9 +13,16 @@ import locations from "../shared/locations";
 const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user_prefer = useSelector((state) => state.preference.user_prefer);
-  const [search, setSearch] = React.useState("");
-  const [location, setLocation] = React.useState(user_prefer.location);
-  const [time, setTime] = React.useState(user_prefer.offTime);
+  const [search, setSearch] = useState("");
+  const [location, setLocation] = useState(user_prefer.location);
+  const [time, setTime] = useState(user_prefer.offTime);
+
+  useEffect(() => {
+    // effect
+    return () => {
+      // cleanup
+    }
+  }, [])
 
   let searchLocation = locations.filter((location) => {
     return location.includes(search);
@@ -38,6 +44,9 @@ const UserDetail = (props) => {
       return l !== val;
     });
     setLocation(_location);
+  };
+  const setValue = (time, location)=>{
+
   };
   return (
     <Container>
@@ -68,7 +77,8 @@ const UserDetail = (props) => {
           <BorderBox flex>
             <Divide>
               <strong>관심 카테고리</strong>
-              <CheckBox interests={user_prefer.interests} isChecked={true} />
+              <CheckBox interests={user_prefer.interests}
+              isChecked={true} />
             </Divide>
             <Line />
             <Divide>
@@ -155,6 +165,7 @@ export default UserDetail;
 const Container = styled.div`
   width: 70%;
   min-width: 749px;
+  max-width: 1004px;
   margin: 0 auto;
 `;
 const TextBox = styled.div`
