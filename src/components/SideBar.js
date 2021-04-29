@@ -26,7 +26,7 @@ function SideBar(props) {
                   <li
                     key={idx}
                     onClick={() => {
-                      history.push(`/category/${val.id}`);
+                      history.push(`/category/${val.categoryId}`);
                       window.scrollTo({ top: 0, left: 0 });
                     }}
                   >

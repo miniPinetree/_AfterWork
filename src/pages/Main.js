@@ -20,7 +20,7 @@ function Main(props) {
       <Banner />
       <Carousel text='카테고리' size='5'>
         {category_list.map((val, idx) => {
-          return <CategoryCard key={val.id} {...val} />;
+          return <CategoryCard key={idx + 'category'} {...val} />;
         })}
       </Carousel>
       <Carousel text='인기 취미 아이템'>

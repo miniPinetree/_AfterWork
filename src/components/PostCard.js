@@ -4,7 +4,6 @@ import { HeartFilled } from '@ant-design/icons';
 
 function ItemCard(props) {
   const { small, like, post_info } = props;
-  console.log(props);
   return (
     <>
       {/* 링크 연결 고려 */}

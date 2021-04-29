@@ -7,7 +7,7 @@ function CategoryCard(props) {
     <>
       <CardWrap
         onClick={() => {
-          history.push(`/category/${props.id}`);
+          history.push(`/category/${props.categoryId}`);
           window.scrollTo({ top: 0, left: 0 });
         }}
       >
