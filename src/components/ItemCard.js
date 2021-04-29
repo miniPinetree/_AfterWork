@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { HeartFilled } from '@ant-design/icons';
 
 function ItemCard(props) {
-  const { small, like } = props;
+  
+  const { small, content, like } = props;
+
   return (
     <>
       <CardWrap small={small} className='wrap'>

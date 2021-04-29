@@ -1,8 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
+
 const UserInfo =(props)=>{
 const user = useSelector((state)=>state.user.user);
     return(

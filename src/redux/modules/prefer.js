@@ -1,5 +1,5 @@
 import { createAction, handleActions } from "redux-actions";
-import { config } from "../../shared/config";
+import { config } from "../../config";
 import Swal from "sweetalert2";
 import produce from "immer";
 import axios from "axios";
@@ -24,23 +24,50 @@ const deleteCollection = createAction(DELETE_COLLECTION, (collection = []) => ({
 
 //initialState
 const initialState = {
-  user_prefer: {
-    //크롤링 데이터 기준 확인 후 범위확정
-    location: ["서초구", "송파구", "성동구"],
-    offTime: "18:30:00",
-    interests: [
-      //API response 불분명하여 작업 보류
-      { 1: "아트" }, { 2: "교육" }, { 3: "공예" }],
-  },
-  collection: [],
+  collection: [
+    //테스트용 임시 데이터 삭제예정
+    {
+        "productId": 433,
+        "title": "일반인 운동 쉽고 빠르게 그리고 간단하게",
+        "price": 44000,
+        "priceInfo": "￦44,000/시간",
+        "author": "신성영",
+        "imgUrl": "https://img.taling.me/Content/Uploads/Cover/s_4794141ff0871fbdc5f5bec51b2778a246de813e.jpg",
+        "location": "서울,강남",
+        "popularity": 18,
+        "status": "N",
+        "siteName": "Taling",
+        "siteUrl": "https://taling.me/Talent/Detail/18634",
+        "category": null,
+        "collects": [], // 불필요하다 생각 성능상 이슈
+        "online": false
+    },
+    {
+        "productId": 426,
+        "title": "(도봉역)초보자/근력운동 편하고 즐겁게 하기^^/1대1PT /추가비용없이!",
+        "price": 36300,
+        "priceInfo": "￦36,300",
+        "author": "민병철",
+        "imgUrl": "https://img.taling.me/Content/Uploads/Cover/s_0e982244cee2f1ae22a36534c0a23d4c23f13cc7.jpg",
+        "location": "서울,노원",
+        "popularity": 125,
+        "status": "N",
+        "siteName": "Taling",
+        "siteUrl": "https://taling.me/Talent/Detail/12623",
+        "category": null,
+        "collects": [],
+        "online": false
+    }
+],
 };
+
 //회원 관심사 수정
 const updateUserInfoDB = (location, offTime, interests) => {
   return function (dispatch, getState, { history }) {
     const id = getState().user.user.uid;
     let user_prefer = {
-      location: location,
       offTime: offTime,
+      locations: location,
       interests: interests,
     };
     axios
@@ -54,12 +81,13 @@ const updateUserInfoDB = (location, offTime, interests) => {
   };
 };
 //찜 목록 불러오기
-const getCollectionDB = (id, location, offTime, interests) => {
+const getCollectionDB = () => {
   return function (dispatch, getState, { history }) {
     axios
-      .get(`${config}/api/profile/${id}`)
+      .get(`${config}/api/collects`)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data); //테스트 후 삭제예정
+        dispatch(getCollection(res.data));
       })
       .catch((e) => {
         console.log(e);
@@ -75,21 +103,21 @@ const toggleLikeDB = (prd_id) => {
     if (!getState().user.user) {
       return;
     }
-    let collection = getState().preference.collection;
-    //post module 생성 이후 getState로 수정
-    let post_list = getState().post.list;
-    let idx = post_list.findIndex((post) => post.id === prd_id);
-    let post = post_list[idx];
-    //찜 목록에 없으면 추가, 있으면 삭제
-    if (collection.indexOf(post) === -1) {
-      collection = [...collection, post];
-      dispatch(likeToggle(collection));
-    } else {
-      collection.filter((prd) => {
-        return prd !== post;
-      });
-      dispatch(likeToggle(collection));
-    }
+    let userCollects = getState().user.user.collects;
+    let postList = getState().post.post_list;
+    let difference = postList.filter(post => !userCollects.includes(post));
+    // const checkPrdId = (element) =>{
+    //   if(element.productId === prd_id){
+    //     return true;
+    //   }
+    // }
+    // //찜 목록에 없으면 추가, 있으면 삭제
+    // if (collection.some(checkPrdId)) {
+    //   collection.filter((prd) => {
+    //     return prd !== post;
+    //   });
+    //   dispatch(likeToggle(collection));
+    // }
     //     let data={
     //       productId:prd_id,
     //     }

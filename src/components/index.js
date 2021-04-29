@@ -4,5 +4,14 @@ import CategoryCard from "./CategoryCard";
 import ItemCard from "./ItemCard";
 import UserInfo from "./UserInfo";
 import CheckBox from "./CheckBox";
+import PostCard from "./PostCard";
 
-export {Footer, Header, CategoryCard, ItemCard, UserInfo, CheckBox};
+export { 
+    Footer, 
+    Header, 
+    CategoryCard, 
+    ItemCard, 
+    UserInfo, 
+    CheckBox,
+    PostCard,
+ };

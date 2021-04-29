@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HeartFilled } from '@ant-design/icons';
+import { useDispatch } from "react-redux";
+import { actionCreators as preferActions} from '../redux/modules/prefer';
 
 function ItemCard(props) {
+  const dispatch = useDispatch();
   const { small, like, post_info } = props;
   return (
     <>
@@ -13,7 +16,10 @@ function ItemCard(props) {
         <TextBox small={small}>
           <TitleWrap like={like}>
             <strong>{post_info?.title}</strong>
-            <HeartFilled />
+            <HeartFilled 
+            onClick={()=>{
+              dispatch(preferActions.toggleLikeDB(post_info.productId));
+            }}/>
           </TitleWrap>
           {/* 이름, 위치, 가격 */}
           <div>
