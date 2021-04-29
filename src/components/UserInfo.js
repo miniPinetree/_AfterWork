@@ -7,13 +7,12 @@ const UserInfo =(props)=>{
 const user = useSelector((state)=>state.user.user);
     return(
         <>
-        <Avatar size={80} icon={<UserOutlined />} />
+        <UserImg src={user.image}/>
         <InfoBox>
           <p>
-            <strong>{user.nickname}</strong>님
+            <strong>{user.name}</strong>님
           </p>
           <p>{user.email}</p>
-          <p>{user.address}</p>
         </InfoBox>
         </>
     );
@@ -30,4 +29,10 @@ const InfoBox = styled.div`
   & p {
     margin: 0;
   }
+`;
+const UserImg = styled.img`
+width:80px;
+height:80px;
+object-fit:cover;
+border-radius:40px;
 `;

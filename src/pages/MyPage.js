@@ -1,16 +1,21 @@
-import React from "react";
+import {useEffect} from "react";
 import styled from "styled-components";
 import {history} from "../redux/configStore";
 import { RightOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as preferActions } from "../redux/modules/preference";
+import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { ItemCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
 import { Empty } from 'antd';
 
 const MyPage = (props) => {
   const dispatch = useDispatch();
-  const collection = useSelector((state) => state.preference.collection);
+  const user = useSelector((state)=>state.user.user);
+  const collection = useSelector((state)=>state.prefer.collection);
+
+  useEffect(() => {
+   
+  }, [])
 
   return (
     <Container>

@@ -7,15 +7,15 @@ import { TimePicker, Input } from "antd";
 import moment from "moment";
 import { range } from "lodash";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
-import { actionCreators as preferActions } from "../redux/modules/preference";
-import locations from "../shared/locations";
+import { actionCreators as preferActions } from "../redux/modules/prefer";
+import locationOpts from "../shared/locationOpts";
 
 const UserDetail = (props) => {
   const dispatch = useDispatch();
-  const user_prefer = useSelector((state) => state.preference.user_prefer);
+  const user = useSelector((state) => state.user.user);
   const [search, setSearch] = useState("");
-  const [location, setLocation] = useState(user_prefer.location);
-  const [time, setTime] = useState(user_prefer.offTime);
+  const [locations, setLocations] = useState(user.locations);
+  const [time, setTime] = useState(user.offTime);
 
   useEffect(() => {
     // effect
@@ -24,26 +24,26 @@ const UserDetail = (props) => {
     }
   }, [])
 
-  let searchLocation = locations.filter((location) => {
-    return location.includes(search);
+  let searchedLocation = locationOpts.filter((option) => {
+    return option.includes(search);
   });
   const selectLocation = (val) => {
-    setLocation([...location, val]);
+    setLocations([...locations, val]);
   };
   const enterLocation = (val) => {
     console.log(val, search);
-    if (searchLocation.length === 1) {
-      setLocation([...location, ...searchLocation]);
+    if (searchedLocation.length === 1) {
+      searchedLocation([...locations, ...searchedLocation]);
       setSearch("");
     } else {
       setSearch("");
     }
   };
   const deleteLocation = (val) => {
-    let _location = location.filter((l) => {
+    let _location = locations.filter((l) => {
       return l !== val;
     });
-    setLocation(_location);
+    setLocations(_location);
   };
   const setValue = (time, location)=>{
 
@@ -77,26 +77,26 @@ const UserDetail = (props) => {
           <BorderBox flex>
             <Divide>
               <strong>관심 카테고리</strong>
-              <CheckBox interests={user_prefer.interests}
+              <CheckBox interests={user.interests.categoryId}
               isChecked={true} />
             </Divide>
             <Line />
             <Divide>
               <text>추가하기</text>
-              <CheckBox interests={user_prefer.interests} />
+              <CheckBox interests={user.interests.categoryId} />
             </Divide>
           </BorderBox>
 
           <BorderBox>
             <strong>관심지역 설정</strong>
             <AreaList>
-              {location?.map((l, idx) => {
+              {locations?.map((location, idx) => {
                 return (
                   <Area>
-                    {l}
+                    {location}
                     <CloseOutlined
                       onClick={() => {
-                        deleteLocation(l);
+                        deleteLocation(location);
                       }}
                     />
                   </Area>
@@ -133,14 +133,14 @@ const UserDetail = (props) => {
                 value={search}
               />
 
-              {searchLocation.length !== locations.length ? (
+              {searchedLocation.length !== locationOpts.length ? (
                 <Autofill>
-                  {searchLocation.length === 0 ? (
+                  {searchedLocation.length === 0 ? (
                     <p>서비스 지역이 아닙니다</p>
                   ) : (
                     <p>원하는 지역을 선택해주세요</p>
                   )}
-                  {searchLocation.map((location, idx) => {
+                  {searchedLocation.map((location, idx) => {
                     return (
                       <div
                         onClick={() => {
