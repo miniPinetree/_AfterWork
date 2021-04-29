@@ -4,7 +4,7 @@ import {history} from "../redux/configStore";
 import { RightOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
-import { PostCard, UserInfo } from "../components";
+import { ItemCard, PostCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
 import { Empty } from 'antd';
 
@@ -51,9 +51,12 @@ const MyPage = (props) => {
         <ItemList>
           {collection.map((prd,idx)=>{
             return(
-<PostCard small post_info={prd} like/>
+<PostCard post_info={prd} like/>
             );
           })}
+          {/* wrap 확인용 삭제예정 */}
+          <ItemCard/>
+          <ItemCard/>
         </ItemList>
         </>
         : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -116,5 +119,5 @@ const ItemList = styled.div`
   justify-content: flex-start;
   margin-bottom: 18px;
   min-height: 220px;
-  gap: 20px 20px;
+  gap: 20px 14px;
 `;
