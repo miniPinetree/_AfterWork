@@ -1,11 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Title, TextBtn } from "../elements";
-import { UserInfo, InterestBox, LocationBox } from "../components";
+import { UserInfo, InterestBox, LocationBox, OffTimePicker } from "../components";
 import { useSelector, useDispatch } from "react-redux";
-import { TimePicker, Input } from "antd";
-import moment from "moment";
-import { range } from "lodash";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
 
 const UserDetail = (props) => {
@@ -33,18 +30,9 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
           <InfoBox>
             <UserInfo />
           </InfoBox>
-          {/* 퇴근시간 설정 */}
           <BorderBox>
             <strong>퇴근시간 설정</strong>
-            <TimePicker
-              size="large"
-              onChange={(time, timeString) => {
-                setTime(timeString);
-              }}
-              defaultOpenValue={moment(time, "HH:mm:ss")}
-              defaultValue={moment(time, "HH:mm:ss")}
-              disabledHours={() => range(0, 15)}
-            />
+          <OffTimePicker time={time} setTime={setTime}/>
           </BorderBox>
         </Col>
 
@@ -55,8 +43,8 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
          setCategories={setCategories} 
          categories={categories}/>
           </BorderBox>
-          {/* 관심지역 설정 */}
           <BorderBox>
+          <strong>관심지역 설정</strong>
             <LocationBox 
             setLocations={setLocations}
             locations={locations}

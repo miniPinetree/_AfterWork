@@ -28,42 +28,45 @@ const initialState = {
   collection: [
     //테스트용 임시 데이터 삭제예정
     {
-        "productId": 433,
-        "title": "일반인 운동 쉽고 빠르게 그리고 간단하게",
-        "price": 44000,
-        "priceInfo": "￦44,000/시간",
-        "author": "신성영",
-        "imgUrl": "https://img.taling.me/Content/Uploads/Cover/s_4794141ff0871fbdc5f5bec51b2778a246de813e.jpg",
-        "location": "서울,강남",
-        "popularity": 18,
-        "status": "N",
-        "siteName": "Taling",
-        "siteUrl": "https://taling.me/Talent/Detail/18634",
-        "category": null,
-        "collects": [], // 불필요하다 생각 성능상 이슈
-        "online": false
+      productId: 433,
+      title: "일반인 운동 쉽고 빠르게 그리고 간단하게",
+      price: 44000,
+      priceInfo: "￦44,000/시간",
+      author: "신성영",
+      imgUrl:
+        "https://img.taling.me/Content/Uploads/Cover/s_4794141ff0871fbdc5f5bec51b2778a246de813e.jpg",
+      location: "서울,강남",
+      popularity: 18,
+      status: "N",
+      siteName: "Taling",
+      siteUrl: "https://taling.me/Talent/Detail/18634",
+      category: null,
+      collects: [], // 불필요하다 생각 성능상 이슈
+      online: false,
     },
     {
-        "productId": 426,
-        "title": "(도봉역)초보자/근력운동 편하고 즐겁게 하기^^/1대1PT /추가비용없이!",
-        "price": 36300,
-        "priceInfo": "￦36,300",
-        "author": "민병철",
-        "imgUrl": "https://img.taling.me/Content/Uploads/Cover/s_0e982244cee2f1ae22a36534c0a23d4c23f13cc7.jpg",
-        "location": "서울,노원",
-        "popularity": 125,
-        "status": "N",
-        "siteName": "Taling",
-        "siteUrl": "https://taling.me/Talent/Detail/12623",
-        "category": null,
-        "collects": [],
-        "online": false
-    }
-],
+      productId: 426,
+      title:
+        "(도봉역)초보자/근력운동 편하고 즐겁게 하기^^/1대1PT /추가비용없이!",
+      price: 36300,
+      priceInfo: "￦36,300",
+      author: "민병철",
+      imgUrl:
+        "https://img.taling.me/Content/Uploads/Cover/s_0e982244cee2f1ae22a36534c0a23d4c23f13cc7.jpg",
+      location: "서울,노원",
+      popularity: 125,
+      status: "N",
+      siteName: "Taling",
+      siteUrl: "https://taling.me/Talent/Detail/12623",
+      category: null,
+      collects: [],
+      online: false,
+    },
+  ],
 };
 
 //회원 관심사 수정
-const updateUserInfoDB = (locations,categories,time) => {
+const updateUserInfoDB = (locations, categories, time) => {
   return function (dispatch, getState, { history }) {
     const id = getState().user.user.uid;
     let data = {
@@ -75,7 +78,7 @@ const updateUserInfoDB = (locations,categories,time) => {
       .post(`${config}/api/user`, data)
       .then((res) => {
         //내려오는 data없음 회원정보 다시 불러와야 함.
-        dispatch(userActions.getUserDB()) //함수 인자값 수정예정
+        dispatch(userActions.getUserDB()); //함수 인자값 수정예정
       })
       .catch((e) => {
         console.log(e);
@@ -109,36 +112,41 @@ const toggleLikeDB = (prd_id) => {
       });
       return;
     }
-     //찜 목록에 존재하면 삭제, 그렇지 않으면 추가
+    //찜 목록에 존재하면 삭제, 그렇지 않으면 추가
     let collects = getState().user.user.collects;
     let flag = false;
     console.log(collects, prd_id, collects[0].productId);
-    for(let i=0;i<collects.length;i++){
-      if(collects[i].productId===prd_id){
+    for (let i = 0; i < collects.length; i++) {
+      if (collects[i].productId === prd_id) {
         flag = true;
-        axios.delete(`${config}/api/collects/${collects[i].collectId}`)
-      .then((res)=>{
-        console.log(res.data); //테스트 후 삭제예정
-        let _collects = collects.filter((collect)=>{
-          return collect.productId !== prd_id
-        })
-        dispatch(likeToggle(_collects));
-    }).catch((e)=>{
-        console.log(e);
-    });
+        axios
+          .delete(`${config}/api/collects/${collects[i].collectId}`)
+          .then((res) => {
+            console.log(res.data); //테스트 후 삭제예정
+            let _collects = collects.filter((collect) => {
+              return collect.productId !== prd_id;
+            });
+            dispatch(likeToggle(_collects));
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       }
-    }if(flag===false){
-      let data={
-            productId:prd_id,
-          };
-      axios.post(`${config}/api/collects`, data)
-      .then((res)=>{
-        console.log(res.data); //테스트 후 삭제예정
-        let _collects = [...collects, res.data]
-        dispatch(likeToggle(_collects));
-    }).catch((e)=>{
-        console.log(e);
-    });
+    }
+    if (flag === false) {
+      let data = {
+        productId: prd_id,
+      };
+      axios
+        .post(`${config}/api/collects`, data)
+        .then((res) => {
+          console.log(res.data); //테스트 후 삭제예정
+          let _collects = [...collects, res.data];
+          dispatch(likeToggle(_collects));
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
   };
 };
@@ -163,12 +171,14 @@ const deleteCollectionDB = () => {
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-            axios.delete(`${config}/api/collects`)
-            .then((res)=>{
-            // 데이터없음
-          }).catch((e)=>{
+          axios
+            .delete(`${config}/api/collects`)
+            .then((res) => {
+              // 데이터없음
+            })
+            .catch((e) => {
               console.log(e);
-          });
+            });
           dispatch(deleteCollection());
         }
       });
