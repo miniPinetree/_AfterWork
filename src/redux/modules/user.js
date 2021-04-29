@@ -12,11 +12,10 @@ const logOut = createAction(LOG_OUT, (user) => ({ user }));
 
 const initialState = {
     user: {
+        //테스트용 임시 데이터
         email: "email@email.com",
         uid: "1234",
         nickname: "퇴그니",
-        snsId: "snsId",
-        address: "서울 강남구",
     },
     is_login: false,
 };
