@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as postActions } from '../redux/modules/post';
+import { history } from '../redux/configStore';
 
-function SideBar() {
+function SideBar(props) {
+  const dispatch = useDispatch();
+  const category_list = useSelector((state) => state.post.category_list);
+
+  useEffect(() => {
+    if (category_list.length === 0) {
+      dispatch(postActions.getCategoryDB());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <Wrap>
@@ -9,24 +21,19 @@ function SideBar() {
           <Container>
             <Title>카테고리</Title>
             <List>
-              <li>
-                <span>운동/건강</span>
-              </li>
-              <li>
-                <span>요리</span>
-              </li>
-              <li>
-                <span>아트</span>
-              </li>
-              <li>
-                <span>교육</span>
-              </li>
-              <li>
-                <span>공예</span>
-              </li>
-              <li>
-                <span>음악</span>
-              </li>
+              {category_list.map((val, idx) => {
+                return (
+                  <li
+                    key={idx}
+                    onClick={() => {
+                      history.push(`/category/${val.id}`);
+                      window.scrollTo({ top: 0, left: 0 });
+                    }}
+                  >
+                    <span>{val.name}</span>
+                  </li>
+                );
+              })}
             </List>
           </Container>
         </SideBox>

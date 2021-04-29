@@ -4,7 +4,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Slider from 'react-slick';
 import '../../node_modules/slick-carousel/slick/slick.css';
 import '../../node_modules/slick-carousel/slick/slick-theme.css';
-import { history } from '../redux/configStore';
+
 function Prev(props) {
   const { onClick } = props;
   return (
@@ -37,19 +37,7 @@ function Carousel(props) {
     <>
       <Wrap>
         <TitleContainer>
-          {text === '카테고리' ? (
-            <Title
-              onClick={() => {
-                history.push('/category');
-              }}
-              style={{ cursor: 'pointer' }}
-            >
-              {text}
-            </Title>
-          ) : (
-            <Title>{text}</Title>
-          )}
-
+          <Title>{text}</Title>
           {/* <div>전체보기</div> */}
         </TitleContainer>
         <CarouselContainer>
