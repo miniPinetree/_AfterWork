@@ -3,7 +3,7 @@ import Header from "./Header";
 import CategoryCard from "./CategoryCard";
 import ItemCard from "./ItemCard";
 import UserInfo from "./UserInfo";
-import CheckBox from "./CheckBox";
+import InterestBox from "./InterestBox";
 import PostCard from "./PostCard";
 
 export { 
@@ -12,6 +12,6 @@ export {
     CategoryCard, 
     ItemCard, 
     UserInfo, 
-    CheckBox,
+    InterestBox,
     PostCard,
  };

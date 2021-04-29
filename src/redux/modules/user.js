@@ -20,7 +20,7 @@ const initialState = {
         "interests":[
             {
                 "interestId": 1,
-                "categoryId": 1,
+                "categoryId": 4,
                 "userId": 1 //불필요 하다 생각
             },
             {

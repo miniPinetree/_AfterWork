@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import styled from "styled-components";
 import { Title, TextBtn } from "../elements";
-import { UserInfo, CheckBox } from "../components";
+import { UserInfo, InterestBox } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { TimePicker, Input } from "antd";
 import moment from "moment";
@@ -13,29 +13,49 @@ import locationOpts from "../shared/locationOpts";
 const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const locationNames = user.locations.map(location=>location.name);
+  const categoryIds = user.interests.map(interest=>interest.categoryId);
   const [search, setSearch] = useState("");
-  const [locations, setLocations] = useState(user.locations);
+  const [locations, setLocations] = useState(locationNames);
+  const [categories, setCategories] = useState(categoryIds);
   const [time, setTime] = useState(user.offTime);
-console.log(user);
-  useEffect(() => {
-    // effect
-    return () => {
-      // cleanup
-    }
-  }, [])
+ 
+  const inputStyle = {
+    borderRadius: "29px",
+    font: "normal normal normal 20px/30px Noto Sans CJK KR",
+    letterSpacing: "-0.6px",
+    color: "#606060",
+    boxSizing: "border-box",
+    padding: "9px 27px 12px 27px",
+  }
+console.log(locations, time, search,categoryIds);
+console.log(categoryIds, categories);
 
+//관심 카테고리 변경
+  const changeInterest =(id)=>{
+    if(categories.includes(id)){
+      let _categories = categories.filter((category)=>{
+        console.log(category, id);
+        return category !== id
+      });
+      setCategories(_categories);
+    }else{
+      console.log(categories, id);
+      setCategories([...categories, id]);
+    }
+  }
+//검색 키워드가 포함된 선택가능지역 리스트
   let searchedLocation = locationOpts.filter((option) => {
     return option.includes(search);
   });
+//선택가능지역 클릭하여 추가
   const selectLocation = (val) => {
     setLocations([...locations, val]);
   };
-  const enterLocation = (val) => {
-    console.log(val, search);
+//선택가능지역이 하나이면 엔터로도 추가 가능
+  const enterLocation = () => {
     if (searchedLocation.length === 1) {
-      searchedLocation([...locations, ...searchedLocation]);
-      setSearch("");
-    } else {
+      setLocations([...locations, ...searchedLocation]);
       setSearch("");
     }
   };
@@ -56,9 +76,11 @@ console.log(user);
       </TextBox>
       <Wrap>
         <Col>
+        {/* 프로필*/}
           <InfoBox>
             <UserInfo />
           </InfoBox>
+          {/* 퇴근시간 설정 */}
           <BorderBox>
             <strong>퇴근시간 설정</strong>
             <TimePicker
@@ -74,26 +96,18 @@ console.log(user);
         </Col>
 
         <Col>
-          <BorderBox flex>
-            <Divide>
-              <strong>관심 카테고리</strong>
-              <CheckBox interests={user.interests.categoryId}
-              isChecked={true} />
-            </Divide>
-            <Line />
-            <Divide>
-              <text>추가하기</text>
-              <CheckBox interests={user.interests.categoryId} />
-            </Divide>
+        {/* 관심 카테고리 */}
+          <BorderBox>
+         <InterestBox toggle={changeInterest} selectedCategory={categories}/>
           </BorderBox>
-
+          {/* 관심지역 설정 */}
           <BorderBox>
             <strong>관심지역 설정</strong>
             <AreaList>
               {locations?.map((location, idx) => {
                 return (
                   <Area>
-                    {location.name}
+                    {location}
                     <CloseOutlined
                       onClick={() => {
                         deleteLocation(location);
@@ -111,25 +125,14 @@ console.log(user);
                 suffix={
                   <SearchOutlined
                     style={{ color: "#000", cursor: "pointer" }}
-                    onClick={() => {
-                      setSearch("");
-                    }}
+                    onClick={enterLocation}
                   />
                 }
-                style={{
-                  borderRadius: "29px",
-                  font: "normal normal normal 20px/30px Noto Sans CJK KR",
-                  letterSpacing: "-0.6px",
-                  color: "#606060",
-                  boxSizing: "border-box",
-                  padding: "9px 27px 12px 27px",
-                }}
+                style={inputStyle}
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
-                onPressEnter={(e) => {
-                  enterLocation(e.target.value);
-                }}
+                onPressEnter={enterLocation}
                 value={search}
               />
 
@@ -240,13 +243,6 @@ const BorderBox = styled.div`
     font: normal normal normal 16px/30px Noto Sans CJK KR;
   }
 `;
-const Divide = styled.div`
-  width: 50%;
-  position: relative;
-  & label {
-    margin-bottom: 18.25px;
-  }
-`;
 const AreaList = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -265,14 +261,6 @@ const Area = styled.div`
   & svg {
     margin-left: 2px;
   }
-`;
-const Line = styled.div`
-  border: 1px solid #e8e8e8;
-  width: 0.1px;
-  height: 65%;
-  position: absolute;
-  left: 46%;
-  bottom: 10%;
 `;
 const InputBox = styled.div`
   position: relative;
