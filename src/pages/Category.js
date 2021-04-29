@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Select } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as postActions } from '../redux/modules/post';
 import SubBanner from '../components/SubBanner';
-import ItemCard from '../components/ItemCard';
+import PostCard from '../components/PostCard';
 import SideBar from '../components/SideBar';
 
 function Category(props) {
+  const dispatch = useDispatch();
+  const id = props.match.params.id;
+  const category_list = useSelector((state) => state.post.category_list);
+  const post_list = useSelector((state) => state.post.post_list);
+  const idx = category_list.findIndex((val) => {
+    return val.id === parseInt(id);
+  });
+  const category = category_list[idx];
+
+  useEffect(() => {
+    dispatch(postActions.getPostDB(id));
+  }, [dispatch, id]);
+
   const { Option } = Select;
 
   function handleChange(value) {
@@ -19,7 +34,7 @@ function Category(props) {
         <SideBar />
         <MainContainer>
           <MainHeader>
-            <div>title</div>
+            <div>{category?.name}</div>
 
             <div>
               <Select
@@ -43,26 +58,9 @@ function Category(props) {
             </div>
           </MainHeader>
           <Main>
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
+            {post_list.map((val, idx) => {
+              return <PostCard post_info={val} key={idx} />;
+            })}
           </Main>
         </MainContainer>
       </Container>

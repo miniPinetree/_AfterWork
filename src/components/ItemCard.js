@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HeartFilled } from "@ant-design/icons";
+import { HeartFilled } from '@ant-design/icons';
 
 function ItemCard(props) {
   const { small, like } = props;
@@ -14,8 +14,8 @@ function ItemCard(props) {
         />
         <TextBox small={small}>
           <TitleWrap like={like}>
-          <strong>클래스</strong>
-          <HeartFilled />
+            <strong>클래스</strong>
+            <HeartFilled />
           </TitleWrap>
           <div>설명설명설명설명</div>
         </TextBox>
@@ -25,7 +25,7 @@ function ItemCard(props) {
 }
 ItemCard.defaultProps = {
   small: false,
-  like:false,
+  like: false,
 };
 const CardWrap = styled.div`
   border-radius: 10px;
@@ -55,12 +55,12 @@ const TextBox = styled.div`
   ${(props) => (props.small ? 'margin-bottom:5%' : '')}
 `;
 const TitleWrap = styled.div`
-display:flex;
-justify-content:space-between;
-& svg{
-  font-size:18.12px;
-  color:${(props)=>props.like? '#7F58EC':'#E2E2E2'};
-  margin-top:5px;
-}
+  display: flex;
+  justify-content: space-between;
+  & svg {
+    font-size: 18.12px;
+    color: ${(props) => (props.like ? '#7F58EC' : '#E2E2E2')};
+    margin-top: 5px;
+  }
 `;
 export default ItemCard;
