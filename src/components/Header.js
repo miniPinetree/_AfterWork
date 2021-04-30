@@ -38,7 +38,7 @@ const Header = () => {
                             <>
                                 <Login
                                     onClick={() => {
-                                        dispatch(userActions.logOutDB());
+                                        dispatch(userActions.logOut());
                                     }}
                                 >
                                     로그아웃

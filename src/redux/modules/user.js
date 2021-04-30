@@ -21,9 +21,9 @@ const initialState = {
         offTime: "18:30:00",
         interests: [
             {
-                "interestId": 1,
-                "categoryId": 4,
-                "userId": 1 //불필요 하다 생각
+                interestId: 1,
+                categoryId: 4,
+                userId: 1, //불필요 하다 생각
             },
             {
                 interestId: 2,
@@ -66,14 +66,18 @@ const getUserDB = () => {
         axios({
             method: "get",
             url: `${config.api}/api/user/me`,
-            // headers: {
-            //     authorization: `Bearer ${jwtToken}`,
-            //     "Content-type": "application/json",
-            // },
-            
+            headers: {
+                authorization: `Bearer ${jwtToken}`,
+                "Content-type": "application/json",
+            },
         })
             .then((res) => {
-                console.log(res.data);
+                // console.log(res);
+                // var str = JSON.stringify(res);
+                // console.log(str);
+                // var da = JSON.parse(res.data);
+                // console.log(da, "json");
+
                 dispatch(
                     getUser({
                         email: res.data.email,
@@ -92,19 +96,6 @@ const getUserDB = () => {
     };
 };
 
-const logOutDB = () => {
-    return function (dispatch, getState, { history }) {
-        dispatch(logOut());
-        deleteCookie("accessToken");
-        Swal.fire({
-            text: "로그아웃 되었습니다.",
-            confirmButtonColor: "#7F58EC",
-            confirmButtonText: "확인",
-          });
-        window.location.replace("/");
-    };
-};
-
 export default handleActions(
     {
         [GET_USER]: (state, action) =>
@@ -114,6 +105,12 @@ export default handleActions(
             }),
         [LOG_OUT]: (state, action) =>
             produce(state, (draft) => {
+                deleteCookie("accessToken");
+                Swal.fire({
+                    text: "로그아웃 되었습니다.",
+                    confirmButtonColor: "#7F58EC",
+                    confirmButtonText: "확인",
+                });
                 draft.user = null;
                 draft.is_login = false;
             }),
@@ -125,7 +122,6 @@ const actionCreators = {
     getUser,
     getUserDB,
     logOut,
-    logOutDB,
 };
 
 export { actionCreators };
