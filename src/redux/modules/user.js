@@ -58,22 +58,29 @@ const initialState = {
     is_login: false,
 };
 
-const getUserDB = (id) => {
+const getUserDB = () => {
     return function (dispatch) {
         const jwtToken = getCookie("accessToken");
         axios.defaults.headers.common["authorization"] = `Bearer ${jwtToken}`;
         axios({
             method: "get",
             url: `${config.api}/api/user/me`,
+<<<<<<< HEAD
             // headers: {
             //     authorization: `Bearer ${jwtToken}`,
             //     "Content-type": "application/json",
             // },
             data: {
                 id: id,
+=======
+            headers: {
+                authorization: `Bearer ${jwtToken}`,
+                "Content-type": "application/json",
+>>>>>>> 8bdbe740c931c5752de1c4484645227d363cdcb7
             },
         })
             .then((res) => {
+                console.log(res.data);
                 dispatch(
                     getUser({
                         email: res.data.email,

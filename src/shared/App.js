@@ -31,7 +31,7 @@ function App() {
         <Route path='/category/:id' exact component={Category} />
         <Route path='/mypage' exact component={MyPage} />
         <Route path='/userdetail' exact component={UserDetail} />
-        <Route path='/:search?' exact component={Search} />
+        <Route path='/:search' exact component={Search} />
         <Route
           path='/oauth2/redirect'
           component={OAuth2RedirectHandler}
