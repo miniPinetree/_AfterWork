@@ -42,8 +42,8 @@ function SideBar(props) {
   );
 }
 const Wrap = styled.div`
-  background: #555555 0% 0% no-repeat padding-box;
-  color: #ffffff;
+  background: #f6f6f6 0% 0% no-repeat padding-box;
+  color: #000000;
 `;
 
 const SideBox = styled.div`
@@ -67,7 +67,7 @@ const Title = styled.div`
   margin-top: 35px;
   font-size: 23px;
   letter-spacing: -0.69px;
-  border-bottom: 3px solid #fff;
+  border-bottom: 3px solid #000;
 `;
 const List = styled.ul`
   list-style: none;

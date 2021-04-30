@@ -38,7 +38,7 @@ const Header = () => {
                             <>
                                 <Login
                                     onClick={() => {
-                                        dispatch(userActions.logOutDB());
+                                        dispatch(userActions.logOut());
                                     }}
                                 >
                                     로그아웃
@@ -99,6 +99,7 @@ const Login = styled.span`
     font-weight: normal;
     cursor: pointer;
     height: 100%;
+    margin-left: 12px;
 `;
 
 export default Header;

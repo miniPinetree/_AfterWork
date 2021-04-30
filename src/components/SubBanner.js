@@ -52,7 +52,8 @@ function SubBanner(props) {
 const Wrap = styled.div`
   width: 100%;
   height: 100px;
-  background: #e8dffc;
+  background: transparent linear-gradient(102deg, #7f58ec 0%, #5c5ce3 100%) 0%
+    0% no-repeat padding-box;
   display: flex;
   align-items: center;
 `;

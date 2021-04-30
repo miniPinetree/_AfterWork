@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Select, Spin } from 'antd';
+import { Select, Spin, Empty } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import InfinityScroll from '../shared/InfinityScroll';
@@ -60,7 +60,7 @@ function Category(props) {
           {!view_loading ? (
             <>
               <MainHeader>
-                <div>{category?.name}</div>
+                <Title>{category?.name}</Title>
 
                 <div>
                   <Select
@@ -86,17 +86,31 @@ function Category(props) {
                 </div>
               </MainHeader>
               <Main>
-                <InfinityScroll
-                  callNext={() => {
-                    dispatch(postActions.scrollGetPostDB());
-                  }}
-                  is_next={paging.page ? true : false}
-                  loading={is_loading}
-                >
-                  {post_list.map((val, idx) => {
-                    return <PostCard post_info={val} key={idx} />;
-                  })}
-                </InfinityScroll>
+                {post_list.length === 0 ? (
+                  <Empty
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  />
+                ) : (
+                  <>
+                    <InfinityScroll
+                      callNext={() => {
+                        dispatch(postActions.scrollGetPostDB());
+                      }}
+                      is_next={paging.page ? true : false}
+                      loading={is_loading}
+                    >
+                      {post_list.map((val, idx) => {
+                        return <PostCard post_info={val} key={idx} />;
+                      })}
+                    </InfinityScroll>
+                  </>
+                )}
               </Main>
             </>
           ) : (
@@ -128,10 +142,16 @@ const MainContainer = styled.div`
 `;
 const MainHeader = styled.div`
   margin: 35px 0 20px 10px;
-  max-width: 85%;
+  max-width: 87%;
   display: flex;
   justify-content: space-between;
 `;
+
+const Title = styled.div`
+  font-size: normal normal normal 16px/24px Noto Sans CJK KR;
+  color: #000;
+`;
+
 const Main = styled.div`
   width: 100%;
   display: flex;

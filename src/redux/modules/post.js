@@ -6,6 +6,8 @@ import { config } from '../../config';
 const CATEGORY_LIST = 'CATEGORY_LIST';
 const POST_LIST = 'POST_LIST';
 const SCROLL_POST_LIST = 'SCROLL_POST_LIST';
+const SEARCH_LIST = 'SEARCH_LIST';
+const SCROLL_SEARCH_LIST = 'SCROLL_SEARCH_LIST';
 const PAGING = 'PAGING';
 const LOADING = 'LOADING';
 const VIEW_LOADING = 'VIEW_LOADING';
@@ -15,6 +17,10 @@ const postList = createAction(POST_LIST, (post_list) => ({
   post_list,
 }));
 const scrollPostList = createAction(SCROLL_POST_LIST, (post_list) => ({
+  post_list,
+}));
+const searchList = createAction(SEARCH_LIST, (post_list) => ({ post_list }));
+const scrollSearchList = createAction(SCROLL_SEARCH_LIST, (post_list) => ({
   post_list,
 }));
 const pagingInfo = createAction(PAGING, (paging) => ({ paging }));
@@ -32,6 +38,7 @@ const initialState = {
     size: 12,
     sort: 'popularity',
     direction: 'desc',
+    keyword: '',
   },
   is_loading: false,
   view_loading: false,
@@ -76,6 +83,31 @@ const getPostDB = (id, sort = 'popularity', direction = 'desc') => {
   };
 };
 
+const getSearchDB = (keyword, sort = 'popularity', direction = 'desc') => {
+  return function (dispatch) {
+    dispatch(viewLoading(true));
+    axios({
+      method: 'get',
+      url: `${config.api}/api/search?keyword=${keyword}&page=0&size=12&sort=${sort}&direction=${direction}`,
+    })
+      .then((res) => {
+        let paging = {
+          keyword: keyword,
+          page: 1,
+          size: 12,
+          sort: sort,
+          direction: direction,
+          total: res.data.totalElements,
+        };
+        dispatch(searchList(res.data.content));
+        dispatch(pagingInfo(paging));
+      })
+      .catch((e) => {
+        console.log('에러발생', e);
+      });
+  };
+};
+
 const scrollGetPostDB = () => {
   return function (dispatch, getState) {
     const _paging = getState().post.paging;
@@ -109,6 +141,40 @@ const scrollGetPostDB = () => {
   };
 };
 
+const scrollSearchDB = () => {
+  return function (dispatch, getState) {
+    const _paging = getState().post.paging;
+    const keyword = _paging.keyword;
+    const page = _paging.page;
+    const size = _paging.size;
+    const sort = _paging.sort;
+    const direction = _paging.direction;
+    if (!page) {
+      return;
+    }
+    dispatch(loading(true));
+    axios({
+      method: 'get',
+      url: `${config.api}/api/search?keyword=${keyword}&page=${page}&size=${size}&sort=${sort}&direction=${direction}`,
+    })
+      .then((res) => {
+        let paging = {
+          keyword: keyword,
+          page: res.data.totalPages !== page ? page + 1 : null,
+          size: size,
+          sort: sort,
+          direction: direction,
+          total: res.data.totalElements,
+        };
+        dispatch(scrollSearchList(res.data.content));
+        dispatch(pagingInfo(paging));
+      })
+      .catch((e) => {
+        console.log('에러발생', e);
+      });
+  };
+};
+
 export default handleActions(
   {
     [CATEGORY_LIST]: (state, action) =>
@@ -120,7 +186,17 @@ export default handleActions(
         draft.post_list = action.payload.post_list;
         draft.view_loading = false;
       }),
+    [SEARCH_LIST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.post_list = action.payload.post_list;
+        draft.view_loading = false;
+      }),
     [SCROLL_POST_LIST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.post_list.push(...action.payload.post_list);
+        draft.is_loading = false;
+      }),
+    [SCROLL_SEARCH_LIST]: (state, action) =>
       produce(state, (draft) => {
         draft.post_list.push(...action.payload.post_list);
         draft.is_loading = false;
@@ -144,7 +220,9 @@ export default handleActions(
 const actionCreators = {
   getCategoryDB,
   getPostDB,
+  getSearchDB,
   scrollGetPostDB,
+  scrollSearchDB,
 };
 
 export { actionCreators };
