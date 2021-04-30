@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { getCookie, deleteCookie } from "../../shared/Cookie";
 import { produce } from "immer";
+import Swal from "sweetalert2";
 import axios from "axios";
 import { config } from "../../config";
 
@@ -65,19 +66,11 @@ const getUserDB = () => {
         axios({
             method: "get",
             url: `${config.api}/api/user/me`,
-<<<<<<< HEAD
             // headers: {
             //     authorization: `Bearer ${jwtToken}`,
             //     "Content-type": "application/json",
             // },
-            data: {
-                id: id,
-=======
-            headers: {
-                authorization: `Bearer ${jwtToken}`,
-                "Content-type": "application/json",
->>>>>>> 8bdbe740c931c5752de1c4484645227d363cdcb7
-            },
+            
         })
             .then((res) => {
                 console.log(res.data);
@@ -103,7 +96,11 @@ const logOutDB = () => {
     return function (dispatch, getState, { history }) {
         dispatch(logOut());
         deleteCookie("accessToken");
-        window.alert("로그아웃 되었습니다.");
+        Swal.fire({
+            text: "로그아웃 되었습니다.",
+            confirmButtonColor: "#7F58EC",
+            confirmButtonText: "확인",
+          });
         window.location.replace("/");
     };
 };
