@@ -75,12 +75,12 @@ const updateUserInfoDB = (locations, categories, time) => {
       categorys: categories,
     };
     const jwtToken = getCookie("accessToken");
+    console.log(data,jwtToken,config);
     axios.defaults.headers.common["authorization"] = `Bearer ${jwtToken}`;
     axios
-      .post(`${config}`, data)
+      .post(`${config}/api/user`, data)
       .then((res) => {
         //내려오는 data없음 회원정보 다시 불러와야 함.
-        dispatch(userActions.getUserDB()); //함수 인자값 수정예정
       })
       .catch((e) => {
         console.log(e);
@@ -145,6 +145,7 @@ const toggleLikeDB = (prd_id) => {
         productId: prd_id,
       };
       const jwtToken = getCookie("accessToken");
+      console.log(data,jwtToken,config);
       axios.defaults.headers.common["authorization"] = `Bearer ${jwtToken}`;
       axios
         .post(`${config}/api/collects`, data)

@@ -51,12 +51,9 @@ const MyPage = (props) => {
         <ItemList>
           {collection.map((prd,idx)=>{
             return(
-<PostCard post_info={prd} like/>
+<PostCard key={idx} post_info={prd} like/>
             );
           })}
-          {/* wrap 확인용 삭제예정 */}
-          <ItemCard/>
-          <ItemCard/>
         </ItemList>
         </>
         : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}

@@ -32,13 +32,13 @@ const InterestBox = (props) => {
     <>
       <Grid>
         <strong>관심 카테고리</strong>
-        <text>추가하기</text>
+        <p>추가하기</p>
         {categoryList.map((category, idx) => {
           return(
             categories.some(
                 (categoryId) => categoryId === category.categoryId
               )? (
-              <Row
+              <Row key={idx}
                 span={16}
                 isChecked
                 onClick={() => changeInterest(category.categoryId)}
@@ -47,7 +47,10 @@ const InterestBox = (props) => {
                 {category.name}
               </Row>
             ) : (
-              <Row span={16} onClick={() => changeInterest(category.categoryId)}>
+              <Row 
+              key={idx}
+              span={16} 
+              onClick={() => changeInterest(category.categoryId)} >
                 <CheckCircleFilled />
                 {category.name}
               </Row>

@@ -14,8 +14,9 @@ const UserDetail = (props) => {
   const [locations, setLocations] = useState(locationNames);
   const [categories, setCategories] = useState(categoryIds);
   const [time, setTime] = useState(user.offTime);
-console.log(locations, categories, time);
+
   const setValue = ()=>{
+    console.log(locations, categories, time);
 dispatch(preferActions.updateUserInfoDB(locations,categories,time));
   };
   return (
@@ -110,7 +111,7 @@ const BorderBox = styled.div`
     width: 100%;
     margin: 0 0 16.5px 0;
   }
-  & text {
+  & p {
     font-size: 18px;
     color: #747474;
     margin: 0 0 16.5px 0;

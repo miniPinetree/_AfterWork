@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Input, Result } from "antd";
+import { Input } from "antd";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
 import locationOpts from "../shared/locationOpts";
 import Swal from "sweetalert2";
@@ -59,7 +59,6 @@ const LocationBox=(props)=>{
   };
       return(
           <>
-            <strong>관심지역 설정</strong>
             <AreaList>
               {locations?.map((location, idx) => {
                 return (
@@ -75,7 +74,7 @@ const LocationBox=(props)=>{
               })}
             </AreaList>
             <hr color="#E8E8E8" />
-            <text>지역 추가하기</text>
+            <p>지역 추가하기</p>
             <InputBox>
               <Input
                 placeholder="지역을 입력하세요"
