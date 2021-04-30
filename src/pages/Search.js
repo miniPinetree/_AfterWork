@@ -1,4 +1,5 @@
 import React from 'react';
+import queryString from 'query-string';
 import styled from 'styled-components';
 import { Select } from 'antd';
 import SubBanner from '../components/SubBanner';
@@ -6,7 +7,8 @@ import ItemCard from '../components/ItemCard';
 import SideBar from '../components/SideBar';
 
 function Search(props) {
-  const searchResult = props.match.params.keyword;
+  const query = queryString.parse(props.location.search);
+  const { keyword } = query;
   const { Option } = Select;
 
   const handleChange = (value) => {
@@ -15,58 +17,62 @@ function Search(props) {
 
   return (
     <>
-      <SubBanner />
-      <Container>
-        <SideBar />
-        <MainContainer>
-          <MainHeader>
-            <div>'{searchResult}' 검색 결과 0건 </div>
+      {keyword ? (
+        <>
+          <SubBanner />
+          <Container>
+            <SideBar />
+            <MainContainer>
+              <MainHeader>
+                <div>'{keyword}' 검색 결과 0건 </div>
 
-            <div>
-              <Select
-                defaultValue='인기순'
-                style={{ width: 112, marginRight: '15px' }}
-                onChange={handleChange}
-              >
-                <Option value='인기순'>인기순</Option>
-                <Option value='가격 낮은순'>가격 낮은순</Option>
-                <Option value='가격 높은순'>가격 높은순</Option>
-              </Select>
-              <Select
-                defaultValue='전체보기'
-                style={{ width: 94 }}
-                onChange={handleChange}
-              >
-                <Option value='전체보기'>전체보기</Option>
-                <Option value='온라인'>온라인</Option>
-                <Option value='오프라인'>오프라인</Option>
-              </Select>
-            </div>
-          </MainHeader>
-          <Main>
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-          </Main>
-        </MainContainer>
-      </Container>
+                <div>
+                  <Select
+                    defaultValue='인기순'
+                    style={{ width: 112, marginRight: '15px' }}
+                    onChange={handleChange}
+                  >
+                    <Option value='인기순'>인기순</Option>
+                    <Option value='가격 낮은순'>가격 낮은순</Option>
+                    <Option value='가격 높은순'>가격 높은순</Option>
+                  </Select>
+                  <Select
+                    defaultValue='전체보기'
+                    style={{ width: 94 }}
+                    onChange={handleChange}
+                  >
+                    <Option value='전체보기'>전체보기</Option>
+                    <Option value='온라인'>온라인</Option>
+                    <Option value='오프라인'>오프라인</Option>
+                  </Select>
+                </div>
+              </MainHeader>
+              <Main>
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+                <ItemCard />
+              </Main>
+            </MainContainer>
+          </Container>
+        </>
+      ) : null}
     </>
   );
 }

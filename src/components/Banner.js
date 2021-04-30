@@ -20,7 +20,7 @@ function CountDownTimer(dt, id) {
     }
     if (distance < 0) {
       clearInterval(timer);
-      document.getElementById(id).innerHTML = '퇴근시간입니다!';
+      document.getElementById(id).textContent = '퇴근시간입니다!';
       return;
     }
 
@@ -28,9 +28,9 @@ function CountDownTimer(dt, id) {
     const minutes = Math.floor((distance % _hour) / _minute);
     const seconds = Math.floor((distance % _minute) / _second);
 
-    document.getElementById(id).innerHTML = hours + '시간 ';
-    document.getElementById(id).innerHTML += minutes + '분 ';
-    document.getElementById(id).innerHTML += seconds + '초';
+    document.getElementById(id).textContent = hours + '시간 ';
+    document.getElementById(id).textContent += minutes + '분 ';
+    document.getElementById(id).textContent += seconds + '초';
   }
   timer = setInterval(showRemaining, 1000);
 }
@@ -39,12 +39,12 @@ function Banner(props) {
   const [search, setSearch] = useState('');
   const now = new Date();
   const today = now.toLocaleDateString();
-  CountDownTimer(today + '18:50:00', 'time');
+  CountDownTimer(today + '20:50:00', 'time');
   const searchHandler = () => {
     if (search === '') {
       return;
     }
-    history.push(`/search/${search}`);
+    history.push(`/search?keyword=${search}`);
     setSearch('');
   };
 

@@ -10,7 +10,7 @@ function SubBanner(props) {
     if (search === '') {
       return;
     }
-    history.push(`/search/${search}`);
+    history.push(`/search?keyword=${search}`);
     setSearch('');
   };
   return (
