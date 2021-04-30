@@ -61,13 +61,14 @@ const initialState = {
 const getUserDB = (id) => {
     return function (dispatch) {
         const jwtToken = getCookie("accessToken");
+        axios.defaults.headers.common["authorization"] = `Bearer ${jwtToken}`;
         axios({
             method: "get",
             url: `${config.api}/api/user/me`,
-            headers: {
-                authorization: `Bearer ${jwtToken}`,
-                "Content-type": "application/json",
-            },
+            // headers: {
+            //     authorization: `Bearer ${jwtToken}`,
+            //     "Content-type": "application/json",
+            // },
             data: {
                 id: id,
             },

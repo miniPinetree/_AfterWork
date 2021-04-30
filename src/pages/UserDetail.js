@@ -14,7 +14,7 @@ const UserDetail = (props) => {
   const [locations, setLocations] = useState(locationNames);
   const [categories, setCategories] = useState(categoryIds);
   const [time, setTime] = useState(user.offTime);
-
+console.log(locations, categories, time);
   const setValue = ()=>{
 dispatch(preferActions.updateUserInfoDB(locations,categories,time));
   };

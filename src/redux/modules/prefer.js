@@ -1,5 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { actionCreators as userActions } from "./user";
+import { getCookie } from "../../shared/Cookie";
 import { config } from "../../config";
 import Swal from "sweetalert2";
 import produce from "immer";
@@ -68,14 +69,15 @@ const initialState = {
 //회원 관심사 수정
 const updateUserInfoDB = (locations, categories, time) => {
   return function (dispatch, getState, { history }) {
-    const id = getState().user.user.uid;
     let data = {
       offTime: time,
       locations: locations,
       categorys: categories,
     };
+    const jwtToken = getCookie("accessToken");
+    axios.defaults.headers.common["authorization"] = `Bearer ${jwtToken}`;
     axios
-      .post(`${config}/api/user`, data)
+      .post(`${config}`, data)
       .then((res) => {
         //내려오는 data없음 회원정보 다시 불러와야 함.
         dispatch(userActions.getUserDB()); //함수 인자값 수정예정
@@ -114,29 +116,36 @@ const toggleLikeDB = (prd_id) => {
     }
     //찜 목록에 존재하면 삭제, 그렇지 않으면 추가
     let collects = getState().user.user.collects;
+    let user = getState().user.user;
+    console.log(user, collects);
     let flag = false;
-    console.log(collects, prd_id, collects[0].productId);
-    for (let i = 0; i < collects.length; i++) {
-      if (collects[i].productId === prd_id) {
-        flag = true;
-        axios
-          .delete(`${config}/api/collects/${collects[i].collectId}`)
-          .then((res) => {
-            console.log(res.data); //테스트 후 삭제예정
-            let _collects = collects.filter((collect) => {
-              return collect.productId !== prd_id;
+    if(collects?.length !== 0){
+      for (let i = 0; i < collects.length; i++) {
+        if (collects[i].productId === prd_id) {
+          flag = true;
+          const jwtToken = getCookie("accessToken");
+          axios.defaults.headers.common["authorization"] = `Bearer ${jwtToken}`;
+          axios
+            .delete(`${config}/api/collects/${collects[i].collectId}`)
+            .then((res) => {
+              console.log(res.data); //테스트 후 삭제예정
+              let _collects = collects.filter((collect) => {
+                return collect.productId !== prd_id;
+              });
+              dispatch(likeToggle(_collects));
+            })
+            .catch((e) => {
+              console.log(e);
             });
-            dispatch(likeToggle(_collects));
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+        }
       }
     }
     if (flag === false) {
       let data = {
         productId: prd_id,
       };
+      const jwtToken = getCookie("accessToken");
+      axios.defaults.headers.common["authorization"] = `Bearer ${jwtToken}`;
       axios
         .post(`${config}/api/collects`, data)
         .then((res) => {
