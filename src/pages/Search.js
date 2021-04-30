@@ -57,9 +57,9 @@ function Search(props) {
               {!view_loading ? (
                 <>
                   <MainHeader>
-                    <div>
+                    <Title>
                       '{keyword}' 검색 결과 {paging.total}건{' '}
-                    </div>
+                    </Title>
 
                     <div>
                       <Select
@@ -121,6 +121,11 @@ const MainHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+const Title = styled.div`
+  font-size: normal normal normal 16px/24px Noto Sans CJK KR;
+  color: #000;
+`;
+
 const Main = styled.div`
   width: 100%;
   display: flex;
