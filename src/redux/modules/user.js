@@ -58,7 +58,7 @@ const initialState = {
     is_login: false,
 };
 
-const getUserDB = (id) => {
+const getUserDB = () => {
     return function (dispatch) {
         const jwtToken = getCookie("accessToken");
         axios({
@@ -68,11 +68,9 @@ const getUserDB = (id) => {
                 authorization: `Bearer ${jwtToken}`,
                 "Content-type": "application/json",
             },
-            data: {
-                id: id,
-            },
         })
             .then((res) => {
+                console.log(res.data);
                 dispatch(
                     getUser({
                         email: res.data.email,
