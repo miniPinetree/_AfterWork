@@ -99,6 +99,7 @@ const Login = styled.span`
     font-weight: normal;
     cursor: pointer;
     height: 100%;
+    margin-left: 12px;
 `;
 
 export default Header;
