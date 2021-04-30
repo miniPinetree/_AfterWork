@@ -119,5 +119,8 @@ const ItemList = styled.div`
   justify-content: flex-start;
   margin-bottom: 18px;
   min-height: 220px;
-  gap: 20px 14px;
+  & .wrap {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
 `;

@@ -8,51 +8,52 @@ const GET_USER = "GET_USER";
 const LOG_OUT = "LOG_OUT";
 
 const getUser = createAction(GET_USER, (user) => ({ user }));
-const logOut = createAction(LOG_OUT, (user) => ({ user }));
+const logOut = createAction(LOG_OUT, () => ({}));
 
 const initialState = {
     user: {
         //테스트용 임시 데이터 삭제예정
         email: "email@email.com",
         name: "퇴그니",
-        image: "https://www.1xbetkrs.com/wp-content/uploads/2020/02/%ED%8E%AD%EC%88%98%EC%A7%A46-e1582012424773.jpg",
+        image:
+            "https://www.1xbetkrs.com/wp-content/uploads/2020/02/%ED%8E%AD%EC%88%98%EC%A7%A46-e1582012424773.jpg",
         offTime: "18:30:00",
-        "interests":[
+        interests: [
             {
                 "interestId": 1,
-                "categoryId": 1,
+                "categoryId": 4,
                 "userId": 1 //불필요 하다 생각
             },
             {
-                "interestId": 2,
-                "categoryId": 2,
-                "userId": 1 //불필요 하다 생각
-            }
+                interestId: 2,
+                categoryId: 2,
+                userId: 1, //불필요 하다 생각
+            },
         ],
-        "collects":[
-                {
-                    "collectId": 1,
-                    "productId": 1,
-                    "userId": 1 //불필요 하다 생각
-                },
-                {
-                    "collectId": 2,
-                    "productId": 1,
-                    "userId": 1 //불필요 하다 생각
-                }
-            ],
-        "locations":[
-                {
-                    "locationId": 1,
-                    "name": "강남",
-                    "userId": 1 //불필요 하다 생각
-                },
-                {
-                    "locationId": 2,
-                    "name": "서울",
-                    "userId": 1 //불필요 하다 생각
-                }
-            ]
+        collects: [
+            {
+                collectId: 1,
+                productId: 433,
+                userId: 1, //불필요 하다 생각
+            },
+            {
+                collectId: 2,
+                productId: 5,
+                userId: 1, //불필요 하다 생각
+            },
+        ],
+        locations: [
+            {
+                locationId: 1,
+                name: "강남",
+                userId: 1, //불필요 하다 생각
+            },
+            {
+                locationId: 2,
+                name: "서울",
+                userId: 1, //불필요 하다 생각
+            },
+        ],
     },
     is_login: false,
 };
@@ -72,7 +73,6 @@ const getUserDB = (id) => {
             },
         })
             .then((res) => {
-                console.log(res);
                 dispatch(
                     getUser({
                         email: res.data.email,
@@ -93,8 +93,8 @@ const getUserDB = (id) => {
 
 const logOutDB = () => {
     return function (dispatch, getState, { history }) {
-        deleteCookie("accessToken");
         dispatch(logOut());
+        deleteCookie("accessToken");
         window.alert("로그아웃 되었습니다.");
         window.location.replace("/");
     };

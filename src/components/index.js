@@ -4,7 +4,9 @@ import CategoryCard from "./CategoryCard";
 import ItemCard from "./ItemCard";
 import UserInfo from "./UserInfo";
 import FButton from "./FButton";
-import CheckBox from "./CheckBox";
+import InterestBox from "./InterestBox";
 import PostCard from "./PostCard";
+import LocationBox from "./LocationBox";
+import OffTimePicker from "./OffTimePicker";
 
-export { Footer, Header, CategoryCard, ItemCard, UserInfo, CheckBox, PostCard, FButton };
+export { OffTimePicker, LocationBox, Footer, Header, CategoryCard, ItemCard, UserInfo, InterestBox, PostCard, FButton };

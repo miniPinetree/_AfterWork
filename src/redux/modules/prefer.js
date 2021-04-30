@@ -1,4 +1,5 @@
 import { createAction, handleActions } from "redux-actions";
+import { actionCreators as userActions } from "./user";
 import { config } from "../../config";
 import Swal from "sweetalert2";
 import produce from "immer";
@@ -27,53 +28,57 @@ const initialState = {
   collection: [
     //테스트용 임시 데이터 삭제예정
     {
-        "productId": 433,
-        "title": "일반인 운동 쉽고 빠르게 그리고 간단하게",
-        "price": 44000,
-        "priceInfo": "￦44,000/시간",
-        "author": "신성영",
-        "imgUrl": "https://img.taling.me/Content/Uploads/Cover/s_4794141ff0871fbdc5f5bec51b2778a246de813e.jpg",
-        "location": "서울,강남",
-        "popularity": 18,
-        "status": "N",
-        "siteName": "Taling",
-        "siteUrl": "https://taling.me/Talent/Detail/18634",
-        "category": null,
-        "collects": [], // 불필요하다 생각 성능상 이슈
-        "online": false
+      productId: 433,
+      title: "일반인 운동 쉽고 빠르게 그리고 간단하게",
+      price: 44000,
+      priceInfo: "￦44,000/시간",
+      author: "신성영",
+      imgUrl:
+        "https://img.taling.me/Content/Uploads/Cover/s_4794141ff0871fbdc5f5bec51b2778a246de813e.jpg",
+      location: "서울,강남",
+      popularity: 18,
+      status: "N",
+      siteName: "Taling",
+      siteUrl: "https://taling.me/Talent/Detail/18634",
+      category: null,
+      collects: [], // 불필요하다 생각 성능상 이슈
+      online: false,
     },
     {
-        "productId": 426,
-        "title": "(도봉역)초보자/근력운동 편하고 즐겁게 하기^^/1대1PT /추가비용없이!",
-        "price": 36300,
-        "priceInfo": "￦36,300",
-        "author": "민병철",
-        "imgUrl": "https://img.taling.me/Content/Uploads/Cover/s_0e982244cee2f1ae22a36534c0a23d4c23f13cc7.jpg",
-        "location": "서울,노원",
-        "popularity": 125,
-        "status": "N",
-        "siteName": "Taling",
-        "siteUrl": "https://taling.me/Talent/Detail/12623",
-        "category": null,
-        "collects": [],
-        "online": false
-    }
-],
+      productId: 426,
+      title:
+        "(도봉역)초보자/근력운동 편하고 즐겁게 하기^^/1대1PT /추가비용없이!",
+      price: 36300,
+      priceInfo: "￦36,300",
+      author: "민병철",
+      imgUrl:
+        "https://img.taling.me/Content/Uploads/Cover/s_0e982244cee2f1ae22a36534c0a23d4c23f13cc7.jpg",
+      location: "서울,노원",
+      popularity: 125,
+      status: "N",
+      siteName: "Taling",
+      siteUrl: "https://taling.me/Talent/Detail/12623",
+      category: null,
+      collects: [],
+      online: false,
+    },
+  ],
 };
 
 //회원 관심사 수정
-const updateUserInfoDB = (location, offTime, interests) => {
+const updateUserInfoDB = (locations, categories, time) => {
   return function (dispatch, getState, { history }) {
     const id = getState().user.user.uid;
-    let user_prefer = {
-      offTime: offTime,
-      locations: location,
-      interests: interests,
+    let data = {
+      offTime: time,
+      locations: locations,
+      categorys: categories,
     };
     axios
-      .post(`${config}/api/profile/${id}`, user_prefer)
+      .post(`${config}/api/user`, data)
       .then((res) => {
-        console.log(res.data);
+        //내려오는 data없음 회원정보 다시 불러와야 함.
+        dispatch(userActions.getUserDB()); //함수 인자값 수정예정
       })
       .catch((e) => {
         console.log(e);
@@ -98,46 +103,51 @@ const getCollectionDB = () => {
 //찜 등록 및 개별 삭제
 const toggleLikeDB = (prd_id) => {
   return function (dispatch, getState, { history }) {
-    console.log("토글연결");
-    // 로그인한 유저인지 확인
+    // 로그인 여부 확인
     if (!getState().user.user) {
+      Swal.fire({
+        text: "로그인 후 이용 가능한 서비스입니다.",
+        confirmButtonColor: "#7F58EC",
+        confirmButtonText: "확인",
+      });
       return;
     }
-    let userCollects = getState().user.user.collects;
-    let postList = getState().post.post_list;
-    let difference = postList.filter(post => !userCollects.includes(post));
-    // const checkPrdId = (element) =>{
-    //   if(element.productId === prd_id){
-    //     return true;
-    //   }
-    // }
-    // //찜 목록에 없으면 추가, 있으면 삭제
-    // if (collection.some(checkPrdId)) {
-    //   collection.filter((prd) => {
-    //     return prd !== post;
-    //   });
-    //   dispatch(likeToggle(collection));
-    // }
-    //     let data={
-    //       productId:prd_id,
-    //     }
-    //     if(해당 게시물의 좋아요 여부 체크){
-    //       axios.post(`${config}/api/likes`, data)
-    //       .then((res)=>{
-    //         console.log(res.data);
-    //         dispatch(likeToggle(prd_id));
-    //     }).catch((e)=>{
-    //         console.log(e);
-    //     });
-    //   }else{
-    //     axios.delete(`${config}/api/likes/${prd_id}`)
-    //     .then((res)=>{
-    //       console.log(res.data);
-    //       dispatch(likeToggle(prd_id));
-    //   }).catch((e)=>{
-    //       console.log(e);
-    //   });
-    // }
+    //찜 목록에 존재하면 삭제, 그렇지 않으면 추가
+    let collects = getState().user.user.collects;
+    let flag = false;
+    console.log(collects, prd_id, collects[0].productId);
+    for (let i = 0; i < collects.length; i++) {
+      if (collects[i].productId === prd_id) {
+        flag = true;
+        axios
+          .delete(`${config}/api/collects/${collects[i].collectId}`)
+          .then((res) => {
+            console.log(res.data); //테스트 후 삭제예정
+            let _collects = collects.filter((collect) => {
+              return collect.productId !== prd_id;
+            });
+            dispatch(likeToggle(_collects));
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+    }
+    if (flag === false) {
+      let data = {
+        productId: prd_id,
+      };
+      axios
+        .post(`${config}/api/collects`, data)
+        .then((res) => {
+          console.log(res.data); //테스트 후 삭제예정
+          let _collects = [...collects, res.data];
+          dispatch(likeToggle(_collects));
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
   };
 };
 
@@ -161,13 +171,14 @@ const deleteCollectionDB = () => {
         cancelButtonText: "취소",
       }).then((result) => {
         if (result.isConfirmed) {
-          //   axios.delete(`${config}/api/likes`)
-          //   .then((res)=>{
-          //     console.log(res.data);
-          // }).catch((e)=>{
-          //     console.log(e);
-          // });
-          // }
+          axios
+            .delete(`${config}/api/collects`)
+            .then((res) => {
+              // 데이터없음
+            })
+            .catch((e) => {
+              console.log(e);
+            });
           dispatch(deleteCollection());
         }
       });
