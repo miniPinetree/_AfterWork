@@ -52,7 +52,6 @@ const getCollectionDB = () => {
     axios
       .get(`${config.api}/api/collects`)
       .then((res) => {
-        console.log(res.data); //테스트 후 삭제예정
         dispatch(getCollection(res.data));
       })
       .catch((e) => {
@@ -76,7 +75,6 @@ const toggleLikeDB = (prd_id) => {
     //찜 목록에 존재하면 삭제, 그렇지 않으면 추가
     let collects = getState().user.user.collects;
     let user = getState().user.user;
-    console.log('유저정보', user, collects);
     let flag = false;
     if(collects?.length !== 0){
       for (let i = 0; i < collects.length; i++) {
@@ -102,11 +100,9 @@ const toggleLikeDB = (prd_id) => {
       let data = {
         productId: prd_id,
       };
-      console.log(data, flag); //테스트 후 삭제예정
       axios
         .post(`${config.api}/api/collects`, data)
         .then((res) => {
-          console.log(res.data); //테스트 후 삭제예정
           let _collects = [...collects, res.data];
           dispatch(likeToggle(_collects));
         })
@@ -121,7 +117,6 @@ const toggleLikeDB = (prd_id) => {
 const deleteCollectionDB = () => {
   return function (dispatch, getState, { history }) {
     let collection = getState().user.user.collects;
-    console.log(collection);
     if (collection.length === 0) {
       Swal.fire({
         title: "삭제할 정보가 없습니다. 😌",

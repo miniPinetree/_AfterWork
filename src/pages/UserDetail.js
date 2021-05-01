@@ -27,20 +27,6 @@ const UserDetail = (props) => {
     setTime(user.offTime);
   }
 };
-
-useEffect(() => {
-  // new Promise([user]).then((user)=>{
-  //   if(user.locations.length>0){
-  //     locationNames = user.locations.map(location=>location.name);
-  //   }
-  //    if(user.interests.length>0){
-  //   categoryIds = user.interests?.map(interest=>interest.categoryId);
-  //    }
-  // console.log(locationNames, categoryIds, time);
-
-  // });
-}, []);
-
   const setValue = ()=>{
 dispatch(preferActions.updateUserInfoDB(locations,categories,time));
   };

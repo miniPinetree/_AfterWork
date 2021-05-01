@@ -13,7 +13,6 @@ const MyPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.user);
   const collection = useSelector((state)=>state.prefer.collection);
-  console.log('리덕스 찜', collection);
   
   useEffect(() => {
     if(user){
@@ -21,7 +20,6 @@ const MyPage = (props) => {
     }
   }, []);
 
-console.log('유저정보', user);
   return (
     <Container>
       {user &&
