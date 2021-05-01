@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Title, TextBtn } from "../elements";
 import { UserInfo, InterestBox, LocationBox, OffTimePicker } from "../components";
@@ -8,17 +8,44 @@ import { actionCreators as preferActions } from "../redux/modules/prefer";
 const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const locationNames = user.locations? user.locations.map(location=>location.name) : [];
-  const categoryIds = user.interests.map(interest=>interest.categoryId);
+
   const [search, setSearch] = useState("");
-  const [locations, setLocations] = useState(locationNames);
-  const [categories, setCategories] = useState(categoryIds);
-  const [time, setTime] = useState(user.offTime);
+  const [locations, setLocations] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [time, setTime] = useState('');
+
+  if(user){
+    if(locations.length===0 && user.locations.length>0){
+      const locationNames = user.locations.map(location=>location.name);
+      setLocations(locationNames);
+    };
+    if(categories.length===0 && user.interests.length>0){
+    const categoryIds = user.interests.map(interest=>interest.categoryId);
+    setCategories(categoryIds);
+  };
+  if(time==='' && user.offTime){
+    setTime(user.offTime);
+  }
+};
+
+useEffect(() => {
+  // new Promise([user]).then((user)=>{
+  //   if(user.locations.length>0){
+  //     locationNames = user.locations.map(location=>location.name);
+  //   }
+  //    if(user.interests.length>0){
+  //   categoryIds = user.interests?.map(interest=>interest.categoryId);
+  //    }
+  // console.log(locationNames, categoryIds, time);
+
+  // });
+}, []);
 
   const setValue = ()=>{
     console.log(locations, categories, time);
 dispatch(preferActions.updateUserInfoDB(locations,categories,time));
   };
+
   return (
     <Container>
      {user &&

@@ -13,10 +13,15 @@ const MyPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.user);
   const collection = useSelector((state)=>state.prefer.collection);
+  console.log('리덕스 찜', collection);
+  
   useEffect(() => {
-    dispatch(preferActions.getCollectionDB());
-  }, [])
+    if(user){
+      dispatch(preferActions.getCollectionDB());
+    }
+  }, []);
 
+console.log('유저정보', user);
   return (
     <Container>
       {user &&

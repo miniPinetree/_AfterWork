@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { CheckCircleFilled } from "@ant-design/icons";
 import { actionCreators as postActions } from "../redux/modules/post";
 const InterestBox = (props) => {
+  const user = useSelector((state) => state.user.user);
   const categoryList = useSelector((state) => state.post.category_list);
   const dispatch = useDispatch();
-
-  const { setCategories, categories } = props;
-
+  
+  let { setCategories, categories } = props;
   useEffect(() => {
     if (categoryList.length === 0) {
       dispatch(postActions.getCategoryDB());
@@ -27,7 +27,6 @@ const InterestBox = (props) => {
       setCategories([...categories, id]);
     }
   }
-
   return (
     <>
       <Grid>
