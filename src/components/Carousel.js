@@ -55,7 +55,7 @@ const TitleContainer = styled.div`
   max-width: 1004px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   color: #000;
 `;

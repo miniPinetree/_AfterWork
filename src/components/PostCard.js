@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Permit from '../shared/Permit';
 import { HeartFilled, HeartTwoTone } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { actionCreators as preferActions } from '../redux/modules/prefer';
@@ -16,22 +17,24 @@ function PostCard(props) {
           <TextBox>
             <TitleWrap like={like}>
               <strong>{post_info?.title}</strong>
-              {like ? (
-                <HeartFilled
-                  onClick={(e) => {
-                    e.preventDefault();
-                    dispatch(preferActions.toggleLikeDB(post_info.productId));
-                  }}
-                />
-              ) : (
-                <HeartTwoTone
-                  twoToneColor='#E2E2E2'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    dispatch(preferActions.toggleLikeDB(post_info.productId));
-                  }}
-                />
-              )}
+              <Permit>
+                {like ? (
+                  <HeartFilled
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(preferActions.toggleLikeDB(post_info.productId));
+                    }}
+                  />
+                ) : (
+                  <HeartTwoTone
+                    twoToneColor='#E2E2E2'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(preferActions.toggleLikeDB(post_info.productId));
+                    }}
+                  />
+                )}
+              </Permit>
             </TitleWrap>
             <div>
               <TextInfo>

@@ -20,6 +20,10 @@ function Search(props) {
   const paging = useSelector((state) => state.post.paging);
   const is_loading = useSelector((state) => state.post.is_loading);
   const view_loading = useSelector((state) => state.post.view_loading);
+  const collection_list = useSelector((state) => state.prefer.collection);
+  const collection = collection_list.map((val) => {
+    return val.productId;
+  });
 
   const sortInfo = sortBox.split(' ');
   const sort = sortInfo[0];
@@ -106,7 +110,12 @@ function Search(props) {
                           loading={is_loading}
                         >
                           {post_list.map((val, idx) => {
-                            return <PostCard post_info={val} key={idx} />;
+                            return collection.includes(val.productId) ===
+                              true ? (
+                              <PostCard post_info={val} key={idx} like />
+                            ) : (
+                              <PostCard post_info={val} key={idx} />
+                            );
                           })}
                         </InfinityScroll>
                       </>
