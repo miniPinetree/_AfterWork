@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HeartFilled } from '@ant-design/icons';
+import { HeartFilled, HeartTwoTone } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { actionCreators as preferActions } from '../redux/modules/prefer';
 
@@ -16,12 +16,22 @@ function PostCard(props) {
           <TextBox>
             <TitleWrap like={like}>
               <strong>{post_info?.title}</strong>
-              <HeartFilled
-                onClick={(e) => {
-                  e.preventDefault()
-                  dispatch(preferActions.toggleLikeDB(post_info.productId));
-                }}
-              />
+              {like ? (
+                <HeartFilled
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(preferActions.toggleLikeDB(post_info.productId));
+                  }}
+                />
+              ) : (
+                <HeartTwoTone
+                  twoToneColor='#E2E2E2'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(preferActions.toggleLikeDB(post_info.productId));
+                  }}
+                />
+              )}
             </TitleWrap>
             <div>
               <TextInfo>
@@ -42,7 +52,7 @@ PostCard.defaultProps = {
 };
 const CardWrap = styled.div`
   border-radius: 10px;
-  box-shadow: 0px 4px 30px #0000000a;
+  box-shadow: 0px 10px 15px #e0e0e0;
   max-width: 240px;
   height: 320px;
   position: relative;
@@ -80,7 +90,7 @@ const TitleWrap = styled.div`
   margin-bottom: -18.12px;
   & svg {
     font-size: 18.12px;
-    color: ${(props) => (props.like ? '#7F58EC' : '#E2E2E2')};
+    color: #7f58ec;
     margin-top: 5px;
     position: absolute;
     top: 155.49px;

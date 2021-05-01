@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as preferActions } from '../redux/modules/prefer';
 import { getCookie } from './Cookie';
 import OAuth2RedirectHandler from './OAuth2RedirectHandler';
 
@@ -19,6 +20,7 @@ function App() {
 
     if (cookie) {
       dispatch(userActions.getUserDB());
+      dispatch(preferActions.getCollectionDB());
     }
   }, [dispatch]);
 
