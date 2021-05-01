@@ -1,7 +1,7 @@
 import { config } from "../config";
 
 export const API_BASE_URL = `${config.api}`;
-export const ACCESS_TOKEN = "accessToken";
+export const ACCESS_TOKEN = "is_login";
 
 export const OAUTH2_REDIRECT_URI = "http://localhost:3000/oauth2/redirect";
 
