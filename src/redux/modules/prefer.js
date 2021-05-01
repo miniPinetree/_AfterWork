@@ -39,7 +39,12 @@ const updateUserInfoDB = (locations, categories, time) => {
     axios
       .post(`${config.api}/api/user`, data)
       .then((res) => {
-        //내려오는 data없음 회원정보 다시 불러와야 함.
+        //res.data 없음.
+        Swal.fire({
+          title: "저장이 완료되었습니다. 😌",
+          confirmButtonColor: "#7F58EC",
+          confirmButtonText: "확인",
+        });
       })
       .catch((e) => {
         console.log(e);
@@ -64,34 +69,21 @@ const getCollectionDB = () => {
 const toggleLikeDB = (prd_id) => {
   return function (dispatch, getState, { history }) {
     const user = getState().user.user
-    let collects = user.collects;
+    //delete API 요청에 필요한 collectId가 담긴 배열
+    const collects = user?.collects;
     let flag = false;
-    console.log(collects, flag);
-    // 로그인 여부 확인
-    if (!user) {
-      Swal.fire({
-        text: "로그인 후 이용 가능한 서비스입니다.",
-        confirmButtonColor: "#7F58EC",
-        confirmButtonText: "확인",
-      });
-      return;
-    }
-    //찜 목록에 존재하면 삭제, 그렇지 않으면 추가
+    // 유저 정보 로드 확인
+    if (user && collects) {
+      //찜 목록에 존재(true)하면 삭제, 그렇지 않으면 추가
     if(collects?.length !== 0){
       for (let i = 0; i < collects.length; i++) {
         if (collects[i].productId === prd_id) {
           flag = true;
-          console.log(collects, flag,collects[i].collectId);
           axios
             .delete(`${config.api}/api/collects/${collects[i].collectId}`)
-            .then((res) => {
-              let _collects = collects.filter((collect) => {
-                return collect.productId !== prd_id;
-              });
-              console.log(_collects);
-              dispatch(likeToggle(_collects));
-            }).then((res)=>{
-              console.log(collects);
+            .then((res)=>{
+              console.log('찜 삭제');
+              dispatch(userActions.getUserDB());
               dispatch(getCollectionDB());
             })
             .catch((e) => {
@@ -104,17 +96,17 @@ const toggleLikeDB = (prd_id) => {
       let data = {
         productId: prd_id,
       };
-      console.log(data);
-      axios
+       axios
         .post(`${config.api}/api/collects`, data)
-        .then((res) => {
-          let _collects = [...collects, res.data];
-          console.log(_collects);
-          dispatch(likeToggle(_collects));
+        .then((res)=>{
+          console.log('찜 등록');
+          dispatch(userActions.getUserDB());
+          dispatch(getCollectionDB());
         })
         .catch((e) => {
           console.log(e);
         });
+    }
     }
   };
 };

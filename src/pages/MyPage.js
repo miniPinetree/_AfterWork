@@ -13,13 +13,7 @@ const MyPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.user);
   const collection = useSelector((state)=>state.prefer.collection);
-  
-  useEffect(() => {
-    if(user){
-      dispatch(preferActions.getCollectionDB());
-    }
-  }, []);
-
+console.log(collection);
   return (
     <Container>
       {user &&
