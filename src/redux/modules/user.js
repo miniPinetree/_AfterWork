@@ -18,23 +18,13 @@ const initialState = {
 
 const getUserDB = () => {
     return function (dispatch) {
-        const jwtToken = getCookie("accessToken");
-        axios.defaults.headers.common["authorization"] = `Bearer ${jwtToken}`;
+        const jwtToken = getCookie("is_login");
+        axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
         axios({
             method: "get",
             url: `${config.api}/api/user/me`,
-            headers: {
-                authorization: `Bearer ${jwtToken}`,
-                "Content-type": "application/json",
-            },
         })
             .then((res) => {
-                // console.log(res);
-                // var str = JSON.stringify(res);
-                // console.log(str);
-                // var da = JSON.parse(res.data);
-                // console.log(da, "json");
-
                 dispatch(
                     getUser({
                         email: res.data.email,
@@ -48,7 +38,7 @@ const getUserDB = () => {
                 );
             })
             .catch((err) => {
-                console.log(err, "에러에여");
+                console.log(err, "error");
             });
     };
 };
@@ -62,7 +52,7 @@ export default handleActions(
             }),
         [LOG_OUT]: (state, action) =>
             produce(state, (draft) => {
-                deleteCookie("accessToken");
+                deleteCookie("is_login");
                 Swal.fire({
                     text: "로그아웃 되었습니다.",
                     confirmButtonColor: "#7F58EC",

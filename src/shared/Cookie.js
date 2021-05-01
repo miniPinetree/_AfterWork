@@ -13,7 +13,7 @@ const setCookie = (name, value, exp = 5) => {
 };
 
 const deleteCookie = (name) => {
-    document.cookie = name + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT; path=/;";
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1999 00:00:00 GMT; path=/;`;
 };
 
 export { getCookie, setCookie, deleteCookie };

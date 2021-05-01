@@ -4,11 +4,12 @@ import styled from "styled-components";
 import { history } from "../redux/configStore";
 import LoginModal from "./LoginModal";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { getCookie } from "../shared/Cookie";
-import { useEffect } from "react";
+import { hamburger } from "../shared/images/text-align-justified.svg";
+
 const Header = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.user.user);
+
     const [isModal, setIsModal] = useState(false);
     const modalOpen = () => {
         setIsModal(true);
@@ -16,8 +17,6 @@ const Header = () => {
     const modalClose = () => {
         setIsModal(false);
     };
-
-    const cookie = getCookie("accessToken");
 
     return (
         <>
@@ -34,7 +33,7 @@ const Header = () => {
                         <About onClick={() => history.push("/about")}>About</About>
                     </div>
                     <div>
-                        {cookie ? (
+                        {user ? (
                             <>
                                 <Login
                                     onClick={() => {
@@ -43,9 +42,8 @@ const Header = () => {
                                 >
                                     로그아웃
                                 </Login>
-                                <Login onClick={() => history.push("/mypage")}>
-                                    {/* {user.user.name}님 */}네임오류
-                                </Login>
+
+                                <Login onClick={() => history.push("/mypage")}>{user.name}님</Login>
                             </>
                         ) : (
                             <Login onClick={modalOpen}>로그인</Login>
@@ -67,6 +65,17 @@ const Wrap = styled.div`
     padding: 14px 0;
     background: #fff;
     z-index: 3;
+    // @media all and (max-width: 375px) {
+    //     width: 100%;
+    //     margin: 0px;
+    //     height: 88px;
+    //     position: fixed;
+    //     padding: 48px 125px 0 125px;
+    //     display: block;
+    //     top: 0px;
+    //     border-bottom: none;
+    //     box-shadow: 0px 3px 16px rgb(24 25 31 / 10%);
+    // }
 `;
 
 const Body = styled.div`
@@ -75,6 +84,11 @@ const Body = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    @media all and (max-width: 375px) {
+        display: block;
+        text-align: center;
+        margin: 0;
+    }
 `;
 
 const Logo = styled.span`
@@ -84,6 +98,10 @@ const Logo = styled.span`
     cursor: pointer;
     height: 100%;
     margin-right: 24px;
+    @media all and (max-width: 375px) {
+        margin: 0 auto;
+        text-align: center;
+    }
 `;
 
 const About = styled.span`
@@ -92,6 +110,9 @@ const About = styled.span`
     letter-spacing: -0.6px;
     cursor: pointer;
     height: 100%;
+    @media all and (max-width: 375px) {
+        display: none;
+    }
 `;
 
 const Login = styled.span`
@@ -100,6 +121,9 @@ const Login = styled.span`
     cursor: pointer;
     height: 100%;
     margin-left: 12px;
+    @media all and (max-width: 375px) {
+        display: none;
+    }
 `;
 
 export default Header;
