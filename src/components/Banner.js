@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
@@ -6,43 +6,50 @@ import { history } from '../redux/configStore';
 import Permit from '../shared/Permit';
 import { useSelector } from 'react-redux';
 
-function CountDownTimer(dt, id) {
-  const end = new Date(dt);
-  const _second = 1000;
-  const _minute = _second * 60;
-  const _hour = _minute * 60;
-  const _day = _hour * 24;
-  let timer;
-  function showRemaining() {
-    const now = new Date();
-    const distance = end - now;
-    if (document.getElementById(id) === null) {
-      clearInterval(timer);
-      return;
-    }
-    if (distance < 0) {
-      clearInterval(timer);
-      document.getElementById(id).textContent = '퇴근시간입니다!';
-      return;
-    }
-
-    const hours = Math.floor((distance % _day) / _hour);
-    const minutes = Math.floor((distance % _hour) / _minute);
-    const seconds = Math.floor((distance % _minute) / _second);
-
-    document.getElementById(id).textContent = hours + '시간 ';
-    document.getElementById(id).textContent += minutes + '분 ';
-    document.getElementById(id).textContent += seconds + '초';
-  }
-  timer = setInterval(showRemaining, 1000);
-}
-
 function Banner(props) {
-  const [search, setSearch] = useState('');
+  const offTime = useSelector((state) => state.user.user?.offTime);
   const now = new Date();
   const today = now.toLocaleDateString();
-  const offTime = useSelector((state) => state.user.user?.offTime);
-  CountDownTimer(today + offTime, 'time');
+  let difference = +new Date(today + offTime) - +new Date();
+
+  const calculateTimeLeft = () => {
+    let timeLeft = {};
+    if (difference > 0) {
+      timeLeft = {
+        hours: `${Math.floor((difference / (1000 * 60 * 60)) % 24)}`,
+        minutes: `${Math.floor((difference / 1000 / 60) % 60)}`,
+        seconds: `${Math.floor((difference / 1000) % 60)}`,
+      };
+    }
+
+    return timeLeft;
+  };
+
+  const [search, setSearch] = useState('');
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
+
+  const timerComponents = [];
+
+  Object.keys(timeLeft).forEach((interval, idx) => {
+    if (!timeLeft[interval]) {
+      return;
+    }
+
+    timerComponents.push(
+      <span key={idx}>
+        {timeLeft[interval] < 10
+          ? `0${timeLeft[interval]}`
+          : `${timeLeft[interval]}`}
+      </span>,
+    );
+  });
 
   const searchHandler = () => {
     if (search === '') {
@@ -57,10 +64,10 @@ function Banner(props) {
       <Section>
         <Container>
           <Permit>
-            {offTime === null ? (
+            {offTime === null || offTime === undefined ? (
               <SettingBox>
                 <span>퇴근 시간을 설정해주세요!</span>
-                <div style={{ textAlign: 'center' }}>
+                <div>
                   <button
                     onClick={() => {
                       history.push('/userdetail');
@@ -71,7 +78,25 @@ function Banner(props) {
                 </div>
               </SettingBox>
             ) : (
-              <Timmer id='time' />
+              <>
+                {difference > 0 ? (
+                  <Timer>
+                    <>
+                      {timerComponents.length ? (
+                        <OffTimeTitle>퇴근 시간 카운트</OffTimeTitle>
+                      ) : null}
+                      <OffTimeCnt>
+                        {timerComponents.length ? (
+                          <>
+                            {timerComponents[0]}: {timerComponents[1]} :{' '}
+                            {timerComponents[2]}
+                          </>
+                        ) : null}
+                      </OffTimeCnt>{' '}
+                    </>
+                  </Timer>
+                ) : null}
+              </>
             )}
           </Permit>
           <TitleBox>
@@ -140,18 +165,42 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Timmer = styled.div`
+const Timer = styled.div`
   width: 357px;
   max-width: 357px;
   height: 102px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   position: absolute;
   right: 0px;
   background: #fff;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: 3px 10px 15px #f3e8f6;
+`;
+const OffTimeTitle = styled.div`
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Noto Sans CJK KR';
+  letter-spacing: -0.54px;
+  color: #000000;
+`;
+const OffTimeCnt = styled.div`
+  margin-top: 8px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #000;
+  font-family: 'Noto Sans CJK KR';
+  & span {
+    display: inline-block;
+    width: 64px;
+    text-align: center;
+    background: #f5f5f5 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    letter-spacing: 1px;
+  }
 `;
 
 const SettingBox = styled.div`
