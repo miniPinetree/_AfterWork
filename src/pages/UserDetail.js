@@ -42,7 +42,6 @@ useEffect(() => {
 }, []);
 
   const setValue = ()=>{
-    console.log(locations, categories, time);
 dispatch(preferActions.updateUserInfoDB(locations,categories,time));
   };
 
