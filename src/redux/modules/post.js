@@ -9,6 +9,7 @@ const SCROLL_POST_LIST = 'SCROLL_POST_LIST';
 const SEARCH_LIST = 'SEARCH_LIST';
 const SCROLL_SEARCH_LIST = 'SCROLL_SEARCH_LIST';
 const POPULAR_LIST = 'POPULAR_LIST';
+const NEAR_LIST = 'NEAR_LIST';
 const PAGING = 'PAGING';
 const LOADING = 'LOADING';
 const VIEW_LOADING = 'VIEW_LOADING';
@@ -25,6 +26,7 @@ const scrollSearchList = createAction(SCROLL_SEARCH_LIST, (post_list) => ({
   post_list,
 }));
 const popularList = createAction(POPULAR_LIST, (post_list) => ({ post_list }));
+const nearList = createAction(NEAR_LIST, (post_list) => ({ post_list }));
 const pagingInfo = createAction(PAGING, (paging) => ({ paging }));
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 const viewLoading = createAction(VIEW_LOADING, (view_loading) => ({
@@ -43,6 +45,7 @@ const initialState = {
     keyword: '',
   },
   popular_list: [],
+  near_list: [],
   is_loading: false,
   view_loading: false,
 };
@@ -69,6 +72,20 @@ const getPopularListDB = () => {
     })
       .then((res) => {
         dispatch(popularList(res.data.content));
+      })
+      .catch((e) => {
+        console.log('에러 발생', e);
+      });
+  };
+};
+const getNearListDB = () => {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: `${config.api}/api/recommend`,
+    })
+      .then((res) => {
+        dispatch(nearList(res.data.content));
       })
       .catch((e) => {
         console.log('에러 발생', e);
@@ -222,6 +239,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.popular_list = action.payload.post_list;
       }),
+    [NEAR_LIST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.near_list = action.payload.post_list;
+      }),
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
         draft.is_loading = action.payload.is_loading;
@@ -245,6 +266,7 @@ const actionCreators = {
   scrollGetPostDB,
   scrollSearchDB,
   getPopularListDB,
+  getNearListDB,
 };
 
 export { actionCreators };
