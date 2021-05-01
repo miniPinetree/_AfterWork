@@ -150,6 +150,7 @@ const MainHeader = styled.div`
 const Title = styled.div`
   font-size: normal normal normal 16px/24px Noto Sans CJK KR;
   color: #000;
+  cursor: default;
 `;
 
 const Main = styled.div`

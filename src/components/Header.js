@@ -57,25 +57,26 @@ const Header = () => {
 };
 
 const Wrap = styled.div`
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid #707070;
-    position: sticky;
-    top: 0px;
-    padding: 14px 0;
-    background: #fff;
-    z-index: 3;
-    // @media all and (max-width: 375px) {
-    //     width: 100%;
-    //     margin: 0px;
-    //     height: 88px;
-    //     position: fixed;
-    //     padding: 48px 125px 0 125px;
-    //     display: block;
-    //     top: 0px;
-    //     border-bottom: none;
-    //     box-shadow: 0px 3px 16px rgb(24 25 31 / 10%);
-    // }
+<<<<<<< Updated upstream
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid #707070;
+  position: sticky;
+  top: 0px;
+  padding: 14px 0;
+  background: #fff;
+  z-index: 3;
+  // @media all and (max-width: 375px) {
+  //     width: 100%;
+  //     margin: 0px;
+  //     height: 88px;
+  //     position: fixed;
+  //     padding: 48px 125px 0 125px;
+  //     display: block;
+  //     top: 0px;
+  //     border-bottom: none;
+  //     box-shadow: 0px 3px 16px rgb(24 25 31 / 10%);
+  // }
 `;
 
 const Body = styled.div`
@@ -116,14 +117,57 @@ const About = styled.span`
 `;
 
 const Login = styled.span`
+  font-size: 17px;
+  font-weight: normal;
+  cursor: pointer;
+  height: 100%;
+  margin-left: 12px;
+  @media all and (max-width: 375px) {
+    display: none;
+  }
+=======
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #707070;
+    position: sticky;
+    top: 0px;
+    padding: 14px 0;
+    background: #fff;
+    z-index: 3;
+`;
+
+const Body = styled.div`
+    max-width: 1004px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+`;
+
+const Logo = styled.span`
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: -0.6px;
+    cursor: pointer;
+    height: 100%;
+    margin-right: 24px;
+`;
+
+const About = styled.span`
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: -0.6px;
+    cursor: pointer;
+    height: 100%;
+`;
+
+const Login = styled.span`
     font-size: 17px;
     font-weight: normal;
     cursor: pointer;
     height: 100%;
     margin-left: 12px;
-    @media all and (max-width: 375px) {
-        display: none;
-    }
+>>>>>>> Stashed changes
 `;
 
 export default Header;

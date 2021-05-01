@@ -61,13 +61,12 @@ function Banner(props) {
               <SettingBox>
                 <span>퇴근 시간을 설정해주세요!</span>
                 <div style={{ textAlign: 'center' }}>
-                  <br />
                   <button
                     onClick={() => {
                       history.push('/userdetail');
                     }}
                   >
-                    설정하기
+                    시간 설정하러 가기 {'>'}
                   </button>
                 </div>
               </SettingBox>
@@ -87,14 +86,17 @@ function Banner(props) {
               placeholder='검색어를 입력하세요'
               suffix={
                 <SearchOutlined
-                  style={{ color: '#7F58EC', cursor: 'pointer' }}
+                  style={{
+                    color: '#7F58EC',
+                    cursor: 'pointer',
+                  }}
                   onClick={searchHandler}
                 />
               }
               value={search}
               style={{
                 borderRadius: '29px',
-                font: 'normal normal normal 20px/30px Noto Sans CJK KR',
+                fontSize: '20px',
                 letterSpacing: '-0.6px',
                 color: '#BDBDBD',
                 boxSizing: 'border-box',
@@ -141,19 +143,21 @@ const Container = styled.div`
 const Timmer = styled.div`
   width: 357px;
   max-width: 357px;
-  height: 95px;
+  height: 102px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   right: 0px;
   background: #fff;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 `;
 
 const SettingBox = styled.div`
   width: 357px;
   max-width: 357px;
-  height: 95px;
+  height: 102px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,10 +165,35 @@ const SettingBox = styled.div`
   position: absolute;
   right: 0px;
   background: #fff;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   & span {
-    font: normal normal medium 18px/18px Noto Sans CJK KR;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Noto Sans CJK KR';
     letter-spacing: -0.54px;
     color: #000000;
+  }
+  & button {
+    margin-top: 12px;
+    width: 165px;
+    max-width: 165px;
+    height: 28px;
+    font-size: 15px;
+    padding: 3px 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0;
+    color: #ffffff;
+    background: transparent linear-gradient(124deg, #7f58ec 0%, #5c5ce3 100%) 0%
+      0% no-repeat padding-box;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.9;
+    }
   }
 `;
 

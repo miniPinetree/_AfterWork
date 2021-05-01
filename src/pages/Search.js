@@ -13,6 +13,7 @@ function Search(props) {
   const dispatch = useDispatch();
   const query = queryString.parse(props.location.search);
   const { keyword } = query;
+
   const [filterBox, setfilterBox] = useState('total');
   const [sortBox, setSortBox] = useState('popularity desc');
   let post_list = useSelector((state) => state.post.post_list);
@@ -150,6 +151,7 @@ const MainHeader = styled.div`
 const Title = styled.div`
   font-size: normal normal normal 16px/24px Noto Sans CJK KR;
   color: #000;
+  cursor: default;
 `;
 
 const Main = styled.div`

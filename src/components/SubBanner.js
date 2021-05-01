@@ -28,7 +28,7 @@ function SubBanner(props) {
             value={search}
             style={{
               borderRadius: '29px',
-              font: 'normal normal normal 20px/30px Noto Sans CJK KR',
+              fontSize: '20px',
               letterSpacing: '-0.6px',
               color: '#bdbdbd',
               boxSizing: 'border-box',
@@ -60,6 +60,7 @@ const Wrap = styled.div`
 
 const InputBox = styled.div`
   width: 512px;
+  max-width: 512px;
   height: 50px;
   box-sizing: border-box;
   margin: 0 auto;
