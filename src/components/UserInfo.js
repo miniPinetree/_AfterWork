@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import {useSelector} from "react-redux";
+import { actionCreators as userActions } from '../redux/modules/user';
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const UserInfo =(props)=>{
+const dispatch=useDispatch();
 const user = useSelector((state)=>state.user.user);
+
+useEffect(() => {
+  if(!user){
+    console.log("실행해");
+   dispatch(userActions.getUserDB());
+  }
+ }, [])
+
     return(
         <>
-        {user.image?
-        <UserImg src={user.image}/>
-        : <Avatar size={64} icon={<UserOutlined />} />}
-        <InfoBox>
-          <p>
-            <strong>{user.name}</strong>님
-          </p>
-          <p>{user.email}</p>
-        </InfoBox>
+        {user && user.image?
+          <UserImg src={user.image}/>
+          : <Avatar size={64} icon={<UserOutlined />} />}
+          <InfoBox>
+            <p>
+              <strong>{user.name}</strong>님
+            </p>
+            <p>{user.email}</p>
+          </InfoBox>
+
+        
         </>
     );
 };

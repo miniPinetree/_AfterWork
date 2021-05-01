@@ -27,16 +27,16 @@ const CardWrap = styled.div`
 `;
 const Img = styled.img`
   width: 100%;
-  height: 182px;
+  height: 187px;
   border-radius: 10px;
 `;
 const TextBox = styled.div`
   width: 100%;
   font: normal normal medium 18px/50px Noto Sans CJK KR;
-  font-size: 18px;
+  font-size: 16px;
   color: #000;
-  letter-spacing: -0.54px;
-  padding: 8px;
+  letter-spacing: -0.48px;
+  padding: 9px 5px;
   box-sizing: border-box;
 `;
 

@@ -8,6 +8,7 @@ const POST_LIST = 'POST_LIST';
 const SCROLL_POST_LIST = 'SCROLL_POST_LIST';
 const SEARCH_LIST = 'SEARCH_LIST';
 const SCROLL_SEARCH_LIST = 'SCROLL_SEARCH_LIST';
+const POPULAR_LIST = 'POPULAR_LIST';
 const PAGING = 'PAGING';
 const LOADING = 'LOADING';
 const VIEW_LOADING = 'VIEW_LOADING';
@@ -23,6 +24,7 @@ const searchList = createAction(SEARCH_LIST, (post_list) => ({ post_list }));
 const scrollSearchList = createAction(SCROLL_SEARCH_LIST, (post_list) => ({
   post_list,
 }));
+const popularList = createAction(POPULAR_LIST, (post_list) => ({ post_list }));
 const pagingInfo = createAction(PAGING, (paging) => ({ paging }));
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 const viewLoading = createAction(VIEW_LOADING, (view_loading) => ({
@@ -40,6 +42,7 @@ const initialState = {
     direction: 'desc',
     keyword: '',
   },
+  popular_list: [],
   is_loading: false,
   view_loading: false,
 };
@@ -55,6 +58,20 @@ const getCategoryDB = () => {
       })
       .catch((e) => {
         console.log('에러발생', e);
+      });
+  };
+};
+const getPopularListDB = () => {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: `${config.api}/api/search?page=0&size=12&sort=popularity&direction=desc`,
+    })
+      .then((res) => {
+        dispatch(popularList(res.data.content));
+      })
+      .catch((e) => {
+        console.log('에러 발생', e);
       });
   };
 };
@@ -201,6 +218,10 @@ export default handleActions(
         draft.post_list.push(...action.payload.post_list);
         draft.is_loading = false;
       }),
+    [POPULAR_LIST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.popular_list = action.payload.post_list;
+      }),
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
         draft.is_loading = action.payload.is_loading;
@@ -223,6 +244,7 @@ const actionCreators = {
   getSearchDB,
   scrollGetPostDB,
   scrollSearchDB,
+  getPopularListDB,
 };
 
 export { actionCreators };

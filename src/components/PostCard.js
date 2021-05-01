@@ -17,7 +17,8 @@ function PostCard(props) {
             <TitleWrap like={like}>
               <strong>{post_info?.title}</strong>
               <HeartFilled
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
                   dispatch(preferActions.toggleLikeDB(post_info.productId));
                 }}
               />

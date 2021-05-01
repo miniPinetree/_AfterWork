@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const cookie = getCookie('accessToken');
+    const cookie = getCookie('is_login');
 
     if (cookie) {
       dispatch(userActions.getUserDB());

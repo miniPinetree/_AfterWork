@@ -38,7 +38,6 @@ function Carousel(props) {
       <Wrap>
         <TitleContainer>
           <Title>{text}</Title>
-          {/* <div>전체보기</div> */}
         </TitleContainer>
         <CarouselContainer>
           <Slider {...settings}>{children}</Slider>
@@ -62,6 +61,7 @@ const TitleContainer = styled.div`
 `;
 const Title = styled.div`
   font-size: 20px;
+  letter-spacing: -0.6px;
   font-weight: 700;
 `;
 const CarouselContainer = styled.div`
