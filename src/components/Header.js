@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { history } from "../redux/configStore";
 import LoginModal from "./LoginModal";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { getCookie } from "../shared/Cookie";
 import { hamburger } from "../shared/images/text-align-justified.svg";
 
 const Header = () => {
@@ -12,15 +11,12 @@ const Header = () => {
     const user = useSelector((state) => state.user.user);
 
     const [isModal, setIsModal] = useState(false);
-
     const modalOpen = () => {
         setIsModal(true);
     };
     const modalClose = () => {
         setIsModal(false);
     };
-
-    const cookie = getCookie("is_login");
 
     return (
         <>
@@ -37,7 +33,7 @@ const Header = () => {
                         <About onClick={() => history.push("/about")}>About</About>
                     </div>
                     <div>
-                        {cookie ? (
+                        {user ? (
                             <>
                                 <Login
                                     onClick={() => {
