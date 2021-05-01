@@ -63,8 +63,12 @@ const getCollectionDB = () => {
 //찜 등록 및 개별 삭제
 const toggleLikeDB = (prd_id) => {
   return function (dispatch, getState, { history }) {
+    const user = getState().user.user
+    let collects = user.collects;
+    let flag = false;
+    console.log(collects, flag);
     // 로그인 여부 확인
-    if (!getState().user.user) {
+    if (!user) {
       Swal.fire({
         text: "로그인 후 이용 가능한 서비스입니다.",
         confirmButtonColor: "#7F58EC",
@@ -73,21 +77,21 @@ const toggleLikeDB = (prd_id) => {
       return;
     }
     //찜 목록에 존재하면 삭제, 그렇지 않으면 추가
-    let collects = getState().user.user.collects;
-    let user = getState().user.user;
-    let flag = false;
     if(collects?.length !== 0){
       for (let i = 0; i < collects.length; i++) {
         if (collects[i].productId === prd_id) {
           flag = true;
+          console.log(collects, flag,collects[i].collectId);
           axios
             .delete(`${config.api}/api/collects/${collects[i].collectId}`)
             .then((res) => {
               let _collects = collects.filter((collect) => {
                 return collect.productId !== prd_id;
               });
+              console.log(_collects);
               dispatch(likeToggle(_collects));
             }).then((res)=>{
+              console.log(collects);
               dispatch(getCollectionDB());
             })
             .catch((e) => {
@@ -100,10 +104,12 @@ const toggleLikeDB = (prd_id) => {
       let data = {
         productId: prd_id,
       };
+      console.log(data);
       axios
         .post(`${config.api}/api/collects`, data)
         .then((res) => {
           let _collects = [...collects, res.data];
+          console.log(_collects);
           dispatch(likeToggle(_collects));
         })
         .catch((e) => {
