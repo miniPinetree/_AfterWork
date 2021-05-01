@@ -14,15 +14,12 @@ import { Header, Footer, FButton } from '../components';
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.user);
-  console.log('유저정보', user);
+  console.log('유저정보', user.locations.length, user);
   
   useEffect(() => {
-   
-    console.log('getCookie');
     const cookie = getCookie('accessToken');
 
     if (cookie) {
-      console.log('getUser');
       dispatch(userActions.getUserDB());
     }
   }, []);

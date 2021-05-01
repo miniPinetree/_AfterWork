@@ -13,57 +13,56 @@ const MyPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.user);
   const collection = useSelector((state)=>state.prefer.collection);
-
   useEffect(() => {
-   if(!user){
-     console.log("실행해");
-    dispatch(userActions.getUserDB());
-   }
+    dispatch(preferActions.getCollectionDB());
   }, [])
 
   return (
     <Container>
-      <Title>마이 페이지</Title>
+      {user &&
+      <>
+       <Title>마이 페이지</Title>
 
-      <Profile>
-        <Area1>
-        <UserInfo/>
-        </Area1>
-        <DetailBtn onClick={()=>{
-            history.push('/userdetail');
-        }}>
-          회원정보 및 상세 설정 <RightOutlined />
-        </DetailBtn>
-      </Profile>
+<Profile>
+  <Area1>
+  <UserInfo/>
+  </Area1>
+  <DetailBtn onClick={()=>{
+      history.push('/userdetail');
+  }}>
+    회원정보 및 상세 설정 <RightOutlined />
+  </DetailBtn>
+</Profile>
 
-      <MarkList>
-        <TextBox>
-          <Area1>
-            <Title>찜 목록</Title>
-            <p>총 {collection.length}건</p>
-          </Area1>
-          <TextBtn 
-          _onClick={()=>{
-            dispatch(preferActions.deleteCollectionDB());
-          }}
-          >
-            목록 전체 삭제
-          </TextBtn>
-        </TextBox>
-        {collection.length?
-        <>
-        <ItemList>
-          {collection.map((prd,idx)=>{
-            return(
+<MarkList>
+  <TextBox>
+    <Area1>
+      <Title>찜 목록</Title>
+      <p>총 {collection.length}건</p>
+    </Area1>
+    <TextBtn 
+    _onClick={()=>{
+      dispatch(preferActions.deleteCollectionDB());
+    }}
+    >
+      목록 전체 삭제
+    </TextBtn>
+  </TextBox>
+  {collection.length?
+  <>
+  <ItemList>
+    {collection.map((prd,idx)=>{
+      return(
 <PostCard key={idx} post_info={prd} like/>
-            );
-          })}
-        </ItemList>
-        </>
-        : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
-        style={{ height:'20vh'}}/>
-      }
-      </MarkList>
+      );
+    })}
+  </ItemList>
+  </>
+  : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
+  style={{ height:'20vh'}}/>
+}
+</MarkList>
+      </>}
     </Container>
   );
 };

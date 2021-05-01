@@ -8,7 +8,7 @@ import { actionCreators as preferActions } from "../redux/modules/prefer";
 const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const locationNames = user.locations.map(location=>location.name);
+  const locationNames = user.locations? user.locations.map(location=>location.name) : [];
   const categoryIds = user.interests.map(interest=>interest.categoryId);
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState(locationNames);
@@ -21,6 +21,8 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
   };
   return (
     <Container>
+     {user &&
+     <>
       <TextBox>
         <Title>회원정보 및 상세 설정</Title>
         <TextBtn _onClick={setValue}>변경 사항 저장</TextBtn>
@@ -55,6 +57,7 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
           </BorderBox>
         </Col>
       </Wrap>
+     </>}
     </Container>
   );
 };

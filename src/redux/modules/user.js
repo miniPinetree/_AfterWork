@@ -29,7 +29,6 @@ const getUserDB = () => {
             },
         })
             .then((res) => {
-                console.log(res.data);
                 // console.log(res);
                 // var str = JSON.stringify(res);
                 // console.log(str);
