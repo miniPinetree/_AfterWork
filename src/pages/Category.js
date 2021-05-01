@@ -18,6 +18,10 @@ function Category(props) {
   const paging = useSelector((state) => state.post.paging);
   const is_loading = useSelector((state) => state.post.is_loading);
   const view_loading = useSelector((state) => state.post.view_loading);
+  const collection_list = useSelector((state) => state.prefer.collection);
+  const collection = collection_list.map((val) => {
+    return val.productId;
+  });
 
   const idx = category_list.findIndex((val) => {
     return val.categoryId === parseInt(id);
@@ -106,7 +110,11 @@ function Category(props) {
                       loading={is_loading}
                     >
                       {post_list.map((val, idx) => {
-                        return <PostCard post_info={val} key={idx} />;
+                        return collection.includes(val.productId) === true ? (
+                          <PostCard post_info={val} key={idx} like />
+                        ) : (
+                          <PostCard post_info={val} key={idx} />
+                        );
                       })}
                     </InfinityScroll>
                   </>
