@@ -44,7 +44,7 @@ const Header = () => {
                                     로그아웃
                                 </Login>
                                 <Login onClick={() => history.push("/mypage")}>
-                                    {user.user.name}님
+                                    {/* {user.user.name}님 */}네임오류
                                 </Login>
                             </>
                         ) : (

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { getCookie } from './Cookie';
 import OAuth2RedirectHandler from './OAuth2RedirectHandler';
@@ -13,14 +13,19 @@ import { Header, Footer, FButton } from '../components';
 
 function App() {
   const dispatch = useDispatch();
-
+  const user = useSelector((state)=>state.user.user);
+  console.log('유저정보', user);
+  
   useEffect(() => {
+   
+    console.log('getCookie');
     const cookie = getCookie('accessToken');
 
     if (cookie) {
+      console.log('getUser');
       dispatch(userActions.getUserDB());
     }
-  }, [dispatch]);
+  }, []);
 
   return (
     <>

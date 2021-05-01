@@ -4,6 +4,7 @@ import {history} from "../redux/configStore";
 import { RightOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
+import { actionCreators as userActions } from '../redux/modules/user';
 import { ItemCard, PostCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
 import { Empty } from 'antd';
@@ -14,7 +15,10 @@ const MyPage = (props) => {
   const collection = useSelector((state)=>state.prefer.collection);
 
   useEffect(() => {
-   
+   if(!user){
+     console.log("실행해");
+    dispatch(userActions.getUserDB());
+   }
   }, [])
 
   return (
