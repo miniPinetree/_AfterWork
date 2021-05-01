@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { history } from '../redux/configStore';
+import Permit from '../shared/Permit';
+import { useSelector } from 'react-redux';
 
 function CountDownTimer(dt, id) {
   const end = new Date(dt);
@@ -39,12 +41,14 @@ function Banner(props) {
   const [search, setSearch] = useState('');
   const now = new Date();
   const today = now.toLocaleDateString();
-  CountDownTimer(today + '20:50:00', 'time');
+  const offTime = useSelector((state) => state.user.user?.offTime);
+  CountDownTimer(today + offTime, 'time');
+
   const searchHandler = () => {
     if (search === '') {
       return;
     }
-    history.push(`/search?keyword=${search}`);
+    history.push(`/find/search?keyword=${search}`);
     setSearch('');
   };
 
@@ -52,7 +56,32 @@ function Banner(props) {
     <>
       <Section>
         <Container>
-          <Timmer id='time' />
+          <Permit>
+            {offTime === null ? (
+              <SettingBox>
+                <span>퇴근 시간을 설정해주세요!</span>
+                <div style={{ textAlign: 'center' }}>
+                  <br />
+                  <button
+                    onClick={() => {
+                      history.push('/userdetail');
+                    }}
+                  >
+                    설정하기
+                  </button>
+                </div>
+              </SettingBox>
+            ) : (
+              <Timmer id='time' />
+            )}
+          </Permit>
+          <TitleBox>
+            <span>
+              <strong>퇴근하는 순간</strong>은 누구나 기다린다 퇴근하고{' '}
+              <strong>뭐 할지는</strong> <br /> 직장에서 정해야 <br />
+              <strong>제맛인 법</strong>
+            </span>
+          </TitleBox>
           <InputBox>
             <Input
               placeholder='검색어를 입력하세요'
@@ -89,7 +118,7 @@ function Banner(props) {
 
 const Section = styled.div`
   width: 100%;
-  height: 650px;
+  height: 670px;
   background: transparent
     linear-gradient(
       180deg,
@@ -119,6 +148,34 @@ const Timmer = styled.div`
   position: absolute;
   right: 0px;
   background: #fff;
+`;
+
+const SettingBox = styled.div`
+  width: 357px;
+  max-width: 357px;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  right: 0px;
+  background: #fff;
+  & span {
+    font: normal normal medium 18px/18px Noto Sans CJK KR;
+    letter-spacing: -0.54px;
+    color: #000000;
+  }
+`;
+
+const TitleBox = styled.div`
+  max-width: 484px;
+  letter-spacing: -1.11px;
+  color: #000;
+  font: normal normal normal 37px/55px Noto Sans CJK KR;
+  position: absolute;
+  top: 78px;
+  line-height: 1.4;
 `;
 
 const InputBox = styled.div`
