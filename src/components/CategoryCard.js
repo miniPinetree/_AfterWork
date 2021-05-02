@@ -24,12 +24,16 @@ const CardWrap = styled.div`
   max-width: 187px;
   height: 240px;
   border-radius: 10px;
+  cursor: pointer;
 `;
 const Img = styled.img`
   width: 100%;
   height: 187px;
   border-radius: 10px;
   box-shadow: 0px 10px 10px #e6e6e6;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 const TextBox = styled.div`
   width: 100%;

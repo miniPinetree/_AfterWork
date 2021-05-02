@@ -30,7 +30,9 @@ function SideBar(props) {
                       window.scrollTo({ top: 0, left: 0 });
                     }}
                   >
-                    <span>{val.name}</span>
+                    <div>
+                      <span>{val.name}</span>
+                    </div>
                   </li>
                 );
               })}
@@ -77,9 +79,9 @@ const List = styled.ul`
   padding: 0;
   & li {
     margin-top: 20px;
-    & span {
-      cursor: pointer;
-    }
+  }
+  & span {
+    cursor: pointer;
   }
 `;
 

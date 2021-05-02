@@ -69,7 +69,7 @@ const CarouselContainer = styled.div`
   margin: 20px auto;
   color: #000;
   position: relative;
-  cursor: pointer;
+  cursor: default;
 `;
 
 const PrevBtn = styled.button`

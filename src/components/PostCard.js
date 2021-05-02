@@ -8,6 +8,7 @@ import { actionCreators as preferActions } from '../redux/modules/prefer';
 function PostCard(props) {
   const dispatch = useDispatch();
   const { like, post_info } = props;
+  const price = post_info?.priceInfo?.split('원');
 
   return (
     <>
@@ -41,7 +42,15 @@ function PostCard(props) {
                 <span>{post_info?.author}</span>
                 <span>{post_info?.location}</span>
               </TextInfo>
-              <PriceInfo>{post_info?.priceInfo}</PriceInfo>
+              <PriceInfo>
+                {price && (
+                  <>
+                    <span style={{ fontWeight: '600' }}>{price[0]}</span>
+                    {price[0] !== '문의' ? <span>원</span> : null}
+                    {price[1]}
+                  </>
+                )}
+              </PriceInfo>
             </div>
           </TextBox>
         </a>
@@ -58,6 +67,7 @@ const CardWrap = styled.div`
   box-shadow: 0px 10px 15px #e0e0e0;
   max-width: 240px;
   height: 320px;
+  cursor: pointer;
   position: relative;
 `;
 const Img = styled.img`
@@ -65,6 +75,9 @@ const Img = styled.img`
   height: 192px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 const TextBox = styled.div`
   width: 100%;
@@ -72,7 +85,8 @@ const TextBox = styled.div`
   box-sizing: border-box;
   line-height: 1.8;
   & strong {
-    font: normal normal medium 15px/18px Noto Sans CJK KR;
+    font-size: 15px;
+    font-family: Noto Sans CJK KR;
     letter-spacing: -0.45px;
     color: #000;
     white-space: nowrap;
@@ -112,6 +126,5 @@ const TextInfo = styled.div`
 `;
 const PriceInfo = styled.div`
   color: #000;
-  font-weight: 600;
 `;
 export default PostCard;
