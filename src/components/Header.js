@@ -100,6 +100,9 @@ const Login = styled.span`
   cursor: pointer;
   height: 100%;
   margin-left: 12px;
+  @media all and (max-width: 375px) {
+    display: none;
+  }
 `;
 
 export default Header;

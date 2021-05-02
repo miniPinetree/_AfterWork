@@ -112,6 +112,11 @@ const TitleWrap = styled.div`
     position: absolute;
     top: 155.49px;
     right: 12px;
+    :hover {
+      opacity: 0.75;
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
   }
 `;
 

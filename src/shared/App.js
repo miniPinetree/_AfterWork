@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { actionCreators as preferActions } from '../redux/modules/prefer';
 import { getCookie } from './Cookie';
@@ -14,7 +14,8 @@ import { Header, Footer, FButton } from '../components';
 
 function App() {
   const dispatch = useDispatch();
-
+  const collection = useSelector((state)=>state.prefer.collection);
+const user = useSelector((state)=>state.user.user);
   useEffect(() => {
     const cookie = getCookie('is_login');
 
@@ -22,6 +23,7 @@ function App() {
       dispatch(userActions.getUserDB());
       dispatch(preferActions.getCollectionDB());
     }
+    console.log(collection, user)
   }, [dispatch]);
 
   return (
