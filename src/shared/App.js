@@ -14,8 +14,8 @@ import { Header, Footer, FButton } from '../components';
 
 function App() {
   const dispatch = useDispatch();
-  const collection = useSelector((state)=>state.prefer.collection);
-const user = useSelector((state)=>state.user.user);
+  const collection = useSelector((state) => state.prefer.collection);
+  const user = useSelector((state) => state.user.user);
   useEffect(() => {
     const cookie = getCookie('is_login');
 
@@ -23,7 +23,7 @@ const user = useSelector((state)=>state.user.user);
       dispatch(userActions.getUserDB());
       dispatch(preferActions.getCollectionDB());
     }
-    console.log(collection, user)
+    console.log(collection, user);
   }, [dispatch]);
 
   return (
@@ -36,10 +36,7 @@ const user = useSelector((state)=>state.user.user);
         <Route path='/mypage' exact component={MyPage} />
         <Route path='/userdetail' exact component={UserDetail} />
         <Route path='/find/:search' exact component={Search} />
-        <Route
-          path='/oauth2/redirect'
-          component={OAuth2RedirectHandler}
-        ></Route>
+        <Route path='/oauth2/redirect' component={OAuth2RedirectHandler} />
       </ConnectedRouter>
       <FButton />
       <Footer />
