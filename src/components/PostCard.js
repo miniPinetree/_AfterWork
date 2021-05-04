@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { actionCreators as preferActions } from '../redux/modules/prefer';
 
 function PostCard(props) {
+  // 취미 상품 카드
   const dispatch = useDispatch();
   const { like, post_info } = props;
   const price = post_info?.priceInfo?.split('원');
@@ -13,12 +14,14 @@ function PostCard(props) {
   return (
     <>
       <CardWrap className='wrap'>
+        {/* 카드 클릭 시 새창에서 해당 페이지로 이동 */}
         <a href={post_info.siteUrl} target='_blank' rel='noreferrer noopener'>
           <Img src={post_info?.imgUrl} alt='img' />
           <TextBox>
             <TitleWrap like={like}>
               <strong>{post_info?.title}</strong>
               <Permit>
+                {/* 찜하는 기능은 회원만 가능하게 랜더링 */}
                 {like ? (
                   <HeartFilled
                     onClick={(e) => {
@@ -39,10 +42,12 @@ function PostCard(props) {
             </TitleWrap>
             <div>
               <TextInfo>
+                {/* 작성자, 지역 표시 */}
                 <span>{post_info?.author}</span>
                 <span>{post_info?.location}</span>
               </TextInfo>
               <PriceInfo>
+                {/* 가격 정보 */}
                 {price && (
                   <>
                     <span style={{ fontWeight: '600' }}>{price[0]}</span>

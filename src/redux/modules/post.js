@@ -3,6 +3,7 @@ import produce from 'immer';
 import axios from 'axios';
 import { config } from '../../config';
 
+// 액션
 const CATEGORY_LIST = 'CATEGORY_LIST';
 const POST_LIST = 'POST_LIST';
 const SCROLL_POST_LIST = 'SCROLL_POST_LIST';
@@ -14,6 +15,7 @@ const PAGING = 'PAGING';
 const LOADING = 'LOADING';
 const VIEW_LOADING = 'VIEW_LOADING';
 
+// 액션 생성 함수
 const categoryList = createAction(CATEGORY_LIST, (list) => ({ list }));
 const postList = createAction(POST_LIST, (post_list) => ({
   post_list,
@@ -33,9 +35,13 @@ const viewLoading = createAction(VIEW_LOADING, (view_loading) => ({
   view_loading,
 }));
 
+// initialState
 const initialState = {
+  // 카테고리 리스트
   category_list: [],
+  // 게시물 리스트
   post_list: [],
+  // 페이징 정보
   paging: {
     id: undefined,
     page: 1,
@@ -44,12 +50,17 @@ const initialState = {
     direction: 'desc',
     keyword: '',
   },
+  // 인기 게시물
   popular_list: [],
+  // 근처 게시물
   near_list: [],
+  // 스크롤 시 로딩
   is_loading: false,
+  // 랜더링 시 로딩
   view_loading: false,
 };
 
+// 카테고리 리스트 조회
 const getCategoryDB = () => {
   return function (dispatch) {
     axios({
@@ -64,6 +75,8 @@ const getCategoryDB = () => {
       });
   };
 };
+
+// 인기 취미 리스트 조회
 const getPopularListDB = () => {
   return function (dispatch) {
     axios({
@@ -78,6 +91,8 @@ const getPopularListDB = () => {
       });
   };
 };
+
+// 근처 취미 항목 조회
 const getNearListDB = () => {
   return function (dispatch) {
     axios({
@@ -93,6 +108,7 @@ const getNearListDB = () => {
   };
 };
 
+// 게시물 조회(랜더링 시)
 const getPostDB = (id, sort = 'popularity', direction = 'desc') => {
   return function (dispatch) {
     dispatch(viewLoading(true));
@@ -117,6 +133,7 @@ const getPostDB = (id, sort = 'popularity', direction = 'desc') => {
   };
 };
 
+// 검색한 게시물 조회(랜더링 시)
 const getSearchDB = (keyword, sort = 'popularity', direction = 'desc') => {
   return function (dispatch) {
     dispatch(viewLoading(true));
@@ -142,6 +159,7 @@ const getSearchDB = (keyword, sort = 'popularity', direction = 'desc') => {
   };
 };
 
+// 게시물 조회(스크롤 이벤트 발생 시, 무한스크롤)
 const scrollGetPostDB = () => {
   return function (dispatch, getState) {
     const _paging = getState().post.paging;
@@ -175,6 +193,7 @@ const scrollGetPostDB = () => {
   };
 };
 
+// 검색한 게시물 조회(스크롤 이벤트 발생 시, 무한스크롤)
 const scrollSearchDB = () => {
   return function (dispatch, getState) {
     const _paging = getState().post.paging;

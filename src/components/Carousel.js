@@ -24,6 +24,7 @@ function Next(props) {
 
 function Carousel(props) {
   const { children, text, size } = props;
+  // 케러셀 셋팅
   const settings = {
     dots: false,
     infinite: true,
@@ -55,6 +56,7 @@ function Carousel(props) {
     </>
   );
 }
+
 const Wrap = styled.div`
   margin: 75px 0;
   cursor: default;

@@ -7,11 +7,12 @@ import Permit from '../shared/Permit';
 import { useSelector } from 'react-redux';
 
 function Banner(props) {
+  // 퇴근시간 카운트 다운
   const offTime = useSelector((state) => state.user.user?.offTime);
   const now = new Date();
   const today = now.toLocaleDateString();
   let difference = +new Date(today + offTime) - +new Date();
-
+  // 남은 시간 계산
   const calculateTimeLeft = () => {
     let timeLeft = {};
     if (difference > 0) {
@@ -29,6 +30,7 @@ function Banner(props) {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
+    // 타이머 1000밀리 초 마다 갱신
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
@@ -38,11 +40,13 @@ function Banner(props) {
   const timerComponents = [];
 
   Object.keys(timeLeft).forEach((interval, idx) => {
+    // diff < 0 이면 값이 없으므로 리턴
     if (!timeLeft[interval]) {
       return;
     }
 
     timerComponents.push(
+      // 한자리 수는 01 꼴로 나오게 처리
       <span key={idx}>
         {timeLeft[interval] < 10
           ? `0${timeLeft[interval]}`
@@ -52,6 +56,7 @@ function Banner(props) {
   });
 
   const searchHandler = () => {
+    // 검색이 공란일때는 리턴
     if (search === '') {
       return;
     }
@@ -63,7 +68,9 @@ function Banner(props) {
     <>
       <Section>
         <Container>
+          {/* 회원일때만 랜더링하므로 Permit으로 감싸줌 */}
           <Permit>
+            {/* 퇴근시간을 설정하지 않은 경우 */}
             {offTime === null || offTime === undefined ? (
               <SettingBox>
                 <span>퇴근 시간을 설정해주세요!</span>
@@ -95,7 +102,8 @@ function Banner(props) {
                       </OffTimeCnt>{' '}
                     </>
                   </Timer>
-                ) : null}
+                ) : // diff < 0 이면 퇴근시간이 지난것이므로 표시해주지 않게 처리
+                null}
               </>
             )}
           </Permit>
@@ -126,6 +134,7 @@ function Banner(props) {
                 color: '#BDBDBD',
                 boxSizing: 'border-box',
                 padding: '9px 27px 12px 27px',
+                boxShadow: '0px 10px 15px #F3E8F6',
               }}
               onChange={(e) => {
                 setSearch(e.target.value);

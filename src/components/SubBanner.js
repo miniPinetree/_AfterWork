@@ -5,8 +5,10 @@ import { SearchOutlined } from '@ant-design/icons';
 import { history } from '../redux/configStore';
 
 function SubBanner(props) {
+  // 카테고리, 검색 페이지 검색창 배너
   const [search, setSearch] = useState('');
   const searchHandler = () => {
+    // 공란이면 리턴
     if (search === '') {
       return;
     }
