@@ -10,6 +10,7 @@ import Permit from '../shared/Permit';
 import Swal from 'sweetalert2';
 
 function Main(props) {
+  // 메인 페이지
   const { history } = props;
   const dispatch = useDispatch();
   const category_list = useSelector((state) => state.post?.category_list);
@@ -22,12 +23,15 @@ function Main(props) {
   });
 
   useEffect(() => {
+    // 카테고리 리스트
     if (category_list.length === 0) {
       dispatch(postActions.getCategoryDB());
     }
+    // 인기 취미 리스트
     if (popularList.length === 0) {
       dispatch(postActions.getPopularListDB());
     }
+    // 지역별 추천 리스트
     if (nearList?.length === 0 && locations?.length) {
       dispatch(postActions.getNearListDB());
     }

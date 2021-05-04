@@ -5,7 +5,9 @@ import _ from 'lodash';
 function InfinityScroll(props) {
   const { children, callNext, is_next, loading } = props;
 
+  // throttle 300ms 지정
   const _handleScroll = _.throttle(() => {
+    // 로딩중일때는 리턴
     if (loading) {
       return;
     }
@@ -16,6 +18,7 @@ function InfinityScroll(props) {
       document.body.scrollTop;
 
     if (scrollHeight - innerHeight - scrollTop < 200) {
+      // 영역이 200남으면 호출
       callNext();
     }
   }, 300);

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { history } from '../redux/configStore';
 
 function CategoryCard(props) {
+  // 카테고리 카드 클릭시 카테고리 페이지로 이동
   return (
     <>
       <CardWrap

@@ -9,15 +9,18 @@ import PostCard from '../components/PostCard';
 import SideBar from '../components/SideBar';
 
 function Category(props) {
+  // 카테고리 페이지
   const dispatch = useDispatch();
   const id = props.match.params.id;
   const [filterBox, setfilterBox] = useState('total');
   const [sortBox, setSortBox] = useState('popularity desc');
+
   const category_list = useSelector((state) => state.post.category_list);
   let post_list = useSelector((state) => state.post.post_list);
   const paging = useSelector((state) => state.post.paging);
   const is_loading = useSelector((state) => state.post.is_loading);
   const view_loading = useSelector((state) => state.post.view_loading);
+  // 찜 목록
   const collection_list = useSelector((state) => state.prefer.collection);
   const collection = collection_list.map((val) => {
     return val.productId;
@@ -27,6 +30,7 @@ function Category(props) {
     return val.categoryId === parseInt(id);
   });
 
+  // 해당 카테고리
   const category = category_list[idx];
 
   const sortInfo = sortBox.split(' ');
@@ -39,9 +43,11 @@ function Category(props) {
 
   const { Option } = Select;
 
+  // 정렬(가격순, 인기순)
   const selectSort = (value) => {
     setSortBox(value);
   };
+  // 필터(온, 오프리안, 전체)
   const selectFilter = (value) => {
     setfilterBox(value);
   };
