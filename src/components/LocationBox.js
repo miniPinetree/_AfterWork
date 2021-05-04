@@ -74,7 +74,7 @@ const LocationBox=(props)=>{
               })}
             </AreaList>
             <hr color="#E8E8E8" />
-            <p>지역 추가하기</p>
+            <Text>지역 추가하기</Text>
             <InputBox>
               <Input
                 placeholder="지역을 입력하세요"
@@ -97,13 +97,15 @@ const LocationBox=(props)=>{
                   {searchedLocation.length === 0 ? (
                     <p>서비스 지역이 아닙니다</p>
                   ) : (
-                    <p>원하는 지역을 선택해주세요</p>
+                    <p>지역을 선택해주세요</p>
                   )}
                   {searchedLocation.map((location, idx) => {
+                    let _location = location.split(' ');
+                    _location = _location.length>1? _location[1]:_location[0];
                     return (
                       <div
                         onClick={() => {
-                          selectLocation(location);
+                          selectLocation(_location);
                         }}
                       >
                         {location}
@@ -123,18 +125,23 @@ const AreaList = styled.div`
   flex-wrap: wrap;
   margin-bottom: 0px;
 `;
+const Text = styled.p`
+    font-size: 18px;
+    margin: 0 0 16.5px 0;
+    display: block;
+`;
 const Area = styled.div`
   display: flex;
-  min-width: 88px;
+  min-width: 60px;
   height: 28px;
   background-color: #eeeeee;
   font-size: 15px;
-  padding: 3.5px 5px 2.5px 11.53px;
+  padding: 3.5px 5px 2.5px 10px;
   align-items: center;
   justify-content: space-between;
-  margin: 0 13px 10px 0;
+  margin: 0 10px 10px 0;
   & svg {
-    margin-left: 2px;
+    margin-left: 5px;
   }
 `;
 const InputBox = styled.div`
@@ -144,17 +151,24 @@ const InputBox = styled.div`
   }
   & input {
     background-color: #eeeeee;
+    margin-top:4px;
   }
 `;
 const Autofill = styled.div`
   width: 80%;
+  max-height:170px;
+  overflow:auto;
   margin: 0 auto;
-  padding: 5px 8px;
+  padding: 0px 8px;
   font-size: 15px;
   position: absolute;
   left: 10%;
   background-color: #eeeeee;
   & p {
+    background-color:#eeeeee;
+    position:sticky;
+    top:0px;
+    font-size: 15px;
     margin-bottom: 3px;
     font-weight: 600;
   }

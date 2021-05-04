@@ -36,12 +36,13 @@ const updateUserInfoDB = (locations, categories, time) => {
       locations: locations,
       categorys: categories,
     };
+    console.log(data);
     axios
       .post(`${config.api}/api/user`, data)
       .then((res) => {
         //res.data 없음.
         Swal.fire({
-          title: "저장이 완료되었습니다. 😌",
+          text: "저장이 완료되었습니다. 😌",
           confirmButtonColor: "#7F58EC",
           confirmButtonText: "확인",
         });
@@ -117,13 +118,13 @@ const deleteCollectionDB = () => {
     let collection = getState().user.user.collects;
     if (collection.length === 0) {
       Swal.fire({
-        title: "삭제할 정보가 없습니다. 😌",
+        text: "삭제할 정보가 없습니다. 😌",
         confirmButtonColor: "#7F58EC",
         confirmButtonText: "확인",
       });
     } else {
       Swal.fire({
-        title: "전부 삭제하시겠어요? 😲",
+        text: "전부 삭제하시겠어요? 😲",
         showCancelButton: true,
         confirmButtonColor: "#7F58EC",
         confirmButtonText: "삭제",

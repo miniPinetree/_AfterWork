@@ -19,7 +19,7 @@ display:inline-block;
 height: 37px;
 margin:56px 29px 36px 0;
 box-sizing:border-box-sizing;
-
+cursor:default;
   & text {
     font-size: 23px;
     font-weight:600;

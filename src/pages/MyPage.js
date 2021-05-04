@@ -7,13 +7,14 @@ import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { actionCreators as userActions } from '../redux/modules/user';
 import { ItemCard, PostCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
-import { Empty } from 'antd';
+import box from "../shared/images/box.png";
+import Emptybox from "../shared/images/emptybox.png";
 
 const MyPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.user);
   const collection = useSelector((state)=>state.prefer.collection);
-console.log(collection);
+console.log(user, collection);
   return (
     <Container>
       {user &&
@@ -30,7 +31,6 @@ console.log(collection);
     회원정보 및 상세 설정 <RightOutlined />
   </DetailBtn>
 </Profile>
-
 <MarkList>
   <TextBox>
     <Area1>
@@ -55,8 +55,9 @@ console.log(collection);
     })}
   </ItemList>
   </>
-  : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
-  style={{ height:'20vh'}}/>
+  : <div><image src={Emptybox}/>
+  하이
+  </div>
 }
 </MarkList>
       </>}
@@ -102,10 +103,17 @@ const DetailBtn = styled.button`
   bottom: 23px;
   right: 30px;
   text-align: center;
+  cursor:pointer;
   background:linear-gradient(to right,#7F58EC,#5C5CE3);
+  &:hover {
+      opacity: 0.9;
+    }
 `;
 const Area1 = styled.div`
   display: flex;
+  & p {
+    cursor:default;
+  }
 `;
 const MarkList = styled.div`
   margin-bottom: 48px;
@@ -120,4 +128,10 @@ const ItemList = styled.div`
     margin-right: 10px;
     margin-bottom: 20px;
   }
+`;
+
+const Img = styled.image`
+width:500px;
+height:500px;
+display:inline-block;
 `;

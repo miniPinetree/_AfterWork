@@ -11,7 +11,6 @@ const user = useSelector((state)=>state.user.user);
 
 useEffect(() => {
   if(!user){
-    console.log("실행해");
    dispatch(userActions.getUserDB());
   }
  }, [])
@@ -27,8 +26,6 @@ useEffect(() => {
             </p>
             <p>{user.email}</p>
           </InfoBox>
-
-        
         </>
     );
 };

@@ -4,11 +4,11 @@ import { Title, TextBtn } from "../elements";
 import { UserInfo, InterestBox, LocationBox, OffTimePicker } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
-
+import { actionCreators as userActions } from "../redux/modules/user";
 const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-
+  console.log(user);
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -44,6 +44,9 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
         {/* 프로필*/}
           <InfoBox>
             <UserInfo />
+            <AbsBtn _onClick={()=>
+              dispatch(userActions.deleteUserDB())
+            }>회원 탈퇴</AbsBtn>
           </InfoBox>
           <BorderBox>
             <strong>퇴근시간 설정</strong>
@@ -109,9 +112,18 @@ const InfoBox = styled.div`
   padding: 25px 30px;
   margin: 0 0 20px 0;
 `;
+const AbsBtn = styled.div`
+ display: inline-block;
+  box-sizing: border-box-sizing;
+  cursor: pointer;
+  position: absolute;
+  right:20px;
+  top:15px;
+  color:#636363;
+`;
 const BorderBox = styled.div`
   width: 98%;
-  min-height: 239px;
+  min-height: 140px;
   box-sizing: border-box;
   border: 1px solid #707070;
   border-radius: 15px;
@@ -125,12 +137,11 @@ const BorderBox = styled.div`
     display: block;
     width: 100%;
     margin: 0 0 16.5px 0;
+    cursor:default;
   }
   & p {
-    font-size: 18px;
     color: #747474;
-    margin: 0 0 16.5px 0;
-    display: block;
+    cursor:default;
   }
   & input::-webkit-input-placeholder {
     /* WebKit browsers */

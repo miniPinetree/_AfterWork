@@ -18,12 +18,10 @@ const InterestBox = (props) => {
   const changeInterest =(id)=>{
     if(categories.includes(id)){
       let _categories = categories.filter((category)=>{
-        console.log(category, id);
         return category !== id
       });
       setCategories(_categories);
     }else{
-      console.log(categories, id);
       setCategories([...categories, id]);
     }
   }
@@ -48,7 +46,7 @@ const InterestBox = (props) => {
             ) : (
               <Row 
               key={idx}
-              span={16} 
+              span={16}
               onClick={() => changeInterest(category.categoryId)} >
                 <CheckCircleFilled />
                 {category.name}
@@ -73,6 +71,11 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-flow: dense;
+  & p {
+    font-size: 18px;
+    margin: 0 0 16.5px 0;
+    display: block;
+  }
 `;
 const Line = styled.div`
   border: 1px solid #e8e8e8;
@@ -87,16 +90,19 @@ const Row = styled.div`
   margin-bottom: 18.25px;
   font-size: 17px;
   grid-column-start: ${(props) => (props.isChecked ? 1 : 2)};
+  cursor: pointer;
   & span {
     margin-right: 14px;
   }
   & svg {
-    cursor: pointer;
     color: ${(props) => (props.isChecked ? "#7F58EC" : "#E8E8E8")};
-    :hover {
+  }
+  :hover {
+    & svg {
       opacity: 0.75;
       -webkit-transform: scale(1.15);
       transform: scale(1.15);
     }
-  }
+     
+    }
 `;
