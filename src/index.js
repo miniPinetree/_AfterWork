@@ -1,16 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './shared/App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import store from './redux/configStore';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./shared/App";
+import axios from "axios";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import store from "./redux/configStore";
+import { getCookie } from "./shared/Cookie";
+
+axios.interceptors.request.use((config) => {
+    const token = getCookie("is_login");
+    config.headers.Authorization = `Bearer ${token}`;
+
+    return config;
+});
+axios.defaults.baseURL = "https://afterwork-webservice.site";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root'),
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

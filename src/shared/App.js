@@ -15,7 +15,6 @@ import { Header, Footer, FButton } from "../components";
 function App() {
     const dispatch = useDispatch();
     const collection = useSelector((state) => state.prefer.collection);
-    const user = useSelector((state) => state.user.user);
     useEffect(() => {
         const cookie = getCookie("is_login");
 
@@ -23,13 +22,12 @@ function App() {
             dispatch(userActions.getUserDB());
             dispatch(preferActions.getCollectionDB());
         }
-        console.log(collection, user);
     }, [dispatch]);
 
     return (
         <>
-            <Header />
             <ConnectedRouter history={history}>
+                <Header />
                 <Route path="/" exact component={Main} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/about" exact component={About} />
