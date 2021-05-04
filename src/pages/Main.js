@@ -7,15 +7,16 @@ import CategoryCard from '../components/CategoryCard';
 import PostCard from '../components/PostCard';
 import { actionCreators as postActions } from '../redux/modules/post';
 import Permit from '../shared/Permit';
+import Swal from 'sweetalert2';
 
 function Main(props) {
   const { history } = props;
   const dispatch = useDispatch();
-  const category_list = useSelector((state) => state.post.category_list);
-  const popularList = useSelector((state) => state.post.popular_list);
-  const nearList = useSelector((state) => state.post.near_list);
+  const category_list = useSelector((state) => state.post?.category_list);
+  const popularList = useSelector((state) => state.post?.popular_list);
+  const nearList = useSelector((state) => state.post?.near_list);
   const locations = useSelector((state) => state.user.user?.locations);
-  const collection_list = useSelector((state) => state.prefer.collection);
+  const collection_list = useSelector((state) => state.prefer?.collection);
   const collection = collection_list.map((val) => {
     return val.productId;
   });
@@ -29,6 +30,19 @@ function Main(props) {
     }
     if (nearList?.length === 0 && locations?.length) {
       dispatch(postActions.getNearListDB());
+    }
+    if (props.location.state && props.location.state.error) {
+      setTimeout(() => {
+        Swal.fire({
+          text: '이미 가입된 이메일입니다. 다시 시도해 주세요',
+          confirmButtonColor: '#7F58EC',
+          confirmButtonText: '확인',
+        });
+        props.history.replace({
+          pathname: props.location.pathname,
+          state: {},
+        });
+      }, 500);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
