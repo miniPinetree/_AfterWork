@@ -32,6 +32,15 @@ function Carousel(props) {
     slidesToScroll: size ? parseInt(size) : 4,
     prevArrow: <Prev />,
     nextArrow: <Next />,
+    responsive: [
+      {
+        breakpoint: 450,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+    ],
   };
   return (
     <>
@@ -86,6 +95,9 @@ const PrevBtn = styled.button`
   transform: translate(-50%, -50%);
   margin-top: -20px;
   left: -50px;
+  @media only screen and (max-width: 414px) {
+    display: none;
+  }
 `;
 const NextBtn = styled.button`
   margin: 0;
@@ -101,6 +113,9 @@ const NextBtn = styled.button`
   transform: translate(-50%, -50%);
   margin-top: -20px;
   right: -50px;
+  @media only screen and (max-width: 414px) {
+    display: none;
+  }
 `;
 
 export default Carousel;

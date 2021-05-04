@@ -66,7 +66,7 @@ const CardWrap = styled.div`
   border-radius: 10px;
   box-shadow: 0px 10px 15px #e0e0e0;
   max-width: 240px;
-  height: 320px;
+  height: 340px;
   cursor: pointer;
   position: relative;
 `;
@@ -104,7 +104,6 @@ const TextBox = styled.div`
 `;
 
 const TitleWrap = styled.div`
-  margin-bottom: -18.12px;
   & svg {
     font-size: 18.12px;
     color: #7f58ec;

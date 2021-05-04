@@ -257,7 +257,7 @@ const TitleBox = styled.div`
 `;
 
 const InputBox = styled.div`
-  width: 512px;
+  width: 51%;
   height: 50px;
   position: absolute;
   top: 367px;

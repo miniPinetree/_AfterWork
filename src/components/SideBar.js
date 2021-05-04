@@ -5,6 +5,7 @@ import { actionCreators as postActions } from '../redux/modules/post';
 import { history } from '../redux/configStore';
 
 function SideBar(props) {
+  const categoryNum = props.categoryId;
   const dispatch = useDispatch();
   const category_list = useSelector((state) => state.post.category_list);
 
@@ -14,6 +15,7 @@ function SideBar(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       <Wrap>
@@ -25,13 +27,18 @@ function SideBar(props) {
                 return (
                   <li
                     key={idx}
+                    id={val.categoryId}
                     onClick={() => {
                       history.push(`/category/${val.categoryId}`);
                       window.scrollTo({ top: 0, left: 0 });
                     }}
+                    className={val.categoryId === categoryNum ? 'active' : ''}
                   >
                     <div>
                       <span>{val.name}</span>
+                    </div>
+                    <div className='arr'>
+                      <span></span>
                     </div>
                   </li>
                 );
@@ -66,22 +73,60 @@ const Container = styled.div`
 `;
 const Title = styled.div`
   display: inline-block;
-  margin-top: 35px;
+  margin-top: 44px;
   font-size: 23px;
+  font-weight: bold;
+  color: #000;
   letter-spacing: -0.69px;
-  border-bottom: 3px solid #000;
 `;
 const List = styled.ul`
   list-style: none;
   font-size: 19px;
-  margin-top: 48px;
+  margin-top: 25px;
   letter-spacing: -0.57px;
   padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   & li {
-    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 59%;
+    height: 49px;
+    padding: 8px 13px;
+
+    &:hover {
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border-radius: 7px;
+      .arr span::after {
+        content: '';
+        display: flex;
+        width: 8px;
+        height: 8px;
+        border-top: 1px solid #000;
+        border-right: 1px solid #000;
+        transform: rotate(45deg);
+      }
+    }
   }
+
   & span {
     cursor: pointer;
+  }
+  .active {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border-radius: 7px;
+    .arr span::after {
+      content: '';
+      display: flex;
+      width: 8px;
+      height: 8px;
+      border-top: 1px solid #000;
+      border-right: 1px solid #000;
+      transform: rotate(45deg);
+    }
   }
 `;
 

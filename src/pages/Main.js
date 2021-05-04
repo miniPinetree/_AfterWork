@@ -14,7 +14,7 @@ function Main(props) {
   const category_list = useSelector((state) => state.post.category_list);
   const popularList = useSelector((state) => state.post.popular_list);
   const nearList = useSelector((state) => state.post.near_list);
-  const interests = useSelector((state) => state.user.user?.interests);
+  const locations = useSelector((state) => state.user.user?.locations);
   const collection_list = useSelector((state) => state.prefer.collection);
   const collection = collection_list.map((val) => {
     return val.productId;
@@ -27,7 +27,7 @@ function Main(props) {
     if (popularList.length === 0) {
       dispatch(postActions.getPopularListDB());
     }
-    if (nearList.length === 0) {
+    if (nearList?.length === 0 && locations?.length) {
       dispatch(postActions.getNearListDB());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +52,7 @@ function Main(props) {
       </Carousel>
 
       <Permit>
-        {interests?.length ? (
+        {locations?.length ? (
           <Carousel text='근처의 아이템'>
             {nearList.map((val, idx) => {
               return collection.includes(val.productId) === true ? (

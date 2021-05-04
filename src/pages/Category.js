@@ -59,7 +59,7 @@ function Category(props) {
     <>
       <SubBanner />
       <Container>
-        <SideBar />
+        <SideBar categoryId={category?.categoryId} />
         <MainContainer>
           {!view_loading ? (
             <>
@@ -156,7 +156,8 @@ const MainHeader = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: normal normal normal 16px/24px Noto Sans CJK KR;
+  font-size: 16px;
+  font-family: Noto Sans CJK KR;
   color: #000;
   cursor: default;
 `;
