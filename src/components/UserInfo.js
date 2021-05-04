@@ -8,13 +8,11 @@ import styled from "styled-components";
 const UserInfo =(props)=>{
 const dispatch=useDispatch();
 const user = useSelector((state)=>state.user.user);
-
 useEffect(() => {
   if(!user){
    dispatch(userActions.getUserDB());
   }
- }, [])
-
+ }, []);
     return(
         <>
         {user && user.image?

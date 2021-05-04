@@ -30,7 +30,6 @@ const UserDetail = (props) => {
   const setValue = ()=>{
 dispatch(preferActions.updateUserInfoDB(locations,categories,time));
   };
-
   return (
     <Container>
      {user &&
@@ -53,7 +52,6 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
           <OffTimePicker time={time} setTime={setTime}/>
           </BorderBox>
         </Col>
-
         <Col>
         {/* 관심 카테고리 */}
           <BorderBox>
@@ -63,7 +61,7 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
           </BorderBox>
           <BorderBox>
           <strong>관심지역 설정</strong>
-            <LocationBox 
+            <LocationBox
             setLocations={setLocations}
             locations={locations}
             setSearch={setSearch}

@@ -20,7 +20,6 @@ console.log(user, collection);
       {user &&
       <>
        <Title>마이 페이지</Title>
-
 <Profile>
   <Area1>
   <UserInfo/>

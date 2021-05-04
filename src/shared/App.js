@@ -14,7 +14,6 @@ import { Header, Footer, FButton } from "../components";
 
 function App() {
     const dispatch = useDispatch();
-    const collection = useSelector((state) => state.prefer.collection);
     useEffect(() => {
         const cookie = getCookie("is_login");
 
@@ -23,7 +22,6 @@ function App() {
             dispatch(preferActions.getCollectionDB());
         }
     }, [dispatch]);
-
     return (
         <>
             <ConnectedRouter history={history}>
@@ -42,5 +40,4 @@ function App() {
         </>
     );
 }
-
 export default App;
