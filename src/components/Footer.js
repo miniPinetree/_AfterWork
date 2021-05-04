@@ -22,6 +22,12 @@ const Wrap = styled.div`
     background: #636363;
     height: 100%;
     padding: 66px 0;
+    @media all and (max-width: 375px) {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
 `;
 
 const Body = styled.div`
@@ -33,6 +39,11 @@ const Body = styled.div`
         font-weight: normal;
         color: #fff;
         letter-spacing: -0.6px;
+    }
+    @media all and (max-width: 375px) {
+        display: block;
+        width: 375px;
+        margin: 0;
     }
 `;
 
