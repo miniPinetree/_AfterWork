@@ -45,7 +45,9 @@ const LocationBox=(props)=>{
             });
               }else{
                 if (searchedLocation.length === 1) {
-                  setLocations([...locations, ...searchedLocation]);
+                  let _location = searchedLocation.split(' ');
+                    _location = _location.length>1? _location[1]:_location[0];
+                  setLocations([...locations, ..._location]);
                   setSearch("");
                 }
               }
