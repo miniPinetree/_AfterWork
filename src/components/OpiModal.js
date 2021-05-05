@@ -3,12 +3,17 @@ import styled, { keyframes } from "styled-components";
 import { CloseOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { config } from "../config";
+import Swal from "sweetalert2";
 
 const OpiModal = ({ close }) => {
     const [opinion, setOpinion] = useState();
     const submit = () => {
         if (opinion === "" || opinion === undefined) {
-            window.alert("내용을 입력해 주세요");
+            Swal.fire({
+                text: "내용을 입력해 주세요",
+                confirmButtonColor: "#7F58EC",
+                confirmButtonText: "확인",
+            });
             return;
         }
         const opi = {
@@ -16,11 +21,15 @@ const OpiModal = ({ close }) => {
         };
         axios({
             method: "post",
-            url: `${config.api}/feedback`,
+            url: `${config.api}/api/feedback`,
             data: opi,
         })
             .then(function (response) {
-                window.alert("후기가 작성되었습니다");
+                Swal.fire({
+                    text: "후기가 작성되었습니다",
+                    confirmButtonColor: "#7F58EC",
+                    confirmButtonText: "확인",
+                });
                 close();
             })
             .catch((error) => {
