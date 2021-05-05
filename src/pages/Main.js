@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCookie } from '../shared/Cookie';
+import Permit from '../shared/Permit';
 import Banner from '../components/Banner';
 import Carousel from '../components/Carousel';
 import CategoryCard from '../components/CategoryCard';
 import PostCard from '../components/PostCard';
 import { actionCreators as postActions } from '../redux/modules/post';
-import Permit from '../shared/Permit';
 import Swal from 'sweetalert2';
 
 function Main(props) {
   // 메인 페이지
-  const { history } = props;
   const dispatch = useDispatch();
+  const { history } = props;
+  const cookie = getCookie('is_login');
+  const is_user = cookie ? true : false;
   const category_list = useSelector((state) => state.post?.category_list);
   const popularList = useSelector((state) => state.post?.popular_list);
   const nearList = useSelector((state) => state.post?.near_list);
@@ -32,7 +35,7 @@ function Main(props) {
       dispatch(postActions.getPopularListDB());
     }
     // 지역별 추천 리스트
-    if (nearList?.length === 0 && locations?.length) {
+    if (nearList.length === 0 && is_user) {
       dispatch(postActions.getNearListDB());
     }
     if (props.location.state && props.location.state.error) {
@@ -111,7 +114,7 @@ const TitleContainer = styled.div`
   max-width: 1004px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   color: #000;
 `;

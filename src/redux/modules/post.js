@@ -92,7 +92,7 @@ const getPopularListDB = () => {
   };
 };
 
-// 근처 취미 항목 조회
+// 관심 지역 취미 항목 조회
 const getNearListDB = () => {
   return function (dispatch) {
     axios({
@@ -100,7 +100,7 @@ const getNearListDB = () => {
       url: `${config.api}/api/recommend`,
     })
       .then((res) => {
-        dispatch(nearList(res.data.content));
+        dispatch(nearList(res.data));
       })
       .catch((e) => {
         console.log('에러 발생', e);
