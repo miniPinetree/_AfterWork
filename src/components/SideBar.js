@@ -91,6 +91,7 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
   & li {
     display: flex;
     align-items: center;
