@@ -16,12 +16,16 @@ function Search(props) {
   const query = queryString.parse(props.location.search);
   // 검색 키워드
   const { keyword } = query;
-
+  // 셀랙트 박스 상태
   const [filterBox, setfilterBox] = useState('total');
   const [sortBox, setSortBox] = useState('popularity desc');
+  // 게시물 정보
   let post_list = useSelector((state) => state.post.post_list);
+  // 페이지 정보
   const paging = useSelector((state) => state.post.paging);
+  // 무한스크롤 로딩 정보
   const is_loading = useSelector((state) => state.post.is_loading);
+  // 게시물 조회 로딩 정보
   const view_loading = useSelector((state) => state.post.view_loading);
   // 찜 목록
   const collection_list = useSelector((state) => state.prefer.collection);
@@ -34,6 +38,7 @@ function Search(props) {
   const direction = sortInfo[1];
 
   useEffect(() => {
+    // 검색한 게시물 조회
     dispatch(postActions.getSearchDB(keyword, sort, direction));
   }, [direction, dispatch, keyword, sort]);
 
@@ -98,6 +103,7 @@ function Search(props) {
                   <Main>
                     {post_list.length === 0 ? (
                       <>
+                        {/* 항목 없을때 */}
                         <EmptyBox>
                           <img src={box} alt='empty' />
                           <p>항목이 없습니다!</p>
@@ -107,6 +113,7 @@ function Search(props) {
                       <>
                         <InfinityScroll
                           callNext={() => {
+                            // 게시물 호출
                             dispatch(postActions.scrollSearchDB());
                           }}
                           is_next={paging.page ? true : false}

@@ -8,6 +8,7 @@ import { actionCreators as preferActions } from '../redux/modules/prefer';
 function PostCard(props) {
   // 취미 상품 카드
   const dispatch = useDispatch();
+  // 찜 여부와 상품 정보를 프롭스로 받는다
   const { like, post_info } = props;
   const price = post_info?.priceInfo?.split('원');
 
@@ -16,7 +17,14 @@ function PostCard(props) {
       <CardWrap className='wrap'>
         {/* 카드 클릭 시 새창에서 해당 페이지로 이동 */}
         <a href={post_info.siteUrl} target='_blank' rel='noreferrer noopener'>
-          <Img src={post_info?.imgUrl} alt='img' />
+          <Img
+            src={post_info?.imgUrl}
+            alt='img'
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'http://admin.sjcam.kr/dev/upload/noimage.jpg';
+            }}
+          />
           <TextBox>
             <TitleWrap like={like}>
               <strong>{post_info?.title}</strong>

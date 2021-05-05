@@ -6,10 +6,13 @@ import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import hamburgerIcon from "../shared/images/text-align-justified.svg";
 import searchIcon from "../shared/images/search.svg";
+import homeIcon from "../shared/images/home.svg";
 import MoDrawer from "./MobileDrawer";
 
 const MoHeader = (props) => {
-    const location = useSelector((state) => state.router.location.pathname);
+    const push = useSelector((state) => state.router.action);
+    const titles = useSelector((state) => state.router.location.state);
+
     const [search, setSearch] = useState("");
     const [isSearch, setIsSearch] = useState(false);
     const [isDrawer, setIsDrawer] = useState(false);
@@ -35,7 +38,6 @@ const MoHeader = (props) => {
         setSearch("");
         setIsSearch(false);
     };
-
     return (
         <>
             {isSearch ? (
@@ -81,19 +83,28 @@ const MoHeader = (props) => {
             ) : (
                 <Wrap>
                     <Body>
-                        <Img>
+                        <Imgs>
                             <img
                                 src={hamburgerIcon}
                                 alt="hamburger menu"
                                 onClick={drawerOpen}
                             ></img>
-                        </Img>
-                        <Logo
-                            onClick={() => {
-                                history.push("/");
-                            }}
-                        >
-                            퇴근하고 뭐하지?
+                            {push === "PUSH" && titles !== undefined ? (
+                                <img
+                                    src={homeIcon}
+                                    alt="home"
+                                    onClick={() => {
+                                        history.push("/");
+                                    }}
+                                ></img>
+                            ) : null}
+                        </Imgs>
+                        <Logo>
+                            {push === "PUSH" && titles !== undefined ? (
+                                titles
+                            ) : (
+                                <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
+                            )}
                         </Logo>
                         <Img>
                             <img src={searchIcon} alt="hamburger menu" onClick={searchOpen}></img>
@@ -134,10 +145,16 @@ const Logo = styled.span`
     letter-spacing: -0.6px;
     cursor: pointer;
     height: 100%;
+    margin-top: -2px;
 `;
 
 const Img = styled.div`
     width: 24px;
+`;
+
+const Imgs = styled.div`
+    display: flex;
+    justify-content: space-between;
 `;
 
 export default MoHeader;

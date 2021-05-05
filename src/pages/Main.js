@@ -16,25 +16,30 @@ function Main(props) {
   const { history } = props;
   const cookie = getCookie('is_login');
   const is_user = cookie ? true : false;
+  // 카테고리 리스트
   const category_list = useSelector((state) => state.post?.category_list);
+  // 인기 취미 추천 리스트
   const popularList = useSelector((state) => state.post?.popular_list);
+  // 지역별 추천 리스트
   const nearList = useSelector((state) => state.post?.near_list);
+  // 해당 유저가 설정한 지역 정보
   const locations = useSelector((state) => state.user.user?.locations);
+  // 찜목록
   const collection_list = useSelector((state) => state.prefer?.collection);
   const collection = collection_list.map((val) => {
     return val.productId;
   });
 
   useEffect(() => {
-    // 카테고리 리스트
+    // 카테고리 리스트 조회
     if (category_list.length === 0) {
       dispatch(postActions.getCategoryDB());
     }
-    // 인기 취미 리스트
+    // 인기 취미 리스트 조회
     if (popularList.length === 0) {
       dispatch(postActions.getPopularListDB());
     }
-    // 지역별 추천 리스트
+    // 지역별 추천 리스트 조회
     if (nearList.length === 0 && is_user) {
       dispatch(postActions.getNearListDB());
     }
@@ -84,6 +89,7 @@ function Main(props) {
             })}
           </Carousel>
         ) : (
+          // 지역을 설정하지 않았을 경우
           <Wrap>
             <TitleContainer>
               <Title>근처의 아이템</Title>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { history } from "../redux/configStore";
@@ -9,7 +9,7 @@ import { debounce } from "lodash";
 
 const Header = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user?.user);
+    const user = useSelector((state) => state.user.user);
 
     const [isModal, setIsModal] = useState(false);
     const modalOpen = () => {
@@ -19,14 +19,10 @@ const Header = () => {
         setIsModal(false);
     };
 
-    const [windowSize, setWindowSize] = useState({
-        width: window.innerWidth,
-    });
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
 
     const handleResize = debounce(() => {
-        setWindowSize({
-            width: window.innerWidth,
-        });
+        setWindowSize(window.innerWidth);
     }, 100);
 
     useEffect(() => {
@@ -34,9 +30,11 @@ const Header = () => {
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [windowSize]);
+    }, [handleResize]);
 
-    if (windowSize.width > 490) {
+    if (windowSize < 415) {
+        return <MoHeader />;
+    } else {
         return (
             <Wrap>
                 <Body>
@@ -72,15 +70,13 @@ const Header = () => {
                 </Body>
             </Wrap>
         );
-    } else {
-        return <MoHeader />;
     }
 };
 
 const Wrap = styled.div`
     width: 100%;
     height: 100%;
-    border-bottom: 1px solid #707070;
+    box-shadow: 0px 3px 16px rgb(24 25 31 / 10%);
     position: sticky;
     top: 0px;
     padding: 14px 0;
@@ -121,4 +117,4 @@ const Login = styled.span`
     margin-left: 12px;
 `;
 
-export default Header;
+export default React.memo(Header);
