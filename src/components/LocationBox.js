@@ -2,11 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import { Input } from "antd";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 import locationOpts from "../shared/locationOpts";
 import Swal from "sweetalert2";
 
 const LocationBox=(props)=>{
     const {search, locations,setSearch,setLocations}=props;
+    const user = useSelector((state) => state.user.user);
+    console.log('props', locations);
+
+React.useEffect(()=>{
+  if(locations.length===0 && user.locations.length>0){
+    const locationNames = user.locations.map(location=>location.name);
+    setLocations(locationNames);
+  };
+},[]);
+
     const inputStyle = {
         borderRadius: "29px",
         font: "normal normal normal 20px/30px Noto Sans CJK KR",
@@ -55,10 +66,16 @@ const LocationBox=(props)=>{
       }
   };
   const deleteLocation = (val) => {
-    let _location = locations.filter((l) => {
-      return l !== val;
-    });
-    setLocations(_location);
+    console.log(locations);
+    console.log('삭제대상', val);
+   
+      let _location = locations.filter((l) => {
+        return l !== val;
+      });
+      console.log(_location);
+      setLocations(_location);
+    
+  
   };
       return(
           <>

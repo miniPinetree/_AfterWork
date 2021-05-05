@@ -1,25 +1,20 @@
 import { createAction, handleActions } from "redux-actions";
 import { actionCreators as userActions } from "./user";
-import { getCookie } from "../../shared/Cookie";
 import { config } from "../../config";
 import Swal from "sweetalert2";
 import produce from "immer";
 import axios from "axios";
+import { CalculatorFilled } from '@ant-design/icons';
 
 //actions
-const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 const GET_COLLECTION = "GET_COLLECTION";
-const LIKE_TOGGLE = "LIKE_TOGGLE";
 const DELETE_COLLECTION = "DELETE_COLLECTION";
 
 //action Creators
-const updateUserInfo = createAction(UPDATE_USER_INFO, (user_prefer) => ({
-  user_prefer,
-}));
+
 const getCollection = createAction(GET_COLLECTION, (collection) => ({
   collection,
 }));
-const likeToggle = createAction(LIKE_TOGGLE, (collection) => ({ collection }));
 const deleteCollection = createAction(DELETE_COLLECTION, (collection = []) => ({
   collection,
 }));
@@ -29,18 +24,19 @@ const initialState = {
   collection: [],
 };
 //회원 관심사 수정
-const updateUserInfoDB = (locations, categories, time) => {
+const updateUserPreferDB = (locations, categories, time) => {
   return function (dispatch, getState, { history }) {
+    const user = getState().user.user
     let data = {
       offTime: time,
       locations: locations,
       categorys: categories,
     };
-    console.log(data);
     axios
       .post(`${config.api}/api/user`, data)
       .then((res) => {
         //res.data 없음.
+        dispatch(userActions.getUser({...user, ...data}));
         Swal.fire({
           text: "저장이 완료되었습니다.",
           confirmButtonColor: "#7F58EC",
@@ -70,8 +66,10 @@ const getCollectionDB = () => {
 const toggleLikeDB = (prd_id) => {
   return function (dispatch, getState, { history }) {
     const user = getState().user.user
+    
     //delete API 요청에 필요한 collectId가 담긴 배열
     const collects = user?.collects;
+    console.log(user,collects);
     let flag = false;
     // 유저 정보 로드 확인
     if (user && collects) {
@@ -83,12 +81,18 @@ const toggleLikeDB = (prd_id) => {
           axios
             .delete(`${config.api}/api/collects/${collects[i].collectId}`)
             .then((res)=>{
-              console.log('찜 삭제');
-              dispatch(userActions.getUserDB());
+              let _data = collects.filter((val)=>{
+                return val.productId !== prd_id
+              });
+              let data = {
+                collects: _data
+              };
+              console.log('삭제', prd_id, data);
+              dispatch(userActions.getUser({...user, ...data}));
               dispatch(getCollectionDB());
             })
             .catch((e) => {
-              console.log(e);
+              console.log('삭제에러',e);
             });
         }
       }
@@ -100,12 +104,15 @@ const toggleLikeDB = (prd_id) => {
        axios
         .post(`${config.api}/api/collects`, data)
         .then((res)=>{
-          console.log('찜 등록');
-          dispatch(userActions.getUserDB());
+          let data ={
+            collects:[...collects, res.data]
+          };
+          console.log('등록', prd_id, data);
+          dispatch(userActions.getUser({...user, ...data}));
           dispatch(getCollectionDB());
         })
         .catch((e) => {
-          console.log(e);
+          console.log('등록에러',e);
         });
     }
     }
@@ -149,14 +156,6 @@ const deleteCollectionDB = () => {
 //reducer
 export default handleActions(
   {
-    [UPDATE_USER_INFO]: (state, action) =>
-      produce(state, (draft) => {
-        draft.user_prefer = action.payload.user_prefer;
-      }),
-    [LIKE_TOGGLE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.collection = action.payload.collection;
-      }),
     [GET_COLLECTION]: (state, action) =>
       produce(state, (draft) => {
         draft.collection = action.payload.collection;
@@ -170,7 +169,7 @@ export default handleActions(
 );
 
 const actionCreators = {
-  updateUserInfoDB,
+  updateUserPreferDB,
   getCollectionDB,
   toggleLikeDB,
   deleteCollectionDB,

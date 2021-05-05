@@ -12,22 +12,26 @@ const UserDetail = (props) => {
   const [locations, setLocations] = useState([]);
   const [categories, setCategories] = useState([]);
   const [time, setTime] = useState('');
+console.log(user);
+console.log(time);
 
+useEffect(() => {
+  console.log('이펙트');
   if(user){
-    if(locations.length===0 && user.locations.length>0){
-      const locationNames = user.locations.map(location=>location.name);
-      setLocations(locationNames);
-    };
+    console.log(user);
+    
     if(categories.length===0 && user.interests.length>0){
     const categoryIds = user.interests.map(interest=>interest.categoryId);
     setCategories(categoryIds);
   };
-  if(time==='' && user.offTime){
-    setTime(user.offTime);
-  }
-};
+
+}else{
+  console.log('none');
+}
+}, []);
+
   const setValue = ()=>{
-dispatch(preferActions.updateUserInfoDB(locations,categories,time));
+dispatch(preferActions.updateUserPreferDB(locations,categories,time));
   };
   return (
     <Container>

@@ -1,10 +1,8 @@
-import {useEffect} from "react";
 import styled from "styled-components";
 import {history} from "../redux/configStore";
 import { RightOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
-import { actionCreators as userActions } from '../redux/modules/user';
 import { PostCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
 import box from "../shared/images/box.png";

@@ -1,18 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { actionCreators as userActions } from '../redux/modules/user';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const UserInfo =(props)=>{
-const dispatch=useDispatch();
 const user = useSelector((state)=>state.user.user);
-useEffect(() => {
-  if(!user){
-   dispatch(userActions.getUserDB());
-  }
- }, []);
+
     return(
         <>
         {user && user.image?
