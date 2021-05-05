@@ -1,9 +1,8 @@
 import { createAction, handleActions } from "redux-actions";
-import { getCookie, deleteCookie } from "../../shared/Cookie";
+import { deleteCookie } from "../../shared/Cookie";
 import { produce } from "immer";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { config } from "../../config";
 
 const GET_USER = "GET_USER";
 const LOG_OUT = "LOG_OUT";
