@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Select, Spin, Empty } from 'antd';
+import { Select, Spin } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import InfinityScroll from '../shared/InfinityScroll';
 import SubBanner from '../components/SubBanner';
 import PostCard from '../components/PostCard';
 import SideBar from '../components/SideBar';
+import box from '../shared/images/box.png';
 
 function Category(props) {
   // 카테고리 페이지
@@ -47,7 +48,7 @@ function Category(props) {
   const selectSort = (value) => {
     setSortBox(value);
   };
-  // 필터(온, 오프리안, 전체)
+  // 필터(온, 오프라인, 전체)
   const selectFilter = (value) => {
     setfilterBox(value);
   };
@@ -97,15 +98,12 @@ function Category(props) {
               </MainHeader>
               <Main>
                 {post_list.length === 0 ? (
-                  <Empty
-                    image={Empty.PRESENTED_IMAGE_SIMPLE}
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                    }}
-                  />
+                  <>
+                    <EmptyBox>
+                      <img src={box} alt='empty' />
+                      <p>항목이 없습니다!</p>
+                    </EmptyBox>
+                  </>
                 ) : (
                   <>
                     <InfinityScroll
@@ -181,4 +179,23 @@ const Main = styled.div`
     margin-bottom: 20px;
   }
 `;
+
+const EmptyBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & img {
+    max-width: 207px;
+    max-height: 207px;
+  }
+  & p {
+    font-size: 23px;
+    font-family: Noto Sans CJK KR;
+    letter-spacing: -0.69px;
+    color: #676767;
+  }
+`;
+
 export default Category;
