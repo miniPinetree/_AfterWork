@@ -43,8 +43,6 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
           <InfoBox>
             <UserInfo />
             <AbsBtn onClick={()=>{
-              console.log('xkfxhlqjxmszmfflr'
-              );
                 dispatch(userActions.deleteUserDB());
             }
             

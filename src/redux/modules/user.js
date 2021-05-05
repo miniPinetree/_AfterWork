@@ -43,7 +43,6 @@ const getUserDB = () => {
 
 const deleteUserDB = () => {
     return function (dispatch) {
-        console.log("xkfxhl");
         axios
             .delete(`/api/user`)
             .then((res) => {
