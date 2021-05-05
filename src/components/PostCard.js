@@ -8,6 +8,7 @@ import { actionCreators as preferActions } from '../redux/modules/prefer';
 function PostCard(props) {
   // 취미 상품 카드
   const dispatch = useDispatch();
+  // 찜 여부와 상품 정보를 프롭스로 받는다
   const { like, post_info } = props;
   const price = post_info?.priceInfo?.split('원');
 

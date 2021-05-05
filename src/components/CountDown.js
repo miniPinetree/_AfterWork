@@ -8,10 +8,12 @@ function CountDown() {
   const offTime = useSelector((state) => state.user.user?.offTime);
   const now = new Date();
   const today = now.toLocaleDateString();
+  // 차이(퇴근시간 - 현재시간)
   let difference = +new Date(today + offTime) - +new Date();
   // 남은 시간 계산
   const calculateTimeLeft = () => {
     let timeLeft = {};
+    // 차이가 양수일때만 계산 음수면 이미 퇴근이라 비활성화 할 것 이므로
     if (difference > 0) {
       timeLeft = {
         hours: `${Math.floor((difference / (1000 * 60 * 60)) % 24)}`,
@@ -41,7 +43,7 @@ function CountDown() {
     }
 
     timerComponents.push(
-      // 한자리 수는 01 꼴로 나오게 처리
+      // 한자리 수는 01, 02 꼴로 나오게 처리
       <span key={idx}>
         {timeLeft[interval] < 10
           ? `0${timeLeft[interval]}`
@@ -68,6 +70,7 @@ function CountDown() {
         </SettingBox>
       ) : (
         <>
+          {/* 남은 퇴근시간 카운트 */}
           {difference > 0 ? (
             <Timer>
               <>

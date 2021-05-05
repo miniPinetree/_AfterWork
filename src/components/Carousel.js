@@ -50,6 +50,7 @@ function Carousel(props) {
           <Title>{text}</Title>
         </TitleContainer>
         <CarouselContainer>
+          {/* children => postCard or CategoryCard */}
           <Slider {...settings}>{children}</Slider>
         </CarouselContainer>
       </Wrap>

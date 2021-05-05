@@ -12,6 +12,7 @@ function SideBar(props) {
 
   useEffect(() => {
     if (category_list.length === 0) {
+      // 카테고리 정보 불러오기
       dispatch(postActions.getCategoryDB());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -134,4 +135,4 @@ const List = styled.ul`
   }
 `;
 
-export default SideBar;
+export default React.memo(SideBar);
