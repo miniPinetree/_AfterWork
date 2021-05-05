@@ -10,6 +10,7 @@ import { debounce } from "lodash";
 const Header = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
+    const is_loading = useSelector((state) => state.user.is_loading);
 
     const [isModal, setIsModal] = useState(false);
     const modalOpen = () => {
@@ -36,46 +37,51 @@ const Header = () => {
         return <MoHeader />;
     } else {
         return (
-            <Wrap>
-                <Body>
-                    <div>
-                        <Logo
-                            onClick={() => {
-                                history.push("/");
-                            }}
-                        >
-                            퇴근하고 뭐하지?
-                        </Logo>
-                        <About onClick={() => history.push("/about")}>About</About>
-                    </div>
-                    <div>
-                        {user ? (
-                            <>
-                                <Login
-                                    onClick={() => {
-                                        dispatch(userActions.logOut());
-                                        history.push("/");
-                                    }}
-                                >
-                                    로그아웃
-                                </Login>
+            <>
+                <Wrap>
+                    <Body>
+                        <div>
+                            <Logo
+                                onClick={() => {
+                                    history.push("/");
+                                }}
+                            >
+                                퇴근하고 뭐하지?
+                            </Logo>
+                            <About onClick={() => history.push("/about")}>About</About>
+                        </div>
 
-                                <Login onClick={() => history.push("/mypage")}>{user.name}님</Login>
-                            </>
-                        ) : (
-                            <Login onClick={modalOpen}>로그인</Login>
-                        )}
-                        {isModal === true ? <LoginModal close={modalClose} /> : null}
-                    </div>
-                </Body>
-            </Wrap>
+                        <div>
+                            {user ? (
+                                <>
+                                    <Login
+                                        onClick={() => {
+                                            dispatch(userActions.logOut());
+                                            history.push("/");
+                                        }}
+                                    >
+                                        로그아웃
+                                    </Login>
+
+                                    <Login onClick={() => history.push("/mypage")}>
+                                        {user.name}님
+                                    </Login>
+                                </>
+                            ) : is_loading ? null : (
+                                <Login onClick={modalOpen}>로그인</Login>
+                            )}
+                            {isModal === true ? <LoginModal close={modalClose} /> : null}
+                        </div>
+                    </Body>
+                </Wrap>
+            </>
         );
     }
 };
 
 const Wrap = styled.div`
     width: 100%;
-    height: 100%;
+    height: 60px;
     box-shadow: 0px 3px 16px rgb(24 25 31 / 10%);
     position: sticky;
     top: 0px;
