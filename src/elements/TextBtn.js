@@ -10,7 +10,6 @@ const TextBtn = (props) => {
       <hr/>
     </BtnBox>
   );
-
 };
 export default React.memo(TextBtn); 
 
