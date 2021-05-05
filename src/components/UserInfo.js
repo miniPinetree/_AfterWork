@@ -33,10 +33,18 @@ const InfoBox = styled.div`
   & p {
     margin: 0;
   }
+  @media all and (max-width: 376px) {
+    font-size: 15px;
+    margin: auto 20px;
+  }
 `;
 const UserImg = styled.img`
 width:80px;
 height:80px;
 object-fit:cover;
 border-radius:40px;
+@media all and (max-width: 376px) {
+  width:67px;
+height:67px;
+  }
 `;

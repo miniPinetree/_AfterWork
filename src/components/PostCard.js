@@ -82,6 +82,10 @@ const CardWrap = styled.div`
   height: 340px;
   cursor: pointer;
   position: relative;
+  @media all and (max-width: 415px) {
+    max-width: 162px;
+    height: 204.73px;
+    }
 `;
 const Img = styled.img`
   width: 100%;
@@ -91,6 +95,9 @@ const Img = styled.img`
   &:hover {
     opacity: 0.7;
   }
+  @media all and (max-width: 415px) {
+    height: 126px;
+    }
 `;
 const TextBox = styled.div`
   width: 100%;

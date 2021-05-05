@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Title = (props) => {
     const {children} = props;
   return (
-    <TitleBox>
+    <TitleBox className='title'>
       <text>{children}</text>
       <hr/>
     </TitleBox>
@@ -30,4 +30,7 @@ cursor:default;
     background: black;
     margin:0px;
   }
+  @media all and (max-width: 415px) {
+        display: none;
+    }
 `;

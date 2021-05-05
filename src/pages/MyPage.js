@@ -42,13 +42,13 @@ const MyPage = (props) => {
   </TextBox>
   {collection.length?
   <>
-  <ItemList>
+  <CardList>
     {collection.map((prd,idx)=>{
       return(
 <PostCard key={idx} post_info={prd} like/>
       );
     })}
-  </ItemList>
+  </CardList>
   </>
   : 
   <EmptyBox>
@@ -68,6 +68,10 @@ const Container = styled.div`
   width: 70%;
   max-width: 1004px;
   margin: 0 auto;
+  @media all and (max-width: 415px) {
+    background-color: #F8F8F8;
+    width:100%;
+  }
 `;
 const TextBox = styled.div`
   display: flex;
@@ -78,6 +82,9 @@ const TextBox = styled.div`
     margin-top: 64px;
     font-weight: 100;
   }
+  @media all and (max-width: 415px) {
+        display: none;
+    }
 `;
 const Profile = styled.div`
   width: 100%;
@@ -90,6 +97,9 @@ const Profile = styled.div`
   display: flex;
   align-items: center;
   padding: 0 30px;
+  @media all and (max-width: 415px) {
+        display: none;
+    }
 `;
 const DetailBtn = styled.button`
   color: white;
@@ -113,18 +123,28 @@ const Area1 = styled.div`
   }
 `;
 const MarkList = styled.div`
-  margin-bottom: 48px;
 `;
-const ItemList = styled.div`
+const CardList = styled.div`
   display: flex;
+  width:100%;
   flex-wrap:wrap;
   justify-content: flex-start;
-  margin-bottom: 18px;
   min-height: 220px;
+  min-width:500.26px;
+  margin-bottom: 48px;
   & .wrap {
-    margin-right: 10px;
     margin-bottom: 20px;
+    margin-right:10px;
   }
+  @media all and (max-width: 415px) {
+    min-width:344px;
+    width:344px;
+    margin:20px auto;
+    & .wrap:nth-child(2n-1) {
+    margin-bottom: 20px;
+    margin-right:10px;
+  }
+    }
 `;
 
 const EmptyBox = styled.div`

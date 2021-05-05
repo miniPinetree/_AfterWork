@@ -28,4 +28,7 @@ const BtnBox = styled.div`
     background: #707070;
     margin: 0px;
   }
+  @media all and (max-width: 415px) {
+    margin:15px 0 10px 0;
+    }
 `;
