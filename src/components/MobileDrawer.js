@@ -18,7 +18,7 @@ const MoDrawer = ({ drawerClose }, props) => {
         if (category_list.length === 0) {
             dispatch(postActions.getCategoryDB());
         }
-    }, []);
+    }, [dispatch, category_list]);
 
     return (
         <>
@@ -52,33 +52,42 @@ const MoDrawer = ({ drawerClose }, props) => {
                         <InfoBody>
                             <Info
                                 onClick={() => {
-                                    history.push("/userdetail");
+                                    history.push({
+                                        pathname: "/userdetail",
+                                        state: "회원정보 및 상세 설정",
+                                    });
                                     drawerClose();
                                 }}
                             >
                                 회원정보
                             </Info>
-                            <span
+                            <Info
                                 onClick={() => {
-                                    history.push("/mypage");
+                                    history.push({
+                                        pathname: "/mypage",
+                                        state: "찜 목록",
+                                    });
                                     drawerClose();
                                 }}
                             >
                                 찜 목록
-                            </span>
+                            </Info>
                         </InfoBody>
                         <CategoryBody is_user>
                             <Name>카테고리</Name>
                             <hr></hr>
-                            {category_list.map((p) => {
+                            {category_list.map((p, idx) => {
                                 return (
                                     <Category
                                         onClick={() => {
-                                            history.push(`/category/${p.categoryId}`);
+                                            history.push({
+                                                pathname: `/category/${p.categoryId}`,
+                                                state: `${p.name}`,
+                                            });
                                             window.scrollTo({ top: 0, left: 0 });
                                             drawerClose();
                                         }}
-                                        key={p}
+                                        key={idx}
                                     >
                                         {p.name}
                                     </Category>
@@ -118,15 +127,18 @@ const MoDrawer = ({ drawerClose }, props) => {
                         <CategoryBody>
                             <Name>카테고리</Name>
                             <hr></hr>
-                            {category_list.map((p) => {
+                            {category_list.map((p, idx) => {
                                 return (
                                     <Category
                                         onClick={() => {
-                                            history.push(`/category/${p.categoryId}`);
+                                            history.push({
+                                                pathname: `/category/${p.categoryId}`,
+                                                state: `${p.name}`,
+                                            });
                                             window.scrollTo({ top: 0, left: 0 });
                                             drawerClose();
                                         }}
-                                        key={p}
+                                        key={idx}
                                     >
                                         {p.name}
                                     </Category>
