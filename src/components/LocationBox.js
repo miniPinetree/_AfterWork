@@ -9,23 +9,22 @@ import Swal from "sweetalert2";
 const LocationBox=(props)=>{
     const {search, locations,setSearch,setLocations}=props;
     const user = useSelector((state) => state.user.user);
-    console.log('props', locations);
+    
+    const inputStyle = {
+      borderRadius: "29px",
+      font: "normal normal normal 20px/30px Noto Sans CJK KR",
+      letterSpacing: "-0.6px",
+      color: "#606060",
+      boxSizing: "border-box",
+      padding: "9px 27px 12px 27px",
+    };
 
 React.useEffect(()=>{
   if(locations.length===0 && user.locations.length>0){
     const locationNames = user.locations.map(location=>location.name);
     setLocations(locationNames);
   };
-},[]);
-
-    const inputStyle = {
-        borderRadius: "29px",
-        font: "normal normal normal 20px/30px Noto Sans CJK KR",
-        letterSpacing: "-0.6px",
-        color: "#606060",
-        boxSizing: "border-box",
-        padding: "9px 27px 12px 27px",
-      };
+},[]); // eslint-disable-line react-hooks/exhaustive-deps
 
 //검색 키워드가 포함된 선택가능지역 리스트
   let searchedLocation = locationOpts.filter((option) => {
@@ -57,9 +56,9 @@ React.useEffect(()=>{
             });
               }else{
                 if (searchedLocation.length === 1) {
-                  let _location = searchedLocation.split(' ');
+                  let _location = searchedLocation[0].split(' ');
                     _location = _location.length>1? _location[1]:_location[0];
-                  setLocations([...locations, ..._location]);
+                  setLocations([...locations, _location]);
                   setSearch("");
                 }
               }
@@ -68,14 +67,11 @@ React.useEffect(()=>{
   const deleteLocation = (val) => {
     console.log(locations);
     console.log('삭제대상', val);
-   
       let _location = locations.filter((l) => {
         return l !== val;
       });
       console.log(_location);
       setLocations(_location);
-    
-  
   };
       return(
           <>

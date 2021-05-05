@@ -3,16 +3,14 @@ import styled from "styled-components";
 
 const Title = (props) => {
     const {children} = props;
-
   return (
     <TitleBox>
       <text>{children}</text>
       <hr/>
     </TitleBox>
   );
-
 };
-export default Title; 
+export default React.memo(Title); 
 
 const TitleBox = styled.div`
 display:inline-block;

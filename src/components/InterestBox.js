@@ -3,17 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { CheckCircleFilled } from "@ant-design/icons";
 import { actionCreators as postActions } from "../redux/modules/post";
+
 const InterestBox = (props) => {
-  const user = useSelector((state) => state.user.user);
-  const categoryList = useSelector((state) => state.post.category_list);
   const dispatch = useDispatch();
-  
+  const user = useSelector((state) => state.user.user);
+  const categoryNames = useSelector((state) => state.post.category_list);
   let { setCategories, categories } = props;
+
   useEffect(() => {
-    if (categoryList.length === 0) {
+    if(categoryNames.length===0){
       dispatch(postActions.getCategoryDB());
-    }
-  }, []);
+    };
+    if(categories.length===0 && user.interests.length>0){
+      const categoryIds = user.interests.map(interest=>interest.categoryId);
+      setCategories(categoryIds);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   //관심 카테고리 변경
   const changeInterest =(id)=>{
     if(categories.includes(id)){
@@ -23,14 +29,14 @@ const InterestBox = (props) => {
       setCategories(_categories);
     }else{
       setCategories([...categories, id]);
-    }
+    };
   }
   return (
     <>
       <Grid>
         <strong>관심 카테고리</strong>
         <p>추가하기</p>
-        {categoryList.map((category, idx) => {
+        {categoryNames.map((category, idx) => {
           return(
             categories.some(
                 (categoryId) => categoryId === category.categoryId
@@ -70,6 +76,7 @@ const Grid = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(6, 1fr);
   grid-auto-flow: dense;
   & p {
     font-size: 18px;

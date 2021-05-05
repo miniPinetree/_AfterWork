@@ -1,39 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Title, TextBtn } from "../elements";
 import { UserInfo, InterestBox, LocationBox, OffTimePicker } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { actionCreators as userActions } from "../redux/modules/user";
-import Swal from "sweetalert2";
 
 const UserDetail = (props) => {
-<<<<<<< HEAD
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
   const [categories, setCategories] = useState([]);
   const [time, setTime] = useState('');
-console.log(user);
-console.log(time);
 
-useEffect(() => {
-  console.log('이펙트');
-  if(user){
-    console.log(user);
-    
-    if(categories.length===0 && user.interests.length>0){
-    const categoryIds = user.interests.map(interest=>interest.categoryId);
-    setCategories(categoryIds);
-  };
-
-}else{
-  console.log('none');
-}
-}, []);
-
-  const setValue = ()=>{
+const setValue = ()=>{
 dispatch(preferActions.updateUserPreferDB(locations,categories,time));
   };
   return (
@@ -81,96 +62,6 @@ dispatch(preferActions.updateUserPreferDB(locations,categories,time));
      </>}
     </Container>
   );
-=======
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.user.user);
-    const [search, setSearch] = useState("");
-    const [locations, setLocations] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [time, setTime] = useState("");
-
-    if (user) {
-        if (locations.length === 0 && user.locations.length > 0) {
-            const locationNames = user.locations.map((location) => location.name);
-            setLocations(locationNames);
-        }
-        if (categories.length === 0 && user.interests.length > 0) {
-            const categoryIds = user.interests.map((interest) => interest.categoryId);
-            setCategories(categoryIds);
-        }
-        if (time === "" && user.offTime) {
-            setTime(user.offTime);
-        }
-    }
-    const setValue = () => {
-        dispatch(preferActions.updateUserInfoDB(locations, categories, time));
-    };
-    return (
-        <Container>
-            {user && (
-                <>
-                    <TextBox>
-                        <Title>회원정보 및 상세 설정</Title>
-                        <TextBtn _onClick={setValue}>변경 사항 저장</TextBtn>
-                    </TextBox>
-                    <Wrap>
-                        <Col>
-                            {/* 프로필*/}
-                            <InfoBox>
-                                <UserInfo />
-                                <AbsBtn
-                                    onClick={() => {
-                                        setTimeout(() => {
-                                            Swal.fire({
-                                                text: "정말 탈퇴하시겠어요? 🥺",
-                                                showCancelButton: true,
-                                                confirmButtonColor: "#7F58EC",
-                                                confirmButtonText: "탈퇴",
-                                                cancelButtonText: "취소",
-                                            }).then((result) => {
-                                                if (result.isConfirmed) {
-                                                    dispatch(userActions.deleteUserDB());
-                                                    props.history.replace({
-                                                        pathname: "/",
-                                                        state: {},
-                                                    });
-                                                }
-                                            }, 500);
-                                        });
-                                    }}
-                                >
-                                    회원 탈퇴
-                                </AbsBtn>
-                            </InfoBox>
-                            <BorderBox>
-                                <strong>퇴근시간 설정</strong>
-                                <OffTimePicker time={time} setTime={setTime} />
-                            </BorderBox>
-                        </Col>
-                        <Col>
-                            {/* 관심 카테고리 */}
-                            <BorderBox>
-                                <InterestBox
-                                    setCategories={setCategories}
-                                    categories={categories}
-                                />
-                            </BorderBox>
-                            <BorderBox>
-                                <strong>관심지역 설정</strong>
-                                <LocationBox
-                                    setLocations={setLocations}
-                                    locations={locations}
-                                    setSearch={setSearch}
-                                    search={search}
-                                />
-                            </BorderBox>
-                        </Col>
-                    </Wrap>
-                </>
-            )}
-        </Container>
-    );
->>>>>>> 9c0692a9d52d18e3874d695b564bf3d86fccb7b6
 };
 export default UserDetail;
 

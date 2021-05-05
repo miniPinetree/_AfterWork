@@ -12,7 +12,7 @@ const TextBtn = (props) => {
   );
 
 };
-export default TextBtn; 
+export default React.memo(TextBtn); 
 
 const BtnBox = styled.div`
  display: inline-block;

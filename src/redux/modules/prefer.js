@@ -4,7 +4,6 @@ import { config } from "../../config";
 import Swal from "sweetalert2";
 import produce from "immer";
 import axios from "axios";
-import { CalculatorFilled } from '@ant-design/icons';
 
 //actions
 const GET_COLLECTION = "GET_COLLECTION";
