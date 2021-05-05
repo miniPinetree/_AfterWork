@@ -81,7 +81,7 @@ export default handleActions(
                     confirmButtonText: "확인",
                 });
                 draft.user = null;
-                draft.is_login = true;
+                draft.is_login = false;
             }),
     },
     initialState
