@@ -5,16 +5,14 @@ import { RightOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { actionCreators as userActions } from '../redux/modules/user';
-import { ItemCard, PostCard, UserInfo } from "../components";
+import { PostCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
 import box from "../shared/images/box.png";
-import Emptybox from "../shared/images/emptybox.png";
 
 const MyPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.user);
   const collection = useSelector((state)=>state.prefer.collection);
-console.log(user, collection);
   return (
     <Container>
       {user &&
@@ -54,9 +52,11 @@ console.log(user, collection);
     })}
   </ItemList>
   </>
-  : <div><image src={Emptybox}/>
-  하이
-  </div>
+  : 
+  <EmptyBox>
+  <img src={box} alt='empty' />
+  <p>찜 목록이 비어있습니다.</p>
+  </EmptyBox>
 }
 </MarkList>
       </>}
@@ -129,8 +129,20 @@ const ItemList = styled.div`
   }
 `;
 
-const Img = styled.image`
-width:500px;
-height:500px;
-display:inline-block;
+const EmptyBox = styled.div`
+ width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & img {
+    max-width: 207px;
+    max-height: 207px;
+  }
+  & p {
+    font-size: 15px;
+    font-family: Noto Sans CJK KR;
+    letter-spacing: -0.69px;
+    color: #676767;
+  }
 `;

@@ -42,7 +42,7 @@ const updateUserInfoDB = (locations, categories, time) => {
       .then((res) => {
         //res.data 없음.
         Swal.fire({
-          text: "저장이 완료되었습니다. 😌",
+          text: "저장이 완료되었습니다.",
           confirmButtonColor: "#7F58EC",
           confirmButtonText: "확인",
         });

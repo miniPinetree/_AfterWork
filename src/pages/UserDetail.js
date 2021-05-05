@@ -8,7 +8,6 @@ import { actionCreators as userActions } from "../redux/modules/user";
 const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  console.log(user);
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -43,8 +42,12 @@ dispatch(preferActions.updateUserInfoDB(locations,categories,time));
         {/* 프로필*/}
           <InfoBox>
             <UserInfo />
-            <AbsBtn _onClick={()=>
-              dispatch(userActions.deleteUserDB())
+            <AbsBtn onClick={()=>{
+              console.log('xkfxhlqjxmszmfflr'
+              );
+                dispatch(userActions.deleteUserDB());
+            }
+            
             }>회원 탈퇴</AbsBtn>
           </InfoBox>
           <BorderBox>

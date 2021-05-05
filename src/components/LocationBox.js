@@ -14,7 +14,7 @@ const LocationBox=(props)=>{
         color: "#606060",
         boxSizing: "border-box",
         padding: "9px 27px 12px 27px",
-      }
+      };
 
 //검색 키워드가 포함된 선택가능지역 리스트
   let searchedLocation = locationOpts.filter((option) => {
@@ -22,14 +22,15 @@ const LocationBox=(props)=>{
   });
 //선택가능지역 클릭하여 추가
   const selectLocation = (val) => {
-    if(locations.length>=5){
+    if(locations.length>=4){
         Swal.fire({
-          text: "관심지역은 5개까지 설정 가능합니다.",
+          text: "관심지역은 4개까지 설정 가능합니다.",
           confirmButtonColor: "#7F58EC",
           confirmButtonText: "확인",
         });
       }else{
     setLocations([...locations, val]);
+    setSearch('');
       }
   };
 //선택가능지역이 하나이면 엔터로도 추가 가능
@@ -37,9 +38,9 @@ const LocationBox=(props)=>{
       if(e.keyCode !== 13){
           return;
       }else{
-        if(locations.length>=5){
+        if(locations.length>=4){
             Swal.fire({
-              text: "관심지역은 5개까지 설정하실 수 있어요. 😧",
+              text: "관심지역은 4개까지 설정 가능합니다.",
               confirmButtonColor: "#7F58EC",
               confirmButtonText: "확인",
             });
