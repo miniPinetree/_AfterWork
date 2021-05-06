@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { history } from "../redux/configStore";
-import { Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 import hamburgerIcon from "../shared/images/text-align-justified.svg";
 import searchIcon from "../shared/images/search.svg";
 import homeIcon from "../shared/images/home.svg";
@@ -13,8 +11,6 @@ const MoHeader = (props) => {
     const push = useSelector((state) => state.router.action);
     const titles = useSelector((state) => state.router.location.state);
 
-    const [search, setSearch] = useState("");
-    const [isSearch, setIsSearch] = useState(false);
     const [isDrawer, setIsDrawer] = useState(false);
 
     const drawerOpen = () => {
@@ -23,95 +19,41 @@ const MoHeader = (props) => {
     const drawerClose = () => {
         setIsDrawer(false);
     };
-    const searchOpen = () => {
-        setIsSearch(true);
-    };
-    const searchClose = () => {
-        setIsSearch(false);
-    };
 
-    const searchHandler = () => {
-        if (search === "") {
-            return;
-        }
-        history.push(`/find/search?keyword=${search}`);
-        setSearch("");
-        setIsSearch(false);
-    };
     return (
         <>
-            {isSearch ? (
-                <Wrap is_search>
-                    <Body>
-                        <Input
-                            placeholder="검색어를 입력하세요"
-                            prefix={
-                                <SearchOutlined
-                                    style={{
-                                        color: "#333",
-                                        cursor: "pointer",
-                                        fontSize: "20px",
-                                    }}
-                                    onClick={searchHandler}
-                                />
-                            }
-                            value={search}
-                            style={{
-                                borderRadius: "29px",
-                                fontSize: "14px",
-                                letterSpacing: "-0.6px",
-                                color: "#BDBDBD",
-                                boxSizing: "border-box",
-                                padding: "10px 20px",
-                                width: "85%",
-                                display: "flex",
-                                textAlign: "left",
-                                height: "40px",
-                            }}
-                            onChange={(e) => {
-                                setSearch(e.target.value);
-                            }}
-                            onKeyPress={(e) => {
-                                if (e.key === "Enter") {
-                                    searchHandler();
-                                }
-                            }}
-                        />
-                        <div onClick={searchClose}>취소</div>
-                    </Body>
-                </Wrap>
-            ) : (
-                <Wrap>
-                    <Body>
-                        <Imgs>
+            <Wrap>
+                <Body>
+                    <Imgs>
+                        <img src={hamburgerIcon} alt="hamburger menu" onClick={drawerOpen}></img>
+                        {push === "PUSH" && titles !== undefined ? (
                             <img
-                                src={hamburgerIcon}
-                                alt="hamburger menu"
-                                onClick={drawerOpen}
+                                src={homeIcon}
+                                alt="home"
+                                onClick={() => {
+                                    history.push("/");
+                                }}
                             ></img>
-                            {push === "PUSH" && titles !== undefined ? (
-                                <img
-                                    src={homeIcon}
-                                    alt="home"
-                                    onClick={() => {
-                                        history.push("/");
-                                    }}
-                                ></img>
-                            ) : null}
-                        </Imgs>
-                        <Logo>
-                            {push === "PUSH" && titles !== undefined ? (
-                                titles
-                            ) : (
-                                <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
-                            )}
-                        </Logo>
-                        <Img>
-                            <img src={searchIcon} alt="hamburger menu" onClick={searchOpen}></img>
-                        </Img>
-                    </Body>
-                </Wrap>
-            )}
+                        ) : null}
+                    </Imgs>
+                    <Logo>
+                        {push === "PUSH" && titles !== undefined ? (
+                            titles
+                        ) : (
+                            <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
+                        )}
+                    </Logo>
+                    <Img>
+                        <img
+                            src={searchIcon}
+                            alt="search"
+                            onClick={() => {
+                                history.push({ pathname: "/search", state: "검색" });
+                            }}
+                        ></img>
+                    </Img>
+                </Body>
+            </Wrap>
 
             {isDrawer === true ? <MoDrawer drawerClose={drawerClose} /> : null}
         </>
@@ -123,7 +65,7 @@ const Wrap = styled.div`
     height: 88px;
     position: sticky;
     top: 0px;
-    padding: ${(props) => (props.is_search ? "42px 18px 2px 18px" : "48px 16px 0 16px")};
+    padding: 48px 16px 0 16px;
     background: #fff;
     z-index: 3;
     text-align: center;

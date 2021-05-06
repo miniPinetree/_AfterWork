@@ -56,6 +56,9 @@ function SideBar(props) {
 const Wrap = styled.div`
   background: #f6f6f6 0% 0% no-repeat padding-box;
   color: #000000;
+  @media only screen and (max-width: 414px) {
+    display: none;
+  }
 `;
 
 const SideBox = styled.div`

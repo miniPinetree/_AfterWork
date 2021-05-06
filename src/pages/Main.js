@@ -62,11 +62,13 @@ function Main(props) {
   return (
     <>
       <Banner />
-      <Carousel text='카테고리' size='5'>
-        {category_list.map((val, idx) => {
-          return <CategoryCard key={idx + 'category'} {...val} />;
-        })}
-      </Carousel>
+      <CarouselWrap>
+        <Carousel text='카테고리' size='5' category>
+          {category_list.map((val, idx) => {
+            return <CategoryCard key={idx + 'category'} {...val} />;
+          })}
+        </Carousel>
+      </CarouselWrap>
       <Carousel text='인기 취미 아이템'>
         {popularList.map((val, idx) => {
           return collection.includes(val.productId) === true ? (
@@ -111,9 +113,18 @@ function Main(props) {
   );
 }
 
+const CarouselWrap = styled.div`
+  @media only screen and (max-width: 414px) {
+    margin-top: -500px;
+  }
+`;
+
 const Wrap = styled.div`
   margin: 75px 0;
   cursor: default;
+  @media only screen and (max-width: 414px) {
+    margin: 55px 20px;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -128,6 +139,10 @@ const Title = styled.div`
   font-size: 20px;
   letter-spacing: -0.6px;
   font-weight: 700;
+  @media only screen and (max-width: 414px) {
+    font-size: 15px;
+    letter-spacing: -0.45px;
+  }
 `;
 const EmptyList = styled.div`
   max-width: 1004px;
@@ -164,6 +179,14 @@ const EmptyList = styled.div`
     cursor: pointer;
     &:hover {
       opacity: 0.9;
+    }
+  }
+  @media only screen and (max-width: 414px) {
+    & p {
+      font-size: 16px;
+    }
+    & button {
+      font-size: 13px;
     }
   }
 `;

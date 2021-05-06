@@ -18,9 +18,13 @@ function Banner(props) {
           <SearchInput />
           <TitleBox>
             <span>
-              <strong>퇴근하는 순간</strong>은 누구나 기다린다 퇴근하고{' '}
-              <strong>뭐 할지는</strong> <br /> 직장에서 정해야 <br />
-              <strong>제맛인 법</strong>
+              <strong>
+                퇴근하는 순간은 누구나 기다린다
+                <br />
+                퇴근하고 뭐 할지는
+                <br />
+                직장에서 정해야 제맛인 법
+              </strong>
             </span>
           </TitleBox>
         </Container>
@@ -49,6 +53,9 @@ const Container = styled.div`
   max-width: 1004px;
   margin: 0 auto;
   position: relative;
+  @media only screen and (max-width: 414px) {
+    margin: 0 20px;
+  }
 `;
 
 const TitleBox = styled.div`
@@ -59,6 +66,14 @@ const TitleBox = styled.div`
   position: absolute;
   top: 78px;
   line-height: 1.4;
+  @media only screen and (max-width: 414px) {
+    width: auto;
+    font-size: 16px;
+    letter-spacing: -0.48px;
+    color: #000;
+    position: absolute;
+    top: 32px;
+  }
 `;
 
 export default Banner;

@@ -23,7 +23,7 @@ function Next(props) {
 }
 
 function Carousel(props) {
-  const { children, text, size } = props;
+  const { children, text, size, category } = props;
   // 케러셀 셋팅
   const settings = {
     dots: false,
@@ -37,8 +37,9 @@ function Carousel(props) {
       {
         breakpoint: 450,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: category ? 3 : 2,
+          slidesToScroll: category ? 3 : 2,
+          slidesPerRow: category ? 1 : 2,
         },
       },
     ],
@@ -61,6 +62,9 @@ function Carousel(props) {
 const Wrap = styled.div`
   margin: 75px 0;
   cursor: default;
+  @media only screen and (max-width: 414px) {
+    margin: 55px 20px;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -75,6 +79,10 @@ const Title = styled.div`
   font-size: 20px;
   letter-spacing: -0.6px;
   font-weight: 700;
+  @media only screen and (max-width: 414px) {
+    font-size: 15px;
+    letter-spacing: -0.45px;
+  }
 `;
 const CarouselContainer = styled.div`
   max-width: 1004px;

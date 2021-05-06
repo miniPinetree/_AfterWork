@@ -78,29 +78,32 @@ function Category(props) {
             <>
               <MainHeader>
                 <Title>{category?.name}</Title>
-
-                <div>
-                  <Select
-                    defaultValue='popularity desc'
-                    style={{ width: 112, marginRight: '15px' }}
-                    onChange={selectSort}
-                    value={sortBox}
-                  >
-                    <Option value='popularity desc'>인기순</Option>
-                    <Option value='price asc'>가격 낮은순</Option>
-                    <Option value='price desc'>가격 높은순</Option>
-                  </Select>
-                  <Select
-                    defaultValue='total'
-                    style={{ width: 94 }}
-                    onChange={selectFilter}
-                    value={filterBox}
-                  >
-                    <Option value='total'>전체보기</Option>
-                    <Option value='online'>온라인</Option>
-                    <Option value='offline'>오프라인</Option>
-                  </Select>
-                </div>
+                <SelectDiv>
+                  <Sort>
+                    <Select
+                      defaultValue='popularity desc'
+                      style={{ width: '100%' }}
+                      onChange={selectSort}
+                      value={sortBox}
+                    >
+                      <Option value='popularity desc'>인기순</Option>
+                      <Option value='price asc'>가격 낮은순</Option>
+                      <Option value='price desc'>가격 높은순</Option>
+                    </Select>
+                  </Sort>
+                  <Filter>
+                    <Select
+                      defaultValue='total'
+                      style={{ width: '100%' }}
+                      onChange={selectFilter}
+                      value={filterBox}
+                    >
+                      <Option value='total'>전체보기</Option>
+                      <Option value='online'>온라인</Option>
+                      <Option value='offline'>오프라인</Option>
+                    </Select>
+                  </Filter>
+                </SelectDiv>
               </MainHeader>
               <Main>
                 {post_list.length === 0 ? (
@@ -159,12 +162,42 @@ const MainContainer = styled.div`
   width: 60%;
   margin-left: 31px;
   position: relative;
+  @media only screen and (max-width: 414px) {
+    width: 100%;
+    margin: 0 10px;
+  }
 `;
 const MainHeader = styled.div`
   margin: 35px 0 20px 10px;
   max-width: 87%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  @media only screen and (max-width: 414px) {
+    max-width: 100%;
+    margin: 22px 10px 13px;
+  }
+`;
+const SelectDiv = styled.div`
+  display: flex;
+`;
+const Sort = styled.div`
+  max-width: 112px;
+  margin-right: 15px;
+  @media only screen and (max-width: 414px) {
+    & span {
+      font-size: 10px;
+    }
+  }
+`;
+
+const Filter = styled.div`
+  max-width: 94px;
+  @media only screen and (max-width: 414px) {
+    & span {
+      font-size: 10px;
+    }
+  }
 `;
 
 const Title = styled.div`
@@ -172,6 +205,9 @@ const Title = styled.div`
   font-family: Noto Sans CJK KR;
   color: #000;
   cursor: default;
+  @media only screen and (max-width: 414px) {
+    font-size: 12px;
+  }
 `;
 
 const Main = styled.div`
@@ -185,6 +221,14 @@ const Main = styled.div`
   & .wrap {
     margin-right: 20px;
     margin-bottom: 20px;
+  }
+  @media only screen and (max-width: 414px) {
+    justify-content: center;
+
+    & .wrap {
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
   }
 `;
 
