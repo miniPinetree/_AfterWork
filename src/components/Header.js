@@ -10,7 +10,7 @@ import { debounce } from "lodash";
 const Header = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
-    const is_loading = useSelector((state) => state.user.is_loading);
+    const is_loading = useSelector((state) => state.user.user_loading);
 
     const [isModal, setIsModal] = useState(false);
     const modalOpen = () => {
