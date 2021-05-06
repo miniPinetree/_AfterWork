@@ -8,7 +8,12 @@ function CategoryCard(props) {
     <>
       <CardWrap
         onClick={() => {
-          history.push(`/category/${props.categoryId}`);
+          // history.push(`/category/${props.categoryId}`);
+          history.push({
+            pathname: `/category/${props.categoryId}`,
+            state: `${props.name}`,
+          });
+
           window.scrollTo({ top: 0, left: 0 });
         }}
       >
