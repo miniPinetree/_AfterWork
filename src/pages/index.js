@@ -5,5 +5,6 @@ import UserDetail from "./UserDetail";
 import Search from "./Search";
 import About from "./About";
 import Login from "./Login";
+import MobileSearch from "./MobileSearch";
 
-export { MyPage, Main, UserDetail, Category, Search, About, Login };
+export { MyPage, Main, UserDetail, Category, Search, About, Login, MobileSearch };

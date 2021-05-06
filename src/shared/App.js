@@ -9,7 +9,7 @@ import "./App.css";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configStore";
-import { MyPage, Main, UserDetail, Category, Search, About, Login } from "../pages";
+import { MyPage, Main, UserDetail, Category, Search, About, Login, MobileSearch } from "../pages";
 import { Header, Footer, FButton } from "../components";
 
 function App() {
@@ -33,6 +33,7 @@ function App() {
                 <Route path="/mypage" exact component={MyPage} />
                 <Route path="/userdetail" exact component={UserDetail} />
                 <Route path="/find/:search" exact component={Search} />
+                <Route path="/search" exact component={MobileSearch} />
                 <Route path="/oauth2/redirect" component={OAuth2RedirectHandler} />
             </ConnectedRouter>
             <FButton />
