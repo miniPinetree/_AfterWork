@@ -123,6 +123,9 @@ const Area1 = styled.div`
   }
 `;
 const MarkList = styled.div`
+@media all and (max-width: 415px) {
+  min-height:100vh;
+}
 `;
 const CardList = styled.div`
   display: flex;
@@ -148,7 +151,7 @@ const CardList = styled.div`
 `;
 
 const EmptyBox = styled.div`
- width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -163,4 +166,7 @@ const EmptyBox = styled.div`
     letter-spacing: -0.69px;
     color: #676767;
   }
+  @media all and (max-width: 415px) {
+    padding-top:40%;
+    }
 `;
