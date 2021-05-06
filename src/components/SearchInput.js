@@ -7,10 +7,9 @@ import { history } from '../redux/configStore';
 function SearchInput() {
   // 배너 검색 창
   const [search, setSearch] = useState('');
-
   const searchHandler = () => {
     // 검색이 공란일때는 리턴
-    if (search === '') {
+    if (search === '' || search.trim() === '') {
       return;
     }
     history.push(`/find/search?keyword=${search}`);
