@@ -109,6 +109,14 @@ const Timer = styled.div`
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 3px 10px 15px #f3e8f6;
+  @media only screen and (max-width: 414px) {
+    width: 172px;
+    max-width: 172px;
+    height: 58px;
+    top: 133px;
+    left: 0;
+    border-radius: 7px;
+  }
 `;
 const OffTimeTitle = styled.div`
   font-size: 18px;
@@ -116,6 +124,10 @@ const OffTimeTitle = styled.div`
   font-family: 'Noto Sans CJK KR';
   letter-spacing: -0.54px;
   color: #000000;
+  @media only screen and (max-width: 414px) {
+    font-size: 9px;
+    letter-spacing: -0.27px;
+  }
 `;
 const OffTimeCnt = styled.div`
   margin-top: 8px;
@@ -130,6 +142,12 @@ const OffTimeCnt = styled.div`
     background: #f5f5f5 0% 0% no-repeat padding-box;
     border-radius: 6px;
     letter-spacing: 1px;
+  }
+  @media only screen and (max-width: 414px) {
+    font-size: 15px;
+    & span {
+      width: 36px;
+    }
   }
 `;
 
@@ -172,6 +190,25 @@ const SettingBox = styled.div`
     cursor: pointer;
     &:hover {
       opacity: 0.9;
+    }
+  }
+  @media only screen and (max-width: 414px) {
+    width: 172px;
+    max-width: 172px;
+    height: 62px;
+    top: 133px;
+    left: 0;
+    border-radius: 7px;
+    & span {
+      font-size: 12px;
+      letter-spacing: -0.27px;
+    }
+    & button {
+      width: 100px;
+      font-size: 9px;
+      height: 20px;
+      padding: 0;
+      margin-top: 5px;
     }
   }
 `;

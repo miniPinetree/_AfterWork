@@ -31,6 +31,10 @@ const CardWrap = styled.div`
   height: 240px;
   border-radius: 10px;
   cursor: pointer;
+  @media only screen and (max-width: 414px) {
+    max-width: 105px;
+    height: auto;
+  }
 `;
 const Img = styled.img`
   width: 100%;
@@ -39,6 +43,9 @@ const Img = styled.img`
   box-shadow: 0px 10px 10px #e6e6e6;
   &:hover {
     opacity: 0.7;
+  }
+  @media only screen and (max-width: 414px) {
+    height: 105px;
   }
 `;
 const TextBox = styled.div`
@@ -49,6 +56,10 @@ const TextBox = styled.div`
   letter-spacing: -0.48px;
   padding: 9px 5px;
   box-sizing: border-box;
+  @media only screen and (max-width: 414px) {
+    font-size: 12px;
+    letter-spacing: -0.36px;
+  }
 `;
 
 export default CategoryCard;

@@ -4,6 +4,7 @@ import Permit from '../shared/Permit';
 import { HeartFilled, HeartTwoTone } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { actionCreators as preferActions } from '../redux/modules/prefer';
+import { getCookie } from '../shared/Cookie';
 
 function PostCard(props) {
   // 취미 상품 카드
@@ -11,7 +12,8 @@ function PostCard(props) {
   // 찜 여부와 상품 정보를 프롭스로 받는다
   const { like, post_info } = props;
   const price = post_info?.priceInfo?.split('원');
-
+  const cookie = getCookie('is_login');
+  const is_user = cookie ? true : false;
   return (
     <>
       <CardWrap className='wrap'>
@@ -49,7 +51,7 @@ function PostCard(props) {
               </Permit>
             </TitleWrap>
             <div>
-              <TextInfo>
+              <TextInfo is_user={is_user}>
                 {/* 작성자, 지역 표시 */}
                 <span>{post_info?.author}</span>
                 <span>{post_info?.location}</span>
@@ -82,10 +84,11 @@ const CardWrap = styled.div`
   height: 340px;
   cursor: pointer;
   position: relative;
-  @media all and (max-width: 415px) {
+  @media only screen and (max-width: 414px) {
+    margin-top: 11.27px;
     max-width: 162px;
-    height: 204.73px;
-    }
+    height: 224.73px;
+  }
 `;
 const Img = styled.img`
   width: 100%;
@@ -95,9 +98,9 @@ const Img = styled.img`
   &:hover {
     opacity: 0.7;
   }
-  @media all and (max-width: 415px) {
+  @media only screen and (max-width: 414px) {
     height: 126px;
-    }
+  }
 `;
 const TextBox = styled.div`
   width: 100%;
@@ -106,7 +109,7 @@ const TextBox = styled.div`
   line-height: 1.8;
   & strong {
     font-size: 15px;
-    font-family: Noto Sans CJK KR;
+    font-family: 'Noto Sans CJK KR';
     letter-spacing: -0.45px;
     color: #000;
     white-space: nowrap;
@@ -120,6 +123,12 @@ const TextBox = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  }
+  @media only screen and (max-width: 414px) {
+    & strong {
+      font-size: 12px;
+      letter-spacing: -0.36px;
+    }
   }
 `;
 
@@ -137,6 +146,12 @@ const TitleWrap = styled.div`
       transform: scale(1.2);
     }
   }
+  @media only screen and (max-width: 414px) {
+    & svg {
+      top: 98.42px;
+      right: 7.87px;
+    }
+  }
 `;
 
 const TextInfo = styled.div`
@@ -147,8 +162,16 @@ const TextInfo = styled.div`
   margin-right: 12px;
   justify-content: space-between;
   line-height: 2.1;
+  margin-top: ${(props) => (props.is_user ? '-18.11px' : '0')};
+  @media only screen and (max-width: 414px) {
+    font-size: 9px;
+    letter-spacing: -0.3px;
+  }
 `;
 const PriceInfo = styled.div`
   color: #000;
+  @media only screen and (max-width: 414px) {
+    font-size: 11px;
+  }
 `;
 export default PostCard;

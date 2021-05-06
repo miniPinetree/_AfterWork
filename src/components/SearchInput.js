@@ -60,6 +60,9 @@ const InputBox = styled.div`
   position: absolute;
   top: 367px;
   box-sizing: border-box;
+  @media only screen and (max-width: 414px) {
+    display: none;
+  }
 `;
 
 export default SearchInput;
