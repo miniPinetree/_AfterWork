@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { history } from "../redux/configStore";
@@ -34,10 +34,20 @@ const MoHeader = (props) => {
                                     history.push("/");
                                 }}
                             ></img>
+                        ) : push === "POP" && titles !== undefined ? (
+                            <img
+                                src={homeIcon}
+                                alt="home"
+                                onClick={() => {
+                                    history.push("/");
+                                }}
+                            ></img>
                         ) : null}
                     </Imgs>
                     <Logo>
                         {push === "PUSH" && titles !== undefined ? (
+                            titles
+                        ) : push === "POP" && titles !== undefined ? (
                             titles
                         ) : (
                             <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
