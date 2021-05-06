@@ -68,7 +68,7 @@ const Container = styled.div`
   width: 70%;
   max-width: 1004px;
   margin: 0 auto;
-  @media all and (max-width: 415px) {
+  @media all and (max-width: 414px) {
     background-color: #F8F8F8;
     width:100%;
   }
@@ -82,7 +82,7 @@ const TextBox = styled.div`
     margin-top: 64px;
     font-weight: 100;
   }
-  @media all and (max-width: 415px) {
+  @media all and (max-width: 414px) {
         display: none;
     }
 `;
@@ -97,7 +97,7 @@ const Profile = styled.div`
   display: flex;
   align-items: center;
   padding: 0 30px;
-  @media all and (max-width: 415px) {
+  @media all and (max-width: 414px) {
         display: none;
     }
 `;
@@ -123,8 +123,8 @@ const Area1 = styled.div`
   }
 `;
 const MarkList = styled.div`
-@media all and (max-width: 415px) {
-  min-height:100vh;
+@media all and (max-width: 414px) {
+  /* min-height:100vh; //푸터 조정 후 반영*/
 }
 `;
 const CardList = styled.div`
@@ -139,7 +139,7 @@ const CardList = styled.div`
     margin-bottom: 20px;
     margin-right:10px;
   }
-  @media all and (max-width: 415px) {
+  @media all and (max-width: 414px) {
     min-width:344px;
     width:344px;
     margin:20px auto;
@@ -166,7 +166,7 @@ const EmptyBox = styled.div`
     letter-spacing: -0.69px;
     color: #676767;
   }
-  @media all and (max-width: 415px) {
+  @media all and (max-width: 414px) {
     padding-top:40%;
     }
 `;
