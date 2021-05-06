@@ -9,7 +9,7 @@ function SubBanner(props) {
   const [search, setSearch] = useState('');
   const searchHandler = () => {
     // 공란이면 리턴
-    if (search === '') {
+    if (search === '' || search.trim() === '') {
       return;
     }
     history.push(`/find/search?keyword=${search}`);
