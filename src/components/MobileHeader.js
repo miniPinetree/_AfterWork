@@ -34,23 +34,35 @@ const MoHeader = (props) => {
                                     history.push("/");
                                 }}
                             ></img>
+                        ) : push === "POP" && titles !== undefined ? (
+                            <img
+                                src={homeIcon}
+                                alt="home"
+                                onClick={() => {
+                                    history.push("/");
+                                }}
+                            ></img>
                         ) : null}
                     </Imgs>
                     <Logo>
                         {push === "PUSH" && titles !== undefined ? (
+                            titles
+                        ) : push === "POP" && titles !== undefined ? (
                             titles
                         ) : (
                             <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
                         )}
                     </Logo>
                     <Img>
-                        <img
-                            src={searchIcon}
-                            alt="search"
-                            onClick={() => {
-                                history.push({ pathname: "/search", state: "검색" });
-                            }}
-                        ></img>
+                        {titles === "검색" ? null : (
+                            <img
+                                src={searchIcon}
+                                alt="search"
+                                onClick={() => {
+                                    history.push({ pathname: "/search", state: "검색" });
+                                }}
+                            ></img>
+                        )}
                     </Img>
                 </Body>
             </Wrap>
@@ -62,10 +74,10 @@ const MoHeader = (props) => {
 
 const Wrap = styled.div`
     width: 100%;
-    height: 88px;
+    height: 44px;
     position: sticky;
     top: 0px;
-    padding: 48px 16px 0 16px;
+    padding: 10px 16px;
     background: #fff;
     z-index: 3;
     text-align: center;
@@ -88,6 +100,9 @@ const Logo = styled.span`
     cursor: pointer;
     height: 100%;
     margin-top: -2px;
+    @media only screen and (max-width: 415px) {
+        transform: translate(-10px);
+    }
 `;
 
 const Img = styled.div`
