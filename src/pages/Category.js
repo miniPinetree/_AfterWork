@@ -46,7 +46,7 @@ function Category(props) {
   useEffect(() => {
     // 게시물 조회
     dispatch(postActions.getPostDB(id, sort, direction));
-  }, [direction, dispatch, id, sort]);
+  }, [dispatch, id, sort, direction]);
 
   const { Option } = Select;
 
@@ -145,6 +145,7 @@ function Category(props) {
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
+                zIndex: '10',
               }}
             />
           )}
@@ -165,6 +166,7 @@ const MainContainer = styled.div`
   @media only screen and (max-width: 414px) {
     width: 100%;
     margin: 0 10px;
+    min-height: 600px;
   }
 `;
 const MainHeader = styled.div`

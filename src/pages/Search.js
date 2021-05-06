@@ -167,6 +167,7 @@ const MainContainer = styled.div`
   @media only screen and (max-width: 414px) {
     width: 100%;
     margin: 0 10px;
+    min-height: 600px;
   }
 `;
 const MainHeader = styled.div`
