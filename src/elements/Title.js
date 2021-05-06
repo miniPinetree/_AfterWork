@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Title = (props) => {
     const {children} = props;
   return (
-    <TitleBox className='title'>
+    <TitleBox>
       <text>{children}</text>
       <hr/>
     </TitleBox>

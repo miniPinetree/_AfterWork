@@ -35,7 +35,15 @@ const updateUserPreferDB = (locations, categories, time) => {
       .post(`${config.api}/api/user`, data)
       .then((res) => {
         //res.data 없음.
-        dispatch(userActions.getUser({...user, ...data}));
+        let _locations = locations.map((location)=>{
+          return {name : location}
+        });
+        let _data = {
+          offTime: time,
+      locations: _locations,
+      categorys: categories,
+        }
+        dispatch(userActions.getUser({...user, ..._data}));
         Swal.fire({
           text: "저장이 완료되었습니다.",
           confirmButtonColor: "#7F58EC",

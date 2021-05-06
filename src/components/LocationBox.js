@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 const LocationBox=(props)=>{
     const {search, locations,setSearch,setLocations}=props;
     const user = useSelector((state) => state.user.user);
-    
     const inputStyle = {
       borderRadius: "29px",
       font: "normal normal normal 20px/30px Noto Sans CJK KR",
@@ -18,7 +17,7 @@ const LocationBox=(props)=>{
       boxSizing: "border-box",
       padding: "9px 27px 12px 27px",
     };
-
+    console.log(user, user.locations);
 React.useEffect(()=>{
   if(locations.length===0 && user.locations.length>0){
     const locationNames = user.locations.map(location=>location.name);
