@@ -162,10 +162,14 @@ const TextInfo = styled.div`
   margin-right: 12px;
   justify-content: space-between;
   line-height: 2.1;
+  height: 27px;
+  overflow: hidden;
   margin-top: ${(props) => (props.is_user ? '-18.11px' : '0')};
   @media only screen and (max-width: 414px) {
     font-size: 9px;
     letter-spacing: -0.3px;
+    height: 21px;
+    overflow: hidden;
   }
 `;
 const PriceInfo = styled.div`
