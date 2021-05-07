@@ -7,6 +7,7 @@ import {
   LocationBox,
   OffTimePicker,
 } from "../components";
+import { getCookie } from "../shared/Cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { actionCreators as userActions } from "../redux/modules/user";
@@ -14,6 +15,12 @@ import { actionCreators as userActions } from "../redux/modules/user";
 const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const cookie = getCookie("is_login");
+
+  if(!cookie){
+    history.replace('/');
+  };
+
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
   const [categories, setCategories] = useState([]);

@@ -5,12 +5,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { PostCard, UserInfo } from "../components";
 import {Title, TextBtn} from "../elements";
+import { getCookie } from "../shared/Cookie";
 import box from "../shared/images/box.png";
 
 const MyPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.user);
   const collection = useSelector((state)=>state.prefer.collection);
+  const cookie = getCookie("is_login");
+
+  if(!cookie){
+    history.replace('/');
+  };
+
   return (
     <Container>
       {user &&
