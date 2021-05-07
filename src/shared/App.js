@@ -10,7 +10,7 @@ import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configStore";
 import { MyPage, Main, UserDetail, Category, Search, About, Login, MobileSearch } from "../pages";
-import { Header, Footer } from "../components";
+import { Header } from "../components";
 
 function App() {
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function App() {
                 <Route path="/search" exact component={MobileSearch} />
                 <Route path="/oauth2/redirect" component={OAuth2RedirectHandler} />
             </ConnectedRouter>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }

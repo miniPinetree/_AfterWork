@@ -11,7 +11,7 @@ import { debounce } from "lodash";
 const Header = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
-    const is_opened = useSelector((state)=>state.prefer.is_opened);
+    const is_opened = useSelector((state) => state.prefer.is_opened);
     const is_loading = useSelector((state) => state.user.user_loading);
     const [isModal, setIsModal] = useState(false);
     const modalOpen = () => {
@@ -28,14 +28,13 @@ const Header = () => {
     }, 100);
 
     useEffect(() => {
-        if(is_opened){
+        if (is_opened) {
             setIsModal(true);
-        };
-        if(!isModal){
+        }
+        if (!isModal) {
             dispatch(preferActions.guideGuests(false));
-                    };
-    }, [is_opened]);
-
+        }
+    }, [is_opened, dispatch, isModal]);
 
     useEffect(() => {
         window.addEventListener("resize", handleResize);
@@ -59,7 +58,7 @@ const Header = () => {
                             >
                                 퇴근하고 뭐하지?
                             </Logo>
-                            <About onClick={() => history.push("/about")}>About</About>
+                            {/* <About onClick={() => history.push("/about")}>About</About> */}
                         </div>
 
                         <div>
@@ -118,13 +117,13 @@ const Logo = styled.span`
     margin-right: 24px;
 `;
 
-const About = styled.span`
-    font-size: 16px;
-    font-weight: normal;
-    letter-spacing: -0.6px;
-    cursor: pointer;
-    height: 100%;
-`;
+// const About = styled.span`
+//     font-size: 16px;
+//     font-weight: normal;
+//     letter-spacing: -0.6px;
+//     cursor: pointer;
+//     height: 100%;
+// `;
 
 const Login = styled.span`
     font-size: 17px;

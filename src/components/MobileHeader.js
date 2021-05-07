@@ -44,15 +44,15 @@ const MoHeader = (props) => {
                             ></img>
                         ) : null}
                     </Imgs>
-                    <Logo>
-                        {push === "PUSH" && titles !== undefined ? (
-                            titles
-                        ) : push === "POP" && titles !== undefined ? (
-                            titles
-                        ) : (
+                    {push === "PUSH" && titles !== undefined ? (
+                        <Logo isState>titles</Logo>
+                    ) : push === "POP" && titles !== undefined ? (
+                        <Logo isState>titles</Logo>
+                    ) : (
+                        <Logo>
                             <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
-                        )}
-                    </Logo>
+                        </Logo>
+                    )}
                     <Img>
                         {titles === "검색" ? null : (
                             <img
@@ -101,7 +101,7 @@ const Logo = styled.span`
     height: 100%;
     margin-top: -2px;
     @media only screen and (max-width: 415px) {
-        transform: translate(-10px);
+        transform: ${(props) => (props.isState ? "translate(-15px)" : "")};
     }
 `;
 

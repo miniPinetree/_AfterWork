@@ -16,12 +16,14 @@ function SearchHistory({ keywords, onRemoveKeyword, onClearKeywords }) {
             <ListContainer>
                 {keywords.map((p, idx) => {
                     return (
-                        <KeywordContainer
-                            onClick={() => {
-                                history.push(`/find/search?keyword=${p}`);
-                            }}
-                        >
-                            <Keyword>{p}</Keyword>
+                        <KeywordContainer key={idx}>
+                            <Keyword
+                                onClick={() => {
+                                    history.push(`/find/search?keyword=${p}`);
+                                }}
+                            >
+                                {p}
+                            </Keyword>
                             <X
                                 src={x}
                                 alt="remove search"
