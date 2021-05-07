@@ -39,8 +39,8 @@ function Search(props) {
 
   useEffect(() => {
     // 검색한 게시물 조회
-    dispatch(postActions.getSearchDB(keyword, sort, direction));
-  }, [direction, dispatch, keyword, sort]);
+    dispatch(postActions.getSearchDB(keyword, sort, direction, filterBox));
+  }, [direction, dispatch, keyword, sort, filterBox]);
 
   const { Option } = Select;
 
@@ -52,15 +52,6 @@ function Search(props) {
   const selectFilter = (value) => {
     setfilterBox(value);
   };
-  if (filterBox === 'online') {
-    post_list = post_list.filter((val) => {
-      return val.online === true;
-    });
-  } else if (filterBox === 'offline') {
-    post_list = post_list.filter((val) => {
-      return val.online === false;
-    });
-  }
 
   return (
     <>

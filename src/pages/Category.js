@@ -45,8 +45,8 @@ function Category(props) {
 
   useEffect(() => {
     // 게시물 조회
-    dispatch(postActions.getPostDB(id, sort, direction));
-  }, [dispatch, id, sort, direction]);
+    dispatch(postActions.getPostDB(id, sort, direction, filterBox));
+  }, [dispatch, id, sort, direction, filterBox]);
 
   const { Option } = Select;
 
@@ -58,15 +58,6 @@ function Category(props) {
   const selectFilter = (value) => {
     setfilterBox(value);
   };
-  if (filterBox === 'online') {
-    post_list = post_list.filter((val) => {
-      return val.online === true;
-    });
-  } else if (filterBox === 'offline') {
-    post_list = post_list.filter((val) => {
-      return val.online === false;
-    });
-  }
 
   return (
     <>
