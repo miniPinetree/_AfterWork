@@ -42,6 +42,7 @@ const initialState = {
   // 게시물 리스트
   post_list: [],
   // 페이징 정보
+
   paging: {
     id: undefined,
     page: 1,
@@ -49,6 +50,8 @@ const initialState = {
     sort: 'popularity',
     direction: 'desc',
     keyword: '',
+    total: undefined,
+    filter: 'total',
   },
   // 인기 게시물
   popular_list: [],
@@ -109,12 +112,17 @@ const getNearListDB = () => {
 };
 
 // 게시물 조회(랜더링 시)
-const getPostDB = (id, sort = 'popularity', direction = 'desc') => {
+const getPostDB = (
+  id,
+  sort = 'popularity',
+  direction = 'desc',
+  filter = 'total',
+) => {
   return function (dispatch) {
     dispatch(viewLoading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/categorys/${id}?page=0&size=12&sort=${sort}&direction=${direction}`,
+      url: `${config.api}/api/categorys/${id}?page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}`,
     })
       .then((res) => {
         let paging = {
@@ -123,6 +131,7 @@ const getPostDB = (id, sort = 'popularity', direction = 'desc') => {
           size: 12,
           sort: sort,
           direction: direction,
+          filter: filter,
         };
         dispatch(postList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -134,12 +143,17 @@ const getPostDB = (id, sort = 'popularity', direction = 'desc') => {
 };
 
 // 검색한 게시물 조회(랜더링 시)
-const getSearchDB = (keyword, sort = 'popularity', direction = 'desc') => {
+const getSearchDB = (
+  keyword,
+  sort = 'popularity',
+  direction = 'desc',
+  filter = 'total',
+) => {
   return function (dispatch) {
     dispatch(viewLoading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/search?keyword=${keyword}&page=0&size=12&sort=${sort}&direction=${direction}`,
+      url: `${config.api}/api/search?keyword=${keyword}&page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}`,
     })
       .then((res) => {
         let paging = {
@@ -149,6 +163,7 @@ const getSearchDB = (keyword, sort = 'popularity', direction = 'desc') => {
           sort: sort,
           direction: direction,
           total: res.data.totalElements,
+          filter: filter,
         };
         dispatch(searchList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -168,13 +183,14 @@ const scrollGetPostDB = () => {
     const size = _paging.size;
     const sort = _paging.sort;
     const direction = _paging.direction;
+    const filter = _paging.filter;
     if (!page) {
       return;
     }
     dispatch(loading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/categorys/${id}?page=${page}&size=${size}&sort=${sort}&direction=${direction}`,
+      url: `${config.api}/api/categorys/${id}?page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}`,
     })
       .then((res) => {
         let paging = {
@@ -183,6 +199,7 @@ const scrollGetPostDB = () => {
           size: size,
           sort: sort,
           direction: direction,
+          filter: filter,
         };
         dispatch(scrollPostList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -202,13 +219,14 @@ const scrollSearchDB = () => {
     const size = _paging.size;
     const sort = _paging.sort;
     const direction = _paging.direction;
+    const filter = _paging.filter;
     if (!page) {
       return;
     }
     dispatch(loading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/search?keyword=${keyword}&page=${page}&size=${size}&sort=${sort}&direction=${direction}`,
+      url: `${config.api}/api/search?keyword=${keyword}&page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}`,
     })
       .then((res) => {
         let paging = {
@@ -218,6 +236,7 @@ const scrollSearchDB = () => {
           sort: sort,
           direction: direction,
           total: res.data.totalElements,
+          filter: filter,
         };
         dispatch(scrollSearchList(res.data.content));
         dispatch(pagingInfo(paging));
