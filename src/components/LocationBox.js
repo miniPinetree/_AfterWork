@@ -64,12 +64,9 @@ React.useEffect(()=>{
       }
   };
   const deleteLocation = (val) => {
-    console.log(locations);
-    console.log('삭제대상', val);
       let _location = locations.filter((l) => {
         return l !== val;
       });
-      console.log(_location);
       setLocations(_location);
   };
       return(

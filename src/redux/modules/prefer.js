@@ -25,7 +25,7 @@ const initialState = {
 //회원 관심사 수정
 const updateUserPreferDB = (locations, categories, time) => {
   return function (dispatch, getState, { history }) {
-    const user = getState().user.user
+    const user = getState().user.user;
     let data = {
       offTime: time,
       locations: locations,
@@ -35,15 +35,15 @@ const updateUserPreferDB = (locations, categories, time) => {
       .post(`${config.api}/api/user`, data)
       .then((res) => {
         //res.data 없음.
-        let _locations = locations.map((location)=>{
-          return {name : location}
+        let _locations = locations.map((location) => {
+          return { name: location };
         });
         let _data = {
           offTime: time,
-      locations: _locations,
-      categorys: categories,
-        }
-        dispatch(userActions.getUser({...user, ..._data}));
+          locations: _locations,
+          categorys: categories,
+        };
+        dispatch(userActions.getUser({ ...user, ..._data }));
         Swal.fire({
           text: "저장이 완료되었습니다.",
           confirmButtonColor: "#7F58EC",
@@ -72,56 +72,63 @@ const getCollectionDB = () => {
 //찜 등록 및 개별 삭제
 const toggleLikeDB = (prd_id) => {
   return function (dispatch, getState, { history }) {
-    const user = getState().user.user
-    
+    const user = getState().user.user;
+    if(!user){
+      Swal.fire({
+        text: "로그인이 필요한 서비스입니다.",
+        confirmButtonColor: "#7F58EC",
+        confirmButtonText: "확인",
+      });
+      return;
+    }
     //delete API 요청에 필요한 collectId가 담긴 배열
     const collects = user?.collects;
-    console.log(user,collects);
+    console.log(user, collects);
     let flag = false;
     // 유저 정보 로드 확인
     if (user && collects) {
       //찜 목록에 존재(true)하면 삭제, 그렇지 않으면 추가
-    if(collects?.length !== 0){
-      for (let i = 0; i < collects.length; i++) {
-        if (collects[i].productId === prd_id) {
-          flag = true;
-          axios
-            .delete(`${config.api}/api/collects/${collects[i].collectId}`)
-            .then((res)=>{
-              let _data = collects.filter((val)=>{
-                return val.productId !== prd_id
+      if (collects?.length !== 0) {
+        for (let i = 0; i < collects.length; i++) {
+          if (collects[i].productId === prd_id) {
+            flag = true;
+            axios
+              .delete(`${config.api}/api/collects/${collects[i].collectId}`)
+              .then((res) => {
+                let _data = collects.filter((val) => {
+                  return val.productId !== prd_id;
+                });
+                let data = {
+                  collects: _data,
+                };
+                console.log("삭제", prd_id, data);
+                dispatch(userActions.getUser({ ...user, ...data }));
+                dispatch(getCollectionDB());
+              })
+              .catch((e) => {
+                console.log("삭제에러", e);
               });
-              let data = {
-                collects: _data
-              };
-              console.log('삭제', prd_id, data);
-              dispatch(userActions.getUser({...user, ...data}));
-              dispatch(getCollectionDB());
-            })
-            .catch((e) => {
-              console.log('삭제에러',e);
-            });
+          }
         }
       }
-    }
-    if (flag === false) {
-      let data = {
-        productId: prd_id,
-      };
-       axios
-        .post(`${config.api}/api/collects`, data)
-        .then((res)=>{
-          let data ={
-            collects:[...collects, res.data]
-          };
-          console.log('등록', prd_id, data);
-          dispatch(userActions.getUser({...user, ...data}));
-          dispatch(getCollectionDB());
-        })
-        .catch((e) => {
-          console.log('등록에러',e);
-        });
-    }
+      if (flag === false) {
+        let data = {
+          productId: prd_id,
+        };
+        axios
+          .post(`${config.api}/api/collects`, data)
+          .then((res) => {
+            let data = {
+              collects: [...collects, res.data],
+            };
+            console.log("등록", prd_id, data);
+            dispatch(userActions.getUser({ ...user, ...data }));
+            dispatch(getCollectionDB());
+          })
+          .catch((e) => {
+            console.log("등록에러", e);
+          });
+      }
     }
   };
 };
@@ -132,7 +139,7 @@ const deleteCollectionDB = () => {
     let collection = getState().user.user.collects;
     if (collection.length === 0) {
       Swal.fire({
-        text: "삭제할 정보가 없습니다. 😌",
+        text: "삭제할 정보가 없습니다.",
         confirmButtonColor: "#7F58EC",
         confirmButtonText: "확인",
       });
