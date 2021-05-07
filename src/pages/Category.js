@@ -216,8 +216,6 @@ const Main = styled.div`
     margin-bottom: 20px;
   }
   @media only screen and (max-width: 414px) {
-    justify-content: center;
-
     & .wrap {
       margin-right: 10px;
       margin-bottom: 10px;

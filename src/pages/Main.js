@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCookie } from '../shared/Cookie';
-import Permit from '../shared/Permit';
 import Banner from '../components/Banner';
 import Carousel from '../components/Carousel';
 import CategoryCard from '../components/CategoryCard';
@@ -78,37 +77,47 @@ function Main(props) {
           );
         })}
       </Carousel>
-
-      <Permit>
-        {locations?.length ? (
-          <Carousel text='근처의 아이템'>
-            {nearList.map((val, idx) => {
-              return collection.includes(val.productId) === true ? (
-                <PostCard post_info={val} key={idx + 'near'} like />
-              ) : (
-                <PostCard post_info={val} key={idx + 'near'} />
-              );
-            })}
-          </Carousel>
-        ) : (
-          // 지역을 설정하지 않았을 경우
-          <Wrap>
-            <TitleContainer>
-              <Title>근처의 아이템</Title>
-            </TitleContainer>
-            <EmptyList>
-              <p>지역을 설정하고 근처의 아이템을 찾아보세요!</p>
-              <button
-                onClick={() => {
-                  history.push('/userdetail');
-                }}
-              >
-                지역 설정하러 가기 {'>'}
-              </button>
-            </EmptyList>
-          </Wrap>
-        )}
-      </Permit>
+      {is_user ? (
+        <>
+          {locations?.length ? (
+            <Carousel text='근처의 아이템'>
+              {nearList.map((val, idx) => {
+                return collection.includes(val.productId) === true ? (
+                  <PostCard post_info={val} key={idx + 'near'} like />
+                ) : (
+                  <PostCard post_info={val} key={idx + 'near'} />
+                );
+              })}
+            </Carousel>
+          ) : (
+            // 지역을 설정하지 않았을 경우
+            <Wrap>
+              <TitleContainer>
+                <Title>근처의 아이템</Title>
+              </TitleContainer>
+              <EmptyList>
+                <p>지역을 설정하고 근처의 아이템을 찾아보세요!</p>
+                <button
+                  onClick={() => {
+                    history.push('/userdetail');
+                  }}
+                >
+                  지역 설정하러 가기 {'>'}
+                </button>
+              </EmptyList>
+            </Wrap>
+          )}
+        </>
+      ) : (
+        <Wrap>
+          <TitleContainer>
+            <Title>근처의 아이템</Title>
+          </TitleContainer>
+          <EmptyList>
+            <p>로그인 후 근처의 아이템을 찾아보세요!</p>
+          </EmptyList>
+        </Wrap>
+      )}
     </>
   );
 }

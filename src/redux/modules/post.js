@@ -103,7 +103,8 @@ const getNearListDB = () => {
       url: `${config.api}/api/recommend`,
     })
       .then((res) => {
-        dispatch(nearList(res.data));
+        // 값이 없을때 ''으로 보내주기때문에 데이터는 배열이므로 []로 만들어줌
+        res.data === '' ? dispatch(nearList([])) : dispatch(nearList(res.data));
       })
       .catch((e) => {
         console.log('에러 발생', e);

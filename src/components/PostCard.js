@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Permit from '../shared/Permit';
-import { HeartFilled, HeartTwoTone } from '@ant-design/icons';
+import { HeartFilled, HeartTwoTone, LikeOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { actionCreators as preferActions } from '../redux/modules/prefer';
-import { getCookie } from '../shared/Cookie';
 
 function PostCard(props) {
   // 취미 상품 카드
@@ -12,8 +10,6 @@ function PostCard(props) {
   // 찜 여부와 상품 정보를 프롭스로 받는다
   const { like, post_info } = props;
   const price = post_info?.priceInfo?.split('원');
-  const cookie = getCookie('is_login');
-  const is_user = cookie ? true : false;
   return (
     <>
       <CardWrap className='wrap'>
@@ -30,31 +26,42 @@ function PostCard(props) {
           <TextBox>
             <TitleWrap like={like}>
               <strong>{post_info?.title}</strong>
-            
-                {/* 찜하는 기능은 회원만 가능하게 랜더링 */}
-                {like ? (
-                  <HeartFilled
-                    onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(preferActions.toggleLikeDB(post_info.productId));
-                    }}
-                  />
-                ) : (
-                  <HeartTwoTone
-                    twoToneColor='#E2E2E2'
-                    onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(preferActions.toggleLikeDB(post_info.productId));
-                    }}
-                  />
-                )}
-             
+
+              {/* 찜하는 기능은 회원만 가능하게 랜더링 */}
+              {like ? (
+                <HeartFilled
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(preferActions.toggleLikeDB(post_info.productId));
+                  }}
+                />
+              ) : (
+                <HeartTwoTone
+                  twoToneColor='#E2E2E2'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(preferActions.toggleLikeDB(post_info.productId));
+                  }}
+                />
+              )}
+              <SiteName>{post_info?.siteName}</SiteName>
             </TitleWrap>
             <div>
-              <TextInfo is_user={is_user}>
-                {/* 작성자, 지역 표시 */}
-                <span>{post_info?.author}</span>
-                <span>{post_info?.location}</span>
+              <TextInfo>
+                {/* 인기도, 작성자, 지역 표시 */}
+                <div>
+                  <LikeOutlined />
+                  <span style={{ marginLeft: '4px' }}>
+                    {post_info?.popularity}
+                  </span>
+                </div>
+                <div>
+                  <span>{post_info?.author}</span>
+                  {post_info?.author && post_info?.location ? (
+                    <span> / </span>
+                  ) : null}
+                  <span>{post_info?.location}</span>
+                </div>
               </TextInfo>
               <PriceInfo>
                 {/* 가격 정보 */}
@@ -87,7 +94,7 @@ const CardWrap = styled.div`
   @media only screen and (max-width: 414px) {
     margin-top: 11.27px;
     max-width: 162px;
-    height: 224.73px;
+    height: 244.73px;
   }
 `;
 const Img = styled.img`
@@ -154,21 +161,37 @@ const TitleWrap = styled.div`
   }
 `;
 
+const SiteName = styled.span`
+  position: absolute;
+  top: 5px;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  color: #ffffff;
+  background: transparent linear-gradient(124deg, #7f58ec 0%, #5c5ce3 100%) 0%
+    0% no-repeat padding-box;
+  @media only screen and (max-width: 414px) {
+    font-size: 9px;
+    letter-spacing: -0.3px;
+  }
+`;
+
 const TextInfo = styled.div`
   font-size: 13px;
   letter-spacing: -0.39px;
   color: #595959;
   display: flex;
-  margin-right: 12px;
-  justify-content: space-between;
+  flex-direction: column;
   line-height: 2.1;
-  height: 27px;
+  height: 54px;
   overflow: hidden;
-  margin-top: ${(props) => (props.is_user ? '-18.11px' : '0')};
+  margin-top: -18.11px;
   @media only screen and (max-width: 414px) {
     font-size: 9px;
     letter-spacing: -0.3px;
-    height: 21px;
+    height: 42px;
     overflow: hidden;
   }
 `;
