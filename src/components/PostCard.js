@@ -26,6 +26,7 @@ function PostCard(props) {
           <TextBox>
             <TitleWrap like={like}>
               <strong>{post_info?.title}</strong>
+
               {/* 찜하는 기능은 회원만 가능하게 랜더링 */}
               {like ? (
                 <HeartFilled

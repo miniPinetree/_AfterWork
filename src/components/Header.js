@@ -4,14 +4,15 @@ import styled from "styled-components";
 import { history } from "../redux/configStore";
 import LoginModal from "./LoginModal";
 import MoHeader from "./MobileHeader";
+import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { debounce } from "lodash";
 
 const Header = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
+    const is_opened = useSelector((state)=>state.prefer.is_opened);
     const is_loading = useSelector((state) => state.user.user_loading);
-
     const [isModal, setIsModal] = useState(false);
     const modalOpen = () => {
         setIsModal(true);
@@ -25,6 +26,16 @@ const Header = () => {
     const handleResize = debounce(() => {
         setWindowSize(window.innerWidth);
     }, 100);
+
+    useEffect(() => {
+        if(is_opened){
+            setIsModal(true);
+        };
+        if(!isModal){
+            dispatch(preferActions.guideGuests(false));
+                    };
+    }, [is_opened]);
+
 
     useEffect(() => {
         window.addEventListener("resize", handleResize);
