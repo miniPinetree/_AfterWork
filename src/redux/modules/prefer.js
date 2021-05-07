@@ -8,7 +8,7 @@ import axios from "axios";
 //actions
 const GET_COLLECTION = "GET_COLLECTION";
 const DELETE_COLLECTION = "DELETE_COLLECTION";
-
+const GUIDE_GUESTS = "GUIDE_GUESTS";
 //action Creators
 
 const getCollection = createAction(GET_COLLECTION, (collection) => ({
@@ -17,10 +17,12 @@ const getCollection = createAction(GET_COLLECTION, (collection) => ({
 const deleteCollection = createAction(DELETE_COLLECTION, (collection = []) => ({
   collection,
 }));
+const guideGuests = createAction(GUIDE_GUESTS, (is_opened) => ({ is_opened }));
 
 //initialState
 const initialState = {
   collection: [],
+  is_opened: false,
 };
 //회원 관심사 수정
 const updateUserPreferDB = (locations, categories, time) => {
@@ -73,12 +75,12 @@ const getCollectionDB = () => {
 const toggleLikeDB = (prd_id) => {
   return function (dispatch, getState, { history }) {
     const user = getState().user.user;
-    if(!user){
-      Swal.fire({
-        text: "로그인이 필요한 서비스입니다.",
-        confirmButtonColor: "#7F58EC",
-        confirmButtonText: "확인",
-      });
+    if (!user) {
+      if(window.innerWidth>414){
+        dispatch(guideGuests(true));
+      }else{
+        history.push("/login");
+      };
       return;
     }
     //delete API 요청에 필요한 collectId가 담긴 배열
@@ -178,6 +180,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.collection = action.payload.collection;
       }),
+    [GUIDE_GUESTS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_opened = action.payload.is_opened;
+      }),
   },
   initialState
 );
@@ -187,6 +193,7 @@ const actionCreators = {
   getCollectionDB,
   toggleLikeDB,
   deleteCollectionDB,
+  guideGuests,
 };
 
 export { actionCreators };
