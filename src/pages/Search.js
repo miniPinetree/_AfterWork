@@ -221,11 +221,15 @@ const Main = styled.div`
     margin-bottom: 20px;
   }
   @media only screen and (max-width: 414px) {
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 15px;
     & .wrap {
       margin-right: 10px;
       margin-bottom: 10px;
     }
+  }
+  @media only screen and (max-width: 375px) {
+    padding: 0;
   }
 `;
 
