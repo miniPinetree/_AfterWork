@@ -50,12 +50,6 @@ function PostCard(props) {
               <TextInfo>
                 {/* 인기도, 작성자, 지역 표시 */}
                 <div>
-                  <LikeOutlined />
-                  <span style={{ marginLeft: '4px' }}>
-                    {post_info?.popularity}
-                  </span>
-                </div>
-                <div>
                   <span>{post_info?.author}</span>
                   {post_info?.author && post_info?.location ? (
                     <span> / </span>
@@ -64,14 +58,25 @@ function PostCard(props) {
                 </div>
               </TextInfo>
               <PriceInfo>
-                {/* 가격 정보 */}
-                {price && (
-                  <>
-                    <span style={{ fontWeight: '600' }}>{price[0]}</span>
-                    {price[0] !== '문의' ? <span>원</span> : null}
-                    {price[1]}
-                  </>
-                )}
+                <InfoBox>
+                  <div>
+                    {/* 가격 정보 */}
+                    {price && (
+                      <>
+                        <span style={{ fontWeight: '600' }}>{price[0]}</span>
+                        {price[0] !== '문의' ? <span>원</span> : null}
+                        {price[1]}
+                      </>
+                    )}
+                  </div>
+                  <div>
+                    {/* 좋아요 갯수 */}
+                    <LikeOutlined style={{ color: '#7F58EC' }} />
+                    <span style={{ marginLeft: '4px', color: '#7F58EC' }}>
+                      {post_info?.popularity}
+                    </span>
+                  </div>
+                </InfoBox>
               </PriceInfo>
             </div>
           </TextBox>
@@ -88,13 +93,13 @@ const CardWrap = styled.div`
   border-radius: 10px;
   box-shadow: 0px 10px 15px #e0e0e0;
   max-width: 240px;
-  height: 340px;
+  height: 320px;
   cursor: pointer;
   position: relative;
   @media only screen and (max-width: 414px) {
     margin-top: 11.27px;
     max-width: 162px;
-    height: 249.73px;
+    height: 229.73px;
     margin-bottom: 20px;
   }
 `;
@@ -118,8 +123,9 @@ const TextBox = styled.div`
   & strong {
     font-size: 15px;
     font-family: 'Noto Sans CJK KR';
+    font-weight: 600;
     letter-spacing: -0.45px;
-    color: #000;
+    color: #333;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -134,8 +140,8 @@ const TextBox = styled.div`
   }
   @media only screen and (max-width: 414px) {
     & strong {
-      font-size: 12px;
-      letter-spacing: -0.36px;
+      font-size: 11px;
+      letter-spacing: -0.22px;
     }
   }
 `;
@@ -162,44 +168,54 @@ const TitleWrap = styled.div`
   }
 `;
 
-const SiteName = styled.span`
+const SiteName = styled.div`
   position: absolute;
-  top: 5px;
-  padding: 3px;
+  top: 14px;
+  padding: 1px 3px;
   box-sizing: border-box;
-  border-radius: 14px;
   font-size: 13px;
   letter-spacing: -0.39px;
-  color: #ffffff;
-  background: transparent linear-gradient(124deg, #7f58ec 0%, #5c5ce3 100%) 0%
-    0% no-repeat padding-box;
+  color: #7f58ec;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #7f58ec66;
+  border-radius: 3px;
   @media only screen and (max-width: 414px) {
     font-size: 9px;
     letter-spacing: -0.3px;
+    top: 7px;
+    left: 8px;
   }
 `;
 
 const TextInfo = styled.div`
   font-size: 13px;
   letter-spacing: -0.39px;
-  color: #595959;
+  color: #666;
   display: flex;
   flex-direction: column;
   line-height: 2.1;
-  height: 54px;
+  height: 27px;
   overflow: hidden;
   margin-top: -18.11px;
   @media only screen and (max-width: 414px) {
     font-size: 9px;
-    letter-spacing: -0.3px;
-    height: 42px;
+    letter-spacing: -0.18px;
+    height: 21px;
     overflow: hidden;
   }
 `;
-const PriceInfo = styled.div`
-  color: #000;
+const InfoBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  letter-spacing: -0.42px;
   @media only screen and (max-width: 414px) {
-    font-size: 11px;
+    font-size: 10px;
+    letter-spacing: -0.2px;
   }
 `;
+const PriceInfo = styled.div`
+  color: #333;
+`;
+
 export default PostCard;

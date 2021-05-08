@@ -18,6 +18,7 @@ function Banner(props) {
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
+    pauseOnHover: false,
   };
   return (
     <>
@@ -83,7 +84,7 @@ const Main = styled.div`
 
 const Section = styled.div`
   width: 100%;
-  height: 670px;
+  height: 681px;
   background: transparent
     linear-gradient(
       180deg,
@@ -105,23 +106,23 @@ const Container = styled.div`
   margin: 0 auto;
   position: relative;
   @media only screen and (max-width: 414px) {
-    margin: 0 20px;
+    margin: 0 17px;
   }
 `;
 
 const TitleBox = styled.div`
   max-width: 484px;
   letter-spacing: -1.11px;
-  color: #000;
-  font: normal normal normal 37px/55px Noto Sans CJK KR;
+  color: #333;
+  font: normal normal 800 37px/55px NanumSquare;
   position: absolute;
-  top: 78px;
+  top: 99px;
   line-height: 1.4;
   @media only screen and (max-width: 414px) {
     width: auto;
     font-size: 16px;
     letter-spacing: -0.48px;
-    color: #000;
+    color: #333;
     position: absolute;
     top: 32px;
   }

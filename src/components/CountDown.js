@@ -96,8 +96,8 @@ function CountDown() {
 }
 
 const Timer = styled.div`
-  width: 357px;
-  max-width: 357px;
+  width: 364px;
+  max-width: 364px;
   height: 102px;
   display: flex;
   align-items: center;
@@ -123,7 +123,7 @@ const OffTimeTitle = styled.div`
   font-weight: 600;
   font-family: 'Noto Sans CJK KR';
   letter-spacing: -0.54px;
-  color: #000000;
+  color: #333;
   @media only screen and (max-width: 414px) {
     font-size: 9px;
     letter-spacing: -0.27px;
@@ -133,7 +133,7 @@ const OffTimeCnt = styled.div`
   margin-top: 8px;
   font-size: 32px;
   font-weight: bold;
-  color: #000;
+  color: #333;
   font-family: 'Noto Sans CJK KR';
   & span {
     display: inline-block;
@@ -152,8 +152,8 @@ const OffTimeCnt = styled.div`
 `;
 
 const SettingBox = styled.div`
-  width: 357px;
-  max-width: 357px;
+  width: 364px;
+  max-width: 364px;
   height: 102px;
   display: flex;
   align-items: center;
@@ -169,7 +169,7 @@ const SettingBox = styled.div`
     font-weight: 600;
     font-family: 'Noto Sans CJK KR';
     letter-spacing: -0.54px;
-    color: #000000;
+    color: #333;
   }
   & button {
     margin-top: 12px;

@@ -55,7 +55,7 @@ function SideBar(props) {
 }
 const Wrap = styled.div`
   background: #f6f6f6 0% 0% no-repeat padding-box;
-  color: #000000;
+  color: #333;
   @media only screen and (max-width: 414px) {
     display: none;
   }
@@ -82,7 +82,7 @@ const Title = styled.div`
   margin-top: 44px;
   font-size: 23px;
   font-weight: bold;
-  color: #000;
+  color: #333;
   letter-spacing: -0.69px;
 `;
 const List = styled.ul`
@@ -112,8 +112,8 @@ const List = styled.ul`
         display: flex;
         width: 8px;
         height: 8px;
-        border-top: 1px solid #000;
-        border-right: 1px solid #000;
+        border-top: 1px solid #333;
+        border-right: 1px solid #333;
         transform: rotate(45deg);
       }
     }
@@ -131,8 +131,8 @@ const List = styled.ul`
       display: flex;
       width: 8px;
       height: 8px;
-      border-top: 1px solid #000;
-      border-right: 1px solid #000;
+      border-top: 1px solid #333;
+      border-right: 1px solid #333;
       transform: rotate(45deg);
     }
   }

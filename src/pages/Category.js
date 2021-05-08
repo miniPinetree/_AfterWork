@@ -149,7 +149,7 @@ function Category(props) {
 }
 const Container = styled.div`
   display: flex;
-  color: #000;
+  color: #333;
 `;
 
 const MainContainer = styled.div`
@@ -157,8 +157,8 @@ const MainContainer = styled.div`
   margin-left: 31px;
   position: relative;
   @media only screen and (max-width: 414px) {
-    width: 100%;
-    margin: 0 10px;
+    width: 92%;
+    margin: 0 auto;
     min-height: 600px;
   }
 `;
@@ -198,10 +198,12 @@ const Filter = styled.div`
 const Title = styled.div`
   font-size: 16px;
   font-family: Noto Sans CJK KR;
-  color: #000;
+  color: #333;
   cursor: default;
+  letter-spacing: -0.48px;
   @media only screen and (max-width: 414px) {
     font-size: 12px;
+    letter-spacing: -0.24px;
   }
 `;
 
@@ -218,6 +220,7 @@ const Main = styled.div`
     margin-bottom: 20px;
   }
   @media only screen and (max-width: 414px) {
+    justify-content: center;
     & .wrap {
       margin-right: 10px;
       margin-bottom: 10px;

@@ -64,7 +64,7 @@ const Wrap = styled.div`
   margin: 75px 0;
   cursor: default;
   @media only screen and (max-width: 414px) {
-    margin: 55px 20px;
+    margin: 55px 17px;
   }
 `;
 
@@ -74,7 +74,7 @@ const TitleContainer = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  color: #000;
+  color: #333;
 `;
 const Title = styled.div`
   font-size: 20px;
@@ -88,7 +88,7 @@ const Title = styled.div`
 const CarouselContainer = styled.div`
   max-width: 1004px;
   margin: 20px auto;
-  color: #000;
+  color: #333;
   position: relative;
   cursor: default;
 `;

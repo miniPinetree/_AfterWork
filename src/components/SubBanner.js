@@ -30,11 +30,11 @@ function SubBanner(props) {
             value={search}
             style={{
               borderRadius: '29px',
-              fontSize: '20px',
+              fontSize: '18px',
               letterSpacing: '-0.6px',
-              color: '#bdbdbd',
+              color: '#666',
               boxSizing: 'border-box',
-              padding: '9px 27px 12px 27px',
+              padding: '8px 27px 10px 27px',
             }}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -69,7 +69,7 @@ const Wrap = styled.div`
 const InputBox = styled.div`
   width: 512px;
   max-width: 512px;
-  height: 50px;
+  height: 48px;
   box-sizing: border-box;
   margin: 0 auto;
 `;
