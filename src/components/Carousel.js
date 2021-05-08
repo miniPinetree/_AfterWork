@@ -40,6 +40,7 @@ function Carousel(props) {
           slidesToShow: category ? 3 : 2,
           slidesToScroll: category ? 3 : 2,
           slidesPerRow: category ? 1 : 2,
+          dots: true,
         },
       },
     ],

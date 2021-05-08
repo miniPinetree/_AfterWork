@@ -64,9 +64,9 @@ const Wrap = styled.div`
 const SideBox = styled.div`
   position: sticky;
   width: 433px;
-  top: 60px;
+  top: 160px;
   left: 0;
-  z-index: 100;
+  z-index: 3;
   cursor: default;
 `;
 

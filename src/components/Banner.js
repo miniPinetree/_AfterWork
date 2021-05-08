@@ -3,35 +3,83 @@ import styled from 'styled-components';
 import Permit from '../shared/Permit';
 import CountDown from './CountDown';
 import SearchInput from './SearchInput';
+import Slider from 'react-slick';
+import '../../node_modules/slick-carousel/slick/slick.css';
+import '../../node_modules/slick-carousel/slick/slick-theme.css';
 
 function Banner(props) {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
+  };
   return (
     <>
-      <Section>
-        <Container>
-          {/* 회원일때만 퇴근 시간을 랜더링하므로 Permit으로 감싸줌 */}
-          <Permit>
-            {/* 퇴근시간 카운트 다운 */}
-            <CountDown />
-          </Permit>
-          {/* 검색 창 */}
+      <Main>
+        <Slider {...settings}>
+          <Section>
+            <Container>
+              {/* 회원일때만 퇴근 시간을 랜더링하므로 Permit으로 감싸줌 */}
+              <Permit>
+                {/* 퇴근시간 카운트 다운 */}
+                <CountDown />
+              </Permit>
+              <TitleBox>
+                <span>
+                  <strong>
+                    퇴근하는 순간은 누구나 기다린다
+                    <br />
+                    퇴근하고 뭐 할지는
+                    <br />
+                    직장에서 정해야 제맛인 법
+                  </strong>
+                </span>
+              </TitleBox>
+            </Container>
+          </Section>
+          <Section>
+            <Container>
+              {/* 회원일때만 퇴근 시간을 랜더링하므로 Permit으로 감싸줌 */}
+              <Permit>
+                {/* 퇴근시간 카운트 다운 */}
+                <CountDown />
+              </Permit>
+              {/* 검색 창 */}
+
+              <SearchInput />
+              <TitleBox>
+                <span>
+                  <strong>
+                    123
+                    <br />
+                    456
+                    <br />
+                    789
+                  </strong>
+                </span>
+              </TitleBox>
+            </Container>
+          </Section>
+        </Slider>
+        {/* 검색 창 */}
+        <Wrap>
           <SearchInput />
-          <TitleBox>
-            <span>
-              <strong>
-                퇴근하는 순간은 누구나 기다린다
-                <br />
-                퇴근하고 뭐 할지는
-                <br />
-                직장에서 정해야 제맛인 법
-              </strong>
-            </span>
-          </TitleBox>
-        </Container>
-      </Section>
+        </Wrap>
+      </Main>
     </>
   );
 }
+
+const Main = styled.div`
+  width: 100%;
+  position: relative;
+`;
 
 const Section = styled.div`
   width: 100%;
@@ -47,6 +95,9 @@ const Section = styled.div`
     )
     0% 0% no-repeat padding-box;
   cursor: default;
+  @media only screen and (max-width: 414px) {
+    height: 340px;
+  }
 `;
 
 const Container = styled.div`
@@ -74,6 +125,10 @@ const TitleBox = styled.div`
     position: absolute;
     top: 32px;
   }
+`;
+const Wrap = styled.div`
+  max-width: 1004px;
+  margin: 0 auto;
 `;
 
 export default Banner;

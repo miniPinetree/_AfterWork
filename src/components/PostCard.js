@@ -94,7 +94,8 @@ const CardWrap = styled.div`
   @media only screen and (max-width: 414px) {
     margin-top: 11.27px;
     max-width: 162px;
-    height: 244.73px;
+    height: 249.73px;
+    margin-bottom: 20px;
   }
 `;
 const Img = styled.img`

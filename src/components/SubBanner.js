@@ -54,6 +54,9 @@ function SubBanner(props) {
 const Wrap = styled.div`
   width: 100%;
   height: 100px;
+  position: sticky;
+  top: 60px;
+  z-index: 3;
   background: transparent linear-gradient(102deg, #7f58ec 0%, #5c5ce3 100%) 0%
     0% no-repeat padding-box;
   display: flex;

@@ -8,6 +8,7 @@ import InfinityScroll from '../shared/InfinityScroll';
 import SubBanner from '../components/SubBanner';
 import PostCard from '../components/PostCard';
 import SideBar from '../components/SideBar';
+import UpBtn from '../elements/UpBtn';
 import box from '../shared/images/box.png';
 
 function Search(props) {
@@ -57,6 +58,7 @@ function Search(props) {
     <>
       {keyword ? (
         <>
+          <UpBtn />
           <SubBanner />
           <Container>
             <SideBar />
