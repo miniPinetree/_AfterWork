@@ -107,7 +107,7 @@ const PrevBtn = styled.button`
   transform: translate(-50%, -50%);
   margin-top: -20px;
   left: -50px;
-  @media only screen and (max-width: 414px) {
+  @media only screen and (max-width: 1024px) {
     display: none;
   }
 `;
@@ -125,7 +125,7 @@ const NextBtn = styled.button`
   transform: translate(-50%, -50%);
   margin-top: -20px;
   right: -50px;
-  @media only screen and (max-width: 414px) {
+  @media only screen and (max-width: 1024px) {
     display: none;
   }
 `;

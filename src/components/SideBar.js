@@ -68,6 +68,10 @@ const SideBox = styled.div`
   left: 0;
   z-index: 3;
   cursor: default;
+  @media only screen and (max-width: 1024px) {
+    width: auto;
+    max-width: 433px;
+  }
 `;
 
 const Container = styled.div`
@@ -100,7 +104,7 @@ const List = styled.ul`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 59%;
+    width: 255.37px;
     height: 49px;
     padding: 8px 13px;
 

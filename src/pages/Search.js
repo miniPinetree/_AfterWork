@@ -162,6 +162,11 @@ const MainContainer = styled.div`
     margin: 0 auto;
     min-height: 600px;
   }
+  @media only screen and (max-width: 372px) {
+    width: 100%;
+    margin: 0 5px;
+    min-height: 600px;
+  }
 `;
 const MainHeader = styled.div`
   margin: 35px 0 20px 10px;
@@ -228,7 +233,7 @@ const Main = styled.div`
       margin-bottom: 10px;
     }
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 407px) {
     padding: 0;
   }
 `;
