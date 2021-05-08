@@ -123,6 +123,7 @@ function Main(props) {
 }
 
 const CarouselWrap = styled.div`
+  margin-top: -250px;
   @media only screen and (max-width: 414px) {
     margin-top: -160px;
   }
