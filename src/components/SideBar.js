@@ -31,7 +31,7 @@ function SideBar(props) {
                     key={idx}
                     id={val.categoryId}
                     onClick={() => {
-                      history.push(`/category/${val.categoryId}`);
+                      history.replace(`/category/${val.categoryId}`);
                       window.scrollTo({ top: 0, left: 0 });
                     }}
                     // 해당 카테고리 페이지가 어떤 것인지 사이드바에서 표시
