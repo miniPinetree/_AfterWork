@@ -123,9 +123,10 @@ function Main(props) {
 }
 
 const CarouselWrap = styled.div`
-  margin-top: -250px;
   @media only screen and (max-width: 414px) {
-    margin-top: -160px;
+    margin-top: -30px;
+    padding: 1px 0;
+    background: #fafafa 0% 0% no-repeat padding-box;
   }
 `;
 

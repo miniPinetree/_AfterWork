@@ -108,13 +108,13 @@ const Timer = styled.div`
   background: #fff;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  box-shadow: 3px 10px 15px #f3e8f6;
+  box-shadow: 0px 3px 10px #0000001a;
+  z-index: 3;
   @media only screen and (max-width: 414px) {
     width: 172px;
     max-width: 172px;
     height: 58px;
-    top: 133px;
-    left: 0;
+    right: 0px;
     border-radius: 7px;
   }
 `;
@@ -164,6 +164,8 @@ const SettingBox = styled.div`
   background: #fff;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: 0px 3px 10px #0000001a;
+  z-index: 3;
   & span {
     font-size: 18px;
     font-weight: 600;
@@ -196,8 +198,7 @@ const SettingBox = styled.div`
     width: 172px;
     max-width: 172px;
     height: 62px;
-    top: 133px;
-    left: 0;
+    right: 0px;
     border-radius: 7px;
     & span {
       font-size: 12px;

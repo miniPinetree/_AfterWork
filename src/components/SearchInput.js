@@ -58,7 +58,7 @@ const InputBox = styled.div`
   max-width: 492px;
   height: 45px;
   position: absolute;
-  top: 367px;
+  top: 475.71px;
   box-sizing: border-box;
   & .ant-input-affix-wrapper {
     border: 1px solid #7f58ec;
