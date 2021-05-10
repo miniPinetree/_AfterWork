@@ -19,7 +19,7 @@ function Banner(props) {
     slidesToScroll: 1,
     fade: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 6000,
     arrows: false,
     pauseOnHover: false,
   };

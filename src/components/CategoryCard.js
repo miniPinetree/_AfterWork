@@ -17,7 +17,7 @@ function CategoryCard(props) {
         }}
       >
         <Img
-          src={'props.imgUrl'}
+          src={props.imgUrl}
           alt='category-img'
           onError={(e) => {
             e.target.onerror = null;
@@ -43,7 +43,7 @@ const CardWrap = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 187px;
-  border-radius: 10px;
+  border-radius: 50%;
   box-shadow: 0px 10px 10px #e6e6e6;
   &:hover {
     opacity: 0.7;
