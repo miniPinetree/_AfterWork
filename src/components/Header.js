@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configStore";
@@ -92,7 +92,7 @@ const Header = () => {
 const Wrap = styled.div`
     width: 100%;
     height: 60px;
-    box-shadow: 0px 3px 16px rgb(24 25 31 / 10%);
+    border-bottom: 1px solid #dbdbdb;
     position: sticky;
     top: 0px;
     padding: 14px 0;

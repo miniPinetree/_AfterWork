@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import logo from "../shared/images/footer.png";
+
+import { useSelector } from "react-redux";
 import { debounce } from "lodash";
+import { history } from "../redux/configStore";
 
 const Footer = () => {
     const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -36,9 +38,10 @@ const Footer = () => {
                     </A>
                     &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                     <A
-                        href="https://www.notion.so/95091a37dad845a4be152b34628e8b19"
-                        target="#"
-                        rel="noreferrer noopener"
+                        onClick={() => {
+                            history.push("/privacy");
+                            window.scrollTo({ top: 0, left: 0 });
+                        }}
                     >
                         개인정보 처리 방침
                     </A>

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { useDispatch } from "react-redux";
 import { history } from "../redux/configStore";
@@ -18,7 +18,7 @@ const UserModal = ({ close }, props) => {
         return () => {
             window.removeEventListener("click", handleClickOutside);
         };
-    }, []);
+    }, [handleClickOutside]);
 
     return (
         <UserBody ref={modal}>
