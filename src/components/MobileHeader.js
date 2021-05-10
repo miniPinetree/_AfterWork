@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { history } from "../redux/configStore";
+
 import hamburgerIcon from "../shared/images/text-align-justified.svg";
 import searchIcon from "../shared/images/search.svg";
 import homeIcon from "../shared/images/home.svg";
+import header from "../shared/images/mobileHeader.png";
 import MoDrawer from "./MobileDrawer";
 
 const MoHeader = (props) => {
@@ -53,18 +55,22 @@ const MoHeader = (props) => {
                                 ></img>
                             </Imgs>
                             <Logo>
-                                <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
+                                <ImgLogo
+                                    src={header}
+                                    onClick={() => history.push("/")}
+                                    alt="mobile header logo"
+                                ></ImgLogo>
                             </Logo>
                         </>
                     )}
                     <Img>
-                        <img
+                        <SearchImg
                             src={searchIcon}
                             alt="search"
                             onClick={() => {
                                 history.replace({ pathname: "/search", state: "검색" });
                             }}
-                        ></img>
+                        ></SearchImg>
                     </Img>
                 </Body>
             </Wrap>
@@ -111,9 +117,18 @@ const Img = styled.div`
     width: 24px;
 `;
 
+const ImgLogo = styled.img`
+    width: 160px;
+    margin-top: -4px;
+`;
+
 const Imgs = styled.div`
     display: flex;
     justify-content: space-between;
+`;
+
+const SearchImg = styled.img`
+    margin-top: -8px;
 `;
 
 export default MoHeader;

@@ -89,6 +89,11 @@ const Content = styled.span`
     opacity: 1;
     display: block;
     margin-bottom: 8px;
+    &:hover {
+        color: #7f58ec;
+        cursor: pointer;
+        font-weight: bold;
+    }
 `;
 
 export default UserModal;

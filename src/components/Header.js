@@ -9,6 +9,7 @@ import { debounce } from "lodash";
 import LoginModal from "./LoginModal";
 import MoHeader from "./MobileHeader";
 import UserModal from "./UserModal";
+import header from "../shared/images/header.png";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -62,12 +63,12 @@ const Header = () => {
                     <Body>
                         <div>
                             <Logo
+                                src={header}
                                 onClick={() => {
                                     history.push("/");
                                 }}
-                            >
-                                퇴근하고 뭐하지?
-                            </Logo>
+                                alt="header logo"
+                            />
                         </div>
 
                         <div>
@@ -108,10 +109,8 @@ const Body = styled.div`
     margin: 0 auto;
 `;
 
-const Logo = styled.span`
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: -0.6px;
+const Logo = styled.img`
+    width: 160px;
     cursor: pointer;
     height: 100%;
     margin-right: 24px;
