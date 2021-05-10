@@ -13,7 +13,6 @@ const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const cookie = getCookie("is_login");
-
   if(!cookie){
     history.replace('/');
   };
