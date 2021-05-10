@@ -10,7 +10,7 @@ function CountDown() {
   const today = moment().format('YYYY/MM/DD');
 
   // 차이(퇴근시간 - 현재시간)
-  let difference = +new Date(today + offTime) - +new Date();
+  let difference = +new Date(`${today} ${offTime}`) - +new Date();
   // 남은 시간 계산
   const calculateTimeLeft = () => {
     let timeLeft = {};
