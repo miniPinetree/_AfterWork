@@ -19,7 +19,7 @@ function SearchHistory({ keywords, onRemoveKeyword, onClearKeywords }) {
                         <KeywordContainer key={idx}>
                             <Keyword
                                 onClick={() => {
-                                    history.push(`/find/search?keyword=${p}`);
+                                    history.replace(`/find/search?keyword=${p}`);
                                 }}
                             >
                                 {p}
