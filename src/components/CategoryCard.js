@@ -31,7 +31,7 @@ function CategoryCard(props) {
   );
 }
 const CardWrap = styled.div`
-  max-width: 187px;
+  max-width: 157px;
   height: 240px;
   border-radius: 10px;
   cursor: pointer;
@@ -42,7 +42,7 @@ const CardWrap = styled.div`
 `;
 const Img = styled.img`
   width: 100%;
-  height: 187px;
+  height: 157px;
   border-radius: 50%;
   box-shadow: 0px 10px 10px #e6e6e6;
   &:hover {

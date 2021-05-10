@@ -62,7 +62,7 @@ function Main(props) {
     <>
       <Banner />
       <CarouselWrap>
-        <Carousel text='카테고리' size='5' category>
+        <Carousel text='카테고리' size='6' category>
           {category_list.map((val, idx) => {
             return <CategoryCard key={idx + 'category'} {...val} />;
           })}

@@ -152,7 +152,7 @@ const Section = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   cursor: default;
   @media only screen and (max-width: 414px) {
-    height: 230px;
+    height: 250px;
   }
 `;
 
@@ -179,11 +179,8 @@ const TitleBox = styled.div`
     position: absolute;
     top: 42px;
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 406px) {
     font-size: 15px;
-    letter-spacing: -0.4px;
-    position: absolute;
-    top: 42px;
   }
 `;
 
@@ -201,13 +198,18 @@ const SubTitleBox = styled.div`
     top: 135px;
     width: 156px;
   }
+  @media only screen and (max-width: 375px) {
+    width: 151px;
+    font-size: 9px;
+  }
 `;
 
 const ImgBox = styled.div`
   max-width: 530px;
   position: absolute;
   top: 25.5px;
-  right: -100px;
+  right: 0;
+  right: -30px;
   & img {
     width: 100%;
   }
@@ -215,7 +217,7 @@ const ImgBox = styled.div`
     right: 0;
   }
   @media only screen and (max-width: 414px) {
-    max-width: 185.16px;
+    max-width: 195.16px;
     right: 0;
     top: 33.32px;
   }

@@ -61,7 +61,16 @@ const InputBox = styled.div`
   top: 475.71px;
   box-sizing: border-box;
   & .ant-input-affix-wrapper {
-    border: 1px solid #7f58ec;
+    border: 2px solid #7f58ec;
+    &:hover {
+      border: 2px solid #7f58ec !important;
+    }
+  }
+  & .ant-input-affix-wrapper-focused {
+    border: 2px solid #7f58ec;
+    &:hover {
+      border: 2px solid #7f58ec !important;
+    }
   }
   @media only screen and (max-width: 414px) {
     display: none;
