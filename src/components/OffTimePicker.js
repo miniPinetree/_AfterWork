@@ -21,6 +21,7 @@ const OffTimePicker=(props)=>{
   defaultOpenValue={moment(user.offTime, "HH:mm:ss")}
   defaultValue={moment(user.offTime, "HH:mm:ss")}
   disabledHours={() => range(0, 15)}
+  showNow=false
 />
 :
 <TimePicker
@@ -30,6 +31,7 @@ const OffTimePicker=(props)=>{
   }}
   defaultOpenValue={moment("18:00:00", "HH:mm:ss")}
   disabledHours={() => range(0, 15)}
+  showNow=false
 />
 }
   </>);

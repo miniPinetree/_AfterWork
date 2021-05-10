@@ -7,6 +7,7 @@ import {
   LocationBox,
   OffTimePicker,
 } from "../components";
+import {history} from "../redux/configStore";
 import { getCookie } from "../shared/Cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
