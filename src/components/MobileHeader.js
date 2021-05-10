@@ -24,45 +24,47 @@ const MoHeader = (props) => {
         <>
             <Wrap>
                 <Body>
-                    <Imgs>
-                        <img src={hamburgerIcon} alt="hamburger menu" onClick={drawerOpen}></img>
-                        {push === "PUSH" && titles !== undefined ? (
-                            <img
-                                src={homeIcon}
-                                alt="home"
-                                onClick={() => {
-                                    history.push("/");
-                                }}
-                            ></img>
-                        ) : push === "POP" && titles !== undefined ? (
-                            <img
-                                src={homeIcon}
-                                alt="home"
-                                onClick={() => {
-                                    history.push("/");
-                                }}
-                            ></img>
-                        ) : null}
-                    </Imgs>
-                    {push === "PUSH" && titles !== undefined ? (
-                        <Logo isState>titles</Logo>
-                    ) : push === "POP" && titles !== undefined ? (
-                        <Logo isState>titles</Logo>
+                    {titles !== undefined ? (
+                        <>
+                            <Imgs>
+                                <img
+                                    src={hamburgerIcon}
+                                    alt="hamburger menu"
+                                    onClick={drawerOpen}
+                                ></img>
+
+                                <img
+                                    src={homeIcon}
+                                    alt="home"
+                                    onClick={() => {
+                                        history.push("/");
+                                    }}
+                                ></img>
+                            </Imgs>
+                            <Logo isState>{titles}</Logo>
+                        </>
                     ) : (
-                        <Logo>
-                            <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
-                        </Logo>
+                        <>
+                            <Imgs>
+                                <img
+                                    src={hamburgerIcon}
+                                    alt="hamburger menu"
+                                    onClick={drawerOpen}
+                                ></img>
+                            </Imgs>
+                            <Logo>
+                                <span onClick={() => history.push("/")}>퇴근하고뭐하지?</span>
+                            </Logo>
+                        </>
                     )}
                     <Img>
-                        {titles === "검색" ? null : (
-                            <img
-                                src={searchIcon}
-                                alt="search"
-                                onClick={() => {
-                                    history.push({ pathname: "/search", state: "검색" });
-                                }}
-                            ></img>
-                        )}
+                        <img
+                            src={searchIcon}
+                            alt="search"
+                            onClick={() => {
+                                history.replace({ pathname: "/search", state: "검색" });
+                            }}
+                        ></img>
                     </Img>
                 </Body>
             </Wrap>
