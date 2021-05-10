@@ -18,8 +18,10 @@ function UpBtn() {
           size='large'
           style={{
             background:
-              'transparent linear-gradient(124deg, #7f58ec 0%, #5c5ce3 100%) 0% 0% no-repeat padding-box',
+              'linear-gradient(rgb(180, 139, 255) 0%, rgb(180, 139, 255) 50%, rgb(207, 139, 255) 100%)',
             border: 'none',
+            width: '100%',
+            height: '100%',
           }}
         />
       </BtnWrap>
@@ -29,8 +31,10 @@ function UpBtn() {
 
 const BtnWrap = styled.div`
   position: fixed;
-  bottom: 5%;
-  right: 5%;
+  width: 50px;
+  height: 50px;
+  bottom: 10%;
+  right: 2%;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
