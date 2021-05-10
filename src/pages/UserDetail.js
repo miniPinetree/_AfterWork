@@ -3,18 +3,25 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import { history } from "../redux/configStore";
 import { Title, TextBtn } from "../elements";
-import { UserInfo, InterestBox, LocationBox, OffTimePicker } from "../components";
+import {UserInfo,InterestBox,LocationBox,OffTimePicker} from "../components";
+import { getCookie } from "../shared/Cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { actionCreators as userActions } from "../redux/modules/user";
 
 const UserDetail = (props) => {
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.user.user);
-    const [search, setSearch] = useState("");
-    const [locations, setLocations] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [time, setTime] = useState("");
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  const cookie = getCookie("is_login");
+
+  if(!cookie){
+    history.replace('/');
+  };
+
+  const [search, setSearch] = useState("");
+  const [locations, setLocations] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [time, setTime] = useState("");
 
     const setValue = () => {
         dispatch(preferActions.updateUserPreferDB(locations, categories, time));
