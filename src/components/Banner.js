@@ -3,50 +3,157 @@ import styled from 'styled-components';
 import Permit from '../shared/Permit';
 import CountDown from './CountDown';
 import SearchInput from './SearchInput';
+import Slider from 'react-slick';
+import '../../node_modules/slick-carousel/slick/slick.css';
+import '../../node_modules/slick-carousel/slick/slick-theme.css';
+import img from '../shared/images/banner1.png';
+import img2 from '../shared/images/banner2.png';
+import img3 from '../shared/images/banner3.png';
 
 function Banner(props) {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: true,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    arrows: false,
+    pauseOnHover: false,
+  };
   return (
     <>
-      <Section>
-        <Container>
-          {/* 회원일때만 퇴근 시간을 랜더링하므로 Permit으로 감싸줌 */}
-          <Permit>
-            {/* 퇴근시간 카운트 다운 */}
-            <CountDown />
-          </Permit>
-          {/* 검색 창 */}
+      <Main>
+        <Slider {...settings}>
+          <>
+            <Section>
+              <Container>
+                {/* 회원일때만 퇴근 시간을 랜더링하므로 Permit으로 감싸줌 */}
+                <Permit>
+                  {/* 퇴근시간 카운트 다운 */}
+                  <CountDown />
+                </Permit>
+                <div>
+                  <TitleBox>
+                    <span>
+                      <strong>
+                        퇴근하고 뭐 할지
+                        <br />
+                        고민될 땐
+                        <br />
+                        After Work
+                      </strong>
+                    </span>
+                  </TitleBox>
+                  <SubTitleBox>
+                    <span>
+                      퇴근하고 뭐하지?
+                      <br />
+                      모든 취미 클래스를 모아 볼 수 있는 After Work
+                    </span>
+                  </SubTitleBox>
+                  <ImgBox>
+                    <img src={img} alt='img' />
+                  </ImgBox>
+                </div>
+              </Container>
+            </Section>
+          </>
+          <>
+            <Section>
+              <Container>
+                {/* 회원일때만 퇴근 시간을 랜더링하므로 Permit으로 감싸줌 */}
+                <Permit>
+                  {/* 퇴근시간 카운트 다운 */}
+                  <CountDown />
+                </Permit>
+                <div>
+                  <TitleBox>
+                    <span>
+                      <strong>
+                        출근... 퇴근... 반복적인 삶
+                        <br />
+                        AfterWork에서
+                        <br />
+                        바꿔보자
+                      </strong>
+                    </span>
+                  </TitleBox>
+                  <SubTitleBox>
+                    <span>
+                      퇴근한 후에 하는 일은,
+                      <br />
+                      당신이 직장에서 어디까지
+                      <br />
+                      올라갈 수 있는지를 결정한다.
+                    </span>
+                  </SubTitleBox>
+                  <ImgBox>
+                    <img src={img2} alt='img2' />
+                  </ImgBox>
+                </div>
+              </Container>
+            </Section>
+          </>
+          <>
+            <Section>
+              <Container>
+                {/* 회원일때만 퇴근 시간을 랜더링하므로 Permit으로 감싸줌 */}
+                <Permit>
+                  {/* 퇴근시간 카운트 다운 */}
+                  <CountDown />
+                </Permit>
+                <div>
+                  <TitleBox>
+                    <span>
+                      <strong>
+                        퇴근 후 치맥 한잔 대신
+                        <br />
+                        After Work에서
+                        <br />
+                        취미 한번 추천받자!
+                      </strong>
+                    </span>
+                  </TitleBox>
+                  <SubTitleBox>
+                    <span>
+                      퇴근하는 순간은 누구나 기다린다
+                      <br />
+                      퇴근하고 뭐 할지는 직장에서 정해야 제맛인 법
+                    </span>
+                  </SubTitleBox>
+                  <ImgBox>
+                    <img src={img3} alt='img3' />
+                  </ImgBox>
+                </div>
+              </Container>
+            </Section>
+          </>
+        </Slider>
+        {/* 검색 창 */}
+        <Wrap>
           <SearchInput />
-          <TitleBox>
-            <span>
-              <strong>
-                퇴근하는 순간은 누구나 기다린다
-                <br />
-                퇴근하고 뭐 할지는
-                <br />
-                직장에서 정해야 제맛인 법
-              </strong>
-            </span>
-          </TitleBox>
-        </Container>
-      </Section>
+        </Wrap>
+      </Main>
     </>
   );
 }
 
+const Main = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
 const Section = styled.div`
   width: 100%;
-  height: 670px;
-  background: transparent
-    linear-gradient(
-      180deg,
-      rgba(160, 122, 244, 0.24) 0%,
-      rgba(159, 122, 243, 0.21) 27%,
-      rgba(159, 122, 243, 0.14) 67%,
-      rgba(203, 185, 245, 0.08) 87%,
-      rgba(255, 255, 255, 0.24) 100%
-    )
-    0% 0% no-repeat padding-box;
+  height: 615px;
+  background: #ffffff 0% 0% no-repeat padding-box;
   cursor: default;
+  @media only screen and (max-width: 414px) {
+    height: 250px;
+  }
 `;
 
 const Container = styled.div`
@@ -54,26 +161,70 @@ const Container = styled.div`
   margin: 0 auto;
   position: relative;
   @media only screen and (max-width: 414px) {
-    margin: 0 20px;
+    margin: 0 17px;
   }
 `;
 
 const TitleBox = styled.div`
   max-width: 484px;
-  letter-spacing: -1.11px;
-  color: #000;
-  font: normal normal normal 37px/55px Noto Sans CJK KR;
+  letter-spacing: -0.9px;
+  color: #333;
+  font-size: 45px;
   position: absolute;
-  top: 78px;
+  top: 99px;
   line-height: 1.4;
   @media only screen and (max-width: 414px) {
-    width: auto;
-    font-size: 16px;
-    letter-spacing: -0.48px;
-    color: #000;
+    font-size: 18px;
+    letter-spacing: -0.4px;
     position: absolute;
-    top: 32px;
+    top: 42px;
   }
+  @media only screen and (max-width: 406px) {
+    font-size: 15px;
+  }
+`;
+
+const SubTitleBox = styled.div`
+  width: 480px;
+  letter-spacing: -0.6px;
+  font-size: 20px;
+  color: #333;
+  position: absolute;
+  top: 314.73px;
+  @media only screen and (max-width: 414px) {
+    font-size: 11px;
+    letter-spacing: -0.33px;
+    position: absolute;
+    top: 135px;
+    width: 156px;
+  }
+  @media only screen and (max-width: 375px) {
+    width: 151px;
+    font-size: 9px;
+  }
+`;
+
+const ImgBox = styled.div`
+  max-width: 530px;
+  position: absolute;
+  top: 25.5px;
+  right: 0;
+  right: -30px;
+  & img {
+    width: 100%;
+  }
+  @media only screen and (max-width: 1160px) {
+    right: 0;
+  }
+  @media only screen and (max-width: 414px) {
+    max-width: 195.16px;
+    right: 0;
+    top: 33.32px;
+  }
+`;
+const Wrap = styled.div`
+  max-width: 1004px;
+  margin: 0 auto;
 `;
 
 export default Banner;

@@ -18,10 +18,9 @@ const MobileSearch = () => {
             return;
         }
         if (search && e.keyCode === 13) {
-            //엔터일때 부모의 addkeyword에 전달
             handleAddKeyword(search);
             setSearch("");
-            history.push(`/find/search?keyword=${search}`);
+            history.replace(`/find/search?keyword=${search}`);
         }
     };
 
@@ -33,6 +32,7 @@ const MobileSearch = () => {
         setKeywords(temp);
         localStorage.setItem("searchHistory", JSON.stringify(temp));
     };
+
     //단일 검색어 삭제
     const handleRemoveKeyword = (id) => {
         let temp = keywords.filter((thisKeyword, index) => {

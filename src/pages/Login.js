@@ -28,7 +28,7 @@ const Login = () => {
 
 const Body = styled.div`
     text-align: center;
-    margin: 180px 0;
+    margin: 40% 0;
 `;
 
 const Logo = styled.h4`

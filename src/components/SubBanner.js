@@ -30,11 +30,11 @@ function SubBanner(props) {
             value={search}
             style={{
               borderRadius: '29px',
-              fontSize: '20px',
+              fontSize: '18px',
               letterSpacing: '-0.6px',
-              color: '#bdbdbd',
+              color: '#666',
               boxSizing: 'border-box',
-              padding: '9px 27px 12px 27px',
+              padding: '8px 27px 10px 27px',
             }}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -54,6 +54,9 @@ function SubBanner(props) {
 const Wrap = styled.div`
   width: 100%;
   height: 100px;
+  position: sticky;
+  top: 60px;
+  z-index: 3;
   background: transparent linear-gradient(102deg, #7f58ec 0%, #5c5ce3 100%) 0%
     0% no-repeat padding-box;
   display: flex;
@@ -66,7 +69,7 @@ const Wrap = styled.div`
 const InputBox = styled.div`
   width: 512px;
   max-width: 512px;
-  height: 50px;
+  height: 48px;
   box-sizing: border-box;
   margin: 0 auto;
 `;

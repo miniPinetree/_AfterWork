@@ -9,7 +9,17 @@ import "./App.css";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configStore";
-import { MyPage, Main, UserDetail, Category, Search, About, Login, MobileSearch } from "../pages";
+import {
+    MyPage,
+    Main,
+    UserDetail,
+    Category,
+    Search,
+    About,
+    Login,
+    MobileSearch,
+    Privacy,
+} from "../pages";
 import { Header, Footer } from "../components";
 
 function App() {
@@ -29,6 +39,7 @@ function App() {
                 <Route path="/" exact component={Main} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/about" exact component={About} />
+                <Route path="/privacy" exact component={Privacy} />
                 <Route path="/category/:id" exact component={Category} />
                 <Route path="/mypage" exact component={MyPage} />
                 <Route path="/userdetail" exact component={UserDetail} />

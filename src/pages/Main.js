@@ -62,7 +62,7 @@ function Main(props) {
     <>
       <Banner />
       <CarouselWrap>
-        <Carousel text='카테고리' size='5' category>
+        <Carousel text='카테고리' size='6' category>
           {category_list.map((val, idx) => {
             return <CategoryCard key={idx + 'category'} {...val} />;
           })}
@@ -124,7 +124,9 @@ function Main(props) {
 
 const CarouselWrap = styled.div`
   @media only screen and (max-width: 414px) {
-    margin-top: -500px;
+    margin-top: -30px;
+    padding: 1px 0;
+    background: #fafafa 0% 0% no-repeat padding-box;
   }
 `;
 
@@ -132,7 +134,7 @@ const Wrap = styled.div`
   margin: 75px 0;
   cursor: default;
   @media only screen and (max-width: 414px) {
-    margin: 55px 20px;
+    margin: 55px 17px;
   }
 `;
 
@@ -142,7 +144,7 @@ const TitleContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: #000;
+  color: #333;
 `;
 const Title = styled.div`
   font-size: 20px;
@@ -156,7 +158,7 @@ const Title = styled.div`
 const EmptyList = styled.div`
   max-width: 1004px;
   margin: 20px auto;
-  color: #000;
+  color: #333;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -170,7 +172,7 @@ const EmptyList = styled.div`
     font-size: 18px;
     font-family: Noto Sans CJK KR;
     letter-spacing: -0.54px;
-    color: #676767;
+    color: #666;
   }
   & button {
     max-width: 165px;

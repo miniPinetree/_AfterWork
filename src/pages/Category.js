@@ -7,6 +7,7 @@ import InfinityScroll from '../shared/InfinityScroll';
 import SubBanner from '../components/SubBanner';
 import PostCard from '../components/PostCard';
 import SideBar from '../components/SideBar';
+import UpBtn from '../elements/UpBtn';
 import box from '../shared/images/box.png';
 
 function Category(props) {
@@ -61,6 +62,7 @@ function Category(props) {
 
   return (
     <>
+      <UpBtn />
       <SubBanner />
       <Container>
         <SideBar categoryId={category?.categoryId} />
@@ -147,7 +149,7 @@ function Category(props) {
 }
 const Container = styled.div`
   display: flex;
-  color: #000;
+  color: #333;
 `;
 
 const MainContainer = styled.div`
@@ -155,8 +157,13 @@ const MainContainer = styled.div`
   margin-left: 31px;
   position: relative;
   @media only screen and (max-width: 414px) {
+    width: 92%;
+    margin: 0 auto;
+    min-height: 600px;
+  }
+  @media only screen and (max-width: 372px) {
     width: 100%;
-    margin: 0 10px;
+    margin: 0 5px;
     min-height: 600px;
   }
 `;
@@ -196,10 +203,12 @@ const Filter = styled.div`
 const Title = styled.div`
   font-size: 16px;
   font-family: Noto Sans CJK KR;
-  color: #000;
+  color: #333;
   cursor: default;
+  letter-spacing: -0.48px;
   @media only screen and (max-width: 414px) {
     font-size: 12px;
+    letter-spacing: -0.24px;
   }
 `;
 
@@ -216,10 +225,15 @@ const Main = styled.div`
     margin-bottom: 20px;
   }
   @media only screen and (max-width: 414px) {
+    justify-content: space-between;
+    padding: 0 15px;
     & .wrap {
       margin-right: 10px;
       margin-bottom: 10px;
     }
+  }
+  @media only screen and (max-width: 407px) {
+    padding: 0;
   }
 `;
 

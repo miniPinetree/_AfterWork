@@ -96,8 +96,8 @@ function CountDown() {
 }
 
 const Timer = styled.div`
-  width: 357px;
-  max-width: 357px;
+  width: 364px;
+  max-width: 364px;
   height: 102px;
   display: flex;
   align-items: center;
@@ -108,13 +108,13 @@ const Timer = styled.div`
   background: #fff;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  box-shadow: 3px 10px 15px #f3e8f6;
+  box-shadow: 0px 3px 10px #0000001a;
+  z-index: 3;
   @media only screen and (max-width: 414px) {
     width: 172px;
     max-width: 172px;
     height: 58px;
-    top: 133px;
-    left: 0;
+    right: 0px;
     border-radius: 7px;
   }
 `;
@@ -123,7 +123,7 @@ const OffTimeTitle = styled.div`
   font-weight: 600;
   font-family: 'Noto Sans CJK KR';
   letter-spacing: -0.54px;
-  color: #000000;
+  color: #333;
   @media only screen and (max-width: 414px) {
     font-size: 9px;
     letter-spacing: -0.27px;
@@ -133,7 +133,7 @@ const OffTimeCnt = styled.div`
   margin-top: 8px;
   font-size: 32px;
   font-weight: bold;
-  color: #000;
+  color: #333;
   font-family: 'Noto Sans CJK KR';
   & span {
     display: inline-block;
@@ -152,8 +152,8 @@ const OffTimeCnt = styled.div`
 `;
 
 const SettingBox = styled.div`
-  width: 357px;
-  max-width: 357px;
+  width: 364px;
+  max-width: 364px;
   height: 102px;
   display: flex;
   align-items: center;
@@ -164,12 +164,14 @@ const SettingBox = styled.div`
   background: #fff;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: 0px 3px 10px #0000001a;
+  z-index: 3;
   & span {
     font-size: 18px;
     font-weight: 600;
     font-family: 'Noto Sans CJK KR';
     letter-spacing: -0.54px;
-    color: #000000;
+    color: #333;
   }
   & button {
     margin-top: 12px;
@@ -196,8 +198,7 @@ const SettingBox = styled.div`
     width: 172px;
     max-width: 172px;
     height: 62px;
-    top: 133px;
-    left: 0;
+    right: 0px;
     border-radius: 7px;
     & span {
       font-size: 12px;

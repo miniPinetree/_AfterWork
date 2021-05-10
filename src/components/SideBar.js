@@ -31,7 +31,7 @@ function SideBar(props) {
                     key={idx}
                     id={val.categoryId}
                     onClick={() => {
-                      history.push(`/category/${val.categoryId}`);
+                      history.replace(`/category/${val.categoryId}`);
                       window.scrollTo({ top: 0, left: 0 });
                     }}
                     // 해당 카테고리 페이지가 어떤 것인지 사이드바에서 표시
@@ -55,7 +55,7 @@ function SideBar(props) {
 }
 const Wrap = styled.div`
   background: #f6f6f6 0% 0% no-repeat padding-box;
-  color: #000000;
+  color: #333;
   @media only screen and (max-width: 414px) {
     display: none;
   }
@@ -64,10 +64,14 @@ const Wrap = styled.div`
 const SideBox = styled.div`
   position: sticky;
   width: 433px;
-  top: 60px;
+  top: 160px;
   left: 0;
-  z-index: 100;
+  z-index: 3;
   cursor: default;
+  @media only screen and (max-width: 1024px) {
+    width: auto;
+    max-width: 433px;
+  }
 `;
 
 const Container = styled.div`
@@ -82,7 +86,7 @@ const Title = styled.div`
   margin-top: 44px;
   font-size: 23px;
   font-weight: bold;
-  color: #000;
+  color: #333;
   letter-spacing: -0.69px;
 `;
 const List = styled.ul`
@@ -100,7 +104,7 @@ const List = styled.ul`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 59%;
+    width: 255.37px;
     height: 49px;
     padding: 8px 13px;
 
@@ -112,8 +116,8 @@ const List = styled.ul`
         display: flex;
         width: 8px;
         height: 8px;
-        border-top: 1px solid #000;
-        border-right: 1px solid #000;
+        border-top: 1px solid #333;
+        border-right: 1px solid #333;
         transform: rotate(45deg);
       }
     }
@@ -131,8 +135,8 @@ const List = styled.ul`
       display: flex;
       width: 8px;
       height: 8px;
-      border-top: 1px solid #000;
-      border-right: 1px solid #000;
+      border-top: 1px solid #333;
+      border-right: 1px solid #333;
       transform: rotate(45deg);
     }
   }

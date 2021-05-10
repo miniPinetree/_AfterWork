@@ -40,6 +40,7 @@ function Carousel(props) {
           slidesToShow: category ? 3 : 2,
           slidesToScroll: category ? 3 : 2,
           slidesPerRow: category ? 1 : 2,
+          dots: true,
         },
       },
     ],
@@ -63,7 +64,7 @@ const Wrap = styled.div`
   margin: 75px 0;
   cursor: default;
   @media only screen and (max-width: 414px) {
-    margin: 55px 20px;
+    margin: 55px 17px;
   }
 `;
 
@@ -73,7 +74,7 @@ const TitleContainer = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  color: #000;
+  color: #333;
 `;
 const Title = styled.div`
   font-size: 20px;
@@ -87,7 +88,7 @@ const Title = styled.div`
 const CarouselContainer = styled.div`
   max-width: 1004px;
   margin: 20px auto;
-  color: #000;
+  color: #333;
   position: relative;
   cursor: default;
 `;
@@ -106,7 +107,7 @@ const PrevBtn = styled.button`
   transform: translate(-50%, -50%);
   margin-top: -20px;
   left: -50px;
-  @media only screen and (max-width: 414px) {
+  @media only screen and (max-width: 1024px) {
     display: none;
   }
 `;
@@ -124,7 +125,7 @@ const NextBtn = styled.button`
   transform: translate(-50%, -50%);
   margin-top: -20px;
   right: -50px;
-  @media only screen and (max-width: 414px) {
+  @media only screen and (max-width: 1024px) {
     display: none;
   }
 `;

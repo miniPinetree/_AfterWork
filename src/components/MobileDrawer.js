@@ -1,8 +1,10 @@
 import { useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import styled, { keyframes } from "styled-components";
 import x from "../shared/images/x.svg";
+import logOut from "../shared/images/log-out.svg";
+
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as userActions } from "../redux/modules/user";
@@ -44,7 +46,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                                 </div>
                                 <div>
                                     <Logo is_user>
-                                        {user.name}님<Emial>{user.email}</Emial>
+                                        {user.name}님<Email>{user.email}</Email>
                                     </Logo>
                                 </div>
                             </Flex>
@@ -80,7 +82,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                                 return (
                                     <Category
                                         onClick={() => {
-                                            history.push({
+                                            history.replace({
                                                 pathname: `/category/${p.categoryId}`,
                                                 state: `${p.name}`,
                                             });
@@ -94,15 +96,18 @@ const MoDrawer = ({ drawerClose }, props) => {
                                 );
                             })}
                         </CategoryBody>
-                        <LogOut
-                            onClick={() => {
-                                drawerClose();
-                                dispatch(userActions.logOut());
-                                history.push("/");
-                            }}
-                        >
-                            로그아웃
-                        </LogOut>
+                        <LogOutBody>
+                            <LogOutImg src={logOut} alt="log out" />
+                            <LogOut
+                                onClick={() => {
+                                    drawerClose();
+                                    dispatch(userActions.logOut());
+                                    history.replace("/");
+                                }}
+                            >
+                                로그아웃
+                            </LogOut>
+                        </LogOutBody>
                     </>
                 ) : (
                     <>
@@ -116,7 +121,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                             ></X>
                             <Logo
                                 onClick={() => {
-                                    history.push("/login");
+                                    history.push({ pathname: "/login", state: "로그인" });
                                     drawerClose();
                                 }}
                             >
@@ -131,7 +136,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                                 return (
                                     <Category
                                         onClick={() => {
-                                            history.push({
+                                            history.replace({
                                                 pathname: `/category/${p.categoryId}`,
                                                 state: `${p.name}`,
                                             });
@@ -162,7 +167,7 @@ const Back = styled.div`
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: #000000 0% 0% no-repeat padding-box;
     opacity: 0.3;
     backdrop-filter: blur(5px);
@@ -183,14 +188,14 @@ const openScale = keyframes`
 
 const Body = styled.div`
     position: fixed;
-    height: 100vh;
+    height: 100%;
     width: 0;
     top: 0;
     max-width: 278px;
     background: #fff;
     z-index: 999;
     box-shadow: 0 6px 35px rgb(24 25 31 / 20%);
-    overflow: scroll;
+    // overflow: scroll;
     animation: ${openScale} 0.6s cubic-bezier(0.17, 0.67, 0.5, 1) forwards;
 `;
 
@@ -248,7 +253,7 @@ const Logo = styled.h4`
     cursor: ${(props) => (props.is_user ? "" : "pointer")};
 `;
 
-const Emial = styled.span`
+const Email = styled.span`
     display: block;
     font-size: 12px;
     font-weight: 400;
@@ -327,13 +332,33 @@ const Info = styled.span`
     }
 `;
 
-const LogOut = styled.span`
-    position: absolute;
+const LogOutBody = styled.div`
+    position: fixed;
+    height: 48px;
     top: 612px;
-    left: 24px;
-    z-index: 999;
-    color: #333;
-    font-size: 12px;
+    left: 16px;
+    background: #fff;
+    padding: 12px 16px;
+    border-radius: 10px;
+    z-index: 99;
+    box-shadow: 0 6px 35px rgb(24 25 31 / 20%);
+    animation: ${openCategoryScale} 0.6s cubic-bezier(0.17, 0.67, 0.5, 1) forwards;
+`;
+
+const LogOutImg = styled.img`
+    width: 16px;
+    margin-top: -3px;
+`;
+
+const LogOut = styled.span`
+    // position: absolute;
+    // top: 612px;
+    // left: 24px;
+    // z-index: 999;
+    // color: #333;
+    // font-size: 12px;
+    display: inline-block;
+    margin-left: 8px;
 `;
 
 export default MoDrawer;
