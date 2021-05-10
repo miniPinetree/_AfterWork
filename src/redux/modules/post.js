@@ -11,6 +11,7 @@ const SEARCH_LIST = 'SEARCH_LIST';
 const SCROLL_SEARCH_LIST = 'SCROLL_SEARCH_LIST';
 const POPULAR_LIST = 'POPULAR_LIST';
 const NEAR_LIST = 'NEAR_LIST';
+const CATEGORY_RECOMMEND_LIST = 'CATEGORY_RECOMMEND_LIST';
 const PAGING = 'PAGING';
 const LOADING = 'LOADING';
 const VIEW_LOADING = 'VIEW_LOADING';
@@ -29,6 +30,10 @@ const scrollSearchList = createAction(SCROLL_SEARCH_LIST, (post_list) => ({
 }));
 const popularList = createAction(POPULAR_LIST, (post_list) => ({ post_list }));
 const nearList = createAction(NEAR_LIST, (post_list) => ({ post_list }));
+const categoryRecommendList = createAction(
+  CATEGORY_RECOMMEND_LIST,
+  (post_list) => ({ post_list }),
+);
 const pagingInfo = createAction(PAGING, (paging) => ({ paging }));
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 const viewLoading = createAction(VIEW_LOADING, (view_loading) => ({
@@ -57,6 +62,8 @@ const initialState = {
   popular_list: [],
   // 근처 게시물
   near_list: [],
+  // 관심 카테고리 추천 게시물
+  recommend_list: [],
   // 스크롤 시 로딩
   is_loading: false,
   // 랜더링 시 로딩
@@ -105,6 +112,23 @@ const getNearListDB = () => {
       .then((res) => {
         // 값이 없을때 ''으로 보내주기때문에 데이터는 배열이므로 []로 만들어줌
         res.data === '' ? dispatch(nearList([])) : dispatch(nearList(res.data));
+      })
+      .catch((e) => {
+        console.log('에러 발생', e);
+      });
+  };
+};
+
+const getCategoryRecommendDB = () => {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: `${config.api}/api/recommend/category`,
+    })
+      .then((res) => {
+        res.data === ''
+          ? dispatch(nearList([]))
+          : dispatch(categoryRecommendList(res.data));
       })
       .catch((e) => {
         console.log('에러 발생', e);
@@ -282,6 +306,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.near_list = action.payload.post_list;
       }),
+    [CATEGORY_RECOMMEND_LIST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.recommend_list = action.payload.post_list;
+      }),
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
         draft.is_loading = action.payload.is_loading;
@@ -306,6 +334,7 @@ const actionCreators = {
   scrollSearchDB,
   getPopularListDB,
   getNearListDB,
+  getCategoryRecommendDB,
 };
 
 export { actionCreators };

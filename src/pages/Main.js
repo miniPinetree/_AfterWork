@@ -21,8 +21,12 @@ function Main(props) {
   const popularList = useSelector((state) => state.post?.popular_list);
   // 지역별 추천 리스트
   const nearList = useSelector((state) => state.post?.near_list);
+  // 관심 카테고리 리스트
+  const recommend_list = useSelector((state) => state.post?.recommend_list);
   // 해당 유저가 설정한 지역 정보
   const locations = useSelector((state) => state.user.user?.locations);
+  // 해당 유저가 설정한 관심 카테고리 정보
+  const interests = useSelector((state) => state.user.user?.interests);
   // 찜목록
   const collection_list = useSelector((state) => state.prefer?.collection);
   const collection = collection_list.map((val) => {
@@ -41,6 +45,9 @@ function Main(props) {
     // 지역별 추천 리스트 조회
     if (nearList.length === 0 && is_user) {
       dispatch(postActions.getNearListDB());
+    }
+    if (recommend_list.length === 0 && is_user) {
+      dispatch(postActions.getCategoryRecommendDB());
     }
     if (props.location.state && props.location.state.error) {
       setTimeout(() => {
@@ -115,6 +122,46 @@ function Main(props) {
           </TitleContainer>
           <EmptyList>
             <p>로그인 후 근처의 아이템을 찾아보세요!</p>
+          </EmptyList>
+        </Wrap>
+      )}
+      {is_user ? (
+        <>
+          {interests?.length ? (
+            <Carousel text='카테고리 추천 아이템'>
+              {nearList.map((val, idx) => {
+                return collection.includes(val.productId) === true ? (
+                  <PostCard post_info={val} key={idx + 'recommend'} like />
+                ) : (
+                  <PostCard post_info={val} key={idx + 'recommend'} />
+                );
+              })}
+            </Carousel>
+          ) : (
+            <Wrap>
+              <TitleContainer>
+                <Title>카테고리 추천 아이템</Title>
+              </TitleContainer>
+              <EmptyList>
+                <p>관심 카테고리를 설정하고 아이템을 추천받아보세요!</p>
+                <button
+                  onClick={() => {
+                    history.push('/userdetail');
+                  }}
+                >
+                  설정하러 가기 {'>'}
+                </button>
+              </EmptyList>
+            </Wrap>
+          )}
+        </>
+      ) : (
+        <Wrap>
+          <TitleContainer>
+            <Title>카테고리 추천 아이템</Title>
+          </TitleContainer>
+          <EmptyList>
+            <p>로그인 후 취미를 추천받아보세요!</p>
           </EmptyList>
         </Wrap>
       )}
