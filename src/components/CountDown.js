@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { history } from '../redux/configStore';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 function CountDown() {
   // 퇴근시간 카운트 다운
   const offTime = useSelector((state) => state.user.user?.offTime);
-  const now = new Date();
-  const today = now.toLocaleDateString();
+  const today = moment().format('YYYY/MM/DD');
+
   // 차이(퇴근시간 - 현재시간)
   let difference = +new Date(today + offTime) - +new Date();
   // 남은 시간 계산
