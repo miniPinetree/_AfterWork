@@ -119,6 +119,7 @@ const getNearListDB = () => {
   };
 };
 
+// 관심 카테고리 취미 추천 항목 조회
 const getCategoryRecommendDB = () => {
   return function (dispatch) {
     axios({

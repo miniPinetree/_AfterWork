@@ -46,6 +46,7 @@ function Main(props) {
     if (nearList.length === 0 && is_user) {
       dispatch(postActions.getNearListDB());
     }
+    // 관심 카테고리 리스트 조회
     if (recommend_list.length === 0 && is_user) {
       dispatch(postActions.getCategoryRecommendDB());
     }
@@ -138,6 +139,7 @@ function Main(props) {
               })}
             </Carousel>
           ) : (
+            // 관심 카테고리 설정하지 않았을 경우
             <Wrap>
               <TitleContainer>
                 <Title>카테고리 추천 아이템</Title>
