@@ -129,7 +129,7 @@ function Main(props) {
         <>
           {interests?.length ? (
             <Carousel text='카테고리 추천 아이템'>
-              {nearList.map((val, idx) => {
+              {recommend_list.map((val, idx) => {
                 return collection.includes(val.productId) === true ? (
                   <PostCard post_info={val} key={idx + 'recommend'} like />
                 ) : (
