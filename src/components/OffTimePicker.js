@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { TimePicker } from "antd";
 import { range } from "lodash";
@@ -11,7 +12,7 @@ const OffTimePicker=(props)=>{
     setTime(user.offTime);
   }
   return(
-    <>
+    <Contatiner>
   {user.offTime?
   <TimePicker
   size="large"
@@ -21,7 +22,6 @@ const OffTimePicker=(props)=>{
   defaultOpenValue={moment(user.offTime, "HH:mm:ss")}
   defaultValue={moment(user.offTime, "HH:mm:ss")}
   disabledHours={() => range(0, 15)}
-  showNow=false
 />
 :
 <TimePicker
@@ -31,9 +31,14 @@ const OffTimePicker=(props)=>{
   }}
   defaultOpenValue={moment("18:00:00", "HH:mm:ss")}
   disabledHours={() => range(0, 15)}
-  showNow=false
 />
 }
-  </>);
+  </Contatiner>);
 };
 export default React.memo(OffTimePicker);
+
+const Contatiner = styled.div`
+& .ant-picker-now{
+  display:none;
+}
+`;
