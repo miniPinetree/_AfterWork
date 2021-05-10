@@ -10,7 +10,6 @@ import header from "../shared/images/mobileHeader.png";
 import MoDrawer from "./MobileDrawer";
 
 const MoHeader = (props) => {
-    const push = useSelector((state) => state.router.action);
     const titles = useSelector((state) => state.router.location.state);
 
     const [isDrawer, setIsDrawer] = useState(false);
@@ -90,7 +89,7 @@ const Wrap = styled.div`
     z-index: 3;
     text-align: center;
     border-bottom: none;
-    box-shadow: 0px 3px 16px rgb(24 25 31 / 10%);
+    border-bottom: 1px solid #dbdbdb;
 `;
 
 const Body = styled.div`
