@@ -21,7 +21,7 @@ const Footer = () => {
         };
     }, [handleResize]);
 
-    if (windowSize < 415 && titles !== "/") {
+    if (windowSize < 769 && titles !== "/") {
         return null;
     }
     return (
@@ -60,7 +60,7 @@ const Wrap = styled.div`
     margin-top: 160px;
     background: #fafbfc 0% 0% no-repeat padding-box;
     border: 1px solid #e4e8eb;
-    @media all and (max-width: 414px) {
+    @media all and (max-width: 768px) {
         display: block;
         width: 100%;
         margin-top: 120px;
@@ -73,7 +73,7 @@ const Body = styled.div`
     max-width: 1004px;
     text-align: left;
     margin: 0 auto;
-    @media all and (max-width: 414px) {
+    @media all and (max-width: 768px) {
         display: block;
         width: 314px;
         margin: 0;
@@ -82,7 +82,7 @@ const Body = styled.div`
 
 const Logo = styled.img`
     width: 150px;
-    @media all and (max-width: 414px) {
+    @media all and (max-width: 768px) {
         display: block;
         width: 120px;
     }
@@ -95,7 +95,7 @@ const Normal = styled.span`
     color: #666666;
     opacity: 1;
     margin: 0 5%;
-    @media all and (max-width: 414px) {
+    @media all and (max-width: 768px) {
         display: block;
         margin: 16px 0 2px 0;
         font-size: 12px;
@@ -108,7 +108,7 @@ const Bold = styled.span`
     letter-spacing: 0px;
     color: #333333;
     opacity: 1;
-    @media all and (max-width: 414px) {
+    @media all and (max-width: 768px) {
         font-size: 12px;
         display: block;
     }
