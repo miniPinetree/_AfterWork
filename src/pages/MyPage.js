@@ -19,6 +19,7 @@ const MyPage = (props) => {
   };
 
   return (
+    <Bg>
     <Container>
       {user &&
       <>
@@ -30,7 +31,7 @@ const MyPage = (props) => {
   <DetailBtn onClick={()=>{
       history.push('/userdetail');
   }}>
-    회원정보 및 상세 설정 <RightOutlined />
+    내 정보 및 상세 설정 <RightOutlined />
   </DetailBtn>
 </Profile>
 <MarkList>
@@ -44,7 +45,7 @@ const MyPage = (props) => {
       dispatch(preferActions.deleteCollectionDB());
     }}
     >
-      목록 전체 삭제
+      전체 삭제
     </TextBtn>
   </TextBox>
   {collection.length?
@@ -66,17 +67,24 @@ const MyPage = (props) => {
 </MarkList>
       </>}
     </Container>
+    </Bg>
   );
 };
 
 export default MyPage;
-
+const Bg = styled.div`
+background-color: #F8F8F8;
+width:100%;
+height:100vh;
+`;
 const Container = styled.div`
   width: 70%;
   max-width: 1004px;
   margin: 0 auto;
+  @media all and (max-width: 768px) {
+    width: 90%;
+    }
   @media all and (max-width: 414px) {
-    background-color: #F8F8F8;
     width:100%;
   }
 `;
@@ -98,7 +106,8 @@ const Profile = styled.div`
   min-width: 495px;
   height: 137px;
   box-sizing: border-box;
-  border: 1px solid #707070;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 15px #e0e0e0;
   border-radius: 15px;
   position: relative;
   display: flex;
@@ -131,7 +140,6 @@ const Area1 = styled.div`
 `;
 const MarkList = styled.div`
 @media all and (max-width: 414px) {
-  /* min-height:100vh; //푸터 조정 후 반영*/
 }
 `;
 const CardList = styled.div`
@@ -173,6 +181,9 @@ const EmptyBox = styled.div`
     letter-spacing: -0.69px;
     color: #676767;
   }
+  @media all and (max-width: 768px) {
+    padding-top:10%;
+    }
   @media all and (max-width: 414px) {
     padding-top:40%;
     }

@@ -13,6 +13,7 @@ const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const cookie = getCookie("is_login");
+  
   if(!cookie){
     history.replace('/');
   };
@@ -26,11 +27,12 @@ const UserDetail = (props) => {
         dispatch(preferActions.updateUserPreferDB(locations, categories, time));
     };
     return (
+        <Bg>
         <Container>
             {user && (
                 <>
                     <TextBox>
-                        <Title>회원정보 및 상세 설정</Title>
+                        <Title>내 정보 및 상세 설정</Title>
                         <TextBtn _onClick={setValue}>변경 사항 저장</TextBtn>
                     </TextBox>
                     <Wrap>
@@ -38,7 +40,7 @@ const UserDetail = (props) => {
                             {/* 프로필*/}
                             <InfoBox>
                                 <UserInfo />
-                                <AbsBtn
+                                <DeleteUserBtn
                                     onClick={() => {
                                         Swal.fire({
                                             text: "정말 탈퇴하시려구요? 🥺",
@@ -55,7 +57,7 @@ const UserDetail = (props) => {
                                     }}
                                 >
                                     회원 탈퇴
-                                </AbsBtn>
+                                </DeleteUserBtn>
                             </InfoBox>
                             <BorderBox>
                                 <strong>퇴근시간 설정</strong>
@@ -84,17 +86,25 @@ const UserDetail = (props) => {
                 </>
             )}
         </Container>
+        </Bg>
     );
 };
 export default UserDetail;
-
+const Bg = styled.div`
+background-color: #F8F8F8;
+width:100%;
+height:100vh;
+`;
 const Container = styled.div`
     width: 70%;
     min-width: 749px;
     max-width: 1004px;
     margin: 0 auto;
+    @media all and (max-width: 768px) {
+    width: 94%;
+    min-width: 720px;
+    }
     @media all and (max-width: 415px) {
-        background-color: #f8f8f8;
         min-width: 374px;
         width: 100%;
     }
@@ -138,7 +148,7 @@ const InfoBox = styled.div`
     padding: 25px 30px;
     margin: 0 0 20px 0;
 `;
-const AbsBtn = styled.div`
+const DeleteUserBtn = styled.div`
     display: inline-block;
     box-sizing: border-box-sizing;
     cursor: pointer;
@@ -165,6 +175,12 @@ const BorderBox = styled.div`
         width: 100%;
         margin: 0 0 16.5px 0;
         cursor: default;
+        @media all and (max-width: 768px){
+            font-size: 19px;
+        }
+        @media all and (max-width: 414px){
+            font-size: 17px;
+        }
     }
     & p {
         color: #747474;

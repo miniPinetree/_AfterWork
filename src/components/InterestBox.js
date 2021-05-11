@@ -83,6 +83,9 @@ const Grid = styled.div`
     font-size: 18px;
     margin: 0 0 16.5px 0;
     display: block;
+    @media all and (max-width: 768px) {
+      visibility: hidden;
+    }
     @media all and (max-width: 415px) {
       visibility: hidden;
     }
@@ -121,4 +124,10 @@ const Row = styled.div`
       transform: scale(1.15);
     }
   }
+  @media all and (max-width: 768px) {
+    font-size: 15px;
+    }
+    @media all and (max-width: 415px) {
+      font-size: 15px;
+    }
 `;

@@ -6,7 +6,6 @@ const Title = (props) => {
   return (
     <TitleBox>
       <text>{children}</text>
-      <hr/>
     </TitleBox>
   );
 };
@@ -30,6 +29,9 @@ cursor:default;
     background: black;
     margin:0px;
   }
+  @media all and (max-width: 768px) {
+    font-size: 22px;
+    }
   @media all and (max-width: 415px) {
         display: none;
     }
