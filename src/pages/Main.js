@@ -173,6 +173,7 @@ function Main(props) {
 
 const CarouselWrap = styled.div`
   margin-top: -75px;
+
   @media only screen and (max-width: 414px) {
     margin-top: -30px;
     padding: 1px 0;
@@ -183,6 +184,9 @@ const CarouselWrap = styled.div`
 const Wrap = styled.div`
   margin: 75px 0;
   cursor: default;
+  @media only screen and (max-width: 1024px) {
+    margin: 75px 27px;
+  }
   @media only screen and (max-width: 414px) {
     margin: 55px 17px;
   }
@@ -200,6 +204,10 @@ const Title = styled.div`
   font-size: 20px;
   letter-spacing: -0.6px;
   font-weight: 700;
+  @media only screen and (max-width: 1024px) {
+    font-size: 16px;
+    letter-spacing: -0.48px;
+  }
   @media only screen and (max-width: 414px) {
     font-size: 15px;
     letter-spacing: -0.45px;

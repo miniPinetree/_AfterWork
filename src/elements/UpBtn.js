@@ -39,7 +39,7 @@ const BtnWrap = styled.div`
   &:hover {
     opacity: 0.8;
   }
-  @media only screen and (max-width: 414px) {
+  @media only screen and (max-width: 1024px) {
     display: none;
   }
 `;

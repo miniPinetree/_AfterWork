@@ -35,7 +35,23 @@ function Carousel(props) {
     nextArrow: <Next />,
     responsive: [
       {
-        breakpoint: 450,
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: category ? 6 : 4,
+          slidesToScroll: category ? 6 : 4,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 780,
+        settings: {
+          slidesToShow: category ? 6 : 3,
+          slidesToScroll: category ? 6 : 3,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 580,
         settings: {
           slidesToShow: category ? 3 : 2,
           slidesToScroll: category ? 3 : 2,
@@ -63,6 +79,9 @@ function Carousel(props) {
 const Wrap = styled.div`
   margin: 75px 0;
   cursor: default;
+  @media only screen and (max-width: 1024px) {
+    margin: 75px 27px;
+  }
   @media only screen and (max-width: 414px) {
     margin: 55px 17px;
   }
@@ -80,6 +99,10 @@ const Title = styled.div`
   font-size: 20px;
   letter-spacing: -0.6px;
   font-weight: 700;
+  @media only screen and (max-width: 1024px) {
+    font-size: 16px;
+    letter-spacing: -0.48px;
+  }
   @media only screen and (max-width: 414px) {
     font-size: 15px;
     letter-spacing: -0.45px;

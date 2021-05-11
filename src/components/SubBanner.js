@@ -61,6 +61,9 @@ const Wrap = styled.div`
     0% no-repeat padding-box;
   display: flex;
   align-items: center;
+  @media only screen and (max-width: 768px) {
+    height: 75px;
+  }
   @media only screen and (max-width: 414px) {
     display: none;
   }
@@ -72,6 +75,9 @@ const InputBox = styled.div`
   height: 48px;
   box-sizing: border-box;
   margin: 0 auto;
+  @media only screen and (max-width: 768px) {
+    width: 388px;
+  }
 `;
 
 export default SubBanner;

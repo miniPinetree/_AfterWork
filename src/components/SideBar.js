@@ -72,6 +72,9 @@ const SideBox = styled.div`
     width: auto;
     max-width: 433px;
   }
+  @media only screen and (max-width: 768px) {
+    top: 135px;
+  }
 `;
 
 const Container = styled.div`
@@ -88,6 +91,9 @@ const Title = styled.div`
   font-weight: bold;
   color: #333;
   letter-spacing: -0.69px;
+  @media only screen and (max-width: 1024px) {
+    font-size: 20px;
+  }
 `;
 const List = styled.ul`
   list-style: none;
@@ -99,7 +105,12 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
+  @media only screen and (max-width: 1024px) {
+    font-size: 16px;
+    letter-spacing: -0.39px;
+    padding: 0 15px 0 26px;
+    box-sizing: border-box;
+  }
   & li {
     display: flex;
     align-items: center;
@@ -107,7 +118,9 @@ const List = styled.ul`
     width: 255.37px;
     height: 49px;
     padding: 8px 13px;
-
+    @media only screen and (max-width: 1024px) {
+      width: 149px;
+    }
     &:hover {
       background: #ffffff 0% 0% no-repeat padding-box;
       border-radius: 7px;

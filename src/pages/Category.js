@@ -156,15 +156,16 @@ const MainContainer = styled.div`
   width: 60%;
   margin-left: 31px;
   position: relative;
-  @media only screen and (max-width: 414px) {
+  @media only screen and (max-width: 1024px) {
     width: 92%;
     margin: 0 auto;
     min-height: 600px;
+    padding: 0 20px;
   }
+
   @media only screen and (max-width: 372px) {
     width: 100%;
     margin: 0 5px;
-    min-height: 600px;
   }
 `;
 const MainHeader = styled.div`
@@ -173,6 +174,10 @@ const MainHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media only screen and (max-width: 1004px) {
+    max-width: 100%;
+    margin: 22px 10px 13px;
+  }
   @media only screen and (max-width: 414px) {
     max-width: 100%;
     margin: 22px 10px 13px;
@@ -224,13 +229,15 @@ const Main = styled.div`
     margin-right: 20px;
     margin-bottom: 20px;
   }
-  @media only screen and (max-width: 414px) {
-    justify-content: space-between;
-    padding: 0 15px;
+  @media only screen and (max-width: 936px) {
     & .wrap {
       margin-right: 10px;
       margin-bottom: 10px;
     }
+  }
+  @media only screen and (max-width: 414px) {
+    justify-content: space-between;
+    padding: 0 15px;
   }
   @media only screen and (max-width: 407px) {
     padding: 0;
