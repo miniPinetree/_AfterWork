@@ -119,9 +119,14 @@ function Category(props) {
                     >
                       {post_list.map((val, idx) => {
                         return collection.includes(val.productId) === true ? (
-                          <PostCard post_info={val} key={idx} like />
+                          <PostCard
+                            post_info={val}
+                            key={idx}
+                            like
+                            is_responsive
+                          />
                         ) : (
-                          <PostCard post_info={val} key={idx} />
+                          <PostCard post_info={val} key={idx} is_responsive />
                         );
                       })}
                     </InfinityScroll>
