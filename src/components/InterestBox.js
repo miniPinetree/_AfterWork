@@ -11,13 +11,15 @@ const InterestBox = (props) => {
   let { setCategories, categories } = props;
 
   useEffect(() => {
+    // 전체 카테고리 불러오기
     if (categoryNames.length === 0) {
       dispatch(postActions.getCategoryDB());
-    }
+    };
+    // 유저의 관심 카테고리 불러오기
     if (categories.length === 0 && user.interests.length > 0) {
       const categoryIds = user.interests.map((interest) => interest.categoryId);
       setCategories(categoryIds);
-    }
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   //관심 카테고리 변경

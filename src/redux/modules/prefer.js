@@ -40,10 +40,13 @@ const updateUserPreferDB = (locations, categories, time) => {
         let _locations = locations.map((location) => {
           return { name: location };
         });
+        let _categories = categories.map((category)=>{
+          return {categoryId : category};
+        });
         let _data = {
           offTime: time,
           locations: _locations,
-          categorys: categories,
+          interests: _categories,
         };
         dispatch(userActions.getUser({ ...user, ..._data }));
         Swal.fire({
