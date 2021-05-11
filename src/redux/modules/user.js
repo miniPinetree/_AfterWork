@@ -13,9 +13,8 @@ const getUser = createAction(GET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
 const deleteUser = createAction(DELETE_USER, (user) => ({ user }));
 const userLoading = createAction(USER_LOADING, (user_loading) => ({ user_loading }));
-
 const initialState = {
-    user: null,
+    user:null,
     is_login: false,
     user_loading: false,
 };
