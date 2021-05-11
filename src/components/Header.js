@@ -114,6 +114,9 @@ const Logo = styled.img`
     cursor: pointer;
     height: 100%;
     margin-right: 24px;
+    @media only screen and (max-width: 1024px) {
+        margin-left: 26px;
+    }
 `;
 
 const Login = styled.span`
@@ -122,6 +125,9 @@ const Login = styled.span`
     cursor: pointer;
     height: 100%;
     margin-left: 12px;
+    @media only screen and (max-width: 1024px) {
+        margin-right: 26px;
+    }
 `;
 
 export default Header;
