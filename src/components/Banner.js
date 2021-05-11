@@ -19,7 +19,7 @@ function Banner(props) {
     slidesToScroll: 1,
     fade: true,
     autoplay: true,
-    autoplaySpeed: 6000,
+    autoplaySpeed: 3000,
     arrows: false,
     pauseOnHover: false,
   };
@@ -151,6 +151,9 @@ const Section = styled.div`
   height: 615px;
   background: #ffffff 0% 0% no-repeat padding-box;
   cursor: default;
+  @media only screen and (max-width: 1024px) {
+    height: 490px;
+  }
   @media only screen and (max-width: 414px) {
     height: 250px;
   }
@@ -160,6 +163,9 @@ const Container = styled.div`
   max-width: 1004px;
   margin: 0 auto;
   position: relative;
+  @media only screen and (max-width: 1024px) {
+    margin: 0 27px;
+  }
   @media only screen and (max-width: 414px) {
     margin: 0 17px;
   }
@@ -173,11 +179,25 @@ const TitleBox = styled.div`
   position: absolute;
   top: 99px;
   line-height: 1.4;
+  @media only screen and (max-width: 1024px) {
+    font-size: 35px;
+    letter-spacing: -0.7px;
+    top: 88px;
+  }
+  @media only screen and (max-width: 768px) {
+    top: 42px;
+  }
+  @media only screen and (max-width: 666px) {
+    font-size: 30px;
+    letter-spacing: -0.4px;
+  }
+  @media only screen and (max-width: 540px) {
+    font-size: 27px;
+    letter-spacing: -0.4px;
+  }
   @media only screen and (max-width: 414px) {
     font-size: 18px;
     letter-spacing: -0.4px;
-    position: absolute;
-    top: 42px;
   }
   @media only screen and (max-width: 406px) {
     font-size: 15px;
@@ -191,10 +211,24 @@ const SubTitleBox = styled.div`
   color: #333;
   position: absolute;
   top: 314.73px;
+  @media only screen and (max-width: 1024px) {
+    font-size: 16px;
+    letter-spacing: -0.48px;
+    top: 254px;
+  }
+  @media only screen and (max-width: 768px) {
+    top: 214px;
+  }
+  @media only screen and (max-width: 666px) {
+    font-size: 14px;
+    letter-spacing: -0.4px;
+  }
+  @media only screen and (max-width: 540px) {
+    top: 190px;
+  }
   @media only screen and (max-width: 414px) {
     font-size: 11px;
     letter-spacing: -0.33px;
-    position: absolute;
     top: 135px;
     width: 156px;
   }
@@ -208,13 +242,25 @@ const ImgBox = styled.div`
   max-width: 530px;
   position: absolute;
   top: 25.5px;
-  right: 0;
   right: -30px;
   & img {
     width: 100%;
   }
-  @media only screen and (max-width: 1160px) {
-    right: 0;
+
+  @media only screen and (max-width: 1024px) {
+    max-width: 450px;
+  }
+  @media only screen and (max-width: 768px) {
+    max-width: 374px;
+  }
+  @media only screen and (max-width: 630px) {
+    max-width: 320px;
+  }
+  @media only screen and (max-width: 562px) {
+    max-width: 280px;
+  }
+  @media only screen and (max-width: 530px) {
+    max-width: 260px;
   }
   @media only screen and (max-width: 414px) {
     max-width: 195.16px;

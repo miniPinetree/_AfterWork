@@ -72,6 +72,16 @@ const InputBox = styled.div`
       border: 2px solid #7f58ec !important;
     }
   }
+  @media only screen and (max-width: 1024px) {
+    width: 428px;
+    top: 366.23px;
+    left: 27px;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 348px;
+    top: 306.23px;
+    left: 27px;
+  }
   @media only screen and (max-width: 414px) {
     display: none;
   }

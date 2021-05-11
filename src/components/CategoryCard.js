@@ -35,6 +35,10 @@ const CardWrap = styled.div`
   height: 240px;
   border-radius: 10px;
   cursor: pointer;
+  @media only screen and (max-width: 768px) {
+    max-width: 107px;
+    height: 150px;
+  }
   @media only screen and (max-width: 414px) {
     max-width: 105px;
     height: auto;
@@ -47,6 +51,9 @@ const Img = styled.img`
   box-shadow: 0px 10px 10px #e6e6e6;
   &:hover {
     opacity: 0.7;
+  }
+  @media only screen and (max-width: 768px) {
+    height: 107px;
   }
   @media only screen and (max-width: 414px) {
     height: 105px;

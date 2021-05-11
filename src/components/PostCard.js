@@ -96,6 +96,12 @@ const CardWrap = styled.div`
   height: 320px;
   cursor: pointer;
   position: relative;
+  @media only screen and (max-width: 1024px) {
+    margin-top: 11.27px;
+    max-width: 215px;
+    height: 280.73px;
+    margin-bottom: 20px;
+  }
   @media only screen and (max-width: 414px) {
     margin-top: 11.27px;
     max-width: 162px;
@@ -110,6 +116,9 @@ const Img = styled.img`
   border-top-right-radius: 10px;
   &:hover {
     opacity: 0.7;
+  }
+  @media only screen and (max-width: 1024px) {
+    height: 165px;
   }
   @media only screen and (max-width: 414px) {
     height: 126px;
@@ -138,6 +147,12 @@ const TextBox = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+  @media only screen and (max-width: 1024px) {
+    & strong {
+      font-size: 13px;
+      letter-spacing: -0.26px;
+    }
+  }
   @media only screen and (max-width: 414px) {
     & strong {
       font-size: 11px;
@@ -160,6 +175,12 @@ const TitleWrap = styled.div`
       transform: scale(1.2);
     }
   }
+  @media only screen and (max-width: 1024px) {
+    & svg {
+      top: 120px;
+      right: 11.3px;
+    }
+  }
   @media only screen and (max-width: 414px) {
     & svg {
       top: 98.42px;
@@ -179,6 +200,12 @@ const SiteName = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #7f58ec66;
   border-radius: 3px;
+  @media only screen and (max-width: 1024px) {
+    font-size: 11px;
+    letter-spacing: -0.33px;
+    top: 12px;
+    left: 10px;
+  }
   @media only screen and (max-width: 414px) {
     font-size: 9px;
     letter-spacing: -0.3px;
@@ -197,6 +224,11 @@ const TextInfo = styled.div`
   height: 27px;
   overflow: hidden;
   margin-top: -18.11px;
+  @media only screen and (max-width: 1024px) {
+    font-size: 11px;
+    letter-spacing: -0.22px;
+    overflow: hidden;
+  }
   @media only screen and (max-width: 414px) {
     font-size: 9px;
     letter-spacing: -0.18px;
@@ -209,6 +241,10 @@ const InfoBox = styled.div`
   justify-content: space-between;
   font-size: 14px;
   letter-spacing: -0.42px;
+  @media only screen and (max-width: 1024px) {
+    font-size: 12px;
+    letter-spacing: -0.24px;
+  }
   @media only screen and (max-width: 414px) {
     font-size: 10px;
     letter-spacing: -0.2px;

@@ -111,6 +111,17 @@ const Timer = styled.div`
   border-bottom-right-radius: 20px;
   box-shadow: 0px 3px 10px #0000001a;
   z-index: 3;
+  @media only screen and (max-width: 768px) {
+    width: 223px;
+    max-width: 223px;
+    height: 69px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+  @media only screen and (max-width: 602px) {
+    width: 162px;
+    max-width: 162px;
+  }
   @media only screen and (max-width: 414px) {
     width: 172px;
     max-width: 172px;
@@ -125,6 +136,13 @@ const OffTimeTitle = styled.div`
   font-family: 'Noto Sans CJK KR';
   letter-spacing: -0.54px;
   color: #333;
+  @media only screen and (max-width: 768px) {
+    font-size: 16px;
+    letter-spacing: -0.27px;
+  }
+  @media only screen and (max-width: 602px) {
+    font-size: 12px;
+  }
   @media only screen and (max-width: 414px) {
     font-size: 9px;
     letter-spacing: -0.27px;
@@ -144,7 +162,7 @@ const OffTimeCnt = styled.div`
     border-radius: 6px;
     letter-spacing: 1px;
   }
-  @media only screen and (max-width: 414px) {
+  @media only screen and (max-width: 768px) {
     font-size: 15px;
     & span {
       width: 36px;
@@ -195,14 +213,14 @@ const SettingBox = styled.div`
       opacity: 0.9;
     }
   }
-  @media only screen and (max-width: 414px) {
-    width: 172px;
-    max-width: 172px;
-    height: 62px;
-    right: 0px;
-    border-radius: 7px;
+  @media only screen and (max-width: 768px) {
+    width: 223px;
+    max-width: 223px;
+    height: 69px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
     & span {
-      font-size: 12px;
+      font-size: 16px;
       letter-spacing: -0.27px;
     }
     & button {
@@ -211,6 +229,16 @@ const SettingBox = styled.div`
       height: 20px;
       padding: 0;
       margin-top: 5px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    width: 172px;
+    max-width: 172px;
+    height: 62px;
+    right: 0px;
+    & span {
+      font-size: 12px;
+      letter-spacing: -0.27px;
     }
   }
 `;
