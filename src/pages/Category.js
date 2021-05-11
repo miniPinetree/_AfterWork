@@ -167,6 +167,9 @@ const MainContainer = styled.div`
     min-height: 600px;
     padding: 0 20px;
   }
+  @media only screen and (max-width: 414px) {
+    padding: 0;
+  }
 
   @media only screen and (max-width: 372px) {
     width: 100%;
