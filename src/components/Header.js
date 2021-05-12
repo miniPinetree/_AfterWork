@@ -128,6 +128,9 @@ const Logo = styled.img`
     cursor: pointer;
     height: 100%;
     margin-top: -8px;
+    @media only screen and (max-width: 1024px) {
+        margin-left: 26px;
+    }
 `;
 
 const ProfileImg = styled.img`
@@ -135,9 +138,8 @@ const ProfileImg = styled.img`
     hegiht: 30px;
     object-fit: cover;
     border-radius: 40px;
-    margin-right: 16px;
     @media only screen and (max-width: 1024px) {
-        margin-left: 26px;
+        margin-right: 26px;
     }
 `;
 
@@ -148,7 +150,7 @@ const Login = styled.span`
     height: 100%;
     margin: ${(props) => (props.is_user ? "-4px 12px 0 0" : "0")};
     @media only screen and (max-width: 1024px) {
-        margin-right: 26px;
+        margin-right: ${(props) => (props.is_user ? "12px" : "26px")};
     }
 `;
 
