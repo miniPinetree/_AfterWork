@@ -77,7 +77,7 @@ const UserBody = styled.div`
     position: absolute;
     margin: 0;
     padding: 16px;
-    z-index: 99;
+    z-index: 4;
     animation: ${openScale} 0.4s cubic-bezier(0.17, 0.67, 0.5, 1) forwards;
 `;
 
@@ -89,7 +89,7 @@ const Content = styled.span`
     opacity: 1;
     display: block;
     margin-bottom: 8px;
-    z-index: 99;
+    z-index: 5;
     &:hover {
         color: #7f58ec;
         cursor: pointer;

@@ -11,6 +11,7 @@ import MoDrawer from "./MobileDrawer";
 
 const MoHeader = (props) => {
     const titles = useSelector((state) => state.router.location.state);
+    const path = useSelector((state) => state.router.location.pathname);
 
     const [isDrawer, setIsDrawer] = useState(false);
 
@@ -25,7 +26,7 @@ const MoHeader = (props) => {
         <>
             <Wrap>
                 <Body>
-                    {titles !== undefined ? (
+                    {titles !== undefined && path !== "/" ? (
                         <>
                             <Imgs>
                                 <img
@@ -34,13 +35,13 @@ const MoHeader = (props) => {
                                     onClick={drawerOpen}
                                 ></img>
 
-                                <img
+                                <HomeImg
                                     src={homeIcon}
                                     alt="home"
                                     onClick={() => {
                                         history.push("/");
                                     }}
-                                ></img>
+                                ></HomeImg>
                             </Imgs>
                             <Logo isState>{titles}</Logo>
                         </>
@@ -108,7 +109,7 @@ const Logo = styled.span`
     height: 100%;
     margin-top: -2px;
     @media only screen and (max-width: 415px) {
-        transform: ${(props) => (props.isState ? "translate(-15px)" : "")};
+        transform: ${(props) => (props.isState ? "translate(-20px)" : "")};
     }
 `;
 
@@ -124,6 +125,11 @@ const ImgLogo = styled.img`
 const Imgs = styled.div`
     display: flex;
     justify-content: space-between;
+`;
+
+const HomeImg = styled.img`
+    margin-left: 12px;
+    margin-bottom: 2px;
 `;
 
 const SearchImg = styled.img`
