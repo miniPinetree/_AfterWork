@@ -201,6 +201,7 @@ const SelectDiv = styled.div`
 `;
 const Sort = styled.div`
   max-width: 112px;
+  min-width: 90px;
   margin-right: 15px;
   @media only screen and (max-width: 414px) {
     & span {
