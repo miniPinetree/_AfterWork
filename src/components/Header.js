@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configStore";
 
 import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { debounce } from "lodash";
 
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import LoginModal from "./LoginModal";
 import MoHeader from "./MobileHeader";
 import UserModal from "./UserModal";
@@ -72,13 +75,24 @@ const Header = () => {
                         </div>
 
                         <div>
-                            {user ? (
+                            {is_loading ? null : user && user.image ? (
                                 <>
-                                    <Login onClick={userOpen}>{user.name}님</Login>
+                                    <Login onClick={userOpen} is_user>
+                                        {user.name}님
+                                    </Login>
+                                    <ProfileImg src={user.image} onClick={userOpen}></ProfileImg>
                                 </>
-                            ) : is_loading ? null : (
+                            ) : user && !user.image ? (
+                                <>
+                                    <Login onClick={userOpen} is_user>
+                                        {user.name}님
+                                    </Login>
+                                    <Avatar size={64} icon={<UserOutlined />} onClick={userOpen} />
+                                </>
+                            ) : (
                                 <Login onClick={modalOpen}>로그인</Login>
                             )}
+
                             {isModal === true ? <LoginModal close={modalClose} /> : null}
                             {userModal === true ? <UserModal close={userClose} /> : null}
                         </div>
@@ -113,18 +127,26 @@ const Logo = styled.img`
     width: 160px;
     cursor: pointer;
     height: 100%;
-    margin-right: 24px;
+    margin-top: -8px;
+`;
+
+const ProfileImg = styled.img`
+    width: 30px;
+    hegiht: 30px;
+    object-fit: cover;
+    border-radius: 40px;
+    margin-right: 16px;
     @media only screen and (max-width: 1024px) {
         margin-left: 26px;
     }
 `;
 
 const Login = styled.span`
-    font-size: 17px;
+    font-size: 16px;
     font-weight: normal;
     cursor: pointer;
     height: 100%;
-    margin-left: 12px;
+    margin: ${(props) => (props.is_user ? "-4px 12px 0 0" : "0")};
     @media only screen and (max-width: 1024px) {
         margin-right: 26px;
     }

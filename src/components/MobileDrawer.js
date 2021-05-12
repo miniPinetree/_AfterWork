@@ -351,12 +351,6 @@ const LogOutImg = styled.img`
 `;
 
 const LogOut = styled.span`
-    // position: absolute;
-    // top: 612px;
-    // left: 24px;
-    // z-index: 999;
-    // color: #333;
-    // font-size: 12px;
     display: inline-block;
     margin-left: 8px;
 `;

@@ -67,6 +67,10 @@ const Modal = styled.div`
     z-index: 999;
     box-shadow: 0 6px 35px rgb(24 25 31 / 20%);
     animation: ${openScale} 0.4s cubic-bezier(0.17, 0.67, 0.5, 1) forwards;
+    @media only screen and (max-width: 1024px) {
+        top: 30%;
+        left: 28%;
+    }
 `;
 
 const Logo = styled.h4`
