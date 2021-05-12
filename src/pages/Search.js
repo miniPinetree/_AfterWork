@@ -78,9 +78,15 @@ function Search(props) {
                           onChange={selectSort}
                           value={sortBox}
                         >
-                          <Option value='popularity desc'>인기순</Option>
-                          <Option value='price asc'>가격 낮은순</Option>
-                          <Option value='price desc'>가격 높은순</Option>
+                          <Option value='popularity desc' className='opt'>
+                            인기순
+                          </Option>
+                          <Option value='price asc' className='opt'>
+                            가격 낮은순
+                          </Option>
+                          <Option value='price desc' className='opt'>
+                            가격 높은순
+                          </Option>
                         </Select>
                       </Sort>
                       <Filter>
@@ -90,9 +96,15 @@ function Search(props) {
                           onChange={selectFilter}
                           value={filterBox}
                         >
-                          <Option value='total'>전체보기</Option>
-                          <Option value='online'>온라인</Option>
-                          <Option value='offline'>오프라인</Option>
+                          <Option value='total' className='opt'>
+                            전체보기
+                          </Option>
+                          <Option value='online' className='opt'>
+                            온라인
+                          </Option>
+                          <Option value='offline' className='opt'>
+                            오프라인
+                          </Option>
                         </Select>
                       </Filter>
                     </SelectDiv>

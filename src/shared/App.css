@@ -9,3 +9,7 @@
 body {
     cursor: default;
 }
+
+.opt {
+    font-size: 12px;
+}
