@@ -111,7 +111,7 @@ const Wrap = styled.div`
     top: 0px;
     padding: 14px 0;
     background: #fff;
-    z-index: 3;
+    z-index: 4;
 `;
 
 const Body = styled.div`
