@@ -15,6 +15,7 @@ const MoDrawer = ({ drawerClose }, props) => {
     const dispatch = useDispatch();
 
     const category_list = useSelector((state) => state.post.category_list);
+    console.log(category_list);
     const user = useSelector((state) => state.user?.user);
 
     useEffect(() => {
