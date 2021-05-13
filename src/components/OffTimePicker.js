@@ -10,7 +10,7 @@ const OffTimePicker=(props)=>{
   const { setTime, time } =props;
   if(time==='' && user.offTime){
     setTime(user.offTime);
-  }
+  };
   return(
     <Contatiner>
   {user.offTime?
@@ -22,6 +22,8 @@ const OffTimePicker=(props)=>{
   defaultOpenValue={moment(user.offTime, "HH:mm:ss")}
   defaultValue={moment(user.offTime, "HH:mm:ss")}
   disabledHours={() => range(0, 15)}
+  minuteStep={10}
+  secondStep={30}
 />
 :
 <TimePicker
@@ -29,8 +31,10 @@ const OffTimePicker=(props)=>{
   onChange={(time, timeString) => {
     setTime(timeString);
   }}
-  defaultOpenValue={moment("18:00:00", "HH:mm:ss")}
+  defaultOpenValue={moment("16:00:00", "HH:mm:ss")}
   disabledHours={() => range(0, 15)}
+  minuteStep={10}
+  secondStep={30}
 />
 }
   </Contatiner>);
