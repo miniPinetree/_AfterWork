@@ -1,4 +1,4 @@
-# AFTER WORK : 넘쳐나는 취미 클래스 한 눈에 !
+# AFTER WORK : 넘쳐나는 취미 클래스를 한 눈에 👀 !
 ![image](https://user-images.githubusercontent.com/68773118/118100292-403b3d80-b411-11eb-9cd6-780ad804caa8.png)
 
 
