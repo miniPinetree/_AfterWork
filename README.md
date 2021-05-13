@@ -12,8 +12,8 @@
 ---
 
 ## 프로젝트 소개
-<h3><a href="https://afterwork.co.kr/" target="_blank">사이트 바로가기</a><h3>
-<h3><a href="https://afterwork.co.kr/" target="_blank">Youtube 시연영상</a><h3>
+<h4><a href="https://afterwork.co.kr/" target="_blank">사이트 바로가기</a><h4>
+<h4><a href="" target="_blank">Youtube 시연영상</a><h4>
 
 ### 서비스 내용 및 기능
 넘쳐나는 취미 플랫폼 클래스들을 한 번에 모아볼 수 있는 사이트
