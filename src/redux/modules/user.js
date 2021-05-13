@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { deleteCookie } from "../../shared/Cookie";
 import { produce } from "immer";
+import { history } from "../configStore";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -13,8 +14,9 @@ const getUser = createAction(GET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
 const deleteUser = createAction(DELETE_USER, (user) => ({ user }));
 const userLoading = createAction(USER_LOADING, (user_loading) => ({ user_loading }));
+
 const initialState = {
-    user:null,
+    user: null,
     is_login: false,
     user_loading: false,
 };
@@ -39,6 +41,12 @@ const getUserDB = () => {
             })
             .catch((err) => {
                 console.log(err, "error");
+                Swal.fire({
+                    text: err.error,
+                    confirmButtonColor: "#7F58EC",
+                    confirmButtonText: "확인",
+                });
+                history.replace("/");
             });
     };
 };
@@ -52,6 +60,8 @@ const deleteUserDB = () => {
             })
             .catch((error) => {
                 console.log(error.response);
+                dispatch.logOut();
+                history.replace("/");
             });
     };
 };

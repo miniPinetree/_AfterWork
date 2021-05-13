@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "../shared/App.css";
 import styled, { keyframes } from "styled-components";
+
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import x from "../shared/images/x.svg";
@@ -9,14 +10,15 @@ import logOut from "../shared/images/log-out.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { getCookie } from "../shared/Cookie";
 import { history } from "../redux/configStore";
 
 const MoDrawer = ({ drawerClose }, props) => {
     const dispatch = useDispatch();
 
     const category_list = useSelector((state) => state.post.category_list);
-    console.log(category_list);
     const user = useSelector((state) => state.user?.user);
+    const cookie = getCookie("is_login");
 
     useEffect(() => {
         if (category_list.length === 0) {
@@ -27,7 +29,7 @@ const MoDrawer = ({ drawerClose }, props) => {
     return (
         <>
             <Body>
-                {user ? (
+                {cookie ? (
                     <>
                         <Head is_user>
                             <X
@@ -124,7 +126,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                             ></X>
                             <Logo
                                 onClick={() => {
-                                    history.push({ pathname: "/login", state: "로그인" });
+                                    history.replace({ pathname: "/login", state: "로그인" });
                                     drawerClose();
                                 }}
                             >

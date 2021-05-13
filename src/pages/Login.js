@@ -3,12 +3,13 @@ import { GOOGLE_AUTH_URL, KAKAO_AUTH_URL, NAVER_AUTH_URL } from "../shared/socia
 import naver from "../shared/images/naver.png";
 import kakao from "../shared/images/kakao.png";
 import google from "../shared/images/google.png";
+import logo from "../shared/images/login.png";
 
 const Login = () => {
     return (
         <>
             <Body>
-                <Logo>퇴근하고 뭐하지?</Logo>
+                <Img src={logo} alt="login" />
                 <A href={GOOGLE_AUTH_URL} google>
                     <SocialLogo src={google} />
                     <Span>구글 계정으로 시작하기</Span>
@@ -26,16 +27,14 @@ const Login = () => {
     );
 };
 
+const Img = styled.img`
+    width: 200px;
+    margin: 24px 4px 44px 0;
+`;
+
 const Body = styled.div`
     text-align: center;
     margin: 40% 0;
-`;
-
-const Logo = styled.h4`
-    font: normal normal bold 22px/33px Noto Sans CJK KR;
-    letter-spacing: -0.66px;
-    color: #000000;
-    margin: 50px 0;
 `;
 
 const A = styled.a`

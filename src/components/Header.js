@@ -6,6 +6,7 @@ import { history } from "../redux/configStore";
 
 import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { debounce } from "lodash";
+import { getCookie } from "../shared/Cookie";
 
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
@@ -16,6 +17,7 @@ import header from "../shared/images/header.png";
 
 const Header = () => {
     const dispatch = useDispatch();
+    const cookie = getCookie("is_login");
     const user = useSelector((state) => state.user.user);
     const is_opened = useSelector((state) => state.prefer.is_opened);
     const is_loading = useSelector((state) => state.user.user_loading);
@@ -29,7 +31,11 @@ const Header = () => {
         setIsModal(false);
     };
     const userOpen = () => {
-        setUserModal(true);
+        if (!cookie) {
+            history.replace("/");
+        } else {
+            setUserModal(true);
+        }
     };
     const userClose = () => {
         setUserModal(false);
@@ -75,14 +81,14 @@ const Header = () => {
                         </div>
 
                         <div>
-                            {is_loading ? null : user && user.image ? (
+                            {is_loading ? null : cookie && user && user.image ? (
                                 <>
                                     <Login onClick={userOpen} is_user>
                                         {user.name}님
                                     </Login>
                                     <ProfileImg src={user.image} onClick={userOpen}></ProfileImg>
                                 </>
-                            ) : user && !user.image ? (
+                            ) : cookie && user && !user.image ? (
                                 <>
                                     <Login onClick={userOpen} is_user>
                                         {user.name}님
