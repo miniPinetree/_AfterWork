@@ -56,7 +56,7 @@ function CountDown() {
   return (
     <>
       {/* 퇴근시간을 설정하지 않은 경우 */}
-      {offTime === null || offTime === undefined ? (
+      {offTime === null || offTime === undefined || offTime === '' ? (
         <SettingBox>
           <span>퇴근 시간을 설정해주세요!</span>
           <div>
