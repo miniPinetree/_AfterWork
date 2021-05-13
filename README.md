@@ -12,8 +12,9 @@
 ---
 
 ## 프로젝트 소개
-### [사이트 바로가기](https://afterwork.co.kr/){:target="_blank"}
-### [시연 영상](){:target="_blank"}
+<h3><a href="https://afterwork.co.kr/" target="_blank">사이트 바로가기</a><h3>
+<h3><a href="https://afterwork.co.kr/" target="_blank">Youtube 시연영상</a><h3>
+
 ### 서비스 내용 및 기능
 넘쳐나는 취미 플랫폼 클래스들을 한 번에 모아볼 수 있는 사이트
 - 유명 플랫폼 7개사 클래스 인기, 가격 한 번에 비교 
