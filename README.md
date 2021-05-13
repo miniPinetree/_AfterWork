@@ -1,13 +1,15 @@
-# AFTER WORK
+# AFTER WORK : 넘쳐나는 취미 클래스 한 눈에 !
 ![image](https://user-images.githubusercontent.com/68773118/118100292-403b3d80-b411-11eb-9cd6-780ad804caa8.png)
 
 
-### 목차
+## 목차
 1. [프로젝트 소개](#프로젝트-소개)
 2. [사용기술](#-tools)<br/>
 3. [배운 점](#-i-learned)<br/>
 4. [기능정보](#-기능정보)<br/>
 5. [진행과정](#-진행과정)<br/>
+
+---
 
 ## 프로젝트 소개
 ### [사이트 바로가기](https://afterwork.co.kr/)
