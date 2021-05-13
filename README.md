@@ -3,7 +3,7 @@
 <h4><a href="https://afterwork.co.kr/" target="_blank">사이트 바로가기</a><h4>
 <h4><a href="" target="_blank">Youtube 시연영상</a><h4>
   
-![image](https://user-images.githubusercontent.com/68773118/118100292-403b3d80-b411-11eb-9cd6-780ad804caa8.png)
+![image](https://user-images.githubusercontent.com/68773118/118110633-9f06b400-b41d-11eb-9735-82f0db5838d1.png)
 
 
 ## 목차
