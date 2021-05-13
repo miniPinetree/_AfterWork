@@ -1,8 +1,9 @@
 # 🤹‍♀️ AFTER WORK - 넘쳐나는 취미 클래스를 한 눈에 !
 
 <h4><a href="https://afterwork.co.kr/" target="_blank">사이트 바로가기</a> <a href="" target="_blank"> / Youtube 시연영상</a><h4>
+  
+![image](https://user-images.githubusercontent.com/68773118/118111208-57345c80-b41e-11eb-948a-982b78a7bc50.png)
 
-![image](https://user-images.githubusercontent.com/68773118/118110633-9f06b400-b41d-11eb-9735-82f0db5838d1.png)
 
 
 ## 목차
