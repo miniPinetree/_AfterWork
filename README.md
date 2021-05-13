@@ -27,7 +27,7 @@
 - 취미 부자, 퇴근 후 뭐하지? 고민하는 직장인들을 타겟팅
 
 ### 팀 구성
-**개발기간 2021.04.25 ~ 2021.05.12**
+**개발기간 2021.04.25 ~ 2021.05.12** <br/>
 Front-end(React) : 3인 <br/>
 Back-end(Spring) : 3인 ([Github Repo](https://github.com/seongbinko/afterwork)) <br/>
 Designer         : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-921c-c8a87578a9e6-3c63/grid)) <br/>
