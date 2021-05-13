@@ -1,4 +1,12 @@
 # AFTER WORK
+![image](https://user-images.githubusercontent.com/68773118/118099789-af646200-b410-11eb-9131-4ff35eb25c81.png)
+
+### 목차
+1. [프로젝트 소개](#프로젝트-소개)
+2. [사용기술](#-tools)<br/>
+3. [배운 점](#-i-learned)<br/>
+4. [기능정보](#-기능정보)<br/>
+5. [진행과정](#-진행과정)<br/>
 ## 프로젝트 소개
 ### [바로가기 https://afterwork.co.kr/](https://afterwork.co.kr/)
 ![image](https://user-images.githubusercontent.com/68773118/118098513-f6e9ee80-b40e-11eb-93d4-c8de77aefbed.png)
@@ -21,3 +29,10 @@ Back-end(Spring) : 3인 ([Github Repo](https://github.com/seongbinko/afterwork))
 Designer         : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-921c-c8a87578a9e6-3c63/grid)) <br/>
 
 
+## 🛠 Tools
+
+## 🔎 I learned 
+
+## 🕹 기능정보
+
+## ⛓ 진행과정
