@@ -44,7 +44,7 @@ function Banner(props) {
                         <br />
                         고민될 땐
                         <br />
-                        After Work
+                        AFTER WORK
                       </strong>
                     </span>
                   </TitleBox>
@@ -52,7 +52,7 @@ function Banner(props) {
                     <span>
                       퇴근하고 뭐하지?
                       <br />
-                      모든 취미 클래스를 모아 볼 수 있는 After Work
+                      모든 취미 클래스를 모아 볼 수 있는 AFTER WORK
                     </span>
                   </SubTitleBox>
                   <ImgBox>
@@ -76,7 +76,7 @@ function Banner(props) {
                       <strong>
                         출근... 퇴근... 반복적인 삶
                         <br />
-                        AfterWork에서
+                        AFTER WORK에서
                         <br />
                         바꿔보자
                       </strong>
@@ -112,7 +112,7 @@ function Banner(props) {
                       <strong>
                         퇴근 후 치맥 한잔 대신
                         <br />
-                        After Work에서
+                        AFTER WORK에서
                         <br />
                         취미 한번 추천받자!
                       </strong>
