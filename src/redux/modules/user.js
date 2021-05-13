@@ -13,15 +13,16 @@ const getUser = createAction(GET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
 const deleteUser = createAction(DELETE_USER, (user) => ({ user }));
 const userLoading = createAction(USER_LOADING, (user_loading) => ({ user_loading }));
+
 const initialState = {
-    user:null,
+    user: null,
     is_login: false,
     user_loading: false,
 };
 
 const getUserDB = () => {
-    return function (dispatch) {
-        dispatch(userLoading(true));
+    userLoading(true);
+    return function (dispatch, { history }) {
         axios
             .get(`/api/user/me`)
             .then((res) => {
@@ -39,12 +40,18 @@ const getUserDB = () => {
             })
             .catch((err) => {
                 console.log(err, "error");
+                Swal.fire({
+                    text: err.error,
+                    confirmButtonColor: "#7F58EC",
+                    confirmButtonText: "확인",
+                });
+                history.replace("/");
             });
     };
 };
 
 const deleteUserDB = () => {
-    return function (dispatch) {
+    return function (dispatch, { history }) {
         axios
             .delete(`/api/user`)
             .then((res) => {
@@ -52,6 +59,8 @@ const deleteUserDB = () => {
             })
             .catch((error) => {
                 console.log(error.response);
+                dispatch.logOut();
+                history.replace("/");
             });
     };
 };
