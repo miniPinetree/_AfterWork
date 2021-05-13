@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configStore";
 
 import { actionCreators as preferActions } from "../redux/modules/prefer";
-import { actionCreators as userActions } from "../redux/modules/user";
 import { debounce } from "lodash";
 import { getCookie } from "../shared/Cookie";
 
@@ -94,7 +93,7 @@ const Header = () => {
                                     <Login onClick={userOpen} is_user>
                                         {user.name}님
                                     </Login>
-                                    <Avatar size={64} icon={<UserOutlined />} onClick={userOpen} />
+                                    <Avatar size={30} icon={<UserOutlined />} onClick={userOpen} />
                                 </>
                             ) : (
                                 <Login onClick={modalOpen}>로그인</Login>
