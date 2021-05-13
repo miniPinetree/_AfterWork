@@ -1,4 +1,8 @@
 # 🤹‍♀️ AFTER WORK - 넘쳐나는 취미 클래스를 한 눈에 !
+
+<h4><a href="https://afterwork.co.kr/" target="_blank">사이트 바로가기</a><h4>
+<h4><a href="" target="_blank">Youtube 시연영상</a><h4>
+  
 ![image](https://user-images.githubusercontent.com/68773118/118100292-403b3d80-b411-11eb-9cd6-780ad804caa8.png)
 
 
@@ -12,8 +16,6 @@
 ---
 
 ## 프로젝트 소개
-<h4><a href="https://afterwork.co.kr/" target="_blank">사이트 바로가기</a><h4>
-<h4><a href="" target="_blank">Youtube 시연영상</a><h4>
 
 ### 서비스 내용 및 기능
 넘쳐나는 취미 플랫폼 클래스들을 한 번에 모아볼 수 있는 사이트
