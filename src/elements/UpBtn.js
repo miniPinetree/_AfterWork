@@ -33,8 +33,8 @@ const BtnWrap = styled.div`
   position: fixed;
   width: 50px;
   height: 50px;
-  bottom: 10%;
-  right: 2%;
+  bottom: 100px;
+  right: 30px;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
