@@ -84,7 +84,7 @@ const Container = styled.div`
   @media all and (max-width: 768px) {
     width: 90%;
     }
-  @media all and (max-width: 414px) {
+  @media all and (max-width: 415px) {
     width:100%;
   }
 `;
@@ -97,7 +97,7 @@ const TextBox = styled.div`
     margin-top: 64px;
     font-weight: 100;
   }
-  @media all and (max-width: 414px) {
+  @media all and (max-width: 415px) {
         display: none;
     }
 `;
@@ -113,7 +113,7 @@ const Profile = styled.div`
   display: flex;
   align-items: center;
   padding: 0 30px;
-  @media all and (max-width: 414px) {
+  @media all and (max-width: 415px) {
         display: none;
     }
 `;
@@ -139,7 +139,7 @@ const Area1 = styled.div`
   }
 `;
 const MarkList = styled.div`
-@media all and (max-width: 414px) {
+@media all and (max-width: 415px) {
 }
 `;
 const CardList = styled.div`
@@ -154,7 +154,7 @@ const CardList = styled.div`
     margin-bottom: 20px;
     margin-right:10px;
   }
-  @media all and (max-width: 414px) {
+  @media all and (max-width: 415px) {
     min-width:344px;
     width:344px;
     margin:20px auto;
@@ -184,7 +184,7 @@ const EmptyBox = styled.div`
   @media all and (max-width: 768px) {
     padding-top:10%;
     }
-  @media all and (max-width: 414px) {
+  @media all and (max-width: 415px) {
     padding-top:40%;
     }
 `;
