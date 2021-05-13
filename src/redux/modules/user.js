@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { deleteCookie } from "../../shared/Cookie";
 import { produce } from "immer";
-import { history } from "../configStore";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -22,8 +21,8 @@ const initialState = {
 };
 
 const getUserDB = () => {
-    return function (dispatch) {
-        dispatch(userLoading(true));
+    userLoading(true);
+    return function (dispatch, { history }) {
         axios
             .get(`/api/user/me`)
             .then((res) => {
@@ -52,7 +51,7 @@ const getUserDB = () => {
 };
 
 const deleteUserDB = () => {
-    return function (dispatch) {
+    return function (dispatch, { history }) {
         axios
             .delete(`/api/user`)
             .then((res) => {

@@ -29,7 +29,7 @@ const MoDrawer = ({ drawerClose }, props) => {
     return (
         <>
             <Body>
-                {cookie ? (
+                {cookie && user ? (
                     <>
                         <Head is_user>
                             <X
