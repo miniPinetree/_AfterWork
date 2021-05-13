@@ -1,5 +1,6 @@
 # AFTER WORK
-![image](https://user-images.githubusercontent.com/68773118/118099789-af646200-b410-11eb-9131-4ff35eb25c81.png)
+![image](https://user-images.githubusercontent.com/68773118/118100292-403b3d80-b411-11eb-9cd6-780ad804caa8.png)
+
 
 ### 목차
 1. [프로젝트 소개](#프로젝트-소개)
@@ -7,10 +8,10 @@
 3. [배운 점](#-i-learned)<br/>
 4. [기능정보](#-기능정보)<br/>
 5. [진행과정](#-진행과정)<br/>
-## 프로젝트 소개
-### [바로가기 https://afterwork.co.kr/](https://afterwork.co.kr/)
-![image](https://user-images.githubusercontent.com/68773118/118098513-f6e9ee80-b40e-11eb-93d4-c8de77aefbed.png)
 
+## 프로젝트 소개
+### [사이트 바로가기](https://afterwork.co.kr/)
+### [시연 영상]()
 ### 서비스 내용 및 기능
 넘쳐나는 취미 플랫폼 클래스들을 한 번에 모아볼 수 있는 사이트
 - 유명 플랫폼 7개사 자료 인기, 가격 한 번에 비교 
