@@ -74,8 +74,9 @@ const MyPage = (props) => {
 export default MyPage;
 const Bg = styled.div`
 background-color: #F8F8F8;
+min-height: 100vh;
 width:100%;
-height:100vh;
+
 `;
 const Container = styled.div`
   width: 70%;
@@ -171,7 +172,9 @@ const EmptyBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height:58vh;
   & img {
+    margin-top: -10%;
     max-width: 207px;
     max-height: 207px;
   }
@@ -182,9 +185,14 @@ const EmptyBox = styled.div`
     color: #676767;
   }
   @media all and (max-width: 768px) {
-    padding-top:10%;
+    & img {
+    margin-top: -30%;
+  }
     }
   @media all and (max-width: 415px) {
-    padding-top:40%;
+    height:100vh;
+    & img {
+    margin-top: -30%;
+  }
     }
 `;
