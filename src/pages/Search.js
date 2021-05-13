@@ -78,9 +78,15 @@ function Search(props) {
                           onChange={selectSort}
                           value={sortBox}
                         >
-                          <Option value='popularity desc'>인기순</Option>
-                          <Option value='price asc'>가격 낮은순</Option>
-                          <Option value='price desc'>가격 높은순</Option>
+                          <Option value='popularity desc' className='opt'>
+                            인기순
+                          </Option>
+                          <Option value='price asc' className='opt'>
+                            가격 낮은순
+                          </Option>
+                          <Option value='price desc' className='opt'>
+                            가격 높은순
+                          </Option>
                         </Select>
                       </Sort>
                       <Filter>
@@ -90,9 +96,15 @@ function Search(props) {
                           onChange={selectFilter}
                           value={filterBox}
                         >
-                          <Option value='total'>전체보기</Option>
-                          <Option value='online'>온라인</Option>
-                          <Option value='offline'>오프라인</Option>
+                          <Option value='total' className='opt'>
+                            전체보기
+                          </Option>
+                          <Option value='online' className='opt'>
+                            온라인
+                          </Option>
+                          <Option value='offline' className='opt'>
+                            오프라인
+                          </Option>
                         </Select>
                       </Filter>
                     </SelectDiv>
@@ -119,9 +131,18 @@ function Search(props) {
                           {post_list.map((val, idx) => {
                             return collection.includes(val.productId) ===
                               true ? (
-                              <PostCard post_info={val} key={idx} like />
+                              <PostCard
+                                post_info={val}
+                                key={idx}
+                                like
+                                is_responsive
+                              />
                             ) : (
-                              <PostCard post_info={val} key={idx} />
+                              <PostCard
+                                post_info={val}
+                                key={idx}
+                                is_responsive
+                              />
                             );
                           })}
                         </InfinityScroll>
@@ -163,6 +184,9 @@ const MainContainer = styled.div`
     min-height: 600px;
     padding: 0 20px;
   }
+  @media only screen and (max-width: 414px) {
+    padding: 0;
+  }
 
   @media only screen and (max-width: 372px) {
     width: 100%;
@@ -189,6 +213,7 @@ const SelectDiv = styled.div`
 `;
 const Sort = styled.div`
   max-width: 112px;
+  min-width: 90px;
   margin-right: 15px;
   @media only screen and (max-width: 414px) {
     & span {

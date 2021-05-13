@@ -8,11 +8,11 @@ function PostCard(props) {
   // 취미 상품 카드
   const dispatch = useDispatch();
   // 찜 여부와 상품 정보를 프롭스로 받는다
-  const { like, post_info } = props;
+  const { like, post_info, is_responsive } = props;
   const price = post_info?.priceInfo?.split('원');
   return (
     <>
-      <CardWrap className='wrap'>
+      <CardWrap className='wrap' is_responsive={is_responsive}>
         {/* 카드 클릭 시 새창에서 해당 페이지로 이동 */}
         <a href={post_info.siteUrl} target='_blank' rel='noreferrer noopener'>
           <Img
@@ -101,6 +101,9 @@ const CardWrap = styled.div`
     max-width: 215px;
     height: 280.73px;
     margin-bottom: 20px;
+  }
+  @media only screen and (max-width: 768px) {
+    max-width: ${(props) => (props.is_responsive ? '168px' : '215px')};
   }
   @media only screen and (max-width: 414px) {
     margin-top: 11.27px;

@@ -56,13 +56,13 @@ const openScale = keyframes`
         0%{
             height:0px ;
             opacity:0;
-            transform: translateX(-60%) ;
+            transform: translateX(-40%) ;
             transition: opacity .1s ease;
          }
          100% {
             height:124px ;
             opacity:1;
-            transform: translateX(-60%) ;
+            transform: translateX(-40%) ;
             transition: opacity .1s ease;
          }
     
@@ -77,7 +77,7 @@ const UserBody = styled.div`
     position: absolute;
     margin: 0;
     padding: 16px;
-    z-index: 11;
+    z-index: 4;
     animation: ${openScale} 0.4s cubic-bezier(0.17, 0.67, 0.5, 1) forwards;
 `;
 
@@ -89,6 +89,7 @@ const Content = styled.span`
     opacity: 1;
     display: block;
     margin-bottom: 8px;
+    z-index: 5;
     &:hover {
         color: #7f58ec;
         cursor: pointer;
