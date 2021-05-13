@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import logo from "../shared/images/footer.png";
 
 import { useSelector } from "react-redux";
-import { debounce } from "lodash";
 import { history } from "../redux/configStore";
 
 const Footer = () => {
-    const [windowSize, setWindowSize] = useState(window.innerWidth);
     const titles = useSelector((state) => state.router.location.pathname);
 
-    const handleResize = debounce(() => {
-        setWindowSize(window.innerWidth);
-    }, 100);
-
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, [handleResize]);
-
-    if (windowSize < 769 && titles !== "/") {
+    if (titles !== "/") {
         return null;
     }
     return (
