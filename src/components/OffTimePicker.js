@@ -12,7 +12,7 @@ const OffTimePicker=(props)=>{
     setTime(user.offTime);
   };
   return(
-    <Contatiner>
+    <>
   {user.offTime?
   <TimePicker
   size="large"
@@ -21,9 +21,10 @@ const OffTimePicker=(props)=>{
   }}
   defaultOpenValue={moment(user.offTime, "HH:mm:ss")}
   defaultValue={moment(user.offTime, "HH:mm:ss")}
-  disabledHours={() => range(0, 15)}
+  disabledHours={() => range(0, 9)}
   minuteStep={10}
-  secondStep={30}
+  secondStep={60}
+  showNow={false}
 />
 :
 <TimePicker
@@ -31,18 +32,13 @@ const OffTimePicker=(props)=>{
   onChange={(time, timeString) => {
     setTime(timeString);
   }}
-  defaultOpenValue={moment("16:00:00", "HH:mm:ss")}
-  disabledHours={() => range(0, 15)}
+  defaultOpenValue={moment("09:00:00", "HH:mm:ss")}
+  disabledHours={() => range(0, 9)}
   minuteStep={10}
-  secondStep={30}
+  secondStep={60}
+  showNow={false}
 />
 }
-  </Contatiner>);
+  </>);
 };
 export default React.memo(OffTimePicker);
-
-const Contatiner = styled.div`
-& .ant-picker-now{
-  display:none;
-}
-`;
