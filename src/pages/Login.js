@@ -22,6 +22,12 @@ const Login = () => {
                     <SocialLogo src={kakao} />
                     <Span kakao>카카오 계정으로 시작하기</Span>
                 </A>
+                <PDiv>
+                    <P>
+                        구글 로그인은 인앱 브라우저(카카오톡 등)에서 지원되지
+                        <br /> 않습니다. 오류 발생시 다른 브라우저에서 실행해주세요.
+                    </P>
+                </PDiv>
             </Body>
         </>
     );
@@ -61,6 +67,17 @@ const Span = styled.span`
     font-size: 15px;
     font-weight: 400;
     color: ${(props) => (props.kakao ? "#3C1E20" : "#fff")};
+`;
+
+const PDiv = styled.div`
+    margin: 0 auto;
+    width: 316px;
+`;
+
+const P = styled.p`
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 36px;
 `;
 
 export default Login;
