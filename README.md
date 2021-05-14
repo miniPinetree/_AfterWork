@@ -2,7 +2,9 @@
 
 <h4><a href="https://afterwork.co.kr/" target="_blank">사이트 바로가기</a> <a href="" target="_blank"> / Youtube 시연영상</a><h4>
   
-**개발기간 2021.04.25 ~ 2021.05.12 / 사용자 피드백 및 개선기간 2021.05.13 ~ 진행 중**
+개발기간 2021.04.25 ~ 2021.05.12
+<br/>
+**사용자 피드백 및 개선기간 2021.05.13 ~ 진행 중**
 <br/>
   
 ![image](https://user-images.githubusercontent.com/68773118/118111208-57345c80-b41e-11eb-948a-982b78a7bc50.png)
