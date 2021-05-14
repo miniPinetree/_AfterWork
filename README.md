@@ -45,12 +45,24 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
 - Build Tool (Create React App)
 - Code Quality Tool (ESLint, Prettier)
 - Infrastructure (AWS S3, Route 53, Amazon CloudFront)
-- Design Tools (Xd adobe)
+- Design Tool (Xd adobe)
 - Other Tools (Git, Github, notion, Slack etc.)
 ```
 
 ## 🔎 I learned
 
 ## 🕹 기능정보
+
+### 1. 소셜 로그인
+
+### 2. 회원 정보에 따른 클래스 추천 기능
+
+### 3. 카테고리 별 클래스 조회
+
+### 4. 클래스 검색 기능
+
+### 5. 관심 클래스 추가 기능
+
+### 6. 회원 정보 수정 및 탈퇴
 
 ## ⛓ 진행과정
