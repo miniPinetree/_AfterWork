@@ -45,7 +45,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                                     {user && user.image ? (
                                         <ProfileImg src={user.image}></ProfileImg>
                                     ) : (
-                                        <Avatar size={64} icon={<UserOutlined />} />
+                                        <Avatar size={50} icon={<UserOutlined />} />
                                     )}
                                 </div>
                                 <div>

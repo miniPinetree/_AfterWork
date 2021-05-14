@@ -24,6 +24,16 @@ const MobileSearch = () => {
         }
     };
 
+    const handleSearchButton = (e) => {
+        if (search === "" || search.trim() === "") {
+            return;
+        }
+
+        handleAddKeyword(search);
+        setSearch("");
+        history.replace(`/find/search?keyword=${search}`);
+    };
+
     //검색어 저장
     const handleAddKeyword = (search) => {
         let temp = [...keywords, search];
@@ -74,8 +84,14 @@ const MobileSearch = () => {
                                     cursor: "pointer",
                                     fontSize: "20px",
                                 }}
+                                onClick={(e) => {
+                                    handleSearchButton(e);
+                                }}
                             />
                         }
+                        onSearch={(e) => {
+                            handleSearch(e);
+                        }}
                         value={search}
                         onChange={handleKeyword}
                         onKeyDown={(e) => handleSearch(e)}
