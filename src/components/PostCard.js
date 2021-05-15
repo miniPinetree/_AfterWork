@@ -158,9 +158,11 @@ const TextBox = styled.div`
     }
   }
   @media only screen and (max-width: 414px) {
+    padding: 15px 10px;
     & strong {
       font-size: 13px;
-      letter-spacing: -0.13px;
+      letter-spacing: -0.15px;
+      line-height: 1.3;
     }
   }
 `;
