@@ -103,10 +103,6 @@ const Title = styled.div`
     font-size: 16px;
     letter-spacing: -0.48px;
   }
-  @media only screen and (max-width: 414px) {
-    font-size: 15px;
-    letter-spacing: -0.45px;
-  }
 `;
 const CarouselContainer = styled.div`
   max-width: 1004px;

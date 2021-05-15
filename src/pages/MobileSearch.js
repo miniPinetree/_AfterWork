@@ -12,7 +12,7 @@ const MobileSearch = () => {
     const handleKeyword = (e) => {
         setSearch(e.target.value);
     };
-
+    //엔터시 검색
     const handleSearch = (e) => {
         if (search === "" || search.trim() === "") {
             return;
@@ -23,7 +23,7 @@ const MobileSearch = () => {
             history.replace(`/find/search?keyword=${search}`);
         }
     };
-
+    //아이콘 터치시 검색
     const handleSearchButton = (e) => {
         if (search === "" || search.trim() === "") {
             return;
@@ -92,6 +92,7 @@ const MobileSearch = () => {
                         onSearch={(e) => {
                             handleSearch(e);
                         }}
+                        maxLength={30}
                         value={search}
                         onChange={handleKeyword}
                         onKeyDown={(e) => handleSearch(e)}

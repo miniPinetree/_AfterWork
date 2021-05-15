@@ -8,20 +8,32 @@ import logo from "../shared/images/login.png";
 const LoginModal = ({ close }, props) => {
     return (
         <>
-            <Modal>
-                <Img src={logo} alt="login" />
-                <A href={GOOGLE_AUTH_URL} google>
-                    <SocialLogo src={google} />
-                    <Span>구글 계정으로 시작하기</Span>
-                </A>
-                <A href={NAVER_AUTH_URL} naver>
-                    <SocialLogo src={naver} />
-                    <Span>네이버 계정으로 시작하기</Span>
-                </A>
-                <A href={KAKAO_AUTH_URL}>
-                    <SocialLogo src={kakao} />
-                    <Span kakao>카카오 계정으로 시작하기</Span>
-                </A>
+            <Modal
+                onClick={() => {
+                    close();
+                }}
+            >
+                <ModalContent>
+                    <Img src={logo} alt="login" />
+                    <A href={GOOGLE_AUTH_URL} google>
+                        <SocialLogo src={google} />
+                        <Span>구글 계정으로 시작하기</Span>
+                    </A>
+                    <A href={NAVER_AUTH_URL} naver>
+                        <SocialLogo src={naver} />
+                        <Span>네이버 계정으로 시작하기</Span>
+                    </A>
+                    <A href={KAKAO_AUTH_URL}>
+                        <SocialLogo src={kakao} />
+                        <Span kakao>카카오 계정으로 시작하기</Span>
+                    </A>
+                    <PDiv>
+                        <P>
+                            구글 로그인은 인앱 브라우저(카카오톡 등)에서 지원되지
+                            <br /> 않습니다. 오류 발생시 다른 브라우저에서 실행해주세요.
+                        </P>
+                    </PDiv>
+                </ModalContent>
             </Modal>
 
             <Back
@@ -34,8 +46,9 @@ const LoginModal = ({ close }, props) => {
 };
 
 const Img = styled.img`
+    display: block;
     width: 200px;
-    margin: 64px 0 44px 0;
+    margin: 44px auto;
 `;
 
 const Back = styled.div`
@@ -47,7 +60,7 @@ const Back = styled.div`
     opacity: 0.3;
     backdrop-filter: blur(5px);
     position: fixed;
-    z-index: 99;
+    z-index: 3;
 `;
 
 const openScale = keyframes`
@@ -61,22 +74,27 @@ const openScale = keyframes`
 
 const Modal = styled.div`
     position: fixed;
-    height: 100vh;
-    top: 30%;
-    left: 38%;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    opacity: 4;
     width: 100%;
-    max-width: 400px;
-    height: 350px;
-    background: #fff;
-    text-align: center;
+    height: 100%;
+`;
+
+const ModalContent = styled.div`
+    background: #fefefe;
+    margin: 20% auto;
+    padding: 20px;
     border-radius: 15px;
-    z-index: 999;
+    max-width: 420px;
+    height: 400px;
+    overflow: auto;
+    opacity: 1;
+    z-index: 99;
     box-shadow: 0 6px 35px rgb(24 25 31 / 20%);
+    text-align: center;
     animation: ${openScale} 0.4s cubic-bezier(0.17, 0.67, 0.5, 1) forwards;
-    @media only screen and (max-width: 1024px) {
-        top: 30%;
-        left: 28%;
-    }
 `;
 
 const A = styled.a`
@@ -103,6 +121,17 @@ const Span = styled.span`
     font-size: 15px;
     font-weight: 400;
     color: ${(props) => (props.kakao ? "#3C1E20" : "#fff")};
+`;
+
+const PDiv = styled.div`
+    margin: 0 auto;
+    width: 316px;
+`;
+
+const P = styled.p`
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 36px;
 `;
 
 export default LoginModal;

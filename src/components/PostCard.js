@@ -20,7 +20,8 @@ function PostCard(props) {
             alt='img'
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = 'http://admin.sjcam.kr/dev/upload/noimage.jpg';
+              e.target.src =
+                'https://afterwork-webservice-static.s3.ap-northeast-2.amazonaws.com/logo/default_image.jpg';
             }}
           />
           <TextBox>
@@ -108,7 +109,7 @@ const CardWrap = styled.div`
   @media only screen and (max-width: 414px) {
     margin-top: 11.27px;
     max-width: 162px;
-    height: 229.73px;
+    height: 235.73px;
     margin-bottom: 20px;
   }
 `;
@@ -158,8 +159,8 @@ const TextBox = styled.div`
   }
   @media only screen and (max-width: 414px) {
     & strong {
-      font-size: 11px;
-      letter-spacing: -0.22px;
+      font-size: 13px;
+      letter-spacing: -0.13px;
     }
   }
 `;
@@ -210,7 +211,7 @@ const SiteName = styled.div`
     left: 10px;
   }
   @media only screen and (max-width: 414px) {
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: -0.3px;
     top: 7px;
     left: 8px;
@@ -233,8 +234,8 @@ const TextInfo = styled.div`
     overflow: hidden;
   }
   @media only screen and (max-width: 414px) {
-    font-size: 9px;
-    letter-spacing: -0.18px;
+    font-size: 11px;
+    letter-spacing: -0.11px;
     height: 21px;
     overflow: hidden;
   }
@@ -249,8 +250,8 @@ const InfoBox = styled.div`
     letter-spacing: -0.24px;
   }
   @media only screen and (max-width: 414px) {
-    font-size: 10px;
-    letter-spacing: -0.2px;
+    font-size: 12px;
+    letter-spacing: -0.12px;
   }
 `;
 const PriceInfo = styled.div`

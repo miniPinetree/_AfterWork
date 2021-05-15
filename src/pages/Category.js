@@ -233,7 +233,7 @@ const Title = styled.div`
   cursor: default;
   letter-spacing: -0.48px;
   @media only screen and (max-width: 414px) {
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: -0.24px;
   }
 `;
