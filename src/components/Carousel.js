@@ -13,6 +13,17 @@ function Prev(props) {
     </PrevBtn>
   );
 }
+function MobilePrev(props) {
+  const { onClick, is_category } = props;
+  return (
+    <MobilePrevBtn is_category={is_category}>
+      <button onClick={onClick}>
+        <LeftOutlined style={{ color: '#666', fontSize: '12px' }} />
+      </button>
+    </MobilePrevBtn>
+  );
+}
+
 function Next(props) {
   const { onClick } = props;
   return (
@@ -21,7 +32,16 @@ function Next(props) {
     </NextBtn>
   );
 }
-
+function MobileNext(props) {
+  const { onClick, is_category } = props;
+  return (
+    <MobileNextBtn is_category={is_category}>
+      <button onClick={onClick}>
+        <RightOutlined style={{ color: '#666', fontSize: '12px' }} />
+      </button>
+    </MobileNextBtn>
+  );
+}
 function Carousel(props) {
   const { children, text, size, category } = props;
   // 케러셀 셋팅
@@ -56,7 +76,11 @@ function Carousel(props) {
           slidesToShow: category ? 3 : 2,
           slidesToScroll: category ? 3 : 2,
           slidesPerRow: category ? 1 : 2,
+          swipe: false,
           dots: true,
+          dotsClass: category ? 'slick-dots' : 'slideDots',
+          prevArrow: <MobilePrev is_category={category} />,
+          nextArrow: <MobileNext is_category={category} />,
         },
       },
     ],
@@ -69,7 +93,7 @@ function Carousel(props) {
         </TitleContainer>
         <CarouselContainer>
           {/* children => postCard or CategoryCard */}
-          <Slider {...settings}>{children}</Slider>
+          {children.length > 0 && <Slider {...settings}>{children}</Slider>}
         </CarouselContainer>
       </Wrap>
     </>
@@ -110,6 +134,36 @@ const CarouselContainer = styled.div`
   color: #333;
   position: relative;
   cursor: default;
+  & .slick-dots li button::before {
+    color: #c8adff;
+  }
+  & .slideDots {
+    display: flex !important;
+    font-size: 12px;
+    list-style: none;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    & li {
+      margin-right: 4px;
+    }
+    & li:last-child {
+      margin-right: 0;
+    }
+    & button {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+  }
+
+  & .slideDots .slick-active {
+    color: #fff;
+    background: #c8adff 0% 0% no-repeat padding-box;
+    border-radius: 2px;
+  }
 `;
 
 const PrevBtn = styled.button`
@@ -146,6 +200,45 @@ const NextBtn = styled.button`
   right: -50px;
   @media only screen and (max-width: 1024px) {
     display: none;
+  }
+`;
+
+const MobilePrevBtn = styled.div`
+  position: absolute;
+  bottom: ${(props) => (props.is_category ? '-23px' : '0px')};
+  left: ${(props) => (props.is_category ? '110px' : '35px')};
+  width: 24px;
+  height: 20px;
+  z-index: 2;
+  & button {
+    width: 24px;
+    height: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${(props) => (props.is_category ? '#fafafa' : '#fff')};
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 2px;
+  }
+`;
+const MobileNextBtn = styled.div`
+  position: absolute;
+  bottom: ${(props) => (props.is_category ? '-23px' : '0px')};
+  right: ${(props) => (props.is_category ? '110px' : '35px')};
+  width: 24px;
+  height: 20px;
+  z-index: 2;
+  & button {
+    width: 24px;
+    height: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${(props) => (props.is_category ? '#fafafa' : '#fff')};
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 2px;
   }
 `;
 
