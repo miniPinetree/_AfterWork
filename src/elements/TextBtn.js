@@ -14,7 +14,7 @@ const TextBtn = (props) => {
 export default React.memo(TextBtn); 
 
 const BtnBox = styled.div`
- display: inline-block;
+  display: inline-block;
   box-sizing: border-box-sizing;
   margin-top: 68px;
   cursor: pointer;
@@ -29,6 +29,14 @@ const BtnBox = styled.div`
     margin: 0px;
   }
   @media all and (max-width: 415px) {
-    margin:15px 0 10px 0;
+    margin:0px;
+    & text {
+    font-size: 12px;
+    margin: 0px;
+    color:#333333;
+  }
+  & hr {
+    display:none;
+  }
     }
 `;

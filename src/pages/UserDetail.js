@@ -59,18 +59,32 @@ const UserDetail = (props) => {
                                     회원 탈퇴
                                 </DeleteUserBtn>
                             </InfoBox>
-                            <BorderBox>
-                                <strong>퇴근시간 설정</strong>
-                                <OffTimePicker time={time} setTime={setTime} />
-                            </BorderBox>
-                        </Col>
-                        <Col>
                             {/* 관심 카테고리 */}
                             <BorderBox>
+                                <ResOther>
                                 <InterestBox
                                     setCategories={setCategories}
                                     categories={categories}
                                 />
+                                </ResOther>
+                                <ResMobile>
+                                <strong>퇴근시간 설정</strong>
+                                <OffTimePicker time={time} setTime={setTime} />
+                                </ResMobile>
+                            </BorderBox>
+                        </Col>
+                        <Col>
+                        <BorderBox>
+                        <ResOther>
+                                <strong>퇴근시간 설정</strong>
+                                <OffTimePicker time={time} setTime={setTime} />
+                                </ResOther>
+                                <ResMobile>
+                                <InterestBox
+                                    setCategories={setCategories}
+                                    categories={categories}
+                                />
+                                </ResMobile>
                             </BorderBox>
                             <BorderBox>
                                 <strong>관심지역 설정</strong>
@@ -82,7 +96,11 @@ const UserDetail = (props) => {
                                 />
                             </BorderBox>
                         </Col>
+                        <ResMobile>
+                        <Btn>변경사항 저장</Btn>
+                        </ResMobile>
                     </Wrap>
+                    
                 </>
             )}
         </Container>
@@ -93,7 +111,7 @@ export default UserDetail;
 const Bg = styled.div`
 background-color: #F8F8F8;
 width:100%;
-height:100vh;
+min-height:100vh;
 `;
 const Container = styled.div`
     width: 70%;
@@ -109,6 +127,17 @@ const Container = styled.div`
         width: 100%;
     }
 `;
+const ResOther = styled.div`
+@media all and (max-width: 415px) {
+        display:none;
+    }
+`;
+const ResMobile = styled.div`
+display:none;
+@media all and (max-width: 415px) {
+    display:block;
+    }
+`;
 const TextBox = styled.div`
     display: flex;
     justify-content: space-between;
@@ -118,10 +147,14 @@ const TextBox = styled.div`
         color: #7f58ec;
         cursor: pointer;
     }
+    & hr {
+        background-color: #7f58ec;
+    }
     @media all and (max-width: 415px) {
         justify-content: flex-end;
         width: 90%;
         padding-right: 0px;
+        display:none;
     }
 `;
 const Wrap = styled.div`
@@ -147,6 +180,9 @@ const InfoBox = styled.div`
     align-items: center;
     padding: 25px 30px;
     margin: 0 0 20px 0;
+    @media all and (max-width: 415px) {
+        margin-top:15px;
+    }
 `;
 const DeleteUserBtn = styled.div`
     display: inline-block;
@@ -205,5 +241,19 @@ const BorderBox = styled.div`
         /* Internet Explorer 10+ */
         color: #606060;
         font: normal normal normal 16px/30px Noto Sans CJK KR;
+    }
+`;
+const Btn = styled.button`
+width:102px;
+height:35px;
+font-size:13px;
+color:white;
+background:linear-gradient(to right,#7F58EC,#5C5CE3);
+box-sizing:border-box;
+border-radius:7px;
+border:none;
+margin:9px 0 24px 70%;
+@media all and (max-width: 376px){
+    margin:9px 0 24px 67%;
     }
 `;

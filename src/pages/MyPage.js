@@ -86,7 +86,7 @@ const Container = styled.div`
     width: 90%;
     }
   @media all and (max-width: 415px) {
-    width:100%;
+    width:90%;
   }
 `;
 const TextBox = styled.div`
@@ -99,7 +99,16 @@ const TextBox = styled.div`
     font-weight: 100;
   }
   @media all and (max-width: 415px) {
-        display: none;
+    width:98%;
+    padding:12px 0 0 0;
+    box-sizing:border-box;
+    height:21.6px;
+    & p {
+    font-size: 12px;
+    color: #333333;
+    margin:auto 0px;
+    font-weight: 400;
+  }
     }
 `;
 const Profile = styled.div`
@@ -140,8 +149,6 @@ const Area1 = styled.div`
   }
 `;
 const MarkList = styled.div`
-@media all and (max-width: 415px) {
-}
 `;
 const CardList = styled.div`
   display: flex;
@@ -158,10 +165,13 @@ const CardList = styled.div`
   @media all and (max-width: 415px) {
     min-width:344px;
     width:344px;
-    margin:20px auto;
-    & .wrap:nth-child(2n-1) {
-    margin-bottom: 20px;
+    margin-top:13px;
+    & .wrap {
+    margin-bottom: 0px;
     margin-right:10px;
+  }
+    & .wrap:nth-child(2n-1) {
+    margin-bottom: 4px;
   }
     }
 `;

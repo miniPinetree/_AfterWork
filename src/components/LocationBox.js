@@ -193,6 +193,11 @@ const InputBox = styled.div`
   & input {
     background-color: #eeeeee;
     margin-top: 4px;
+    & .ant-input-affix-wrapper {
+      @media all and (max-width: 414px) {
+        padding: 5px 15px 7px;
+      }
+    }
     ::-webkit-input-placeholder {
       /* WebKit browsers */
       font-size: 19px;
