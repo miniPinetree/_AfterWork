@@ -21,7 +21,8 @@ function CategoryCard(props) {
           alt='category-img'
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = 'http://admin.sjcam.kr/dev/upload/noimage.jpg';
+            e.target.src =
+              'https://afterwork-webservice-static.s3.ap-northeast-2.amazonaws.com/logo/default_image.jpg';
           }}
         />
 
