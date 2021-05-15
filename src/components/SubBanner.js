@@ -27,6 +27,7 @@ function SubBanner(props) {
                 onClick={searchHandler}
               />
             }
+            maxLength={30}
             value={search}
             style={{
               borderRadius: '29px',
