@@ -14,9 +14,9 @@ const UserDetail = (props) => {
   const user = useSelector((state) => state.user.user);
   const cookie = getCookie("is_login");
   
-  if(!cookie){
-    history.replace('/');
-  };
+//   if(!cookie){
+//     history.replace('/');
+//   };
 
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
@@ -97,7 +97,7 @@ const UserDetail = (props) => {
                             </BorderBox>
                         </Col>
                         <ResMobile>
-                        <Btn>변경사항 저장</Btn>
+                        <Btn onClick={setValue}>변경사항 저장</Btn>
                         </ResMobile>
                     </Wrap>
                     
@@ -215,7 +215,7 @@ const BorderBox = styled.div`
             font-size: 19px;
         }
         @media all and (max-width: 414px){
-            font-size: 17px;
+            font-size: 16px;
         }
     }
     & p {
@@ -252,8 +252,8 @@ background:linear-gradient(to right,#7F58EC,#5C5CE3);
 box-sizing:border-box;
 border-radius:7px;
 border:none;
-margin:9px 0 24px 70%;
-@media all and (max-width: 376px){
-    margin:9px 0 24px 67%;
-    }
+margin:9px 36% 24px;
+@media all and (max-width: 414px){
+    margin:9px 35% 24px;
+        }
 `;

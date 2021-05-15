@@ -4,6 +4,8 @@ import naver from "../shared/images/naver.png";
 import kakao from "../shared/images/kakao.png";
 import google from "../shared/images/google.png";
 import logo from "../shared/images/login.png";
+import more from "../shared/images/more.svg";
+import share from "../shared/images/share.svg";
 
 const LoginModal = ({ close }, props) => {
     return (
@@ -29,8 +31,12 @@ const LoginModal = ({ close }, props) => {
                     </A>
                     <PDiv>
                         <P>
-                            구글 로그인은 인앱 브라우저(카카오톡 등)에서 지원되지
-                            <br /> 않습니다. 오류 발생시 다른 브라우저에서 실행해주세요.
+                            구글 로그인은 <Color>인앱 브라우저(카카오톡 등)</Color>에서 지원되지
+                            <br /> 않습니다. 오류 발생시 더보기 &#40; <img src={more} alt="more" />,
+                            &nbsp;
+                            <InfoImg src={share} alt="share" />
+                            &#41;를 눌러서 <Color>다른 브라우저(Chrome, Safari 등)</Color>에서
+                            실행해주세요.
                         </P>
                     </PDiv>
                 </ModalContent>
@@ -132,6 +138,16 @@ const P = styled.p`
     font-weight: 400;
     font-size: 12px;
     margin-top: 36px;
+`;
+
+const Color = styled.p`
+    color: #7f58ec;
+    display: inline;
+`;
+
+const InfoImg = styled.img`
+    width: 14px;
+    margin-top: -4px;
 `;
 
 export default LoginModal;
