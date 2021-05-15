@@ -197,10 +197,10 @@ const TitleBox = styled.div`
     letter-spacing: -0.4px;
   }
   @media only screen and (max-width: 414px) {
-    font-size: 18px;
+    font-size: 20px;
     letter-spacing: -0.4px;
   }
-  @media only screen and (max-width: 406px) {
+  @media only screen and (max-width: 368px) {
     font-size: 15px;
   }
 `;

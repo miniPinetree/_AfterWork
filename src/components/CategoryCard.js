@@ -69,7 +69,7 @@ const TextBox = styled.div`
   padding: 9px 5px;
   box-sizing: border-box;
   @media only screen and (max-width: 414px) {
-    font-size: 12px;
+    font-size: 15px;
     letter-spacing: -0.36px;
   }
 `;
