@@ -146,7 +146,7 @@ const Text = styled.p`
     font-size: 18px;
   }
   @media all and (max-width: 414px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 const Area = styled.div`
@@ -163,7 +163,7 @@ const Area = styled.div`
     margin-left: 5px;
   }
   @media all and (max-width: 768px) {
-    font-size: 13px;
+    font-size: 14px;
     min-width: 56px;
 
     & svg {
@@ -171,7 +171,7 @@ const Area = styled.div`
     }
   }
   @media all and (max-width: 414px) {
-    font-size: 12px;
+    font-size: 14px;
     min-width: 56px;
 
     & svg {

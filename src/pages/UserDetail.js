@@ -14,9 +14,9 @@ const UserDetail = (props) => {
   const user = useSelector((state) => state.user.user);
   const cookie = getCookie("is_login");
   
-  if(!cookie){
-    history.replace('/');
-  };
+//   if(!cookie){
+//     history.replace('/');
+//   };
 
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
@@ -215,7 +215,7 @@ const BorderBox = styled.div`
             font-size: 19px;
         }
         @media all and (max-width: 414px){
-            font-size: 17px;
+            font-size: 16px;
         }
     }
     & p {
