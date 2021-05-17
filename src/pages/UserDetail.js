@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { history } from "../redux/configStore";
-import { Title, TextBtn } from "../elements";
+import { Title } from "../elements";
 import {UserInfo,InterestBox,LocationBox,OffTimePicker} from "../components";
 import { getCookie } from "../shared/Cookie";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,18 +13,18 @@ const UserDetail = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const cookie = getCookie("is_login");
-  
-//   if(!cookie){
-//     history.replace('/');
-//   };
+
+  if(!cookie){
+    history.replace('/');
+  };
 
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
   const [categories, setCategories] = useState([]);
   const [time, setTime] = useState("");
-
     const setValue = () => {
         dispatch(preferActions.updateUserPreferDB(locations, categories, time));
+        console.log(locations, categories, time);
     };
     return (
         <Bg>
@@ -33,7 +33,8 @@ const UserDetail = (props) => {
                 <>
                     <TextBox>
                         <Title>내 정보 및 상세 설정</Title>
-                        <TextBtn _onClick={setValue}>변경 사항 저장</TextBtn>
+                        <WebBtn onClick={setValue}>변경사항 저장</WebBtn>
+                        {/* <TextBtn _onClick={setValue}>변경 사항 저장</TextBtn> */}
                     </TextBox>
                     <Wrap>
                         <Col>
@@ -100,7 +101,6 @@ const UserDetail = (props) => {
                         <Btn onClick={setValue}>변경사항 저장</Btn>
                         </ResMobile>
                     </Wrap>
-                    
                 </>
             )}
         </Container>
@@ -143,10 +143,7 @@ const TextBox = styled.div`
     justify-content: space-between;
     align-items: center;
     padding-right: 16px;
-    & div:last-of-type {
-        color: #7f58ec;
-        cursor: pointer;
-    }
+    position:relative;
     & hr {
         background-color: #7f58ec;
     }
@@ -253,7 +250,18 @@ box-sizing:border-box;
 border-radius:7px;
 border:none;
 margin:9px 36% 24px;
+cursor: pointer;
 @media all and (max-width: 414px){
     margin:9px 35% 24px;
         }
+`;
+
+const WebBtn = styled(Btn)`
+width:102px;
+height:35px;
+font-size:14px;
+margin:9px 40.5% 24px;
+position:absolute;
+top:50%;
+left:45%;
 `;

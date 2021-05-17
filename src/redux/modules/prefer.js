@@ -4,7 +4,6 @@ import { config } from "../../config";
 import Swal from "sweetalert2";
 import produce from "immer";
 import axios from "axios";
-
 //actions
 const GET_COLLECTION = "GET_COLLECTION";
 const DELETE_COLLECTION = "DELETE_COLLECTION";
@@ -28,12 +27,15 @@ const initialState = {
 const updateUserPreferDB = (locations, categories, time) => {
   return function (dispatch, getState, { history }) {
     const user = getState().user.user;
-    let data = {
+    const data = {
       offTime: time,
       locations: locations,
       categorys: categories,
     };
+   
     axios
+    //test
+      // .post(`${config.api}/api/user`, data, {headers})
       .post(`${config.api}/api/user`, data)
       .then((res) => {
         //res.data 없음.
@@ -50,9 +52,15 @@ const updateUserPreferDB = (locations, categories, time) => {
         };
         dispatch(userActions.getUser({ ...user, ..._data }));
         Swal.fire({
-          text: "저장이 완료되었습니다.",
+          html: "저장이 완료되었습니다. <br/> <b>메인으로 이동하시겠습니까?<b/>",
           confirmButtonColor: "#7F58EC",
-          confirmButtonText: "확인",
+          confirmButtonText: "예",
+          showCancelButton: true,
+          cancelButtonText: "아니오",
+        }).then((result) => {
+          if (result.isConfirmed) {
+           history.push("/");
+          };
         });
       })
       .catch((e) => {
