@@ -77,21 +77,14 @@ export default React.memo(InterestBox);
 const Grid = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 0.7fr;
+  grid-template-rows: 1fr 1fr 1fr;
   grid-auto-flow: dense;
   & p {
+    visibility: hidden;
     font-size: 18px;
     margin: 0 0 16.5px 0;
     display: block;
-    @media all and (max-width: 768px) {
-      visibility: hidden;
-    }
-    @media all and (max-width: 415px) {
-      visibility: hidden;
-    }
-  }
-  @media all and (max-width: 415px) {
-    grid-template-columns: 1fr 0.7fr;
   }
 `;
 const Line = styled.div`
@@ -99,17 +92,14 @@ const Line = styled.div`
   width: 0.1px;
   height: 65%;
   position: absolute;
-  left: 46%;
+  left: 50%;
   bottom: 10%;
-  @media all and (max-width: 415px) {
-    left: 50%;
-  }
 `;
 
 const Row = styled.div`
   margin-bottom: 18.25px;
   font-size: 17px;
-  grid-column-start: ${(props) => (props.isChecked ? 1 : 2)};
+  /* grid-column-start: ${(props) => (props.isChecked? 1 : 2)}; */
   cursor: pointer;
   & span {
     margin-right: 14px;
@@ -126,8 +116,5 @@ const Row = styled.div`
   }
   @media all and (max-width: 768px) {
     font-size: 15px;
-    }
-    @media all and (max-width: 415px) {
-      font-size: 15px;
     }
 `;
