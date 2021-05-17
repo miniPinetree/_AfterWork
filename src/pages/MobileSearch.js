@@ -14,21 +14,40 @@ const MobileSearch = () => {
     };
     //엔터시 검색
     const handleSearch = (e) => {
+        // eslint-disable-next-line no-useless-escape
+        let RegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; //정규식 구문
+        // 특수문자 제한
+        if (RegExp.test(search)) {
+            Swal.fire({
+                text: "특수문자를 제외하고 입력해주세요 😭",
+                confirmButtonColor: "#7F58EC",
+                confirmButtonText: "확인",
+            });
+            return;
+        }
         if (search === "" || search.trim() === "") {
             return;
         }
-        if (search && e.keyCode === 13) {
-            handleAddKeyword(search);
-            setSearch("");
-            history.replace(`/find/search?keyword=${search}`);
-        }
+        handleAddKeyword(search);
+        setSearch("");
+        history.replace(`/find/search?keyword=${search}`);
     };
     //아이콘 터치시 검색
     const handleSearchButton = (e) => {
+        // eslint-disable-next-line no-useless-escape
+        let RegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; //정규식 구문
+        // 특수문자 제한
+        if (RegExp.test(search)) {
+            Swal.fire({
+                text: "특수문자를 제외하고 입력해주세요 😭",
+                confirmButtonColor: "#7F58EC",
+                confirmButtonText: "확인",
+            });
+            return;
+        }
         if (search === "" || search.trim() === "") {
             return;
         }
-
         handleAddKeyword(search);
         setSearch("");
         history.replace(`/find/search?keyword=${search}`);
@@ -95,7 +114,11 @@ const MobileSearch = () => {
                         maxLength={30}
                         value={search}
                         onChange={handleKeyword}
-                        onKeyDown={(e) => handleSearch(e)}
+                        onKeyPress={(e) => {
+                            if (e.key === "Enter") {
+                                handleSearch();
+                            }
+                        }}
                         style={{
                             borderRadius: "29px",
                             fontSize: "14px",
