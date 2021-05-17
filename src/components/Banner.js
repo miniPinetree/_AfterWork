@@ -19,7 +19,7 @@ function Banner(props) {
     slidesToScroll: 1,
     fade: true,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 8000,
     draggable: false,
     arrows: false,
     pauseOnHover: false,
@@ -197,8 +197,8 @@ const TitleBox = styled.div`
     letter-spacing: -0.4px;
   }
   @media only screen and (max-width: 414px) {
-    font-size: 20px;
-    letter-spacing: -0.4px;
+    font-size: 19px;
+    letter-spacing: -1.1px;
   }
   @media only screen and (max-width: 368px) {
     font-size: 15px;

@@ -80,8 +80,7 @@ const Info = styled.div`
     height: 37px;
     font-size: 15px;
     letter-spacing: -0.3px;
-    background: transparent linear-gradient(144deg, #7f58ec 0%, #5c5ce3 100%) 0%
-      0% no-repeat padding-box;
+    background: #333333 0% 0% no-repeat padding-box;
     border-radius: 5px;
     color: #fff;
     border: none;
