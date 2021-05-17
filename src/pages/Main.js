@@ -88,7 +88,7 @@ function Main(props) {
       {is_user ? (
         <>
           {locations?.length ? (
-            <Carousel text='관심 지역 클래스'>
+            <Carousel text='관심 지역 클래스' is_location>
               {nearList.map((val, idx) => {
                 return collection.includes(val.productId) === true ? (
                   <PostCard post_info={val} key={idx + 'near'} like />
@@ -129,7 +129,7 @@ function Main(props) {
       {is_user ? (
         <>
           {interests?.length ? (
-            <Carousel text='관심 분야 클래스'>
+            <Carousel text='관심 분야 클래스' is_interest>
               {recommend_list.map((val, idx) => {
                 return collection.includes(val.productId) === true ? (
                   <PostCard post_info={val} key={idx + 'recommend'} like />

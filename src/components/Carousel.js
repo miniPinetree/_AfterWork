@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { LeftOutlined, RightOutlined, SyncOutlined } from '@ant-design/icons';
 import Slider from 'react-slick';
 import '../../node_modules/slick-carousel/slick/slick.css';
 import '../../node_modules/slick-carousel/slick/slick-theme.css';
+import { actionCreators as postActions } from '../redux/modules/post';
+import { useDispatch } from 'react-redux';
 
 function Prev(props) {
   const { onClick } = props;
@@ -43,7 +45,8 @@ function MobileNext(props) {
   );
 }
 function Carousel(props) {
-  const { children, text, size, category } = props;
+  const { children, text, size, category, is_location, is_interest } = props;
+  const dispatch = useDispatch();
   // 케러셀 셋팅
   const settings = {
     dots: false,
@@ -90,6 +93,24 @@ function Carousel(props) {
       <Wrap>
         <TitleContainer>
           <Title>{text}</Title>
+          {is_location ? (
+            <button
+              onClick={() => {
+                dispatch(postActions.getNearListDB());
+              }}
+            >
+              <SyncOutlined />
+            </button>
+          ) : null}
+          {is_interest ? (
+            <button
+              onClick={() => {
+                dispatch(postActions.getCategoryRecommendDB());
+              }}
+            >
+              <SyncOutlined />
+            </button>
+          ) : null}
         </TitleContainer>
         <CarouselContainer>
           {/* children => postCard or CategoryCard */}
@@ -118,6 +139,53 @@ const TitleContainer = styled.div`
   justify-content: start;
   align-items: center;
   color: #333;
+  & button {
+    margin-left: 10px;
+    line-height: 1.5715;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    background-image: none;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    user-select: none;
+    touch-action: manipulation;
+    color: rgba(0, 0, 0, 0.85);
+    background: #fff;
+    border-color: #d9d9d9;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    padding: 0px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:active {
+      color: #7f58ec;
+      border-color: #7f58ec;
+    }
+    &:hover {
+      color: #7f58ec;
+      border-color: #7f58ec;
+    }
+    @media only screen and (max-width: 414px) {
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      &:hover {
+        color: rgba(0, 0, 0, 0.85);
+        border-color: #d9d9d9;
+      }
+      &:active {
+        color: #7f58ec;
+        border-color: #7f58ec;
+      }
+    }
+  }
 `;
 const Title = styled.div`
   font-size: 20px;
