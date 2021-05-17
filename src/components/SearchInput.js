@@ -3,15 +3,28 @@ import styled from 'styled-components';
 import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { history } from '../redux/configStore';
+import Swal from 'sweetalert2';
 
 function SearchInput() {
   // 배너 검색 창
   const [search, setSearch] = useState('');
   const searchHandler = () => {
+    // eslint-disable-next-line no-useless-escape
+    let RegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; //정규식 구문
+    // 특수문자 제한
+    if (RegExp.test(search)) {
+      Swal.fire({
+        text: '특수문자를 제외하고 입력해주세요 😭',
+        confirmButtonColor: '#7F58EC',
+        confirmButtonText: '확인',
+      });
+      return;
+    }
     // 검색이 공란일때는 리턴
     if (search === '' || search.trim() === '') {
       return;
     }
+
     history.push(`/find/search?keyword=${search}`);
     setSearch('');
   };
