@@ -123,11 +123,15 @@ const Timer = styled.div`
     max-width: 162px;
   }
   @media only screen and (max-width: 414px) {
-    width: 172px;
-    max-width: 172px;
+    width: 168px;
+    max-width: 168px;
     height: 58px;
     right: 0px;
     border-radius: 7px;
+  }
+  @media only screen and (max-width: 375px) {
+    width: 150px;
+    max-width: 150px;
   }
 `;
 const OffTimeTitle = styled.div`
@@ -166,6 +170,12 @@ const OffTimeCnt = styled.div`
     font-size: 15px;
     & span {
       width: 36px;
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    font-size: 15px;
+    & span {
+      width: 32px;
     }
   }
 `;
@@ -240,6 +250,14 @@ const SettingBox = styled.div`
       font-size: 12px;
       letter-spacing: -0.27px;
     }
+  }
+  @media only screen and (max-width: 414px) {
+    width: 168px;
+    max-width: 168px;
+  }
+  @media only screen and (max-width: 375px) {
+    width: 150px;
+    max-width: 150px;
   }
 `;
 
