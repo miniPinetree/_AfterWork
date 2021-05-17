@@ -7,6 +7,7 @@ import Carousel from '../components/Carousel';
 import CategoryCard from '../components/CategoryCard';
 import PostCard from '../components/PostCard';
 import { actionCreators as postActions } from '../redux/modules/post';
+import { actionCreators as preferActions } from '../redux/modules/prefer';
 import Swal from 'sweetalert2';
 
 function Main(props) {
@@ -123,6 +124,17 @@ function Main(props) {
           </TitleContainer>
           <EmptyList>
             <p>로그인 후 지역 클래스를 찾아보세요!</p>
+            <button
+              onClick={() => {
+                if (window.innerWidth > 414) {
+                  dispatch(preferActions.guideGuests(true));
+                } else {
+                  history.push('/login');
+                }
+              }}
+            >
+              로그인하러 가기 {'>'}
+            </button>
           </EmptyList>
         </Wrap>
       )}
@@ -164,6 +176,17 @@ function Main(props) {
           </TitleContainer>
           <EmptyList>
             <p>로그인 후 취미를 추천받아보세요!</p>
+            <button
+              onClick={() => {
+                if (window.innerWidth > 414) {
+                  dispatch(preferActions.guideGuests(true));
+                } else {
+                  history.push('/login');
+                }
+              }}
+            >
+              로그인하러 가기 {'>'}
+            </button>
           </EmptyList>
         </Wrap>
       )}
@@ -221,7 +244,7 @@ const EmptyList = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 209px;
+  height: 149px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 5px 15px #0000000d;
   border-radius: 15px;
@@ -251,6 +274,7 @@ const EmptyList = styled.div`
     }
   }
   @media only screen and (max-width: 414px) {
+    height: 109px;
     & p {
       font-size: 16px;
     }
