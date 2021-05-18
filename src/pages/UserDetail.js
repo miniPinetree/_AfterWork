@@ -264,4 +264,7 @@ margin:9px 40.5% 24px;
 position:absolute;
 top:50%;
 left:45%;
+@media all and (max-width: 414px){
+    display:none;
+        }
 `;
