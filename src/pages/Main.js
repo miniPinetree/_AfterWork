@@ -20,6 +20,10 @@ function Main(props) {
   const category_list = useSelector((state) => state.post?.category_list);
   // 인기 취미 추천 리스트
   const popularList = useSelector((state) => state.post?.popular_list);
+  // 온라인 추천 리스트
+  const onlineList = useSelector((state) => state.post?.online_list);
+  // 오프라인 추천 리스트
+  const offlineList = useSelector((state) => state.post?.offline_list);
   // 지역별 추천 리스트
   const nearList = useSelector((state) => state.post?.near_list);
   // 관심 카테고리 리스트
@@ -42,6 +46,14 @@ function Main(props) {
     // 인기 취미 리스트 조회
     if (popularList.length === 0) {
       dispatch(postActions.getPopularListDB());
+    }
+    // 온라인 취미 리스트 조회
+    if (onlineList.length === 0) {
+      dispatch(postActions.getOnlineListDB());
+    }
+    // 오프라인 취미 리스트 조회
+    if (offlineList.length === 0) {
+      dispatch(postActions.getOfflineListDB());
     }
     // 지역별 추천 리스트 조회
     if (nearList.length === 0 && is_user) {
@@ -138,6 +150,24 @@ function Main(props) {
           </EmptyList>
         </Wrap>
       )}
+      <Carousel text='오늘의 추천 온라인 클래스'>
+        {onlineList.map((val, idx) => {
+          return collection.includes(val.productId) === true ? (
+            <PostCard post_info={val} key={idx + 'online'} like />
+          ) : (
+            <PostCard post_info={val} key={idx + 'online'} />
+          );
+        })}
+      </Carousel>
+      <Carousel text='오늘의 추천 오프라인 클래스'>
+        {offlineList.map((val, idx) => {
+          return collection.includes(val.productId) === true ? (
+            <PostCard post_info={val} key={idx + 'offline'} like />
+          ) : (
+            <PostCard post_info={val} key={idx + 'offline'} />
+          );
+        })}
+      </Carousel>
       {is_user ? (
         <>
           {interests?.length ? (

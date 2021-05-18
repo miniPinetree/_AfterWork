@@ -10,6 +10,8 @@ const SCROLL_POST_LIST = 'SCROLL_POST_LIST';
 const SEARCH_LIST = 'SEARCH_LIST';
 const SCROLL_SEARCH_LIST = 'SCROLL_SEARCH_LIST';
 const POPULAR_LIST = 'POPULAR_LIST';
+const ONLINE_LIST = 'ONLINE_LIST';
+const OFFLINE_LIST = 'OFFLINE_LIST';
 const NEAR_LIST = 'NEAR_LIST';
 const CATEGORY_RECOMMEND_LIST = 'CATEGORY_RECOMMEND_LIST';
 const PAGING = 'PAGING';
@@ -29,6 +31,8 @@ const scrollSearchList = createAction(SCROLL_SEARCH_LIST, (post_list) => ({
   post_list,
 }));
 const popularList = createAction(POPULAR_LIST, (post_list) => ({ post_list }));
+const onlineList = createAction(ONLINE_LIST, (post_list) => ({ post_list }));
+const offlineList = createAction(OFFLINE_LIST, (post_list) => ({ post_list }));
 const nearList = createAction(NEAR_LIST, (post_list) => ({ post_list }));
 const categoryRecommendList = createAction(
   CATEGORY_RECOMMEND_LIST,
@@ -60,6 +64,10 @@ const initialState = {
   },
   // 인기 게시물
   popular_list: [],
+  // 오늘의 온라인 게시물
+  online_list: [],
+  // 오늘의 오프라인 게시물
+  offline_list: [],
   // 근처 게시물
   near_list: [],
   // 관심 카테고리 추천 게시물
@@ -101,7 +109,40 @@ const getPopularListDB = () => {
       });
   };
 };
-
+// 오늘의 온라인 취미 리스트 조회
+const getOnlineListDB = () => {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: `${config.api}/api/recommend/online`,
+    })
+      .then((res) => {
+        res.data === ''
+          ? dispatch(onlineList([]))
+          : dispatch(onlineList(res.data));
+      })
+      .catch((e) => {
+        console.log('에러발생', e);
+      });
+  };
+};
+// 오늘의 오프라인 취미 리스트 조회
+const getOfflineListDB = () => {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: `${config.api}/api/recommend/offline`,
+    })
+      .then((res) => {
+        res.data === ''
+          ? dispatch(offlineList([]))
+          : dispatch(offlineList(res.data));
+      })
+      .catch((e) => {
+        console.log('에러발생', e);
+      });
+  };
+};
 // 관심 지역 취미 항목 조회
 const getNearListDB = () => {
   return function (dispatch) {
@@ -303,6 +344,14 @@ export default handleActions(
       produce(state, (draft) => {
         draft.popular_list = action.payload.post_list;
       }),
+    [ONLINE_LIST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.online_list = action.payload.post_list;
+      }),
+    [OFFLINE_LIST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.offline_list = action.payload.post_list;
+      }),
     [NEAR_LIST]: (state, action) =>
       produce(state, (draft) => {
         draft.near_list = action.payload.post_list;
@@ -334,6 +383,8 @@ const actionCreators = {
   scrollGetPostDB,
   scrollSearchDB,
   getPopularListDB,
+  getOnlineListDB,
+  getOfflineListDB,
   getNearListDB,
   getCategoryRecommendDB,
 };
