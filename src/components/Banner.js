@@ -78,7 +78,7 @@ function Banner(props) {
                         <br />
                         AFTER WORK에서
                         <br />
-                        바꿔보자
+                        바꿔보자!
                       </strong>
                     </span>
                   </TitleBox>
