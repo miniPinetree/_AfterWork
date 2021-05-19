@@ -6,9 +6,9 @@ const getCookie = (name) => {
     }
 };
 
-const setCookie = (name, value, exp = 1) => {
+const setCookie = (name, value) => {
     let date = new Date();
-    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+    date.setTime(date.getTime() + 30 * 60 * 1000);
     document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/; secure=true;`;
 };
 

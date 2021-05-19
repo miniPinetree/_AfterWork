@@ -108,7 +108,7 @@ const Modal = styled.div`
 
 const ModalContent = styled.div`
     background: #fefefe;
-    margin: 15% auto 20% auto;
+    margin: 12% auto 20% auto;
     padding: 20px;
     border-radius: 15px;
     max-width: 420px;
