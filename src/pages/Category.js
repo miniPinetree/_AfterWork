@@ -51,6 +51,7 @@ function Category(props) {
     setCheckedList(e.target.checked ? plainOptions : []);
     setCheckAll(e.target.checked);
   };
+
   // 카테고리 정보
   const category_list = useSelector((state) => state.post.category_list);
   // 게시물 정보
@@ -78,10 +79,12 @@ function Category(props) {
   const sort = sortInfo[0];
   const direction = sortInfo[1];
 
+  const sitename =
+    checkedList.length === 0 ? 'emptySite' : checkedList.join(',');
   useEffect(() => {
     // 게시물 조회
-    dispatch(postActions.getPostDB(id, sort, direction, filterBox));
-  }, [dispatch, id, sort, direction, filterBox]);
+    dispatch(postActions.getPostDB(id, sort, direction, filterBox, sitename));
+  }, [dispatch, id, sort, direction, filterBox, sitename]);
 
   return (
     <>
