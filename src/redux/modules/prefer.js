@@ -64,7 +64,7 @@ const updateUserPreferDB = (locations, categories, time) => {
         });
       })
       .catch((e) => {
-        console.log(e);
+        console.log('회원정보 저장 실패', e);
       });
   };
 };
@@ -77,7 +77,7 @@ const getCollectionDB = () => {
         dispatch(getCollection(res.data));
       })
       .catch((e) => {
-        console.log(e);
+        console.log('찜 목록 불러오기 실패',e);
       });
   };
 };
@@ -96,7 +96,6 @@ const toggleLikeDB = (prd_id) => {
     }
     //delete API 요청에 필요한 collectId가 담긴 배열
     const collects = user?.collects;
-    console.log(user, collects);
     let flag = false;
     // 유저 정보 로드 확인
     if (user && collects) {
@@ -104,6 +103,7 @@ const toggleLikeDB = (prd_id) => {
       if (collects?.length !== 0) {
         for (let i = 0; i < collects.length; i++) {
           if (collects[i].productId === prd_id) {
+            // 찜 목록에 존재(true)
             flag = true;
             axios
               .delete(`${config.api}/api/collects/${collects[i].collectId}`)
@@ -114,35 +114,42 @@ const toggleLikeDB = (prd_id) => {
                 let data = {
                   collects: _data,
                 };
-                console.log("삭제", prd_id, data);
                 dispatch(userActions.getUser({ ...user, ...data }));
                 dispatch(getCollectionDB());
               })
               .catch((e) => {
-                console.log("삭제에러", e);
+                console.log("찜 개별삭제 실패", e);
               });
           }
         }
       }
+      // 찜 목록에 존재하지 않음.
       if (flag === false) {
-        let data = {
-          productId: prd_id,
-        };
-        axios
-          .post(`${config.api}/api/collects`, data)
-          .then((res) => {
-            let data = {
-              collects: [...collects, res.data],
-            };
-            console.log("등록", prd_id, data);
-            dispatch(userActions.getUser({ ...user, ...data }));
-            dispatch(getCollectionDB());
-          })
-          .catch((e) => {
-            console.log("등록에러", e);
+        if(collects.length>=50){
+          Swal.fire({
+            html: "찜은 50개까지 등록 가능합니다. <br/> 기존 클래스 삭제 후 등록해주세요.",
+            confirmButtonColor: "#7F58EC",
+            confirmButtonText: "확인",
           });
-      }
-    }
+        }else{
+          let data = {
+            productId: prd_id,
+          };
+          axios
+            .post(`${config.api}/api/collects`, data)
+            .then((res) => {
+              let data = {
+                collects: [...collects, res.data],
+              };
+              dispatch(userActions.getUser({ ...user, ...data }));
+              dispatch(getCollectionDB());
+            })
+            .catch((e) => {
+              console.log("찜 등록 실패", e);
+            });
+        };
+      };
+    };
   };
 };
 
@@ -171,7 +178,7 @@ const deleteCollectionDB = () => {
               // 데이터없음
             })
             .catch((e) => {
-              console.log(e);
+              console.log('찜 목록 전체삭제 실패', e);
             });
           dispatch(deleteCollection());
         }
