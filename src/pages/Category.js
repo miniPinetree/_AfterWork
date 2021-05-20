@@ -73,7 +73,7 @@ function Category(props) {
     return val.categoryId === parseInt(id);
   });
   // 해당 categoryId가 없을경우 notfound page로 이동(url 직접 치는 경우)
-  if (idx === -1) {
+  if (category_list.length !== 0 && idx === -1) {
     history.replace('/notfound');
   }
   // 카테고리 페이지 해당 카테고리
@@ -83,8 +83,7 @@ function Category(props) {
   const sort = sortInfo[0];
   const direction = sortInfo[1];
 
-  const sitename =
-    checkedList.length === 0 ? 'emptySite' : checkedList.join(',');
+  const sitename = checkedList.length === 0 ? '없음' : checkedList.join(',');
   useEffect(() => {
     // 게시물 조회
     dispatch(postActions.getPostDB(id, sort, direction, filterBox, sitename));

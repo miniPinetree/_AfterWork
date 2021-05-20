@@ -72,8 +72,7 @@ function Search(props) {
   const sort = sortInfo[0];
   const direction = sortInfo[1];
 
-  const sitename =
-    checkedList.length === 0 ? 'emptySite' : checkedList.join(',');
+  const sitename = checkedList.length === 0 ? '없음' : checkedList.join(',');
 
   useEffect(() => {
     // 검색한 게시물 조회
