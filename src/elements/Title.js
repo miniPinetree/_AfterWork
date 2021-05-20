@@ -5,7 +5,7 @@ const Title = (props) => {
     const {children} = props;
   return (
     <TitleBox>
-      <text>{children}</text>
+      <p>{children}</p>
     </TitleBox>
   );
 };
@@ -17,7 +17,7 @@ height: 37px;
 margin:56px 29px 36px 0;
 box-sizing:border-box-sizing;
 cursor:default;
-  & text {
+  & p {
     font-size: 23px;
     font-weight:600;
     margin:0px;

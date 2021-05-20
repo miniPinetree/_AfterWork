@@ -24,16 +24,12 @@ code {
     max-height: 185px;
   }
 }
-
 .ant-picker-time-panel-column
   > li.ant-picker-time-panel-cell-selected
   .ant-picker-time-panel-cell-inner {
   background: #dcd4f466 !important;
 }
-
 .ant-picker-focused {
   border-color: #a88ef2 !important;
   box-shadow: 0 0 0 2px rgb(168 142 242 / 20%) !important;
-}
-.ant-picker-content ul:first-child {
 }
