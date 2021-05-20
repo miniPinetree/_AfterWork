@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React, {useEffect, useState} from "react";
+import styled, {css} from "styled-components";
 import { Input } from "antd";
-import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
+import { SearchOutlined, CloseOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import locationOpts from "../shared/locationOpts";
 import Swal from "sweetalert2";
@@ -9,6 +9,110 @@ import Swal from "sweetalert2";
 const LocationBox = (props) => {
   const { search, locations, setSearch, setLocations } = props;
   const user = useSelector((state) => state.user.user);
+  const [selectedIndex, setIndex] = useState(-1);
+
+  useEffect(() => {
+    if (locations.length === 0 && user.locations.length > 0) {
+      const locationNames = user.locations.map((location) => location.name);
+      setLocations(locationNames);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    setIndex(-1);
+  }, [search]);
+
+  //검색 키워드가 포함된 지역 필터링
+  let searchedLocation = locationOpts.filter((option) => {
+    return option.includes(search);
+  });
+
+  // 키보드로 자동완성리스트 항목 이동
+  const moveOpt = (e)=>{
+    if(searchedLocation.length === 0 || searchedLocation.length === locationOpts.length){
+      return;
+    }else{
+      if (e.key === "ArrowDown" && selectedIndex<searchedLocation.length-1){
+        setIndex(selectedIndex+1);
+      }else if(e.key === "ArrowUp" && selectedIndex>=0){
+        setIndex(selectedIndex-1);
+      }
+    }
+  };
+  const alertMaxLocation = ()=>{
+    Swal.fire({
+      text: "관심지역은 4개까지 설정 가능합니다.",
+      confirmButtonColor: "#7F58EC",
+      confirmButtonText: "확인",
+    });
+    setSearch("");
+  };
+  // 지역 추가 전 중복 검사
+  const checkSameLocation = (locationFullName)=>{
+    setSearch("");
+    let _location = locationFullName.split(" ");
+    _location = _location.length>1 && _location[1] !=="전체" ? _location[1] : _location[0];
+    if(locations.includes(_location)){
+      Swal.fire({
+        text: "이미 등록된 지역입니다.",
+        confirmButtonColor: "#7F58EC",
+        confirmButtonText: "확인",
+      });
+      return false;
+    }else{
+      return _location;
+    }
+  };
+  //선택가능지역 클릭하여 추가
+  const selectLocation = (selectedLocation) => {
+    if (locations.length >= 4) {
+      alertMaxLocation();
+      return;
+    } else {
+      if(checkSameLocation(selectedLocation)){
+        setLocations([...locations, checkSameLocation(selectedLocation)]);
+      }
+    }
+    };
+  //선택가능지역 엔터로 추가
+  const enterLocation = (e) => {
+    if (e.key !== "Enter") {
+      return;
+    } else {
+      if (locations.length >= 4) {
+        alertMaxLocation();
+        return;
+      } else {
+        // 검색결과가 하나라면 해당 지역 추가
+        if (searchedLocation.length === 1) {
+          if(checkSameLocation(searchedLocation[0])){
+            setLocations([...locations, checkSameLocation(searchedLocation[0])]);
+          }
+          // 검색결과가 다수라면 키보드로 포커스된 지역 추가
+        }else if (searchedLocation.length > 1 && searchedLocation.length < locationOpts.length){
+          // 포커스된 지역이 없으면 알림창
+          if(selectedIndex===-1){
+            Swal.fire({
+              text: "지역을 선택해주세요.",
+              confirmButtonColor: "#7F58EC",
+              confirmButtonText: "확인",
+            });
+          }else{
+            if(checkSameLocation(searchedLocation[selectedIndex])){
+              setLocations([...locations, checkSameLocation(searchedLocation[selectedIndex])]);
+            };
+          };
+        };
+      };
+    };
+  };
+  const deleteLocation = (val) => {
+    let _location = locations.filter((l) => {
+      return l !== val;
+    });
+    setLocations(_location);
+  };
+
   const inputStyle = {
     borderRadius: "29px",
     font: "normal normal normal 20px/30px Noto Sans CJK KR",
@@ -17,80 +121,13 @@ const LocationBox = (props) => {
     boxSizing: "border-box",
     padding: "9px 27px 12px 27px",
   };
-  React.useEffect(() => {
-    if (locations.length === 0 && user.locations.length > 0) {
-      const locationNames = user.locations.map((location) => location.name);
-      setLocations(locationNames);
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  //검색 키워드가 포함된 선택가능지역 리스트
-  let searchedLocation = locationOpts.filter((option) => {
-    return option.includes(search);
-  });
-  //선택가능지역 클릭하여 추가
-  const selectLocation = (val) => {
-    if (locations.length >= 4) {
-      Swal.fire({
-        text: "관심지역은 4개까지 설정 가능합니다.",
-        confirmButtonColor: "#7F58EC",
-        confirmButtonText: "확인",
-      });
-      setSearch("");
-    } else {
-      let _location = val.split(" ");
-      _location = _location[1] && _location[1] !=="전체" ? _location[1] : _location[0];
-      if(locations.includes(_location)){
-        Swal.fire({
-          text: "이미 등록된 지역입니다.",
-          confirmButtonColor: "#7F58EC",
-          confirmButtonText: "확인",
-        });
-        setSearch("");
-      }else{
-        setLocations([...locations, _location]);
-        setSearch("");
-      };
-    }
-  };
-  //선택가능지역이 하나이면 엔터로도 추가 가능
-  const enterLocation = (e) => {
-    if (e.keyCode !== 13) {
-      return;
-    } else {
-      if (locations.length >= 4) {
-        Swal.fire({
-          text: "관심지역은 4개까지 설정 가능합니다.",
-          confirmButtonColor: "#7F58EC",
-          confirmButtonText: "확인",
-        });
-      } else {
-        if (searchedLocation.length === 1) {
-          let _location = searchedLocation[0].split(" ");
-          _location = _location[1] && _location[1] !=="전체" ? _location[1] : _location[0];
-          if(locations.includes(_location)){
-            Swal.fire({
-              text: "이미 등록된 지역입니다.",
-              confirmButtonColor: "#7F58EC",
-              confirmButtonText: "확인",
-            });
-            setSearch("");
-          }else{
-            setLocations([...locations, _location]);
-            setSearch("");
-          };
-        };
-      };
-    }
-  };
-  const deleteLocation = (val) => {
-    let _location = locations.filter((l) => {
-      return l !== val;
-    });
-    setLocations(_location);
-  };
   return (
     <>
+    <TitleArea>
+    <strong>관심지역 설정</strong>
+        <p><InfoCircleOutlined /> 4개 지역 등록 가능</p>
+        </TitleArea>
       <AreaList>
         {locations?.map((location, idx) => {
           return (
@@ -117,15 +154,22 @@ const LocationBox = (props) => {
             />
           }
           style={inputStyle}
+          // 검색어 인식
           onChange={(e) => {
             setSearch(e.target.value);
           }}
+          // 엔터로 추가
           onKeyUp={(e) => {
             enterLocation(e);
           }}
+          onKeyDown={(e)=>{
+            if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+              moveOpt(e);
+            }
+          }}
           value={search}
         />
-
+        {/* 검색 키워드가 포함된 선택 가능 지역 목록 */}
         {searchedLocation.length !== locationOpts.length ? (
           <Autofill>
             {searchedLocation.length === 0 ? (
@@ -134,17 +178,39 @@ const LocationBox = (props) => {
               <p>지역을 선택해주세요</p>
             )}
             {searchedLocation.map((location, idx) => {
-              return (
-                <div
+              return idx === selectedIndex ?
+              (
+                <Option
+                selected
+                key={idx}
                 value={location}
                   onClick={(e) => {
                     const _location = e.target.getAttribute('value')
                     selectLocation(_location);
                   }}
+                  onMouseOver={()=>{
+                    setIndex(-1);
+                  }}
                 >
                   {location}
-                </div>
-              );
+                </Option>
+              )
+              :
+              (
+                <Option
+                key={idx}
+                value={location}
+                  onClick={(e) => {
+                    const _location = e.target.getAttribute('value')
+                    selectLocation(_location);
+                  }}
+                  onMouseOver={()=>{
+                    setIndex(-1);
+                  }}
+                >
+                  {location}
+                </Option>
+              )
             })}
           </Autofill>
         ) : null}
@@ -153,7 +219,16 @@ const LocationBox = (props) => {
   );
 };
 export default React.memo(LocationBox);
-
+const TitleArea = styled.div`
+position:relative;
+& p {
+  position:absolute;
+  top:18%;
+  left:137px;
+  color:#7F58EC;
+  font-size:13.5px;
+}
+`;
 const AreaList = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -221,46 +296,28 @@ const InputBox = styled.div`
     }
     ::-webkit-input-placeholder {
       /* WebKit browsers */
-      font-size: 19px;
-      @media all and (max-width: 768px) {
-        font-size: 17px;
-      }
-      @media all and (max-width: 414px) {
-        font-size: 15px;
-      }
+      font-size: 15px;
     }
     :-moz-placeholder {
       /* Mozilla Firefox 4 to 18 */
-      font-size: 19px;
-      @media all and (max-width: 768px) {
-        font-size: 17px;
-      }
-      @media all and (max-width: 414px) {
-        font-size: 15px;
-      }
+      font-size: 15px;
     }
     ::-moz-placeholder {
       /* Mozilla Firefox 19+ */
-      font-size: 19px;
-      @media all and (max-width: 768px) {
-        font-size: 17px;
-      }
-      @media all and (max-width: 414px) {
-        font-size: 15px;
-      }
+      font-size: 15px;
     }
     :-ms-input-placeholder {
       /* Internet Explorer 10+ */
-      font-size: 19px;
-      @media all and (max-width: 768px) {
-        font-size: 17px;
-      }
-      @media all and (max-width: 414px) {
-        font-size: 15px;
-      }
+      font-size: 15px;
     }
   }
 `;
+const SelectedStyle = css`
+background-color:#ffffff;
+    color: #7f58ec;
+    border-radius:5px;
+    `;
+
 const Autofill = styled.div`
   width: 80%;
   max-height: 170px;
@@ -271,6 +328,7 @@ const Autofill = styled.div`
   position: absolute;
   left: 10%;
   background-color: #eeeeee;
+  z-index:4;
   & p {
     background-color: #eeeeee;
     position: sticky;
@@ -279,13 +337,18 @@ const Autofill = styled.div`
     margin-bottom: 3px;
     font-weight: 600;
   }
-  & div {
+`;
+const Option = styled.div`
     cursor: pointer;
-    :hover {
+    /* ${(props)=> (props.selected?
+      `background-color:#ffffff;
       color: #7f58ec;
+      border-radius:5px;`
+      :'')} */
+    ${(props)=> (props.selected? SelectedStyle:'')}
+    :hover {
+      background-color:#ffffff;
+      color: #7f58ec;
+      border-radius:5px;
     }
-  }
-  @media all and (max-width: 414px) {
-    max-height: 107px;
-      }
 `;
