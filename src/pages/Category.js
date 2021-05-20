@@ -23,6 +23,7 @@ const plainOptions = [
 ];
 
 function Category(props) {
+  const { history } = props;
   // 카테고리 페이지
   const dispatch = useDispatch();
   const id = props.match.params.id;
@@ -71,7 +72,10 @@ function Category(props) {
   const idx = category_list.findIndex((val) => {
     return val.categoryId === parseInt(id);
   });
-
+  // 해당 categoryId가 없을경우 notfound page로 이동(url 직접 치는 경우)
+  if (idx === -1) {
+    history.replace('/notfound');
+  }
   // 카테고리 페이지 해당 카테고리
   const category = category_list[idx];
 
