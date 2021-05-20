@@ -15,14 +15,15 @@ const CheckboxGroup = Checkbox.Group;
 const plainOptions = [
   '탈잉',
   '클래스101',
-  '하비인더박스',
+  '하비인더박스',
   '아이디어스',
-  '마이비스킷',
+  '마이비스킷',
   '모카클래스',
   '하비풀',
 ];
 
 function Category(props) {
+  const { history } = props;
   // 카테고리 페이지
   const dispatch = useDispatch();
   const id = props.match.params.id;
@@ -71,7 +72,10 @@ function Category(props) {
   const idx = category_list.findIndex((val) => {
     return val.categoryId === parseInt(id);
   });
-
+  // 해당 categoryId가 없을경우 notfound page로 이동(url 직접 치는 경우)
+  if (category_list.length !== 0 && idx === -1) {
+    history.replace('/notfound');
+  }
   // 카테고리 페이지 해당 카테고리
   const category = category_list[idx];
 
@@ -79,8 +83,7 @@ function Category(props) {
   const sort = sortInfo[0];
   const direction = sortInfo[1];
 
-  const sitename =
-    checkedList.length === 0 ? 'emptySite' : checkedList.join(',');
+  const sitename = checkedList.length === 0 ? '없음' : checkedList.join(',');
   useEffect(() => {
     // 게시물 조회
     dispatch(postActions.getPostDB(id, sort, direction, filterBox, sitename));
@@ -153,9 +156,9 @@ function Category(props) {
                   >
                     <Checkbox value='탈잉'>탈잉</Checkbox>
                     <Checkbox value='클래스101'>클래스101</Checkbox>
-                    <Checkbox value='하비인더박스'>하비인더박스</Checkbox>
+                    <Checkbox value='하비인더박스'>하비인더박스</Checkbox>
                     <Checkbox value='아이디어스'>아이디어스</Checkbox>
-                    <Checkbox value='마이비스킷'>마이비스킷</Checkbox>
+                    <Checkbox value='마이비스킷'>마이비스킷</Checkbox>
                     <Checkbox value='모카클래스'>모카클래스</Checkbox>
                     <Checkbox value='하비풀'>하비풀</Checkbox>
                   </CheckboxGroup>
