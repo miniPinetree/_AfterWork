@@ -62,7 +62,7 @@ const initialState = {
     total: undefined,
     filter: 'total',
     sitename:
-      '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
+      '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
   },
   // 인기 게시물
   popular_list: [],
@@ -101,7 +101,7 @@ const getPopularListDB = () => {
   return function (dispatch) {
     axios({
       method: 'get',
-      url: `${config.api}/api/search?page=0&size=20&sort=popularity&direction=desc`,
+      url: `${config.api}/api/search?page=0&size=20&sort=popularity&direction=desc&filter=total&sitename=탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀`,
     })
       .then((res) => {
         dispatch(popularList(res.data.content));
@@ -186,7 +186,7 @@ const getPostDB = (
   sort = 'popularity',
   direction = 'desc',
   filter = 'total',
-  sitename = '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
+  sitename = '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
 ) => {
   return function (dispatch) {
     dispatch(viewLoading(true));
@@ -219,7 +219,7 @@ const getSearchDB = (
   sort = 'popularity',
   direction = 'desc',
   filter = 'total',
-  sitename = '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
+  sitename = '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
 ) => {
   return function (dispatch) {
     dispatch(viewLoading(true));

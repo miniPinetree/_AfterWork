@@ -15,9 +15,9 @@ const CheckboxGroup = Checkbox.Group;
 const plainOptions = [
   '탈잉',
   '클래스101',
-  '하비인더박스',
+  '하비인더박스',
   '아이디어스',
-  '마이비스킷',
+  '마이비스킷',
   '모카클래스',
   '하비풀',
 ];
@@ -157,9 +157,9 @@ function Category(props) {
                   >
                     <Checkbox value='탈잉'>탈잉</Checkbox>
                     <Checkbox value='클래스101'>클래스101</Checkbox>
-                    <Checkbox value='하비인더박스'>하비인더박스</Checkbox>
+                    <Checkbox value='하비인더박스'>하비인더박스</Checkbox>
                     <Checkbox value='아이디어스'>아이디어스</Checkbox>
-                    <Checkbox value='마이비스킷'>마이비스킷</Checkbox>
+                    <Checkbox value='마이비스킷'>마이비스킷</Checkbox>
                     <Checkbox value='모카클래스'>모카클래스</Checkbox>
                     <Checkbox value='하비풀'>하비풀</Checkbox>
                   </CheckboxGroup>
