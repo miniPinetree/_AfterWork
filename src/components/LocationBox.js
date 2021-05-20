@@ -36,9 +36,21 @@ const LocationBox = (props) => {
         confirmButtonColor: "#7F58EC",
         confirmButtonText: "확인",
       });
-    } else {
-      setLocations([...locations, val]);
       setSearch("");
+    } else {
+      let _location = val.split(" ");
+      _location = _location[1] && _location[1] !=="전체" ? _location[1] : _location[0];
+      if(locations.includes(_location)){
+        Swal.fire({
+          text: "이미 등록된 지역입니다.",
+          confirmButtonColor: "#7F58EC",
+          confirmButtonText: "확인",
+        });
+        setSearch("");
+      }else{
+        setLocations([...locations, _location]);
+        setSearch("");
+      };
     }
   };
   //선택가능지역이 하나이면 엔터로도 추가 가능
@@ -55,11 +67,20 @@ const LocationBox = (props) => {
       } else {
         if (searchedLocation.length === 1) {
           let _location = searchedLocation[0].split(" ");
-          _location = _location.length > 1 ? _location[1] : _location[0];
-          setLocations([...locations, _location]);
-          setSearch("");
-        }
-      }
+          _location = _location[1] && _location[1] !=="전체" ? _location[1] : _location[0];
+          if(locations.includes(_location)){
+            Swal.fire({
+              text: "이미 등록된 지역입니다.",
+              confirmButtonColor: "#7F58EC",
+              confirmButtonText: "확인",
+            });
+            setSearch("");
+          }else{
+            setLocations([...locations, _location]);
+            setSearch("");
+          };
+        };
+      };
     }
   };
   const deleteLocation = (val) => {
@@ -113,11 +134,11 @@ const LocationBox = (props) => {
               <p>지역을 선택해주세요</p>
             )}
             {searchedLocation.map((location, idx) => {
-              let _location = location.split(" ");
-              _location = _location.length > 1 ? _location[1] : _location[0];
               return (
                 <div
-                  onClick={() => {
+                value={location}
+                  onClick={(e) => {
+                    const _location = e.target.getAttribute('value')
                     selectLocation(_location);
                   }}
                 >
@@ -264,4 +285,7 @@ const Autofill = styled.div`
       color: #7f58ec;
     }
   }
+  @media all and (max-width: 414px) {
+    max-height: 107px;
+      }
 `;
