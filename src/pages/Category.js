@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Select, Spin } from 'antd';
+import { Select, Spin, Checkbox } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import InfinityScroll from '../shared/InfinityScroll';
@@ -10,6 +10,18 @@ import SideBar from '../components/SideBar';
 import UpBtn from '../elements/UpBtn';
 import box from '../shared/images/box.png';
 
+const { Option } = Select;
+const CheckboxGroup = Checkbox.Group;
+const plainOptions = [
+  '탈잉',
+  '클래스101',
+  '하비인더박스',
+  '아이디어스',
+  '마이비스킷',
+  '모카클래스',
+  '하비풀',
+];
+
 function Category(props) {
   // 카테고리 페이지
   const dispatch = useDispatch();
@@ -17,6 +29,29 @@ function Category(props) {
   // 셀랙트 박스 상태
   const [filterBox, setfilterBox] = useState('total');
   const [sortBox, setSortBox] = useState('popularity desc');
+
+  // 정렬(가격순, 인기순)
+  const selectSort = (value) => {
+    setSortBox(value);
+  };
+  // 필터(온, 오프라인, 전체)
+  const selectFilter = (value) => {
+    setfilterBox(value);
+  };
+  // 체크박스
+  const [checkedList, setCheckedList] = useState(plainOptions);
+  const [checkAll, setCheckAll] = useState(true);
+
+  const onChange = (list) => {
+    setCheckedList(list);
+    setCheckAll(list.length === plainOptions.length);
+  };
+
+  const onCheckAllChange = (e) => {
+    setCheckedList(e.target.checked ? plainOptions : []);
+    setCheckAll(e.target.checked);
+  };
+
   // 카테고리 정보
   const category_list = useSelector((state) => state.post.category_list);
   // 게시물 정보
@@ -44,21 +79,12 @@ function Category(props) {
   const sort = sortInfo[0];
   const direction = sortInfo[1];
 
+  const sitename =
+    checkedList.length === 0 ? 'emptySite' : checkedList.join(',');
   useEffect(() => {
     // 게시물 조회
-    dispatch(postActions.getPostDB(id, sort, direction, filterBox));
-  }, [dispatch, id, sort, direction, filterBox]);
-
-  const { Option } = Select;
-
-  // 정렬(가격순, 인기순)
-  const selectSort = (value) => {
-    setSortBox(value);
-  };
-  // 필터(온, 오프라인, 전체)
-  const selectFilter = (value) => {
-    setfilterBox(value);
-  };
+    dispatch(postActions.getPostDB(id, sort, direction, filterBox, sitename));
+  }, [dispatch, id, sort, direction, filterBox, sitename]);
 
   return (
     <>
@@ -110,6 +136,31 @@ function Category(props) {
                   </Filter>
                 </SelectDiv>
               </MainHeader>
+              <ChkWrap>
+                <ChkTitle>사이트별 보기</ChkTitle>
+                <ChkItem>
+                  <Checkbox
+                    onChange={onCheckAllChange}
+                    checked={checkAll}
+                    value='all'
+                  >
+                    전체
+                  </Checkbox>
+                  <CheckboxGroup
+                    onChange={onChange}
+                    value={checkedList}
+                    style={{ display: 'inline' }}
+                  >
+                    <Checkbox value='탈잉'>탈잉</Checkbox>
+                    <Checkbox value='클래스101'>클래스101</Checkbox>
+                    <Checkbox value='하비인더박스'>하비인더박스</Checkbox>
+                    <Checkbox value='아이디어스'>아이디어스</Checkbox>
+                    <Checkbox value='마이비스킷'>마이비스킷</Checkbox>
+                    <Checkbox value='모카클래스'>모카클래스</Checkbox>
+                    <Checkbox value='하비풀'>하비풀</Checkbox>
+                  </CheckboxGroup>
+                </ChkItem>
+              </ChkWrap>
               <Main>
                 {post_list.length === 0 ? (
                   <>
@@ -201,6 +252,79 @@ const MainHeader = styled.div`
   @media only screen and (max-width: 414px) {
     max-width: 100%;
     margin: 22px 10px 13px;
+  }
+`;
+const ChkWrap = styled.div`
+  max-width: 87%;
+  margin-left: 10px;
+  margin-bottom: 31px;
+  height: 149px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 5px 15px #0000000d;
+  border: 0.5px solid #e4e4e4;
+  border-radius: 15px;
+  @media only screen and (max-width: 1024px) {
+    height: 179px;
+  }
+  @media only screen and (max-width: 1004px) {
+    max-width: 100%;
+  }
+  @media only screen and (max-width: 414px) {
+    height: 210px;
+  }
+`;
+const ChkTitle = styled.div`
+  font-size: 17px;
+  letter-spacing: -0.51px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 22px;
+  margin-left: 22px;
+  @media only screen and (max-width: 1024px) {
+    font-size: 16px;
+    letter-spacing: -0.48px;
+  }
+  @media only screen and (max-width: 414px) {
+    margin-left: 42px;
+  }
+  @media only screen and (max-width: 392px) {
+    margin-left: 22px;
+  }
+`;
+const ChkItem = styled.div`
+  margin-top: 18px;
+  margin-left: 22px;
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #7f58ec;
+    border-color: #7f58ec;
+  }
+  & label {
+    width: 113px;
+    margin-right: 60px;
+    margin-top: 5px;
+  }
+  & div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+      margin-left: 0;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    & label {
+      margin-right: 40px;
+    }
+  }
+  @media only screen and (max-width: 414px) {
+    margin-left: 42px;
+    & label {
+      margin-right: 40px;
+      margin-top: 8px;
+    }
+  }
+  @media only screen and (max-width: 392px) {
+    margin-left: 22px;
   }
 `;
 const SelectDiv = styled.div`

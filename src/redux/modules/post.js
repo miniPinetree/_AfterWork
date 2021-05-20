@@ -61,6 +61,8 @@ const initialState = {
     keyword: '',
     total: undefined,
     filter: 'total',
+    sitename:
+      '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
   },
   // 인기 게시물
   popular_list: [],
@@ -99,7 +101,7 @@ const getPopularListDB = () => {
   return function (dispatch) {
     axios({
       method: 'get',
-      url: `${config.api}/api/search?page=0&size=24&sort=popularity&direction=desc`,
+      url: `${config.api}/api/search?page=0&size=20&sort=popularity&direction=desc`,
     })
       .then((res) => {
         dispatch(popularList(res.data.content));
@@ -184,12 +186,13 @@ const getPostDB = (
   sort = 'popularity',
   direction = 'desc',
   filter = 'total',
+  sitename = '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
 ) => {
   return function (dispatch) {
     dispatch(viewLoading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/categorys/${id}?page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}`,
+      url: `${config.api}/api/categorys/${id}?page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}`,
     })
       .then((res) => {
         let paging = {
@@ -199,6 +202,7 @@ const getPostDB = (
           sort: sort,
           direction: direction,
           filter: filter,
+          sitename: sitename,
         };
         dispatch(postList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -215,12 +219,13 @@ const getSearchDB = (
   sort = 'popularity',
   direction = 'desc',
   filter = 'total',
+  sitename = '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
 ) => {
   return function (dispatch) {
     dispatch(viewLoading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/search?keyword=${keyword}&page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}`,
+      url: `${config.api}/api/search?keyword=${keyword}&page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}`,
     })
       .then((res) => {
         let paging = {
@@ -231,6 +236,7 @@ const getSearchDB = (
           direction: direction,
           total: res.data.totalElements,
           filter: filter,
+          sitename: sitename,
         };
         dispatch(searchList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -251,13 +257,14 @@ const scrollGetPostDB = () => {
     const sort = _paging.sort;
     const direction = _paging.direction;
     const filter = _paging.filter;
+    const sitename = _paging.sitename;
     if (!page) {
       return;
     }
     dispatch(loading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/categorys/${id}?page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}`,
+      url: `${config.api}/api/categorys/${id}?page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}`,
     })
       .then((res) => {
         let paging = {
@@ -267,6 +274,7 @@ const scrollGetPostDB = () => {
           sort: sort,
           direction: direction,
           filter: filter,
+          sitename: sitename,
         };
         dispatch(scrollPostList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -287,13 +295,14 @@ const scrollSearchDB = () => {
     const sort = _paging.sort;
     const direction = _paging.direction;
     const filter = _paging.filter;
+    const sitename = _paging.sitename;
     if (!page) {
       return;
     }
     dispatch(loading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/search?keyword=${keyword}&page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}`,
+      url: `${config.api}/api/search?keyword=${keyword}&page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}`,
     })
       .then((res) => {
         let paging = {
@@ -304,6 +313,7 @@ const scrollSearchDB = () => {
           direction: direction,
           total: res.data.totalElements,
           filter: filter,
+          sitename: sitename,
         };
         dispatch(scrollSearchList(res.data.content));
         dispatch(pagingInfo(paging));
