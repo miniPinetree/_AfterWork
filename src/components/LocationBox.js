@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import styled, {css} from "styled-components";
 import { Input } from "antd";
 import { SearchOutlined, CloseOutlined, InfoCircleOutlined } from "@ant-design/icons";
@@ -10,7 +10,7 @@ const LocationBox = (props) => {
   const { search, locations, setSearch, setLocations } = props;
   const user = useSelector((state) => state.user.user);
   const [selectedIndex, setIndex] = useState(-1);
-
+  const scrollTarget = useRef();
   useEffect(() => {
     if (locations.length === 0 && user.locations.length > 0) {
       const locationNames = user.locations.map((location) => location.name);
@@ -34,6 +34,11 @@ const LocationBox = (props) => {
     }else{
       if (e.key === "ArrowDown" && selectedIndex<searchedLocation.length-1){
         setIndex(selectedIndex+1);
+        if(selectedIndex>=5){
+          scrollTarget.current.scrollBy({
+            top: 23.2,
+          });
+        };
       }else if(e.key === "ArrowUp" && selectedIndex>=0){
         setIndex(selectedIndex-1);
       }
@@ -128,13 +133,16 @@ const LocationBox = (props) => {
     <strong>관심지역 설정</strong>
         <p><InfoCircleOutlined /> 4개 지역 등록 가능</p>
         </TitleArea>
-      <AreaList>
+      <AreaList
+       onClick={(e) => {
+        e.stopPropagation();
+      }}>
         {locations?.map((location, idx) => {
           return (
-            <Area>
+            <Area key={idx}>
               {location}
               <CloseOutlined
-                onClick={() => {
+                onClick={(e) => {
                   deleteLocation(location);
                 }}
               />
@@ -144,13 +152,20 @@ const LocationBox = (props) => {
       </AreaList>
       <hr color="#E8E8E8" />
       <Text>지역 추가하기</Text>
-      <InputBox>
+      <InputBox
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}>
         <Input
           placeholder="지역을 입력하세요"
           suffix={
             <SearchOutlined
               style={{ color: "#000", cursor: "pointer" }}
-              onClick={enterLocation}
+              onClick={(e) => {
+                enterLocation(e);
+                e.stopPropagation();
+              }}
             />
           }
           style={inputStyle}
@@ -171,7 +186,7 @@ const LocationBox = (props) => {
         />
         {/* 검색 키워드가 포함된 선택 가능 지역 목록 */}
         {searchedLocation.length !== locationOpts.length ? (
-          <Autofill>
+          <Autofill ref={scrollTarget}>
             {searchedLocation.length === 0 ? (
               <p>서비스 지역이 아닙니다</p>
             ) : (
@@ -182,11 +197,12 @@ const LocationBox = (props) => {
               (
                 <Option
                 selected
-                key={idx}
+                key={location}
                 value={location}
                   onClick={(e) => {
                     const _location = e.target.getAttribute('value')
                     selectLocation(_location);
+                    e.stopPropagation();
                   }}
                   onMouseOver={()=>{
                     setIndex(-1);
@@ -198,11 +214,12 @@ const LocationBox = (props) => {
               :
               (
                 <Option
-                key={idx}
+                key={location}
                 value={location}
                   onClick={(e) => {
                     const _location = e.target.getAttribute('value')
                     selectLocation(_location);
+                    e.stopPropagation();
                   }}
                   onMouseOver={()=>{
                     setIndex(-1);

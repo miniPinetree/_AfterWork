@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { history } from "../redux/configStore";
@@ -24,8 +24,25 @@ const UserDetail = (props) => {
   const [time, setTime] = useState("");
     const setValue = () => {
         dispatch(preferActions.updateUserPreferDB(locations, categories, time));
-        console.log(locations, categories, time);
     };
+
+    useEffect(() => {
+        if(search){
+            window.addEventListener('click', (e) => {
+                setSearch("");
+              });
+        }else{
+            window.removeEventListener('click', (e) => {
+                setSearch("");
+              });
+        }
+        return () => {
+            window.removeEventListener('click', (e) => {
+                setSearch("");
+              });
+            };
+    }, [search]);
+
     return (
         <Bg>
         <Container>
@@ -33,8 +50,6 @@ const UserDetail = (props) => {
                 <>
                     <TextBox>
                         <Title>내 정보 및 상세 설정</Title>
-                        <WebBtn onClick={setValue}>변경사항 저장</WebBtn>
-                        {/* <TextBtn _onClick={setValue}>변경 사항 저장</TextBtn> */}
                     </TextBox>
                     <Wrap>
                         <Col>
@@ -60,12 +75,13 @@ const UserDetail = (props) => {
                                     회원 탈퇴
                                 </DeleteUserBtn>
                             </InfoBox>
-                            {/* 관심 카테고리 */}
                             <BorderBox>
                                 <ResOther>
-                                <InterestBox
-                                    setCategories={setCategories}
-                                    categories={categories}
+                                <LocationBox
+                                    setLocations={setLocations}
+                                    locations={locations}
+                                    setSearch={setSearch}
+                                    search={search}
                                 />
                                 </ResOther>
                                 <ResMobile>
@@ -81,20 +97,20 @@ const UserDetail = (props) => {
                                 <OffTimePicker time={time} setTime={setTime} />
                                 </ResOther>
                                 <ResMobile>
-                                <InterestBox
-                                    setCategories={setCategories}
-                                    categories={categories}
-                                />
-                                </ResMobile>
-                            </BorderBox>
-                            <BorderBox>
-                                <strong>관심지역 설정</strong>
                                 <LocationBox
                                     setLocations={setLocations}
                                     locations={locations}
                                     setSearch={setSearch}
                                     search={search}
                                 />
+                                </ResMobile>
+                            </BorderBox>
+                            <BorderBox>
+                                <InterestBox
+                                    setCategories={setCategories}
+                                    categories={categories}
+                                />
+                                <WebBtn onClick={setValue}>변경사항 저장</WebBtn>
                             </BorderBox>
                         </Col>
                         <ResMobile>
@@ -103,6 +119,7 @@ const UserDetail = (props) => {
                     </Wrap>
                 </>
             )}
+            
         </Container>
         </Bg>
     );
@@ -216,7 +233,6 @@ const BorderBox = styled.div`
         }
     }
     & p {
-        color: #747474;
         cursor: default;
     }
     & input::-webkit-input-placeholder {
@@ -262,8 +278,8 @@ height:35px;
 font-size:14px;
 margin:9px 40.5% 24px;
 position:absolute;
-top:50%;
-left:45%;
+bottom:-32%;
+right:-40%;
 @media all and (max-width: 414px){
     display:none;
         }
