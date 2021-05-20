@@ -101,7 +101,7 @@ const getPopularListDB = () => {
   return function (dispatch) {
     axios({
       method: 'get',
-      url: `${config.api}/api/search?page=0&size=24&sort=popularity&direction=desc`,
+      url: `${config.api}/api/search?page=0&size=20&sort=popularity&direction=desc`,
     })
       .then((res) => {
         dispatch(popularList(res.data.content));
