@@ -200,7 +200,7 @@ const LocationBox = (props) => {
                 key={location}
                 value={location}
                   onClick={(e) => {
-                    const _location = e.target.getAttribute('value')
+                    const _location = e.target.getAttribute('value');
                     selectLocation(_location);
                     e.stopPropagation();
                   }}
