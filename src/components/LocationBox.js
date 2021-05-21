@@ -10,7 +10,7 @@ const LocationBox = (props) => {
   const { search, locations, setSearch, setLocations } = props;
   const user = useSelector((state) => state.user.user);
   const [selectedIndex, setIndex] = useState(-1);
-  const [sequence, setSequence] = useState(5);
+  const sequence = useRef(5);
   const scrollTarget = useRef();
   useEffect(() => {
     if (locations.length === 0 && user.locations.length > 0) {
@@ -21,7 +21,7 @@ const LocationBox = (props) => {
   
   useEffect(() => {
     setIndex(-1);
-    setSequence(5);
+    sequence.current = 5;
   }, [search]);
 
   //검색 키워드가 포함된 지역 필터링
@@ -35,25 +35,20 @@ const LocationBox = (props) => {
       return;
     }else{
       if (e.key === "ArrowDown" && selectedIndex<searchedLocation.length-1){
-        console.log(sequence);
         setIndex(selectedIndex+1);
-        if(sequence===5 && selectedIndex>=5){
+        if(sequence.current===5 && selectedIndex>=5){
           scrollTarget.current.scrollBy(0,23.2);
         };
-        if(sequence<5){
-          setSequence(sequence+1);
+        if(sequence.current<5){
+          sequence.current += 1;
         };
-        console.log('scrollHeight',scrollTarget.current.scrollHeight);
-        console.log('clientHeight',scrollTarget.current.clientHeight);
-        console.log('scrollTop',scrollTarget.current.scrollTop);
       }else if(e.key === "ArrowUp" && selectedIndex>=0){
-        console.log('빼기', sequence);
         setIndex(selectedIndex-1);
-        if(sequence===0 && scrollTarget.current.scrollTop>0){
+        if(sequence.current===0 && scrollTarget.current.scrollTop>0){
           scrollTarget.current.scrollBy (0,-23.2);
         };
-        if(sequence>0){
-          setSequence(sequence-1);
+        if(sequence.current>0){
+          sequence.current -= 1;
         };
       }
     }
