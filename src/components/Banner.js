@@ -242,8 +242,8 @@ const SubTitleBox = styled.div`
 const ImgBox = styled.div`
   max-width: 530px;
   position: absolute;
-  top: 25.5px;
-  right: -30px;
+  top: 80px;
+  right: -60px;
   & img {
     width: 100%;
   }
@@ -267,6 +267,10 @@ const ImgBox = styled.div`
     max-width: 195.16px;
     right: 0;
     top: 33.32px;
+  }
+  @media only screen and (max-width: 375px) {
+    max-width: 193.16px;
+    right: -5px;
   }
 `;
 const Wrap = styled.div`

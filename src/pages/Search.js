@@ -269,7 +269,7 @@ const ChkWrap = styled.div`
   box-shadow: 0px 5px 15px #0000000d;
   border: 0.5px solid #e4e4e4;
   border-radius: 15px;
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (max-width: 1371px) {
     height: 179px;
   }
   @media only screen and (max-width: 1004px) {
