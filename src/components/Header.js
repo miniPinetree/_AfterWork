@@ -130,10 +130,9 @@ const Body = styled.div`
 `;
 
 const Logo = styled.img`
-    width: 160px;
+    width: 180px;
     cursor: pointer;
     height: 100%;
-    margin-top: -8px;
     @media only screen and (max-width: 1024px) {
         margin-left: 26px;
     }
