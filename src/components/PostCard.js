@@ -9,7 +9,7 @@ function PostCard(props) {
   const dispatch = useDispatch();
   // 찜 여부와 상품 정보를 프롭스로 받는다
   const { like, post_info, is_responsive } = props;
-  const price = post_info?.priceInfo?.split('원');
+
   return (
     <>
       <CardWrap className='wrap' is_responsive={is_responsive}>
@@ -62,11 +62,11 @@ function PostCard(props) {
                 <InfoBox>
                   <div>
                     {/* 가격 정보 */}
-                    {price && (
+                    {post_info && (
                       <>
-                        <span style={{ fontWeight: '600' }}>{price[0]}</span>
-                        {price[0] !== '문의' ? <span>원</span> : null}
-                        {price[1]}
+                        <span style={{ fontWeight: '600' }}>
+                          {post_info?.priceInfo}
+                        </span>
                       </>
                     )}
                   </div>
