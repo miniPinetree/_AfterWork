@@ -268,6 +268,10 @@ const ImgBox = styled.div`
     right: 0;
     top: 33.32px;
   }
+  @media only screen and (max-width: 375px) {
+    max-width: 193.16px;
+    right: -5px;
+  }
 `;
 const Wrap = styled.div`
   max-width: 1004px;
