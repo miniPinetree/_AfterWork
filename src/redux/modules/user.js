@@ -1,4 +1,5 @@
 import { createAction, handleActions } from "redux-actions";
+import { actionCreators as preferActions } from "./prefer";
 import { deleteCookie } from "../../shared/Cookie";
 import { produce } from "immer";
 import Swal from "sweetalert2";
@@ -60,6 +61,7 @@ const deleteUserDB = () => {
             .catch((error) => {
                 console.log(error.response);
                 dispatch.logOut();
+                dispatch(preferActions.deleteCollection());
                 history.replace("/");
             });
     };
@@ -76,6 +78,7 @@ export default handleActions(
         [LOG_OUT]: (state, action) =>
             produce(state, (draft) => {
                 deleteCookie("is_login");
+                dispatch(preferActions.deleteCollection());
                 Swal.fire({
                     text: "로그아웃 되었습니다.",
                     confirmButtonColor: "#7F58EC",
