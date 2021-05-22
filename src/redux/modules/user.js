@@ -41,13 +41,35 @@ const getUserDB = () => {
             })
             .catch((err) => {
                 console.log(err, "error");
-                Swal.fire({
-                    text: err.error,
-                    confirmButtonColor: "#7F58EC",
-                    confirmButtonText: "확인",
-                });
-                history.replace("/");
+                if (err.error) {
+                    Swal.fire({
+                        text: err.error,
+                        confirmButtonColor: "#7F58EC",
+                        confirmButtonText: "확인",
+                    });
+                } else {
+                    Swal.fire({
+                        text: err,
+                        confirmButtonColor: "#7F58EC",
+                        confirmButtonText: "확인",
+                    });
+                }
+
+                return;
             });
+    };
+};
+
+const logOutUserDB = () => {
+    return function (dispatch, { history }) {
+        dispatch(preferActions.deleteCollection());
+        dispatch(logOut());
+        deleteCookie("is_login");
+        Swal.fire({
+            text: "로그아웃 되었습니다.",
+            confirmButtonColor: "#7F58EC",
+            confirmButtonText: "확인",
+        });
     };
 };
 
@@ -57,11 +79,11 @@ const deleteUserDB = () => {
             .delete(`/api/user`)
             .then((res) => {
                 dispatch(deleteUser());
+                dispatch(preferActions.deleteCollection());
             })
             .catch((error) => {
                 console.log(error.response);
                 dispatch.logOut();
-                dispatch(preferActions.deleteCollection());
                 history.replace("/");
             });
     };
@@ -75,19 +97,12 @@ export default handleActions(
                 draft.is_login = true;
                 draft.user_loading = false;
             }),
-        [LOG_OUT]: (state, action) =>
+        [LOG_OUT]: (state) =>
             produce(state, (draft) => {
-                deleteCookie("is_login");
-                dispatch(preferActions.deleteCollection());
-                Swal.fire({
-                    text: "로그아웃 되었습니다.",
-                    confirmButtonColor: "#7F58EC",
-                    confirmButtonText: "확인",
-                });
                 draft.user = null;
                 draft.is_login = false;
             }),
-        [DELETE_USER]: (state, action) =>
+        [DELETE_USER]: (state) =>
             produce(state, (draft) => {
                 deleteCookie("is_login");
                 Swal.fire({
@@ -110,6 +125,7 @@ const actionCreators = {
     getUser,
     getUserDB,
     logOut,
+    logOutUserDB,
     deleteUser,
     deleteUserDB,
 };

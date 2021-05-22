@@ -42,8 +42,8 @@ const UserModal = ({ close }, props) => {
             <Content
                 onClick={() => {
                     close();
-                    dispatch(userActions.logOut());
-                    history.push("/");
+                    dispatch(userActions.logOutUserDB());
+                    history.replace("/");
                 }}
             >
                 로그아웃

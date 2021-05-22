@@ -62,6 +62,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                                             state: "회원정보 및 상세 설정",
                                         });
                                         drawerClose();
+                                        window.scrollTo({ top: 0, left: 0 });
                                     }}
                                 >
                                     회원정보
@@ -73,6 +74,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                                             state: "찜 목록",
                                         });
                                         drawerClose();
+                                        window.scrollTo({ top: 0, left: 0 });
                                     }}
                                 >
                                     찜 목록
@@ -106,7 +108,8 @@ const MoDrawer = ({ drawerClose }, props) => {
                             <LogOut
                                 onClick={() => {
                                     drawerClose();
-                                    dispatch(userActions.logOut());
+                                    dispatch(userActions.logOutUserDB());
+                                    window.scrollTo({ top: 0, left: 0 });
                                     history.replace("/");
                                 }}
                             >
@@ -197,6 +200,7 @@ const Body = styled.div`
     width: 0;
     top: 0;
     max-width: 278px;
+    mix-width: 248px;
     background: #fff;
     z-index: 4;
     box-shadow: 0 6px 35px rgb(24 25 31 / 20%);
@@ -337,11 +341,11 @@ const Info = styled.span`
     &:after {
         content: "";
         display: inline;
-        position: fixed;
+        position: absolute;
         width: 1px;
         height: 20px;
-        top: 150px;
-        left: 144px;
+        top: 14px;
+        left: 126px;
         background: #bbb;
     }
 `;
