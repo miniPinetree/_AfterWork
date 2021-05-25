@@ -63,6 +63,7 @@ const initialState = {
     filter: 'total',
     sitename:
       '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
+    cityName: '전체,전체',
   },
   // 인기 게시물
   popular_list: [],
@@ -101,7 +102,7 @@ const getPopularListDB = () => {
   return function (dispatch) {
     axios({
       method: 'get',
-      url: `${config.api}/api/search?page=0&size=20&sort=popularity&direction=desc&filter=total&sitename=탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀`,
+      url: `${config.api}/api/search?page=0&size=20&sort=popularity&direction=desc&filter=total&sitename=탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀&location=전체,전체`,
     })
       .then((res) => {
         dispatch(popularList(res.data.content));
@@ -187,12 +188,13 @@ const getPostDB = (
   direction = 'desc',
   filter = 'total',
   sitename = '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
+  cityName = '전체,전체',
 ) => {
   return function (dispatch) {
     dispatch(viewLoading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/categorys/${id}?page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}`,
+      url: `${config.api}/api/categorys/${id}?page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}&location=${cityName}`,
     })
       .then((res) => {
         let paging = {
@@ -203,6 +205,7 @@ const getPostDB = (
           direction: direction,
           filter: filter,
           sitename: sitename,
+          cityName: cityName,
         };
         dispatch(postList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -220,12 +223,13 @@ const getSearchDB = (
   direction = 'desc',
   filter = 'total',
   sitename = '탈잉,클래스101,하비인더박스,아이디어스,마이비스킷,모카클래스,하비풀',
+  cityName = '전체,전체',
 ) => {
   return function (dispatch) {
     dispatch(viewLoading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/search?keyword=${keyword}&page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}`,
+      url: `${config.api}/api/search?keyword=${keyword}&page=0&size=12&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}&location=${cityName}`,
     })
       .then((res) => {
         let paging = {
@@ -237,6 +241,7 @@ const getSearchDB = (
           total: res.data.totalElements,
           filter: filter,
           sitename: sitename,
+          cityName: cityName,
         };
         dispatch(searchList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -258,13 +263,14 @@ const scrollGetPostDB = () => {
     const direction = _paging.direction;
     const filter = _paging.filter;
     const sitename = _paging.sitename;
+    const cityName = _paging.cityName;
     if (!page) {
       return;
     }
     dispatch(loading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/categorys/${id}?page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}`,
+      url: `${config.api}/api/categorys/${id}?page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}&location=${cityName}`,
     })
       .then((res) => {
         let paging = {
@@ -275,6 +281,7 @@ const scrollGetPostDB = () => {
           direction: direction,
           filter: filter,
           sitename: sitename,
+          cityName: cityName,
         };
         dispatch(scrollPostList(res.data.content));
         dispatch(pagingInfo(paging));
@@ -296,13 +303,14 @@ const scrollSearchDB = () => {
     const direction = _paging.direction;
     const filter = _paging.filter;
     const sitename = _paging.sitename;
+    const cityName = _paging.cityName;
     if (!page) {
       return;
     }
     dispatch(loading(true));
     axios({
       method: 'get',
-      url: `${config.api}/api/search?keyword=${keyword}&page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}`,
+      url: `${config.api}/api/search?keyword=${keyword}&page=${page}&size=${size}&sort=${sort}&direction=${direction}&filter=${filter}&sitename=${sitename}&location=${cityName}`,
     })
       .then((res) => {
         let paging = {
@@ -314,6 +322,7 @@ const scrollSearchDB = () => {
           total: res.data.totalElements,
           filter: filter,
           sitename: sitename,
+          cityName: cityName,
         };
         dispatch(scrollSearchList(res.data.content));
         dispatch(pagingInfo(paging));
