@@ -116,6 +116,7 @@ const CardWrap = styled.div`
 `;
 const Img = styled.img`
   width: 100%;
+  object-fit:cover;
   height: 192px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
