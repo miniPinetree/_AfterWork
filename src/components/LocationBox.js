@@ -185,6 +185,7 @@ const LocationBox = (props) => {
           // 엔터로 추가
           onKeyUp={(e) => {
             enterLocation(e);
+            e.stopPropagation();
           }}
           onKeyDown={(e)=>{
             if (e.key === "ArrowUp" || e.key === "ArrowDown") {
