@@ -207,6 +207,7 @@ const SiteName = styled.div`
   background: #333 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #7f58ec66;
   border-radius: 5px;
+  opacity: 0.72;
   @media only screen and (max-width: 1024px) {
     font-size: 11px;
     letter-spacing: -0.33px;
