@@ -8,6 +8,7 @@ import x from "../shared/images/x.svg";
 import logOut from "../shared/images/log-out.svg";
 
 import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { getCookie } from "../shared/Cookie";
@@ -107,6 +108,7 @@ const MoDrawer = ({ drawerClose }, props) => {
                                 onClick={() => {
                                     drawerClose();
                                     dispatch(userActions.logOut());
+                                    dispatch(preferActions.deleteCollection());
                                     history.replace("/");
                                 }}
                             >

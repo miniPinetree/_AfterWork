@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { useDispatch } from "react-redux";
 import { history } from "../redux/configStore";
+import { actionCreators as preferActions } from "../redux/modules/prefer";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { debounce } from "lodash";
 
@@ -43,6 +44,7 @@ const UserModal = ({ close }, props) => {
                 onClick={() => {
                     close();
                     dispatch(userActions.logOut());
+                    dispatch(preferActions.deleteCollection());
                     history.push("/");
                 }}
             >
