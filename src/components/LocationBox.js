@@ -110,6 +110,7 @@ const LocationBox = (props) => {
               text: "지역을 선택해주세요.",
               confirmButtonColor: "#7F58EC",
               confirmButtonText: "확인",
+              allowEnterKey : false,
             });
           }else{
             if(checkSameLocation(searchedLocation[selectedIndex])){
