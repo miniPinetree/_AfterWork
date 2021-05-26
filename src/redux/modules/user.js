@@ -78,7 +78,6 @@ export default handleActions(
         [LOG_OUT]: (state, action) =>
             produce(state, (draft) => {
                 deleteCookie("is_login");
-                dispatch(preferActions.deleteCollection());
                 Swal.fire({
                     text: "로그아웃 되었습니다.",
                     confirmButtonColor: "#7F58EC",

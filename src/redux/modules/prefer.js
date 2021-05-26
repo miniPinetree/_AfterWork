@@ -32,10 +32,13 @@ const updateUserPreferDB = (locations, categories, time) => {
       locations: locations,
       categorys: categories,
     };
-   
     axios
     //test
-      // .post(`${config.api}/api/user`, data, {headers})
+      // .post(`${config.api}/api/user`, data, {
+      //   headers: {
+      //     'Authorization': `Bearer ` 
+      //   }
+      // })
       .post(`${config.api}/api/user`, data)
       .then((res) => {
         //res.data 없음.
@@ -212,6 +215,7 @@ const actionCreators = {
   toggleLikeDB,
   deleteCollectionDB,
   guideGuests,
+  deleteCollection,
 };
 
 export { actionCreators };
