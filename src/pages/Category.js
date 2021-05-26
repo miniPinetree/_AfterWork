@@ -54,7 +54,7 @@ const provinceData = [
   '제주',
 ];
 const cityData = {
-  '시/도': ['세부지역'],
+  '시/도': ['상세지역'],
   서울: [
     '전체',
     '가산',
@@ -169,9 +169,10 @@ function Category(props) {
     setSecondCity(value);
   };
   const cityName =
-    `${firstCity},${secondCity}` === '시/도,세부지역'
+    `${firstCity},${secondCity}` === '시/도,상세지역'
       ? '전체,전체'
       : `${firstCity},${secondCity}`;
+
   // 정렬(가격순, 인기순)
   const selectSort = (value) => {
     setSortBox(value);

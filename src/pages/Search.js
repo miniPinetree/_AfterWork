@@ -54,7 +54,7 @@ const provinceData = [
   '제주',
 ];
 const cityData = {
-  '시/도': ['세부지역'],
+  '시/도': ['상세지역'],
   서울: [
     '전체',
     '가산',
@@ -171,7 +171,7 @@ function Search(props) {
   };
 
   const cityName =
-    `${firstCity},${secondCity}` === '시/도,세부지역'
+    `${firstCity},${secondCity}` === '시/도,상세지역'
       ? '전체,전체'
       : `${firstCity},${secondCity}`;
 
