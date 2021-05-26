@@ -43,14 +43,8 @@ const UserModal = ({ close }, props) => {
             <Content
                 onClick={() => {
                     close();
-<<<<<<< HEAD
-                    dispatch(userActions.logOut());
-                    dispatch(preferActions.deleteCollection());
-                    history.push("/");
-=======
                     dispatch(userActions.logOutUserDB());
                     history.replace("/");
->>>>>>> 0c986ffaf823fe9671e0fe4cc2604be45068ae06
                 }}
             >
                 로그아웃

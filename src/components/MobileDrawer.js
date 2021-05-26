@@ -109,13 +109,8 @@ const MoDrawer = ({ drawerClose }, props) => {
                             <LogOut
                                 onClick={() => {
                                     drawerClose();
-<<<<<<< HEAD
-                                    dispatch(userActions.logOut());
-                                    dispatch(preferActions.deleteCollection());
-=======
                                     dispatch(userActions.logOutUserDB());
                                     window.scrollTo({ top: 0, left: 0 });
->>>>>>> 0c986ffaf823fe9671e0fe4cc2604be45068ae06
                                     history.replace("/");
                                 }}
                             >

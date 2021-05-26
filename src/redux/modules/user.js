@@ -95,43 +95,6 @@ const deleteUserDB = () => {
 };
 
 export default handleActions(
-<<<<<<< HEAD
-    {
-        [GET_USER]: (state, action) =>
-            produce(state, (draft) => {
-                draft.user = action.payload.user;
-                draft.is_login = true;
-                draft.user_loading = false;
-            }),
-        [LOG_OUT]: (state, action) =>
-            produce(state, (draft) => {
-                deleteCookie("is_login");
-                Swal.fire({
-                    text: "로그아웃 되었습니다.",
-                    confirmButtonColor: "#7F58EC",
-                    confirmButtonText: "확인",
-                });
-                draft.user = null;
-                draft.is_login = false;
-            }),
-        [DELETE_USER]: (state, action) =>
-            produce(state, (draft) => {
-                deleteCookie("is_login");
-                Swal.fire({
-                    text: "탈퇴 되었습니다.",
-                    confirmButtonColor: "#7F58EC",
-                    confirmButtonText: "확인",
-                });
-                draft.user = null;
-                draft.is_login = false;
-            }),
-        [USER_LOADING]: (state, action) =>
-            produce(state, (draft) => {
-                draft.user_loading = action.payload.user_loading;
-            }),
-    },
-    initialState
-=======
   {
     [GET_USER]: (state, action) =>
       produce(state, (draft) => {
@@ -165,7 +128,6 @@ export default handleActions(
       }),
   },
   initialState,
->>>>>>> 0c986ffaf823fe9671e0fe4cc2604be45068ae06
 );
 
 const actionCreators = {

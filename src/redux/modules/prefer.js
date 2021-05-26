@@ -25,44 +25,13 @@ const initialState = {
 };
 //회원 관심사 수정
 const updateUserPreferDB = (locations, categories, time) => {
-<<<<<<< HEAD
-  return function (dispatch, getState, { history }) {
-    const user = getState().user.user;
-    const data = {
-      offTime: time,
-      locations: locations,
-      categorys: categories,
-    };
-    axios
-    //test
-      // .post(`${config.api}/api/user`, data, {
-      //   headers: {
-      //     'Authorization': `Bearer ` 
-      //   }
-      // })
-      .post(`${config.api}/api/user`, data)
-      .then((res) => {
-        //res.data 없음.
-        let _locations = locations.map((location) => {
-          return { name: location };
-        });
-        let _categories = categories.map((category)=>{
-          return {categoryId : category};
-        });
-        let _data = {
-          offTime: time,
-          locations: _locations,
-          interests: _categories,
-=======
     return function (dispatch, getState, { history }) {
         const user = getState().user.user;
         const data = {
             offTime: time,
             locations: locations,
             categorys: categories,
->>>>>>> 0c986ffaf823fe9671e0fe4cc2604be45068ae06
         };
-
         axios
             //test
             // .post(`${config.api}/api/user`, data, {headers})
@@ -237,21 +206,12 @@ export default handleActions(
 );
 
 const actionCreators = {
-<<<<<<< HEAD
   updateUserPreferDB,
   getCollectionDB,
   toggleLikeDB,
   deleteCollectionDB,
   guideGuests,
   deleteCollection,
-=======
-    updateUserPreferDB,
-    getCollectionDB,
-    toggleLikeDB,
-    deleteCollectionDB,
-    guideGuests,
-    deleteCollection,
->>>>>>> 0c986ffaf823fe9671e0fe4cc2604be45068ae06
 };
 
 export { actionCreators };
