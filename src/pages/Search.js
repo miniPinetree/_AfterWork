@@ -54,7 +54,7 @@ const provinceData = [
   '제주',
 ];
 const cityData = {
-  전체: ['세부지역'],
+  '시/도': ['세부지역'],
   서울: [
     '전체',
     '가산',

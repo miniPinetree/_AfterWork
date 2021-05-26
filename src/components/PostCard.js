@@ -171,7 +171,7 @@ const TextBox = styled.div`
 
 const TitleWrap = styled.div`
   & svg {
-    font-size: 18.12px;
+    font-size: 20.12px;
     color: #7f58ec;
     margin-top: 5px;
     position: absolute;
@@ -200,14 +200,15 @@ const TitleWrap = styled.div`
 const SiteName = styled.div`
   position: absolute;
   top: 14px;
-  padding: 1px 3px;
+  padding: 1px 5px;
   box-sizing: border-box;
   font-size: 13px;
   letter-spacing: -0.39px;
-  color: #7f58ec;
-  background: #ffffff 0% 0% no-repeat padding-box;
+  color: #fff;
+  background: #333 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #7f58ec66;
-  border-radius: 3px;
+  border-radius: 5px;
+  opacity: 0.72;
   @media only screen and (max-width: 1024px) {
     font-size: 11px;
     letter-spacing: -0.33px;
