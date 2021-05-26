@@ -14,9 +14,9 @@ const UserDetail = (props) => {
   const user = useSelector((state) => state.user.user);
   const cookie = getCookie("is_login");
 
-//   if(!cookie){
-//     history.replace('/');
-//   };
+  if(!cookie){
+    history.replace('/');
+  };
 
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
