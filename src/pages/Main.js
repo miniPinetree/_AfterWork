@@ -33,7 +33,7 @@ function Main(props) {
   // 해당 유저가 설정한 관심 카테고리 정보
   const interests = useSelector((state) => state.user.user?.interests);
   // 찜목록
-  const collection_list = useSelector((state) => state.prefer?.collection);
+  const collection_list = useSelector((state) => state.prefer.collection);
   const collection = collection_list.map((val) => {
     return val.productId;
   });

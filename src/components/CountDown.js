@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { history } from '../redux/configStore';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
+import { MinusOutlined, ArrowsAltOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
 function CountDown() {
+  const dispatch = useDispatch();
   // 퇴근시간 카운트 다운
   const offTime = useSelector((state) => state.user.user?.offTime);
   const today = moment().format('YYYY/MM/DD');
 
   // 차이(퇴근시간 - 현재시간)
   let difference = +new Date(`${today} ${offTime}`) - +new Date();
+
   // 남은 시간 계산
   const calculateTimeLeft = () => {
     let timeLeft = {};
@@ -52,6 +56,15 @@ function CountDown() {
       </span>,
     );
   });
+  const isClose = useSelector((state) => state.user.toggle);
+  const close = () => {
+    sessionStorage.setItem('toggle', 'true');
+    dispatch(userActions.toggle(true));
+  };
+  const open = () => {
+    sessionStorage.removeItem('toggle');
+    dispatch(userActions.toggle(false));
+  };
 
   return (
     <>
@@ -71,25 +84,38 @@ function CountDown() {
         </SettingBox>
       ) : (
         <>
-          {/* 남은 퇴근시간 카운트 */}
-          {difference > 0 ? (
-            <Timer>
-              <>
-                {timerComponents.length ? (
-                  <OffTimeTitle>퇴근 시간 카운트</OffTimeTitle>
-                ) : null}
-                <OffTimeCnt>
-                  {timerComponents.length ? (
-                    <>
-                      {timerComponents[0]}: {timerComponents[1]} :{' '}
-                      {timerComponents[2]}
-                    </>
-                  ) : null}
-                </OffTimeCnt>{' '}
-              </>
-            </Timer>
-          ) : // diff < 0 이면 퇴근시간이 지난것이므로 표시해주지 않게 처리
-          null}
+          {isClose ? (
+            <CloseTimmer>
+              <ToggleBtn onClick={open}>
+                <ArrowsAltOutlined />
+              </ToggleBtn>
+            </CloseTimmer>
+          ) : (
+            <>
+              {/* 남은 퇴근시간 카운트 */}
+              {difference > 0 ? (
+                <Timer>
+                  <>
+                    {timerComponents.length ? (
+                      <OffTimeTitle>퇴근 시간 카운트</OffTimeTitle>
+                    ) : null}
+                    <ToggleBtn onClick={close}>
+                      <MinusOutlined />
+                    </ToggleBtn>
+                    <OffTimeCnt>
+                      {timerComponents.length ? (
+                        <>
+                          {timerComponents[0]}: {timerComponents[1]} :{' '}
+                          {timerComponents[2]}
+                        </>
+                      ) : null}
+                    </OffTimeCnt>{' '}
+                  </>
+                </Timer>
+              ) : // diff < 0 이면 퇴근시간이 지난것이므로 표시해주지 않게 처리
+              null}
+            </>
+          )}
         </>
       )}
     </>
@@ -105,12 +131,14 @@ const Timer = styled.div`
   justify-content: center;
   flex-direction: column;
   position: absolute;
-  right: 0px;
+  top: 0px;
+  right: 0;
   background: #fff;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0px 3px 10px #0000001a;
   z-index: 3;
+
   @media only screen and (max-width: 768px) {
     width: 223px;
     max-width: 223px;
@@ -134,6 +162,45 @@ const Timer = styled.div`
     max-width: 150px;
   }
 `;
+
+const CloseTimmer = styled.div`
+  width: 364px;
+  max-width: 364px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  right: 0px;
+  background: #fff;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0px 3px 10px #0000001a;
+  z-index: 3;
+
+  @media only screen and (max-width: 768px) {
+    width: 223px;
+    max-width: 223px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+  @media only screen and (max-width: 602px) {
+    width: 162px;
+    max-width: 162px;
+  }
+  @media only screen and (max-width: 414px) {
+    width: 168px;
+    max-width: 168px;
+    right: 0px;
+    border-radius: 7px;
+  }
+  @media only screen and (max-width: 375px) {
+    width: 150px;
+    max-width: 150px;
+  }
+`;
+
 const OffTimeTitle = styled.div`
   font-size: 18px;
   font-weight: 600;
@@ -152,6 +219,57 @@ const OffTimeTitle = styled.div`
     letter-spacing: -0.27px;
   }
 `;
+
+const ToggleBtn = styled.button`
+  margin-left: 10px;
+  line-height: 1.5715;
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  background-image: none;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  user-select: none;
+  touch-action: manipulation;
+  color: rgba(0, 0, 0, 0.85);
+  background: #fff;
+  border-color: #d9d9d9;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  padding: 0px 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:active {
+    color: #7f58ec;
+    border-color: #7f58ec;
+  }
+  &:hover {
+    color: #7f58ec;
+    border-color: #7f58ec;
+  }
+  @media only screen and (max-width: 414px) {
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    &:hover {
+      color: rgba(0, 0, 0, 0.85);
+      border-color: #d9d9d9;
+    }
+    &:active {
+      color: #7f58ec;
+      border-color: #7f58ec;
+    }
+  }
+`;
+
 const OffTimeCnt = styled.div`
   margin-top: 8px;
   font-size: 32px;
@@ -166,6 +284,7 @@ const OffTimeCnt = styled.div`
     border-radius: 6px;
     letter-spacing: 1px;
   }
+
   @media only screen and (max-width: 768px) {
     font-size: 15px;
     & span {

@@ -22,6 +22,129 @@ const plainOptions = [
   '모카클래스',
   '하비풀',
 ];
+const provinceData = [
+  '시/도',
+  '서울',
+  '인천',
+  '수원',
+  '일산',
+  '안양',
+  '부천',
+  '용인',
+  '파주',
+  '안산',
+  '고양',
+  '하남',
+  '김포',
+  '남양주',
+  '시흥',
+  '평택',
+  '화성',
+  '포천',
+  '성남',
+  '부산',
+  '대구',
+  '대전',
+  '세종',
+  '청주',
+  '울산',
+  '창원',
+  '천안',
+  '광주',
+  '제주',
+];
+const cityData = {
+  전체: ['세부지역'],
+  서울: [
+    '전체',
+    '가산',
+    '강남',
+    '강동',
+    '강북',
+    '강서',
+    '건대',
+    '관악',
+    '광진',
+    '교대',
+    '구로',
+    '금천',
+    '노원',
+    '논현',
+    '동대문',
+    '동작',
+    '마포',
+    '목동',
+    '문정',
+    '미아',
+    '사당',
+    '서대문',
+    '서초',
+    '성동',
+    '성북',
+    '성수',
+    '송파',
+    '수유',
+    '신림',
+    '신사',
+    '신촌홍대',
+    '양천',
+    '영등포',
+    '올림픽공원',
+    '왕십리',
+    '용산',
+    '은평',
+    '잠실',
+    '잠실새내',
+    '종로',
+    '천호',
+    '청량리',
+    '충무로',
+    '혜화',
+  ],
+  인천: ['전체', '계양', '구월', '미추홀', '부평', '송도', '주안'],
+  수원: ['전체'],
+  일산: ['전체'],
+  안양: ['전체'],
+  부천: ['전체'],
+  용인: ['전체'],
+  파주: ['전체'],
+  안산: ['전체'],
+  고양: ['전체'],
+  하남: ['전체'],
+  김포: ['전체'],
+  남양주: ['전체'],
+  시흥: ['전체'],
+  평택: ['전체'],
+  화성: ['전체'],
+  포천: ['전체'],
+  성남: ['전체', '분당', '서현'],
+  부산: [
+    '전체',
+    '광안리',
+    '금정',
+    '남구',
+    '남포',
+    '동례',
+    '부경대',
+    '부산대',
+    '부산시청',
+    '사상',
+    '서면',
+    '수영',
+    '연제',
+    '진구',
+    '해운대',
+  ],
+  대구: ['전체', '남구', '달서', '동성로', '수성', '중앙'],
+  대전: ['전체', '대전역', '둔산', ' 유성'],
+  세종: ['전체'],
+  청주: ['전체'],
+  울산: ['전체', '울산시청'],
+  창원: ['전체'],
+  천안: ['전체'],
+  광주: ['전체', '광산', '전남대'],
+  제주: ['전체'],
+};
 
 function Search(props) {
   // 검색 페이지
@@ -32,6 +155,25 @@ function Search(props) {
   // 셀랙트 박스 상태
   const [filterBox, setfilterBox] = useState('total');
   const [sortBox, setSortBox] = useState('popularity desc');
+
+  // 지역 필터 박스
+  const [cities, setCities] = useState(cityData[provinceData[0]]);
+  const [firstCity, setFirstCity] = useState(provinceData[0]);
+  const [secondCity, setSecondCity] = useState(cityData[provinceData[0]][0]);
+  const handleProvinceChange = (value) => {
+    setFirstCity(value);
+    setCities(cityData[value]);
+    setSecondCity(cityData[value][0]);
+  };
+
+  const onSecondCityChange = (value) => {
+    setSecondCity(value);
+  };
+
+  const cityName =
+    `${firstCity},${secondCity}` === '시/도,세부지역'
+      ? '전체,전체'
+      : `${firstCity},${secondCity}`;
 
   // 정렬(가격순, 인기순)
   const selectSort = (value) => {
@@ -77,9 +219,16 @@ function Search(props) {
   useEffect(() => {
     // 검색한 게시물 조회
     dispatch(
-      postActions.getSearchDB(keyword, sort, direction, filterBox, sitename),
+      postActions.getSearchDB(
+        keyword,
+        sort,
+        direction,
+        filterBox,
+        sitename,
+        cityName,
+      ),
     );
-  }, [direction, dispatch, keyword, sort, filterBox, sitename]);
+  }, [direction, dispatch, keyword, sort, filterBox, sitename, cityName]);
 
   return (
     <>
@@ -136,6 +285,44 @@ function Search(props) {
                       </Filter>
                     </SelectDiv>
                   </MainHeader>
+                  {filterBox === 'offline' || filterBox === 'total' ? (
+                    <SortWrap>
+                      <SortTitle>지역필터 →</SortTitle>
+                      <LocationDiv>
+                        <Select
+                          defaultValue='전체'
+                          value={firstCity}
+                          style={{ width: '100%' }}
+                          onChange={handleProvinceChange}
+                        >
+                          {provinceData.map((province) => (
+                            <Option
+                              key={province}
+                              value={province}
+                              className='opt'
+                            >
+                              {province}
+                            </Option>
+                          ))}
+                        </Select>
+                      </LocationDiv>
+                      <SecondLocationDiv>
+                        <Select
+                          defaultValue='전체'
+                          value={secondCity}
+                          style={{ width: '100%' }}
+                          onChange={onSecondCityChange}
+                        >
+                          {cities.map((city) => (
+                            <Option key={city} value={city} className='opt'>
+                              {city}
+                            </Option>
+                          ))}
+                        </Select>
+                      </SecondLocationDiv>
+                    </SortWrap>
+                  ) : null}
+
                   <ChkWrap>
                     <ChkTitle>사이트별 보기</ChkTitle>
                     <ChkItem>
@@ -350,6 +537,59 @@ const Sort = styled.div`
 const Filter = styled.div`
   max-width: 94px;
   @media only screen and (max-width: 414px) {
+    & span {
+      font-size: 10px;
+    }
+  }
+`;
+
+const SortWrap = styled.div`
+  margin: 0 0 20px 10px;
+  max-width: 87%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  @media only screen and (max-width: 1004px) {
+    max-width: 100%;
+    margin: 22px 10px 13px;
+  }
+  @media only screen and (max-width: 414px) {
+    max-width: 100%;
+    margin: 22px 10px 13px;
+  }
+`;
+
+const SortTitle = styled.div`
+  font-size: 15px;
+  letter-spacing: -0.45px;
+  color: #333;
+  font-weight: bold;
+  margin-right: 9px;
+  @media only screen and (max-width: 768px) {
+    font-size: 13px;
+    letter-spacing: -0.39px;
+  }
+  @media only screen and (max-width: 414px) {
+    font-size: 12px;
+    letter-spacing: -0.36px;
+  }
+`;
+
+const LocationDiv = styled.div`
+  margin-right: 15px;
+  max-width: 112px;
+  min-width: 90px;
+  @media only screen and (max-width: 414px) {
+    & span {
+      font-size: 10px;
+    }
+  }
+`;
+
+const SecondLocationDiv = styled.div`
+  min-width: 94px;
+  @media only screen and (max-width: 414px) {
+    min-width: 78.81px;
     & span {
       font-size: 10px;
     }

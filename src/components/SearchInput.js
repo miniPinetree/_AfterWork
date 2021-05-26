@@ -79,6 +79,9 @@ const InputBox = styled.div`
     &:hover {
       border: 2px solid #7f58ec !important;
     }
+    &:focus {
+      border: 2px solid #7f58ec !important;
+    }
   }
   & .ant-input-affix-wrapper-focused {
     border: 2px solid #7f58ec;

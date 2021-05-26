@@ -95,6 +95,7 @@ const CardWrap = styled.div`
   box-shadow: 0px 10px 15px #e0e0e0;
   max-width: 240px;
   height: 320px;
+  margin-bottom: 10px;
   cursor: pointer;
   position: relative;
   @media only screen and (max-width: 1024px) {
