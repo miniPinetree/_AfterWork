@@ -23,7 +23,7 @@ const plainOptions = [
   '하비풀',
 ];
 const provinceData = [
-  '전체',
+  '시/도',
   '서울',
   '인천',
   '수원',
@@ -54,7 +54,7 @@ const provinceData = [
   '제주',
 ];
 const cityData = {
-  전체: ['전체'],
+  전체: ['세부지역'],
   서울: [
     '전체',
     '가산',
@@ -170,7 +170,10 @@ function Search(props) {
     setSecondCity(value);
   };
 
-  const cityName = `${firstCity},${secondCity}`;
+  const cityName =
+    `${firstCity},${secondCity}` === '시/도,세부지역'
+      ? '전체,전체'
+      : `${firstCity},${secondCity}`;
 
   // 정렬(가격순, 인기순)
   const selectSort = (value) => {
@@ -287,7 +290,7 @@ function Search(props) {
                       <SortTitle>지역필터 →</SortTitle>
                       <LocationDiv>
                         <Select
-                          defaultValue={firstCity}
+                          defaultValue='전체'
                           value={firstCity}
                           style={{ width: '100%' }}
                           onChange={handleProvinceChange}
@@ -305,7 +308,7 @@ function Search(props) {
                       </LocationDiv>
                       <SecondLocationDiv>
                         <Select
-                          defaultValue={secondCity}
+                          defaultValue='전체'
                           value={secondCity}
                           style={{ width: '100%' }}
                           onChange={onSecondCityChange}
