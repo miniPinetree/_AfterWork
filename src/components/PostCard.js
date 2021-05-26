@@ -199,7 +199,7 @@ const TitleWrap = styled.div`
 const SiteName = styled.div`
   position: absolute;
   top: 14px;
-  padding: 1px 3px;
+  padding: 1px 5px;
   box-sizing: border-box;
   font-size: 13px;
   letter-spacing: -0.39px;
