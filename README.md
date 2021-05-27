@@ -95,5 +95,4 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
 **개발기간 2021.04.25 ~ 2021.05.12** <br/>
 **사용자 피드백 및 개선기간 2021.05.13 ~ 진행 중**
 <br/>
-![image](https://user-images.githubusercontent.com/68773118/119796427-54546400-bf14-11eb-8179-f12d6bb3bbb0.png)
-
+5.26일 기준 1,399명의 사용자를 얻었고 133건의 피드백을 수집하였습니다. 
