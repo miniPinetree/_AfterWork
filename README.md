@@ -46,7 +46,7 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
 - View (React with JavaScript, React-Router, antd, Styled-components)
 - State Management (Redux, Redux-Thunk, Immer, Redux-actions)
 - Build Tool (Create React App)
-- Code Quality Tool (ESLint, Prettier)
+- Code Quality Tool (Prettier)
 - Infrastructure (AWS S3, Route 53, Amazon CloudFront)
 - Design Tool (Xd adobe)
 - Other Tools (Git, Github, notion, Slack etc.)
