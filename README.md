@@ -123,5 +123,7 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
     </td>
 </table>
 
-#### Show your support
+---
+
+### Show your support
 Give a ⭐️ if this project helped you!
