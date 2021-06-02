@@ -91,8 +91,37 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
 - 관심 카테고리는 선택 여부에 따라 좌, 우로 분리하고 체크박스 색상에 차이를 두어 인터랙티브한 느낌을 주고자 함.
 
 ## ⛓ 진행과정
-
 **개발기간 2021.04.25 ~ 2021.05.12** <br/>
 **사용자 피드백 및 개선기간 2021.05.13 ~ 진행 중**
 <br/>
 5.26일 기준 1,399명의 사용자를 얻었고 133건의 피드백을 수집하였습니다. 
+
+<table>
+  <tr>
+    <td align="center">
+    <a href="https://github.com/miniPinetree"><img src="https://avatars.githubusercontent.com/u/68773118?v=4" width="75px;" alt="Gomisong"/><br /><sub><b>고미송</b></sub></a><br />
+    </td>
+    <td>
+    <a href="" title="what did I do">💻what did I do</a>
+    <br/>
+        <a href="" title="Code">📜 Commit Log</a>
+        <br/>
+    </td>
+    <tr>
+    <td align="center"><a href="https://github.com/noh-yj"><img src="https://avatars.githubusercontent.com/u/73735372?s=64&v=4" width="75px;" alt=""/><br /><sub><b>노유진</b></sub></a><br /></td>
+    <td>
+    <a href="" title="what did I do">💻what did I do</a>
+    <br/>
+    <a href="" title="Code">📜 Commit Log</a>
+    </td>
+    <tr>
+    <td align="center"><a href="https://github.com/euljiro"><img src="https://avatars.githubusercontent.com/u/79740061?s=64&v=4" width="75px;" alt=""/><br /><sub><b>김율아</b></sub></a><br /> </td>
+    <td>
+    <a href="" title="what did I do">💻what did I do</a>
+    <br/>
+    <a href="" title="Code">📜 Commit Log</a>
+    </td>
+</table>
+
+#### Show your support
+Give a ⭐️ if this project helped you!
