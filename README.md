@@ -53,7 +53,7 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
 ```
 
 ## 🔎 I learned
-  <a href="https://github.com/miniPinetree"><img src="https://avatars.githubusercontent.com/u/68773118?v=4" width="75px;" alt="Gomisong"/><br /><sub><b>고미송</b></sub></a><br />
+
   
 ## 🕹 기능정보
 
