@@ -104,7 +104,7 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
     <td>
     <a href="" title="what did I do">💻what did I do</a>
     <br/>
-        <a href="" title="Code">📜 Commit Log</a>
+        <a href="https://github.com/miniPinetree/_AfterWork/commits?author=miniPinetree" title="Code">📜 Commit Log</a>
         <br/>
     </td>
     <tr>
