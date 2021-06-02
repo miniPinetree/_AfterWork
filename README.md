@@ -102,7 +102,7 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
     <a href="https://github.com/miniPinetree"><img src="https://avatars.githubusercontent.com/u/68773118?v=4" width="75px;" alt="Gomisong"/><br /><sub><b>고미송</b></sub></a><br />
     </td>
     <td>
-    <a href="" title="what did I do">💻what did I do</a>
+    <a href="https://github.com/miniPinetree/_AfterWork/wiki/%5BMaintaner%5D-%EA%B3%A0%EB%AF%B8%EC%86%A1" title="what did I do">💻what did I do</a>
     <br/>
         <a href="https://github.com/miniPinetree/_AfterWork/commits?author=miniPinetree" title="Code">📜 Commit Log</a>
         <br/>
