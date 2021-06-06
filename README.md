@@ -99,6 +99,13 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
 
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/euljiro"><img src="https://avatars.githubusercontent.com/u/79740061?s=64&v=4" width="75px;" alt=""/><br /><sub><b>김율아</b></sub></a><br /> </td>
+    <td>
+    <a href="" title="what did I do">💻what did I do</a>
+    <br/>
+    <a href="" title="Code">📜 Commit Log</a>
+    </td>
+  <tr>
     <td align="center">
     <a href="https://github.com/miniPinetree"><img src="https://avatars.githubusercontent.com/u/68773118?v=4" width="75px;" alt="Gomisong"/><br /><sub><b>고미송</b></sub></a><br />
     </td>
@@ -115,13 +122,7 @@ Designer : 1인 ([UI/UX Wireframe](https://xd.adobe.com/view/6930efb5-2686-4843-
     <br/>
     <a href="" title="Code">📜 Commit Log</a>
     </td>
-    <tr>
-    <td align="center"><a href="https://github.com/euljiro"><img src="https://avatars.githubusercontent.com/u/79740061?s=64&v=4" width="75px;" alt=""/><br /><sub><b>김율아</b></sub></a><br /> </td>
-    <td>
-    <a href="" title="what did I do">💻what did I do</a>
-    <br/>
-    <a href="" title="Code">📜 Commit Log</a>
-    </td>
+    
 </table>
 
 ---
